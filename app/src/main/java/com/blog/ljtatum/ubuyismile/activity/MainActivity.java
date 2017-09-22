@@ -1,4 +1,4 @@
-package ubuyismile.ljtatum.blog.com.ubuyismile.activity;
+package com.blog.ljtatum.ubuyismile.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
