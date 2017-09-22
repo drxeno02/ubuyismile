@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.app.framework.utilities.FrameworkUtils;
 
-import ubuyismile.ljtatum.blog.com.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.R;
 
 /**
  * Created by leonard on 9/22/2017.

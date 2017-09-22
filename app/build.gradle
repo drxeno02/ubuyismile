@@ -3,28 +3,61 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
+
+    // construct version name
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+    def code = 1;
+
     defaultConfig {
         applicationId "com.blog.ljtatum.ubuyismile"
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode code
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //noinspection GroovyAssignabilityCheck
+        signingConfig signingConfigs.debug
     }
+    // specifies a flavor dimension
+    flavorDimensions "app"
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        debug {
+            applicationIdSuffix '.debug'
+            buildConfigField "String", "ENVIRONMENT", "\"test\""
+            buildConfigField "boolean", "DEBUG_MODE", "true"
+            manifestPlaceholders = [build_version: "${versionMajor}.${versionMinor}.${versionPatch}"]
+
+            // debuggable
+            debuggable true
         }
+        release {
+            applicationIdSuffix '.prod'
+            buildConfigField "String", "ENVIRONMENT", "\"production\""
+            buildConfigField "boolean", "DEBUG_MODE", "false"
+            manifestPlaceholders = [build_version: "${versionMajor}.${versionMinor}.${versionPatch}"]
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFile 'proguard-rules.pro'
+        }
+    }
+    // flavor implementation propelled by request for multiple environments on Crashlytics
+    productFlavors {
+        standard {
+            applicationId 'com.blog.ljtatum.tipcalculator'
+            dimension "app"
+        }
+    }
+    lintOptions {
+        // if true, stop the gradle build if errors are found
+        abortOnError false
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':ApplicationFramework')
 }

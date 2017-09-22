@@ -1,32 +1,74 @@
 apply plugin: 'com.android.library'
 
+
+ext {
+    supportLib = "26.1.0"
+    googleLib = "10.2.1"
+    facebookLib = "4.26.0"
+}
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
 
+    // construct version name
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+    def code = 1;
 
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-
+        versionCode code
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //noinspection GroovyAssignabilityCheck
+        signingConfig signingConfigs.debug
     }
+    // specifies a flavor dimension
+    flavorDimensions "app"
     buildTypes {
+        debug {
+            buildConfigField "String", "FEATURES", "\"Device Utilities, Network Utilities, General Function Utilities, Cohort Functions, " +
+                    "Google Service APIs\""
+            manifestPlaceholders = [build_version: "${versionMajor}.${versionMinor}.${versionPatch}"]
+            // debuggable
+            debuggable true
+        }
         release {
-            minifyEnabled false
+            buildConfigField "String", "FEATURES", "\"Device Utilities, Network Utilities, General Function Utilities, Cohort Functions, " +
+                    "Google Service APIs\""
+            manifestPlaceholders = [build_version: "${versionMajor}.${versionMinor}.${versionPatch}"]
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        // if true, stop the gradle build if errors are found
+        abortOnError false
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
+    //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    compile files('libs/volley.jar')
+    compile files('libs/commons-codec-1.9.jar')
+    compile "com.facebook.android:facebook-android-sdk:${facebookLib}"
+    compile "com.android.support:support-annotations:${supportLib}"
+    compile "com.android.support:cardview-v7:${supportLib}"
+    compile "com.android.support:appcompat-v7:${supportLib}"
+    compile "com.android.support:recyclerview-v7:${supportLib}"
+    compile "com.android.support:design:${supportLib}"
+    compile "com.google.android.gms:play-services:${googleLib}"
+    //noinspection GradleDynamicVersion
+    compile 'com.google.maps.android:android-maps-utils:0.5+'
+
 }
