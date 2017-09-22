@@ -1,7 +1,9 @@
-package ubuyismile.ljtatum.blog.com.ubuyismile;
+package ubuyismile.ljtatum.blog.com.ubuyismile.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import ubuyismile.ljtatum.blog.com.ubuyismile.R;
 
 public class MainActivity extends AppCompatActivity {
 
