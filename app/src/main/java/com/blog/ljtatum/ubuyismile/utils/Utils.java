@@ -1,4 +1,4 @@
-package ubuyismile.ljtatum.blog.com.ubuyismile.utils;
+package com.blog.ljtatum.ubuyismile.utils;
 
 /**
  * Created by leonard on 9/22/2017.
