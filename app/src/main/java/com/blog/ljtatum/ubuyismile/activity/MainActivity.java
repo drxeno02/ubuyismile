@@ -3,7 +3,7 @@ package com.blog.ljtatum.ubuyismile.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import ubuyismile.ljtatum.blog.com.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.activity.R;
 
 public class MainActivity extends AppCompatActivity {
 
