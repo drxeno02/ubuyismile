@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.app.amazonframework.ExampleUnitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-09-24T23:30:09" hostname="DESKTOP-0R5D5DR" time="0.0">
+  <properties/>
+  <testcase name="addition_isCorrect" classname="com.app.amazonframework.ExampleUnitTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
