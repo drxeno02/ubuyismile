@@ -15,9 +15,9 @@ public class Base64 {
 
     /**
      * Returns a {@link Encoder} that encodes using the
-     * <a href="#basic">Basic</a> type base64 encoding scheme.
+     * <a href="#basic">Basic</a> type base64 encoding scheme
      *
-     * @return A Base64 encoder.
+     * @return A Base64 encoder
      */
     static Encoder getEncoder() {
         return Encoder.RFC4648;
@@ -25,7 +25,7 @@ public class Base64 {
 
     /**
      * This class implements an encoder for encoding byte data using
-     * the Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
+     * the Base64 encoding scheme as specified in RFC 4648 and RFC 2045
      * <p>
      * <p> Instances of {@link Encoder} class are safe for use by
      * multiple concurrent threads.
@@ -33,7 +33,7 @@ public class Base64 {
      * <p> Unless otherwise noted, passing a {@code null} argument to
      * a method of this class will cause a
      * {@link NullPointerException NullPointerException} to
-     * be thrown.
+     * be thrown
      *
      * @see Decoder
      * @since 1.8
@@ -55,7 +55,7 @@ public class Base64 {
         /**
          * This array is a lookup table that translates 6-bit positive integer
          * index values into their "Base64 Alphabet" equivalents as specified
-         * in "Table 1: The Base64 Alphabet" of RFC 2045 (and RFC 4648).
+         * in "Table 1: The Base64 Alphabet" of RFC 2045 (and RFC 4648)
          */
         private static final char[] toBase64 = {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -68,7 +68,7 @@ public class Base64 {
         /**
          * It's the lookup table for "URL and Filename safe Base64" as specified
          * in Table 2 of the RFC 4648, with the '+' and '/' changed to '-' and
-         * '_'. This table is used when BASE64_URL is specified.
+         * '_'. This table is used when BASE64_URL is specified
          */
         private static final char[] toBase64URL = {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -89,22 +89,23 @@ public class Base64 {
                 final int n = srclen % 3;
                 len = 4 * (srclen / 3) + (n == 0 ? 0 : n + 1);
             }
-            if (linemax > 0)                                  // line separators
+            if (linemax > 0) { // line separators
                 len += (len - 1) / linemax * newline.length;
+            }
             return len;
         }
 
         /**
          * Encodes all bytes from the specified byte array into a newly-allocated
          * byte array using the {@link Base64} encoding scheme. The returned byte
-         * array is of the length of the resulting bytes.
+         * array is of the length of the resulting bytes
          *
          * @param src the byte array to encode
          * @return A newly-allocated byte array containing the resulting
-         * encoded bytes.
+         * encoded bytes
          */
         byte[] encode(final byte[] src) {
-            final int len = outLength(src.length);          // dst array size
+            final int len = outLength(src.length); // dst array size
             final byte[] dst = new byte[len];
             final int ret = encode0(src, 0, src.length, dst);
             if (ret != dst.length)
@@ -140,7 +141,7 @@ public class Base64 {
                     }
                 }
             }
-            if (sp < end) {               // 1 or 2 leftover bytes
+            if (sp < end) { // 1 or 2 leftover bytes
                 final int b0 = src[sp++] & 0xff;
                 dst[dp++] = (byte) base64[b0 >> 2];
                 if (sp == end) {
@@ -203,7 +204,7 @@ public class Base64 {
          * "Base64 Alphabet" (as specified in Table 1 of RFC 2045) into
          * their 6-bit positive integer equivalents.  Characters that
          * are not in the Base64 alphabet but fall within the bounds of
-         * the array are encoded to -1.
+         * the array are encoded to -1
          */
         private static final int[] fromBase64 = new int[256];
 

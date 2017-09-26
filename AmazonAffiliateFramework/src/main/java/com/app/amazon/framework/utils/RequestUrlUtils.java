@@ -28,6 +28,7 @@ public class RequestUrlUtils {
     }
 
     /**
+     * Method is used to create signed request URL
      *
      * @param protocol
      * @param amazonServiceUrl
@@ -44,6 +45,15 @@ public class RequestUrlUtils {
         return protocol + amazonServiceUrl + route + "?" + canonicalizeRequestParams + "&Signature=" + signature;
     }
 
+    /**
+     * Method is used to create signed request URL
+     *
+     * @param amazonServiceUrl
+     * @param route
+     * @param requestPairs
+     * @param secretKey
+     * @return
+     */
     private static String createSignature(final String amazonServiceUrl, final String route,
                                           final String requestPairs, final String secretKey) {
 
