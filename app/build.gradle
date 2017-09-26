@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 
+ext {
+    developerId = 'drxeno02'
+    developerName = 'Leonard Tatum'
+    developerEmail = 'ljtatum@hotmail.com'
+
+    siteUrl = 'https://github.com/drxeno02/ubuyismile'
+    gitUrl = 'https://github.com/drxeno02/ubuyismile.git'
+}
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -59,5 +68,5 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':ApplicationFramework')
+    implementation project(':AmazonAffiliateFramework')
 }
