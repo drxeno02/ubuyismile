@@ -1,34 +1,26 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
+ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
+INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
+INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
+INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
+INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
+INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
+INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
 	package
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:3:5-38
+		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:11-45
 		INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
 		INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
+		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
 		INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-10:12
+		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:1-2:71
 		INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:1:11-69
-application
-ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:5:5-8:19
-	android:supportsRtl
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:6:9-35
-	android:label
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:5:45-77
-	android:allowBackup
-		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:5:18-44
+		ADDED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml:2:11-69
 uses-sdk
 INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\AndroidStudio\Workspace\ubuyismile\AmazonAffiliateFramework\src\main\AndroidManifest.xml
