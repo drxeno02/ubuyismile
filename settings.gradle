@@ -1,1 +1,1 @@
-include ':app', ':ApplicationFramework'
+include ':app', ':ApplicationFramework', ':AmazonAffiliateFramework'
