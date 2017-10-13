@@ -9,7 +9,15 @@ import com.google.firebase.database.DatabaseError;
 
 public interface OnFirebaseValueListener {
 
+    /**
+     * Interface for when firebase data has changed
+     * @param dataSnapshot Updated data
+     */
     void onDataChange(DataSnapshot dataSnapshot);
 
+    /**
+     * Interface for when there is an error interfacing with firebase
+     * @param databaseError Database error
+     */
     void onCancelled(DatabaseError databaseError);
 }

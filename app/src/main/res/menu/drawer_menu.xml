@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/information">
-        <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/about"
-                android:title="@string/menu_about" />
-            <item
-                android:id="@+id/nav_privacy"
-                android:icon="@drawable/privacy"
-                android:title="@string/menu_privacy" />
-        </menu>
-    </item>
+    <!--<item android:title="@string/information">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_about"-->
+                <!--android:icon="@drawable/about"-->
+                <!--android:title="@string/menu_about" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_privacy"-->
+                <!--android:icon="@drawable/privacy"-->
+                <!--android:title="@string/menu_privacy" />-->
+        <!--</menu>-->
+    <!--</item>-->
 
-    <item android:title="@string/header_information">
-        <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/about"
-                android:title="@string/menu_about" />
-            <item
-                android:id="@+id/nav_privacy"
-                android:icon="@drawable/privacy"
-                android:title="@string/menu_privacy" />
-        </menu>
-    </item>
+    <!--<item android:title="@string/header_information">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_about"-->
+                <!--android:icon="@drawable/about"-->
+                <!--android:title="@string/menu_about" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_privacy"-->
+                <!--android:icon="@drawable/privacy"-->
+                <!--android:title="@string/menu_privacy" />-->
+        <!--</menu>-->
+    <!--</item>-->
 
-    <item android:title="@string/header_partner">
-        <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/about"
-                android:title="@string/menu_about" />
-            <item
-                android:id="@+id/nav_privacy"
-                android:icon="@drawable/privacy"
-                android:title="@string/menu_privacy" />
-        </menu>
-    </item>
+    <!--<item android:title="@string/header_partner">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_about"-->
+                <!--android:icon="@drawable/about"-->
+                <!--android:title="@string/menu_about" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_privacy"-->
+                <!--android:icon="@drawable/privacy"-->
+                <!--android:title="@string/menu_privacy" />-->
+        <!--</menu>-->
+    <!--</item>-->
 
 </menu>

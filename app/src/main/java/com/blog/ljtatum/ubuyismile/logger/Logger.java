@@ -14,8 +14,8 @@ public class Logger {
     /**
      * Helper method for logging e-verbose
      *
-     * @param tag
-     * @param msg
+     * @param tag The tag of the fragment you want to log
+     * @param msg The message to log
      */
     public static void e(String tag, String msg) {
         if (!FrameworkUtils.checkIfNull(msg)) {
@@ -28,8 +28,8 @@ public class Logger {
     /**
      * Helper method for logging d-verbose
      *
-     * @param tag
-     * @param msg
+     * @param tag The tag of the fragment you want to log
+     * @param msg The message to log
      */
     public static void d(String tag, String msg) {
         if (!FrameworkUtils.checkIfNull(msg)) {
@@ -42,8 +42,8 @@ public class Logger {
     /**
      * Helper method for logging i-verbose
      *
-     * @param tag
-     * @param msg
+     * @param tag The tag of the fragment you want to log
+     * @param msg The message to log
      */
     public static void i(String tag, String msg) {
         if (!FrameworkUtils.checkIfNull(msg)) {
@@ -56,13 +56,27 @@ public class Logger {
     /**
      * Helper method for logging v-verbose
      *
-     * @param tag
-     * @param msg
+     * @param tag The tag of the fragment you want to log
+     * @param msg The message to log
      */
     public static void v(String tag, String msg) {
         if (!FrameworkUtils.checkIfNull(msg)) {
             if (Constants.DEBUG) {
                 Log.v(tag, msg);
+            }
+        }
+    }
+
+    /**
+     * Helper method for logging wtf-verbose
+     *
+     * @param tag The tag of the fragment you want to log
+     * @param msg The message to log
+     */
+    public static void wtf(String tag, String msg) {
+        if (!FrameworkUtils.checkIfNull(msg)) {
+            if (Constants.DEBUG) {
+                Log.wtf(tag, msg);
             }
         }
     }

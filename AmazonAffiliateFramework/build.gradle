@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
 
     // construct version name
     def versionMajor = 1
@@ -17,6 +17,8 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        // enabling multidex support
+        multiDexEnabled true
         //noinspection GroovyAssignabilityCheck
         signingConfig signingConfigs.debug
     }
