@@ -27,6 +27,8 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        // enabling multidex support
+        multiDexEnabled true
         //noinspection GroovyAssignabilityCheck
         signingConfig signingConfigs.debug
     }
@@ -67,7 +69,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':AmazonAffiliateFramework')
-    implementation project(':ApplicationFramework')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':AmazonAffiliateFramework')
+    api project(':ApplicationFramework')
 }

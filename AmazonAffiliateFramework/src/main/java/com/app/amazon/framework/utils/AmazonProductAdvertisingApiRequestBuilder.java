@@ -3,14 +3,10 @@ package com.app.amazon.framework.utils;
 import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.model.ItemId;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 
 /**
  * Created by leonard on 9/26/2017.
@@ -19,24 +15,10 @@ import java.util.TimeZone;
 public class AmazonProductAdvertisingApiRequestBuilder {
 
     private static final String SERVICE = "AWSECommerceService";
-    private static final String VERSION = "2011-08-01";
 
     private static final String HTTP_PROTOCOL = "http://";
     private static final String HTTPS_PROTOCOL = "https://";
     private static final String ROUTE = "/onca/xml";
-
-    private static String timestamp;
-
-    /**
-     * Constructor
-     */
-    private AmazonProductAdvertisingApiRequestBuilder() {
-        // set timestamp
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-        timestamp = formatter.format(calendar.getTime());
-    }
 
     /**
      * Creates an {@link AdvertisingApiItemLookupRequestBuilder} for creating an ItemLookup request for the item with the given ID
@@ -188,13 +170,12 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
             requestParams.put("AssociateTag", authentication.getAssociateTag());
             requestParams.put("Condition", itemCondition.getRequestValue());
+            requestParams.put("SearchIndex", itemCategory.getRequestValue());
             requestParams.put("Keywords", keywords);
             requestParams.put("Operation", OPERATION);
-            requestParams.put("ResponseGroup", createResponseGroupRequestValue(alResponseGroup));
-            requestParams.put("SearchIndex", itemCategory.getRequestValue());
             requestParams.put("Service", SERVICE);
-            requestParams.put("Timestamp", timestamp);
-            requestParams.put("Version", VERSION);
+            requestParams.put("ResponseGroup", createResponseGroupRequestValue(alResponseGroup));
+            requestParams.put("Timestamp", authentication.getTimestamp());
             if (maximumPrice != -1) {
                 requestParams.put("MaximumPrice", "" + maximumPrice);
             }
@@ -289,16 +270,15 @@ public class AmazonProductAdvertisingApiRequestBuilder {
                                            final AmazonWebServiceAuthentication authentication, final String protocol) {
 
             final Map<String, String> requestParams = new LinkedHashMap<>();
-            requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
-            requestParams.put("AssociateTag", authentication.getAssociateTag());
-            requestParams.put("Condition", itemCondition.getRequestValue());
-            requestParams.put("IdType", itemId.getType().getRequestValue());
-            requestParams.put("ItemId", itemId.getValue());
+            requestParams.put("Service", SERVICE);
             requestParams.put("Operation", OPERATION);
             requestParams.put("ResponseGroup", createResponseGroupRequestValue(responseGroup));
-            requestParams.put("Service", SERVICE);
-            requestParams.put("Timestamp", timestamp);
-            requestParams.put("Version", VERSION);
+            requestParams.put("SearchIndex", "All");
+            requestParams.put("IdType", itemId.getType().getRequestValue());
+            requestParams.put("ItemId", itemId.getValue());
+            requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
+            requestParams.put("AssociateTag", authentication.getAssociateTag());
+            requestParams.put("Timestamp", authentication.getTimestamp());
 
             return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());

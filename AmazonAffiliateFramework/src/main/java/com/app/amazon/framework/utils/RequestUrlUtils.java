@@ -1,5 +1,7 @@
 package com.app.amazon.framework.utils;
 
+import com.app.framework.utilities.FrameworkUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
@@ -56,7 +58,6 @@ public class RequestUrlUtils {
      */
     private static String createSignature(final String amazonServiceUrl, final String route,
                                           final String requestPairs, final String secretKey) {
-
         // create the string upon which the signature is calculated
         final String toSign = "GET" + "\n"
                 + amazonServiceUrl + "\n"
@@ -116,15 +117,18 @@ public class RequestUrlUtils {
     }
 
     private static String percentEncodeRfc3986(final String s) {
-        String out;
-        try {
-            out = URLEncoder.encode(s, UTF8_CHARSET)
-                    .replace("+", "%20")
-                    .replace("*", "%2A")
-                    .replace("%7E", "~");
-        } catch (final UnsupportedEncodingException e) {
-            out = s;
+        if (!FrameworkUtils.isStringEmpty(s)) {
+            String out;
+            try {
+                out = URLEncoder.encode(s, UTF8_CHARSET)
+                        .replace("+", "%20")
+                        .replace("*", "%2A")
+                        .replace("%7E", "~");
+            } catch (final UnsupportedEncodingException e) {
+                out = s;
+            }
+            return out;
         }
-        return out;
+        return "";
     }
 }
