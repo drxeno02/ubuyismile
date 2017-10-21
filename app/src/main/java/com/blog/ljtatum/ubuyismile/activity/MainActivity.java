@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * embedded class to make HTTP requests to retrieve the default referee reward credit amount
+     * HTTP request
      */
     @SuppressWarnings("deprecation")
     private static class RequestTask extends AsyncTask<String, String, String> {
