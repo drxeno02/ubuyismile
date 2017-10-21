@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\JAVASDK\\AndroidStudio\\AS_Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "/Users/richard/AndroidStudioProjects/ubuyismile/AmazonAffiliateFramework/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v14/values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\leonard\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\198d174c31124c15e6dd429f873dd072\\res\\values-v14\\values-v14.xml",
+                    "source": "/Users/richard/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/e950ef1cce8f1d158b1aaa29800e236e/res/values-v14/values-v14.xml",
                     "from": {
                         "startLines": "2,7,8,9,15",
                         "startColumns": "4,4,4,4,4",

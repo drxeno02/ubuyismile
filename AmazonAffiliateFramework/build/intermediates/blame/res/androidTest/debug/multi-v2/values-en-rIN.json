@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\JAVASDK\\AndroidStudio\\AS_Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-en-rIN\\values-en-rIN.xml",
+            "outputFile": "/Users/richard/AndroidStudioProjects/ubuyismile/AmazonAffiliateFramework/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\leonard\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\8121b4840cb75adcd3065277e2f651c0\\res\\values-en-rIN\\values-en-rIN.xml",
+                    "source": "/Users/richard/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-25.2.0.aar/97686f94ad2f7a778551ce89bc5d6dcd/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\leonard\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\198d174c31124c15e6dd429f873dd072\\res\\values-en-rIN\\values-en-rIN.xml",
+                    "source": "/Users/richard/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/e950ef1cce8f1d158b1aaa29800e236e/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
