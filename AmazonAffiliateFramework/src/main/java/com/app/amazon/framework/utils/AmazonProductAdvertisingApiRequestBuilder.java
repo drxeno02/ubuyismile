@@ -288,7 +288,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
     /**
      * Method is used to create response group request
      *
-     * @param responseGroup
+     * @param responseGroup List of item information to query
      * @return
      */
     private static String createResponseGroupRequestValue(final List<Enum.ItemInformation> responseGroup) {

@@ -58,7 +58,7 @@ android {
     // flavor implementation propelled by request for multiple environments on Crashlytics
     productFlavors {
         standard {
-            applicationId 'com.blog.ljtatum.tipcalculator'
+            applicationId 'com.blog.ljtatum.ubuyismile'
             dimension "app"
         }
     }
