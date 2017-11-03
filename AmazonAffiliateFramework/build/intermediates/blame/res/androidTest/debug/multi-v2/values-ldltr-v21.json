@@ -1,25 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\richard\\AndroidStudioProjects\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
+            "outputFile": "/Users/richard/AndroidStudioProjects/ubuyismile/AmazonAffiliateFramework/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\richard\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e950ef1cce8f1d158b1aaa29800e236e\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "112",
-                        "endOffsets": "163"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\JAVASDK\\AndroidStudio\\AS_Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\leonard\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\198d174c31124c15e6dd429f873dd072\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "source": "/Users/richard/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/9b0780a114796d1344c40b3ef331a623/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
