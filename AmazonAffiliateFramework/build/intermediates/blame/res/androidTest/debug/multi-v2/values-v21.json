@@ -4,26 +4,7 @@
             "outputFile": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v21\\values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\89214215a0d34b0517733967c2193f19\\res\\values-v21\\values-v21.xml",
-                    "from": {
-                        "startLines": "2,5,8,11",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,223,386,554",
-                        "endLines": "4,7,10,13",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "218,381,549,716"
-                    },
-                    "to": {
-                        "startLines": "285,288,292,296",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "21001,21169,21458,21754",
-                        "endLines": "287,290,294,298",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "21164,21327,21621,21916"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\d508f22871089d48903db404305698fe\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fb8f6ee3de32e92b9199be745b947635\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,19,20,21,22,24,26,27,28,29,30,32,34,36,38,40,42,43,48,50,52,53,54,56,58,59,60,61,62,63,107,110,154,157,160,162,164,166,169,171,174,175,176,179,180,181,182,183,184,187,188,190,192,194,196,200,202,203,204,205,207,211,213,215,216,217,218,219,221,222,223,233,234,235,247,259,260,261,264,267,268,271,272",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -42,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9d7558781b8f6a2320c15701c2af69c7\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9a7fe35731aab8b1f5fc67fc0a64053f\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -61,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-appinvite-10.2.1.aar\\9ea6171356b908a327f515a0608712cc\\res\\values-v21\\values.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-appinvite-10.2.1.aar\\35567f29da49770e0884cca67d8bc950\\res\\values-v21\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -80,7 +61,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\2d2b2aeb10b61aa86ba9f82baf4fbbef\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\9b5ca0510be74cfa2eaf06a163221e1b\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,5",
                         "startColumns": "4,4",
@@ -96,6 +77,25 @@
                         "endLines": "166,228",
                         "endColumns": "12,96",
                         "endOffsets": "12783,17219"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\f399899070e4f82f7b8ff844aab7e164\\res\\values-v21\\values-v21.xml",
+                    "from": {
+                        "startLines": "2,5,8,11",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,223,386,554",
+                        "endLines": "4,7,10,13",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "218,381,549,716"
+                    },
+                    "to": {
+                        "startLines": "285,288,292,296",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "21001,21169,21458,21754",
+                        "endLines": "287,290,294,298",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "21164,21327,21621,21916"
                     }
                 }
             ]
