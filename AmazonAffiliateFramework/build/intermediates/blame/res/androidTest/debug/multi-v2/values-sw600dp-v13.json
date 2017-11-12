@@ -4,7 +4,7 @@
             "outputFile": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\9b5ca0510be74cfa2eaf06a163221e1b\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\ac04d36a325f36f8f3ecbe616dccf32c\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,17 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fb8f6ee3de32e92b9199be745b947635\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,124,193,263,337,413,472,543",
-                        "endColumns": "68,68,69,73,75,58,70,67",
-                        "endOffsets": "119,188,258,332,408,467,538,606"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\06670b6fc3fb906d9c13787470905247\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -47,6 +37,16 @@
                         "startOffsets": "1170,1239",
                         "endColumns": "68,68",
                         "endOffsets": "1234,1303"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\317adf7998d5ab6f38508b42ee248787\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
                     }
                 }
             ]

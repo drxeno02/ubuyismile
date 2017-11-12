@@ -4,7 +4,7 @@
             "outputFile": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\06670b6fc3fb906d9c13787470905247\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
@@ -21,26 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\9b5ca0510be74cfa2eaf06a163221e1b\\res\\values-land\\values-land.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "232"
-                    },
-                    "to": {
-                        "startLines": "15",
-                        "startColumns": "4",
-                        "startOffsets": "1066",
-                        "endLines": "18",
-                        "endColumns": "12",
-                        "endOffsets": "1243"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-10.2.1.aar\\341e33ebeafc6e62735fda710da74038\\res\\values-land\\values.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.4.2.aar\\41b9b81cdd37e16aec9621b61376208b\\res\\values-land\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9",
                         "startColumns": "0,0,0,0,0,0",
@@ -57,13 +38,32 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fb8f6ee3de32e92b9199be745b947635\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\317adf7998d5ab6f38508b42ee248787\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
                         "startOffsets": "55,125,189,260",
                         "endColumns": "69,63,70,67",
                         "endOffsets": "120,184,255,323"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\ac04d36a325f36f8f3ecbe616dccf32c\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "232"
+                    },
+                    "to": {
+                        "startLines": "15",
+                        "startColumns": "4",
+                        "startOffsets": "1066",
+                        "endLines": "18",
+                        "endColumns": "12",
+                        "endOffsets": "1243"
                     }
                 }
             ]
