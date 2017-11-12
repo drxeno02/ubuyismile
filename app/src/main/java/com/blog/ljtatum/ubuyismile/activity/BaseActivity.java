@@ -53,6 +53,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * Method is used to pop the top state off the back stack.
+     * Returns true if there was one to pop, else false.
+     */
+    public void popBackStack(String name) {
+        mFragmentManager.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    /**
      * Method is used to remove a fragment
      *
      * @param fragment The fragment to be removed
@@ -67,4 +75,40 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method is used to remove all fragments
+     */
+    public void removeAllFragments() {
+        try {
+            for (Fragment fragment : mFragmentManager.getFragments()) {
+                if (!FrameworkUtils.checkIfNull(fragment)) {
+                    FragmentTransaction ft = mFragmentManager.beginTransaction();
+                    ft.remove(fragment).commit();
+                    popBackStack(fragment.getTag());
+                }
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method is used to retrieve the current fragment the user is on
+     *
+     * @return Returns the TopFragment if there is one, otherwise returns null
+     */
+    @Nullable
+    public Fragment getTopFragment() {
+        if (mFragmentManager.getBackStackEntryCount() > 0) {
+            int i = mFragmentManager.getBackStackEntryCount();
+            while (i >= 0) {
+                i--;
+                Fragment topFragment = mFragmentManager.getFragments().get(i);
+                if (!FrameworkUtils.checkIfNull(topFragment)) {
+                    return topFragment;
+                }
+            }
+        }
+        return null;
+    }
 }

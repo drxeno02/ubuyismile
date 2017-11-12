@@ -35,12 +35,13 @@ public class JsonRequest extends JsonObjectRequest {
     /**
      * Method is used to make Google Service requests
      *
-     * @param method
-     * @param url
-     * @param jsonRequest
-     * @param listener
-     * @param errorListener
-     * @param resultCode
+     * @param method        The desired action to be performed for a given resource for HTTP request methods
+     * @param url           The request URL
+     * @param jsonRequest   Requests do the parsing of raw responses and Volley takes care of
+     *                      dispatching the parsed response back to the main thread for delivery
+     * @param listener      Callback for when response is received
+     * @param errorListener Callback for when error occur
+     * @param resultCode    ResultCode for the failed request
      */
     public JsonRequest(int method, String url, JSONObject jsonRequest, JsonResponseListener listener, ErrorListener errorListener, int resultCode) {
         super(method, url, jsonRequest, listener, errorListener);
@@ -58,11 +59,12 @@ public class JsonRequest extends JsonObjectRequest {
     /**
      * Method is used to make Google Service requests
      *
-     * @param method
-     * @param url
-     * @param jsonRequest
-     * @param listener
-     * @param errorListener
+     * @param method        The desired action to be performed for a given resource for HTTP request methods
+     * @param url           The request URL
+     * @param jsonRequest   Requests do the parsing of raw responses and Volley takes care of
+     *                      dispatching the parsed response back to the main thread for delivery
+     * @param listener      Callback for when response is received
+     * @param errorListener Callback for when error occurs
      */
     public JsonRequest(int method, String url, JSONObject jsonRequest, JsonResponseListener listener, ErrorListener errorListener) {
         super(method, url, jsonRequest, listener, errorListener);
@@ -79,7 +81,7 @@ public class JsonRequest extends JsonObjectRequest {
     /**
      * Set custom headers
      *
-     * @param headers
+     * @param headers The Content-Type entity header is used to indicate the media type of the resource
      */
     public void setHeaders(Map<String, String> headers) {
         mHeaders = headers;
@@ -107,7 +109,7 @@ public class JsonRequest extends JsonObjectRequest {
     /**
      * Method is used to retrieve listener
      *
-     * @return
+     * @return Callback for when response is received
      */
     public JsonResponseListener getListener() {
         return mListener;
@@ -132,7 +134,7 @@ public class JsonRequest extends JsonObjectRequest {
 
     @Override
     protected void deliverResponse(@NonNull JSONObject response) {
-        Log.i(String.format("%s::JsonRequest", TAG_RES),response.toString());
+        Log.i(String.format("%s::JsonRequest", TAG_RES), response.toString());
 
         if (!FrameworkUtils.checkIfNull(mListener)) {
             mListener.onResponse(response, mResultCode);

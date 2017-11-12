@@ -4,30 +4,19 @@
 
 package com.app.framework.utilities;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.content.ContextCompat;
-import android.telephony.PhoneNumberUtils;
-import android.util.DisplayMetrics;
-import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.maps.android.PolyUtil;
 import com.app.framework.constants.Constants;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,7 +27,6 @@ import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -62,8 +50,8 @@ public class FrameworkUtils {
     /**
      * Method checks if String value is empty
      *
-     * @param str
-     * @return string
+     * @param str String value to check if null or empty
+     * @return True if String value is null or empty
      */
     public static boolean isStringEmpty(String str) {
         return str == null || str.length() == 0 || EMPTY.equals(str.trim()) || NULL.equals(str);
@@ -72,18 +60,20 @@ public class FrameworkUtils {
     /**
      * Method is used to check if objects are null
      *
-     * @param objectToCheck
-     * @param <T>
-     * @return true if objectToCheck is null
+     * @param objectToCheck Object to check if null or empty
+     * @param <T>           Generic data value
+     * @return True if object is null or empty
      */
     public static <T> boolean checkIfNull(T objectToCheck) {
         return objectToCheck == null;
     }
 
     /**
-     * @param context
-     * @param strPermissions
-     * @return
+     * Determine whether you have been granted a particular permission
+     *
+     * @param context        Interface to global information about an application environment
+     * @param strPermissions The name of the permission being checked
+     * @return True if permissions are enabled, otherwise false
      */
     public static boolean checkAppPermissions(Context context, String... strPermissions) {
         for (String permissions : strPermissions) {
@@ -100,8 +90,8 @@ public class FrameworkUtils {
     /**
      * Method is used to convert String date time to Calendar object; MM/dd/yyyy hh:mm:ss a
      *
-     * @param dateTime
-     * @return
+     * @param dateTime String value representation of date and time
+     * @return Converted calendar object {@link java.util.Calendar} with given date and time
      */
     public static Calendar convertStringDateTimeToCalendar(String dateTime, String timezone) {
         // remove T from dateTime string
@@ -122,7 +112,7 @@ public class FrameworkUtils {
     /**
      * Method is used to get formatted date and time; MM/dd/yyyy hh:mm:ss a
      *
-     * @return string
+     * @return Formatted date and time; MM/dd/yyyy hh:mm:ss a
      */
     public static String getCurrentDateMonthDayYear() {
         Calendar calendar = Calendar.getInstance();
@@ -131,25 +121,25 @@ public class FrameworkUtils {
     }
 
     /**
-     * Method is used to get formatted date and time; yyyy-MM-dd HH:mm:ss.SSS
+     * Method is used to get formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS
      *
-     * @return string
+     * @return Formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS
      */
     public static String getCurrentDateYearMonthDay() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
         return formatter.format(calendar.getTime());
     }
 
     /**
-     * Method is used to get formatted date and time; yyyy-MM-dd HH:mm:ss.SSS
+     * Method is used to get formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
      *
-     * @return string
-     * @oaram timezone
+     * @param timezone Time zone of the calendar used by this date format
+     * @return Formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
      */
     public static String getCurrentDateYearMonthDay(String timezone) {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
         if (!FrameworkUtils.isStringEmpty(timezone)) {
             formatter.setTimeZone(TimeZone.getTimeZone(timezone));
         }
@@ -159,7 +149,7 @@ public class FrameworkUtils {
     /**
      * Method is used to get formatted date and time; dd/MM/yyyy hh:mm:ss
      *
-     * @return string
+     * @return Formatted date and time; dd/MM/yyyy hh:mm:ss
      */
     public static String getCurrentDateDayMonthYear() {
         Calendar calendar = Calendar.getInstance();
@@ -170,8 +160,8 @@ public class FrameworkUtils {
     /**
      * Method is used to parse formatted date; MM/dd/yyyy
      *
-     * @param calendar
-     * @return string
+     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
+     * @return Formatted date; MM/dd/yyyy
      */
     public static String parseDate(Calendar calendar) {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
@@ -181,8 +171,8 @@ public class FrameworkUtils {
     /**
      * Method is used to parse month and day; MM dd
      *
-     * @param calendar
-     * @return
+     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
+     * @return Formatted date; MM dd
      */
     public static String parseMonthDay(Calendar calendar) {
         SimpleDateFormat formatter = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
@@ -193,8 +183,8 @@ public class FrameworkUtils {
     /**
      * Method is used to parse formatted time; HH:mm
      *
-     * @param calendar
-     * @return string
+     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
+     * @return Formatted time; HH:mm
      */
     public static String parseTime(Calendar calendar) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
@@ -204,8 +194,8 @@ public class FrameworkUtils {
     /**
      * Method is used to parse day of the week
      *
-     * @param calendar
-     * @return
+     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
+     * @return Day of the week
      */
     public static String parseDayOfTheWeek(Calendar calendar) {
         Date date = calendar.getTime();
@@ -215,8 +205,8 @@ public class FrameworkUtils {
     /**
      * Method is used to add set amount of minutes to current date; mm:ss
      *
-     * @param minutesToAdd
-     * @return
+     * @param minutesToAdd Minutes to add to current date and time
+     * @return Calendar object {@link java.util.Calendar} with updated date and time
      */
     public static Calendar addMinutesToCurrentDate(int minutesToAdd) {
         Calendar calendar = Calendar.getInstance();
@@ -226,10 +216,11 @@ public class FrameworkUtils {
 
     /**
      * Method is used to check if two calendar objects have the same day of year
+     * <p>To be true, the year, day of month and day of the year must all be the same</p>
      *
-     * @param calendarA
-     * @param calendarB
-     * @return
+     * @param calendarA Calendar object {@link java.util.Calendar} with given date and time
+     * @param calendarB Calendar object {@link java.util.Calendar} with given date and time
+     * @return True if calendar objects have the same day of year
      */
     public static boolean isSameDay(Calendar calendarA, Calendar calendarB) {
         return calendarA.get(Calendar.YEAR) == calendarB.get(Calendar.YEAR) &&
@@ -240,7 +231,8 @@ public class FrameworkUtils {
     /**
      * Method is used to set visibility of views to VISIBLE
      *
-     * @param params views to set visibility to VISIBLE
+     * @param params Views to set visibility to VISIBLE
+     *               <p>This class represents the basic building block for user interface components</p>
      */
     public static void setViewVisible(View... params) {
         for (View v : params) {
@@ -253,7 +245,8 @@ public class FrameworkUtils {
     /**
      * Method is used to set visibility of views to GONE
      *
-     * @param params views to set visibility to GONE
+     * @param params Views to set visibility to GONE
+     *               <p>This class represents the basic building block for user interface components</p>
      */
     public static void setViewGone(View... params) {
         for (View v : params) {
@@ -266,7 +259,8 @@ public class FrameworkUtils {
     /**
      * Method is used to set visibility of views to INVISIBLE
      *
-     * @param params views to set visibility to INVISIBLE
+     * @param params Views to set visibility to INVISIBLE
+     *               <p>This class represents the basic building block for user interface components</p>
      */
     public static void setViewInvisible(View... params) {
         for (View v : params) {
@@ -279,8 +273,8 @@ public class FrameworkUtils {
     /**
      * Method checks if the application is in the background (i.e behind another application's Activity).
      *
-     * @param context context
-     * @return true if application is running in the background
+     * @param context Interface to global information about an application environment
+     * @return True if application is running in the background, otherwise false
      */
     @SuppressWarnings("deprecation")
     public static boolean isApplicationSentToBackground(final Context context) {
@@ -300,8 +294,8 @@ public class FrameworkUtils {
     /**
      * Method checks if an Activity is currently running
      *
-     * @param context
-     * @return false if tasks list size is zero
+     * @param context Interface to global information about an application environment
+     * @return True if there are running tasks, otherwise false
      */
     public static boolean isActivityRunning(final Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -317,8 +311,8 @@ public class FrameworkUtils {
     /**
      * Method is used to confirm that string parameter is in valid area code format
      *
-     * @param areaCode
-     * @return true if area code is valid
+     * @param areaCode Area code to confirm
+     * @return True if area code has valid format, otherwise false
      */
     public static boolean isAreaCode(String areaCode) {
         return !isStringEmpty(areaCode) && (areaCode.length() >= 3 &&
@@ -328,8 +322,8 @@ public class FrameworkUtils {
     /**
      * Method is used to confirm that string parameter is in valid zip code format
      *
-     * @param zipCode
-     * @return true if zipcode is valid
+     * @param zipCode Zip code to confirm
+     * @return True if zip code has valid format, otherwise false
      */
     public static boolean isZipCode(String zipCode) {
         String zipCodePattern = "^\\d{5}(-\\d{4})?$";
@@ -339,8 +333,8 @@ public class FrameworkUtils {
     /**
      * Method is used to determine if the provided String has a numeric value
      *
-     * @param value
-     * @return
+     * @param value String value to check
+     * @return True if String value contains any numeric values, otherwise false
      */
     public static boolean containsNumericValue(String value) {
         return value.matches(".*\\d+.*"); // regex to check if String has numeric value
@@ -349,9 +343,12 @@ public class FrameworkUtils {
     /**
      * Method is used to convert meters into longitude values
      *
-     * @param meterToEast
-     * @param latitude
-     * @return
+     * @param meterToEast The distance (meters) to convert to longitude values
+     * @param latitude    The angular distance of a place north or south of the earth's equator,
+     *                    or of a celestial object north or south of the celestial equator,
+     *                    usually expressed in degrees and minutes
+     * @return The angle measured in radians to an approximately equivalent angle
+     * measured in degrees
      */
     public static double meterToLongitude(double meterToEast, double latitude) {
         double latArc = Math.toRadians(latitude);
@@ -363,8 +360,9 @@ public class FrameworkUtils {
     /**
      * Method is used to convert meters into latitude values
      *
-     * @param meterToNorth
-     * @return
+     * @param meterToNorth The distance (meters) to convert to latitude values
+     * @return The angle measured in radians to an approximately equivalent angle
+     * measured in degrees
      */
     public static double meterToLatitude(double meterToNorth) {
         double rad = meterToNorth / Constants.EARTH_RADIUS;
@@ -374,8 +372,8 @@ public class FrameworkUtils {
     /**
      * Method is used to convert meters to miles
      *
-     * @param meters
-     * @return
+     * @param meters The distance (meters) to convert to miles
+     * @return The converted miles
      */
     public static double meterToMile(double meters) {
         double miles = meters / (1609.344);
@@ -391,9 +389,9 @@ public class FrameworkUtils {
     /**
      * Method is used to convert input stream into a String
      *
-     * @param in input stream
+     * @param in The input stream from which to read characters
      * @return String value converted from input stream
-     * @throws IOException
+     * @throws IOException Signals a general, I/O-related error
      */
     public static String convertStreamToString(InputStream in) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -410,8 +408,9 @@ public class FrameworkUtils {
     /**
      * Method is used to capitalize the first letter of any given string
      *
-     * @param input
-     * @return
+     * @param input String value to upper case first letter
+     * @return The upper case equivalent for the specified character if the character
+     * is a lower case letter
      */
     public static String toTitleCase(String input) {
         if (!isStringEmpty(input)) {
@@ -429,12 +428,13 @@ public class FrameworkUtils {
     /**
      * Method is used to delay focus set on EditText view
      *
-     * @param delay
-     * @param view
+     * @param delay The delay (in milliseconds) until the Runnable will be executed
+     * @param view  Views to request focus for
+     *              <p>This class represents the basic building block for user interface components</p>
      */
     public static void setFocusWithDelay(int delay, View... view) {
         for (final View v : view) {
-            if (!FrameworkUtils.checkIfNull(v)) {
+            if (!checkIfNull(v)) {
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -449,9 +449,9 @@ public class FrameworkUtils {
     /**
      * Method is used to get color by id
      *
-     * @param context
-     * @param id
-     * @return
+     * @param context Interface to global information about an application environment
+     * @param id      The desired resource identifier, as generated by the aapt tool
+     * @return A color integer associated with a particular resource ID
      */
     public static final int getColor(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -464,9 +464,9 @@ public class FrameworkUtils {
     /**
      * Method is used to get drawable by id
      *
-     * @param context
-     * @param id
-     * @return
+     * @param context Interface to global information about an application environment
+     * @param id      The desired resource identifier, as generated by the aapt tool
+     * @return A drawable object associated with a particular resource ID
      */
     public static final Drawable getDrawable(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -480,8 +480,10 @@ public class FrameworkUtils {
      * Method is used to check if 2 given LatLngs are equal
      * Rounds each latitude and longitude to 6 decimal places before comparing
      *
-     * @param latLng1
-     * @param latLng2
+     * @param latLng1 An immutable class representing a pair of latitude and longitude coordinates,
+     *                stored as degrees
+     * @param latLng2 An immutable class representing a pair of latitude and longitude coordinates,
+     *                stored as degrees
      */
     public static boolean isLatLngEqual(LatLng latLng1, LatLng latLng2) {
         return ((double) Math.round(latLng1.latitude * 1000000d) / 1000000d ==
@@ -495,7 +497,7 @@ public class FrameworkUtils {
      * sometime cause crashes when objects and views are not fully animated or instantiated.
      * This helper method helps minimize and control UI interaction and flow
      *
-     * @return
+     * @return True if clicks have not occurred within 300ms window
      */
     public static boolean isViewClickable() {
         /*

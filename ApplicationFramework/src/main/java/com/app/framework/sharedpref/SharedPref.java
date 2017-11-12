@@ -1,27 +1,31 @@
 package com.app.framework.sharedpref;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Created by LJTat on 2/23/2017.
  */
 public class SharedPref {
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor prefsEditor;
+    private final SharedPreferences sharedPreferences;
+    private final SharedPreferences.Editor prefsEditor;
 
     /**
-     * @param context
+     * @param context  Interface to global information about an application environment
      * @param prefName : Name of Preference
      */
-    public SharedPref(Context context, String prefName) {
+    @SuppressLint("CommitPrefEdits")
+    public SharedPref(@NonNull Context context, String prefName) {
         this.sharedPreferences = context.getSharedPreferences(prefName, Activity.MODE_PRIVATE);
         this.prefsEditor = sharedPreferences.edit();
     }
 
     /**
-     * Method for clearing all data of preference.
+     * Method for clearing all data of preference
      */
     public void clearAllPreferences() {
         prefsEditor.clear();
@@ -29,7 +33,9 @@ public class SharedPref {
     }
 
     /**
-     * Method for remove data of preference.
+     * Method for remove data of preference
+     *
+     * @param key The name of the preference to remove
      */
     public void removePreference(String key) {
         prefsEditor.remove(key);
@@ -37,8 +43,8 @@ public class SharedPref {
     }
 
     /**
-     * @param key
-     * @param value : String Value
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
      */
     public void setPref(String key, String value) {
         prefsEditor.putString(key, value);
@@ -46,8 +52,8 @@ public class SharedPref {
     }
 
     /**
-     * @param key
-     * @param value : int Value
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
      */
     public void setPref(String key, int value) {
         prefsEditor.putInt(key, value);
@@ -55,8 +61,8 @@ public class SharedPref {
     }
 
     /**
-     * @param key
-     * @param value : long value
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
      */
     public void setPref(String key, long value) {
         prefsEditor.putLong(key, value);
@@ -64,8 +70,8 @@ public class SharedPref {
     }
 
     /**
-     * @param key
-     * @param value : boolean value
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
      */
     public void setPref(String key, boolean value) {
         prefsEditor.putBoolean(key, value);
@@ -73,37 +79,40 @@ public class SharedPref {
     }
 
     /**
-     * @param key
-     * @param defValue
-     * @return String Type
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
+     * @return String value
      */
-    public String getStringPref(String key, String defValue) {
-        return sharedPreferences.getString(key, defValue);
+    @Nullable
+    public String getStringPref(String key, String value) {
+        return sharedPreferences.getString(key, value);
     }
 
     /**
-     * @param key
-     * @param defValue
-     * @return int Type
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
+     * @return int value
      */
-    public int getIntPref(String key, int defValue) {
-        return sharedPreferences.getInt(key, defValue);
+    public int getIntPref(String key, int value) {
+        return sharedPreferences.getInt(key, value);
     }
 
     /**
-     * @param key
-     * @return boolean type
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
+     * @return boolean value
      */
-    public boolean getBooleanPref(String key, boolean defValue) {
-        return sharedPreferences.getBoolean(key, defValue);
+    public boolean getBooleanPref(String key, boolean value) {
+        return sharedPreferences.getBoolean(key, value);
     }
 
     /**
-     * @param key
-     * @param defValue
-     * @return long Type
+     * @param key   The name of the preference to remove
+     * @param value The new value for the preference
+     * @return long value
      */
-    public long getLongPref(String key, long defValue) {
-        return sharedPreferences.getLong(key, defValue);
+    public long getLongPref(String key, long value) {
+        return sharedPreferences.getLong(key, value);
     }
+
 }

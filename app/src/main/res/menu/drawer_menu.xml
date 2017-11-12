@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/information">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_browse"
+            android:title="@string/menu_browse" />
+        <item
+            android:id="@+id/nav_search"
+            android:title="@string/menu_search" />
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/menu_settings" />
+    </group>
+
+    <item android:title="@string/menu_header_goods">
         <menu>
             <item
-                android:id="@+id/nav_about"
+                android:id="@+id/nav_all_good_deals"
                 android:icon="@drawable/about"
-                android:title="@string/menu_about" />
+                android:title="@string/menu_all_goods_deals" />
             <item
-                android:id="@+id/nav_privacy"
-                android:icon="@drawable/privacy"
-                android:title="@string/menu_privacy" />
+                android:id="@+id/nav_quick_search_books"
+                android:icon="@drawable/about"
+                android:title="@string/menu_quick_search_books" />
+            <item
+                android:id="@+id/nav_quick_search_electronics"
+                android:icon="@drawable/about"
+                android:title="@string/menu_quick_search_electronics" />
+            <item
+                android:id="@+id/nav_quick_search_food"
+                android:icon="@drawable/about"
+                android:title="@string/menu_quick_search_food" />
+            <item
+                android:id="@+id/nav_quick_search_health_beauty"
+                android:icon="@drawable/about"
+                android:title="@string/menu_quick_search_health_beauty" />
+            <item
+                android:id="@+id/nav_quick_search_movies"
+                android:icon="@drawable/about"
+                android:title="@string/menu_quick_search_movies" />
+            <item
+                android:id="@+id/nav_quick_search_video_games"
+                android:icon="@drawable/about"
+                android:title="@string/menu_quick_search_video_games" />
         </menu>
     </item>
 
-    <item android:title="@string/header_information">
-        <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/about"
-                android:title="@string/menu_about" />
-            <item
-                android:id="@+id/nav_privacy"
-                android:icon="@drawable/privacy"
-                android:title="@string/menu_privacy" />
-        </menu>
-    </item>
-
-    <item android:title="@string/header_partner">
+    <item android:title="@string/menu_header_information">
         <menu>
             <item
                 android:id="@+id/nav_about"

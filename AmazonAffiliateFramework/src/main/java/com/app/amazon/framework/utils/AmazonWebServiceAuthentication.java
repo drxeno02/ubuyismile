@@ -1,5 +1,10 @@
 package com.app.amazon.framework.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
 /**
  * Created by leonard on 9/26/2017.
  */
@@ -53,5 +58,17 @@ public class AmazonWebServiceAuthentication {
      */
     public String getAwsSecretKey() {
         return awsSecretKey;
+    }
+
+    /**
+     * Get the timestamp
+     * @return The current date and time
+     */
+    public String getTimestamp() {
+        // set timestamp
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return formatter.format(calendar.getTime());
     }
 }

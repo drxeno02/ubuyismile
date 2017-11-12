@@ -4,21 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
 import com.android.volley.Request.Method;
 import com.android.volley.VolleyError;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.model.Dash;
-import com.google.android.gms.maps.model.Gap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.PatternItem;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.maps.android.SphericalUtil;
 import com.app.framework.entities.Address;
 import com.app.framework.entities.Place;
 import com.app.framework.listeners.AddressListener;
@@ -32,6 +21,15 @@ import com.app.framework.net.JsonResponseListener;
 import com.app.framework.net.VolleyClient;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.map.model.TurnByTurnModel;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Gap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.PatternItem;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -119,9 +117,10 @@ public class GoogleServiceUtility {
     /**
      * Method is used to get the address based on latitude and longitude coordinates
      *
-     * @param context
-     * @param latLng
-     * @param listener
+     * @param context  Interface to global information about an application environment
+     * @param latLng   An immutable class representing a pair of latitude and longitude coordinates,
+     *                 stored as degrees
+     * @param listener Callback for when address is retrieved
      */
     public static void getAddress(Context context, LatLng latLng, final AddressListener listener) {
         if (latLng == null || listener == null)
@@ -152,7 +151,9 @@ public class GoogleServiceUtility {
                 @Override
                 public void onErrorResponse(VolleyError error, int resultCode) {
                     listener.onAddressError();
-                }                @Override
+                }
+
+                @Override
                 public void onErrorResponse(VolleyError error) {
                     // do nothing
                 }
@@ -171,10 +172,11 @@ public class GoogleServiceUtility {
     /**
      * Method is used to get address using an address String value
      *
-     * @param context
-     * @param address
-     * @param listener
-     * @throws UnsupportedEncodingException
+     * @param context  Interface to global information about an application environment
+     * @param address  The address of the latitude and longitude coordinates location
+     * @param listener Callback for when address is retrieved
+     * @throws UnsupportedEncodingException Thrown when a program asks for a particular
+     *                                      character converter that is unavailable
      */
     public static void getAddress(final Context context, String address, final AddressListener listener)
             throws UnsupportedEncodingException {
@@ -226,11 +228,13 @@ public class GoogleServiceUtility {
     /**
      * Method is used to retrieve eta between two locations based on latitude and longitude coordinates
      *
-     * @param context
-     * @param origin
-     * @param destination
-     * @param unit
-     * @param listener
+     * @param context     Interface to global information about an application environment
+     * @param origin      An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Origin)
+     * @param destination An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Destination)
+     * @param unit        Unit of measurement
+     * @param listener    Callback for when eta is retrieved
      */
     public static void requestGoogleEta(Context context, LatLng origin, LatLng destination,
                                         final String unit, final DistanceListener listener) {
@@ -268,7 +272,7 @@ public class GoogleServiceUtility {
                         } else {
                             listener.onDistanceError();
                         }
-                    } catch (NullPointerException | JSONException | NumberFormatException e) {
+                    } catch (JSONException | NullPointerException | NumberFormatException e) {
                         e.printStackTrace();
                         listener.onDistanceError();
                     }
@@ -302,10 +306,13 @@ public class GoogleServiceUtility {
      * Method is used to retrieve the distance between two locations based on latitude and
      * longitude coordinates
      *
-     * @param context
-     * @param origin
-     * @param destination
-     * @param listener
+     * @param context     Interface to global information about an application environment
+     * @param origin      An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Origin)
+     * @param destination An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Destination)
+     * @param isDriving   True if user is driving, otherwise false
+     * @param listener    Callback for when distance between two locations is retrieved
      */
     public static void getDistance(Context context, LatLng origin, LatLng destination, boolean isDriving,
                                    final DistanceListener listener) {
@@ -363,13 +370,17 @@ public class GoogleServiceUtility {
 
     /**
      * Method is used for Google Places API calls
+     * <p>Predictions are made based on factors, like the popularity and freshness of search terms.
+     * When you choose a prediction, you do a search using the term you selected</p>
      *
-     * @param context
-     * @param input
-     * @param latLong
-     * @param radius
-     * @param listener
-     * @throws UnsupportedEncodingException
+     * @param context  Interface to global information about an application environment
+     * @param input    The users' input
+     * @param latLong  An immutable class representing a pair of latitude and longitude coordinates,
+     *                 stored as degrees
+     * @param radius   The distance from the center of a circle to a point on the circle
+     * @param listener Callback for when Google returns back prediction results
+     * @throws UnsupportedEncodingException Thrown when a program asks for a particular
+     *                                      character converter that is unavailable
      */
     public static void getPredictions(Context context, String input, String latLong, int radius,
                                       final GooglePlacesListener listener)
@@ -416,12 +427,17 @@ public class GoogleServiceUtility {
 
     /**
      * Method is used for Google Places API calls (nearby places)
+     * <p>The Google Places API Web Service allows you to query for place information on a
+     * variety of categories, such as: establishments, prominent points of interest,
+     * geographic locations, and more</p>
      *
-     * @param context
-     * @param latLong
-     * @param radius
-     * @param listener
-     * @throws UnsupportedEncodingException
+     * @param context  Interface to global information about an application environment
+     * @param latLong  An immutable class representing a pair of latitude and longitude coordinates,
+     *                 stored as degrees
+     * @param radius   The distance from the center of a circle to a point on the circle
+     * @param listener Callback for when place information is retrieved
+     * @throws UnsupportedEncodingException Thrown when a program asks for a particular
+     *                                      character converter that is unavailable
      */
     public static void getNearbyPlaces(Context context, String latLong, int radius, String type,
                                        final JsonResponseListener listener, ErrorListener eListener)
@@ -435,10 +451,12 @@ public class GoogleServiceUtility {
 
     /**
      * Method is used for returning a URL for Place Photos
+     * <p>The Place Photo service, part of the Google Places API Web Service, is a read-only API
+     * that allows you to add high quality photographic content to your application</p>
      *
-     * @param maxWidth
-     * @param maxHeight
-     * @param reference
+     * @param maxWidth  The maximum width of the image
+     * @param maxHeight The maximum height of the image
+     * @param reference A string used to identify the photo when you perform a Photo request
      */
     public static String getPlacePhotoURL(int maxWidth, int maxHeight, String reference) {
         return String.format(GOOGLE_API_PLACES_PHOTO_URL, maxWidth, maxHeight, reference, ConfigurationManager.GOOGLE_API_KEY);
@@ -447,12 +465,16 @@ public class GoogleServiceUtility {
     /**
      * Method is used for Google Directions API calls
      *
-     * @param context
-     * @param origin
-     * @param destination
-     * @param listener
-     * @throws ExecutionException
-     * @throws InterruptedException
+     * @param context     Interface to global information about an application environment
+     * @param origin      An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Origin)
+     * @param destination An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Destination)
+     * @param listener    Callback for when directions are retrieved
+     * @throws ExecutionException   Exception thrown when attempting to retrieve the result
+     *                              of a task that aborted by throwing an exception
+     * @throws InterruptedException Thrown when a waiting thread is activated before the
+     *                              condition it was waiting for has been satisfied
      */
     public static void getDirections(Context context, String origin, String destination,
                                      final DirectionsListener listener)
@@ -473,7 +495,7 @@ public class GoogleServiceUtility {
                         JSONObject overViewPolyline = currentRoute.getJSONObject(KEY_OVERVIEW_POLYLINE);
                         String encodedPoints = overViewPolyline.getString(KEY_POINTS);
                         listener.onSuccess(decode(encodedPoints));
-                    } catch (JSONException e) {
+                    } catch (JSONException | NullPointerException e) {
                         e.printStackTrace();
                     }
                 }
@@ -505,12 +527,16 @@ public class GoogleServiceUtility {
     /**
      * Method is used to retrieve turn by turn directions
      *
-     * @param context
-     * @param origin
-     * @param destination
-     * @param listener
-     * @throws ExecutionException
-     * @throws InterruptedException
+     * @param context     Interface to global information about an application environment
+     * @param origin      An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Origin)
+     * @param destination An immutable class representing a pair of latitude and longitude coordinates,
+     *                    stored as degrees (Destination)
+     * @param listener    Callback for when directions are retrieved
+     * @throws ExecutionException   Exception thrown when attempting to retrieve the result
+     *                              of a task that aborted by throwing an exception
+     * @throws InterruptedException Thrown when a waiting thread is activated before the
+     *                              condition it was waiting for has been satisfied
      */
     public static void getTurnByTurnDirections(Context context, String origin, String destination,
                                                String travelMode, final TurnByTurnListener listener)
@@ -554,15 +580,14 @@ public class GoogleServiceUtility {
                                                 Double.parseDouble(endLocation.getString(KEY_LNG)));
 
                                         // current step instructions
-                                        turnByTurnModel.instructions = stepsObject.getJSONObject(i).getString(KEY_INSTRUCTIONS);
-
+                                        turnByTurnModel.instructions = stepsObject.getJSONObject(i).getString(KEY_INSTRUCTIONS)
+                                                .replaceAll("[<](/)?div[^>]*[>]", " ");
                                         try {
                                             // current step maneuver (direction)
                                             turnByTurnModel.maneuver = stepsObject.getJSONObject(i).getString(KEY_MANEUVER);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-
                                         // add current step to list
                                         alTurnByTurn.add(turnByTurnModel);
                                     }
@@ -602,10 +627,13 @@ public class GoogleServiceUtility {
 
     /**
      * Method is used for Google Places API calls (get location details)
+     * <p>The Google Places API Web Service allows you to query for place information on a
+     * variety of categories, such as: establishments, prominent points of interest,
+     * geographic locations, and more</p>
      *
-     * @param context
-     * @param placeId
-     * @param listener
+     * @param context  Interface to global information about an application environment
+     * @param placeId  A place ID is a textual identifier that uniquely identifies a place
+     * @param listener Callback for when location details are retrieved
      */
     public static void getPlacesDetail(final Context context, String placeId, final AddressListener listener) {
         if (FrameworkUtils.isStringEmpty(placeId)) {
@@ -676,7 +704,7 @@ public class GoogleServiceUtility {
     /**
      * Method is used to populate a JSONArray of address component keys
      *
-     * @param arr
+     * @param arr A dense indexed sequence of values.
      * @return
      */
     private static JSONArray getAddressComponents(JSONArray arr, boolean isLatLng) {
@@ -705,7 +733,7 @@ public class GoogleServiceUtility {
     /**
      * Method is used to get formatted address
      *
-     * @param arr
+     * @param arr A dense indexed sequence of values.
      * @return
      */
     private static String getFormattedAddress(JSONArray arr, boolean isLatLng) {
@@ -734,13 +762,13 @@ public class GoogleServiceUtility {
     /**
      * Utility method to check if the types are either a street address, a route, or a premise
      *
-     * @param types
+     * @param arr A dense indexed sequence of values.
      * @return
      */
-    private static boolean isCompatibleType(JSONArray types) {
-        int length = types.length();
+    private static boolean isCompatibleType(JSONArray arr) {
+        int length = arr.length();
         for (int i = 0; i < length; i++) {
-            String type = types.optString(i);
+            String type = arr.optString(i);
             if (type.equalsIgnoreCase(STREET_ADDRESS_TYPE) ||
                     type.equalsIgnoreCase(ROUTE_TYPE) ||
                     type.equalsIgnoreCase(PREMISE_TYPE))
@@ -752,13 +780,13 @@ public class GoogleServiceUtility {
     /**
      * Utility method to check if street address
      *
-     * @param types
+     * @param arr A dense indexed sequence of values.
      * @return
      */
-    private static boolean isStreetAddress(JSONArray types) {
-        int length = types.length();
+    private static boolean isStreetAddress(JSONArray arr) {
+        int length = arr.length();
         for (int i = 0; i < length; i++) {
-            if (types.optString(i).equalsIgnoreCase(STREET_ADDRESS_TYPE))
+            if (arr.optString(i).equalsIgnoreCase(STREET_ADDRESS_TYPE))
                 return true;
         }
         return false;
@@ -767,7 +795,7 @@ public class GoogleServiceUtility {
     /**
      * Method is used to parse street address
      *
-     * @param arr
+     * @param arr A dense indexed sequence of values.
      * @return
      */
     private static Address parseAddress(JSONArray arr, boolean isLatLng) {
@@ -797,9 +825,12 @@ public class GoogleServiceUtility {
     /**
      * Method is used to parse street address components
      *
-     * @param addressComponents
-     * @param type
-     * @return
+     * @param addressComponents The components that make up the address
+     * @param type              Represents whether the type is locality, or sublocality or other.
+     *                          <p>Lcality indicates an incorporated city or town political entity.
+     *                          Sublocality indicates a first-order civil entity below a locality.
+     *                          For some locations may receive one of the additional types</p>
+     * @return The parsed address
      */
     private static String parseAddressComponents(JSONArray addressComponents, String type) {
         if (FrameworkUtils.checkIfNull(addressComponents)) {
@@ -813,8 +844,8 @@ public class GoogleServiceUtility {
                 if (json.optJSONArray(TYPES_KEY).optString(j).equalsIgnoreCase(type)) {
                     if (type.equalsIgnoreCase("locality") || type.equalsIgnoreCase("sublocality"))
                         return json.optString(LONG_NAME_KEY).replace("" + (char) 65532, "").trim();
-                    else
-                        return json.optString(SHORT_NAME_KEY).replace("" + (char) 65532, "").trim();
+                } else {
+                    return json.optString(SHORT_NAME_KEY).replace("" + (char) 65532, "").trim();
                 }
             }
         }
@@ -824,9 +855,12 @@ public class GoogleServiceUtility {
 
     /**
      * Method is used to parse places from Google Places API
+     * <p>The Google Places API Web Service allows you to query for place information on a
+     * variety of categories, such as: establishments, prominent points of interest,
+     * geographic locations, and more</p>
      *
-     * @param predictions
-     * @return
+     * @param predictions User input to retrieve list of relevant place information
+     * @return List of Place objects
      */
     private static List<Place> parsePlaces(JSONArray predictions) {
         if (FrameworkUtils.checkIfNull(predictions)) {
@@ -843,7 +877,6 @@ public class GoogleServiceUtility {
             Place place = new Place();
             place.placeId = json.optString(PLACE_ID_KEY);
             place.description = json.optString(DESCRIPTION_KEY);
-
             places.add(place);
         }
 
@@ -853,15 +886,15 @@ public class GoogleServiceUtility {
     /**
      * Method is used to encode the path created from a list of latitude and longitude coordinates
      *
-     * @param encodedPath
-     * @return
+     * @param encodedPoints Location points to decode
+     * @return List of LatLng objects
      */
-    private static List<LatLng> decode(final String encodedPath) {
-        int len = encodedPath.length();
+    private static List<LatLng> decode(final String encodedPoints) {
+        int len = encodedPoints.length();
 
-        // For speed we preallocate to an upper bound on the final length, then
-        // truncate the array before returning.
-        final List<LatLng> path = new ArrayList<LatLng>();
+        // for speed we preallocate to an upper bound on the final length, then
+        // truncate the array before returning
+        final List<LatLng> path = new ArrayList<>();
         int index = 0;
         int lat = 0;
         int lng = 0;
@@ -871,7 +904,7 @@ public class GoogleServiceUtility {
             int shift = 0;
             int b;
             do {
-                b = encodedPath.charAt(index++) - 63 - 1;
+                b = encodedPoints.charAt(index++) - 63 - 1;
                 result += b << shift;
                 shift += 5;
             } while (b >= 0x1f);
@@ -880,7 +913,7 @@ public class GoogleServiceUtility {
             result = 1;
             shift = 0;
             do {
-                b = encodedPath.charAt(index++) - 63 - 1;
+                b = encodedPoints.charAt(index++) - 63 - 1;
                 result += b << shift;
                 shift += 5;
             } while (b >= 0x1f);
@@ -894,8 +927,8 @@ public class GoogleServiceUtility {
     /**
      * Method is used to check Google Play Services
      *
-     * @param activity
-     * @return
+     * @param activity An activity is a single, focused thing that the user can do
+     * @return True of Google Play Service is available, otherwise false
      */
     public static boolean checkGooglePlaySevices(final Activity activity) {
         final int googlePlayServicesCheck = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
@@ -922,7 +955,7 @@ public class GoogleServiceUtility {
     /**
      * Method is used to create polyline options
      *
-     * @param polygon
+     * @param polygon List of polygons that define the area places need to be in
      */
     public static PolygonOptions createPolygonOptions(Context context, int color, ArrayList<LatLng> polygon) {
         PolygonOptions options = new PolygonOptions().strokeColor(ContextCompat.getColor(context, color))
@@ -937,8 +970,8 @@ public class GoogleServiceUtility {
      * Method is used to compute the number of curve points to be generated based on
      * the distance between pickup and dropoff locations
      *
-     * @param distance
-     * @return
+     * @param distance The distance between two points
+     * @return The number of generated points necessary to create the rainbow arc polyline
      */
     private static int computeNumberOfCurvePoints(double distance) {
         if (distance >= 0 && distance < 250) {
@@ -957,8 +990,9 @@ public class GoogleServiceUtility {
      * Method is used to compute the arc threshold based on the distance between
      * pickup and dropoff locations
      *
-     * @param distance
-     * @return
+     * @param distance The distance between two points
+     * @return Value that represents the arch of the bezier curve
+     * <p>The higher the value, the more the curve will become a full circle</p>
      */
     private static double computeArcThreshold(double distance) {
         // the arch of the bezier curve. The higher the value, the more it becomes a full circle
@@ -973,10 +1007,10 @@ public class GoogleServiceUtility {
     /**
      * Method is used to style polygon based on type
      *
-     * @param context
-     * @param strokeColor
-     * @param fillColor
-     * @param polygon
+     * @param context     Interface to global information about an application environment
+     * @param strokeColor Line segment color in ARGB format
+     * @param fillColor   Fill color in ARGB format
+     * @param polygon     List of polygons that define the area places need to be in
      */
     public static void stylePolygon(Context context, int strokeColor, int fillColor, Polygon polygon) {
         if (!FrameworkUtils.checkIfNull(polygon)) {
@@ -995,7 +1029,7 @@ public class GoogleServiceUtility {
     /**
      * Method is used to remove a list of polygons from the map
      *
-     * @param alPolygon
+     * @param alPolygon List of polygons to remove
      */
     @SafeVarargs
     public static void removePolygons(ArrayList<Polygon>... alPolygon) {
@@ -1011,7 +1045,7 @@ public class GoogleServiceUtility {
     /**
      * Method is used to remove a list of map markers
      *
-     * @param alMarkers
+     * @param alMarkers List of map markers to remove
      */
     @SafeVarargs
     public static void removeMapMarkers(ArrayList<Marker>... alMarkers) {
@@ -1027,9 +1061,11 @@ public class GoogleServiceUtility {
     /**
      * Method is used to confirm if two given latlngs are the same
      *
-     * @param latlngA
-     * @param latlngB
-     * @return
+     * @param latlngA An immutable class representing a pair of latitude and longitude coordinates,
+     *                stored as degrees
+     * @param latlngB An immutable class representing a pair of latitude and longitude coordinates,
+     *                stored as degrees
+     * @return True if the inputted LatLng objects are not the same location
      */
     public static boolean isLatLngSame(LatLng latlngA, LatLng latlngB) {
         if (latlngA.latitude == latlngB.latitude && latlngA.longitude == latlngB.longitude) {

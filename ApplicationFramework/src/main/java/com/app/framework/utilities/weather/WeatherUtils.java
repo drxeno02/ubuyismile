@@ -1,5 +1,6 @@
 package com.app.framework.utilities.weather;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -37,7 +38,7 @@ public class WeatherUtils {
     /**
      * Method is used to set callback for when weather information is received
      *
-     * @param listener
+     * @param listener Callback for when weather information is received
      */
     public static void onWeatherRetrievedListener(OnWeatherRetrievedListener listener) {
         mWeatherRetrievedListener = listener;
@@ -47,10 +48,10 @@ public class WeatherUtils {
      * Method is used to retrieve weather details using OpenWeatherMap API. The weather can be checked
      * three ways by passing in either the latlng, city or zip
      *
-     * @param latLng
-     * @param city
-     * @param zip
-     * @return
+     * @param latLng An immutable class representing a pair of latitude and longitude coordinates,
+     *               stored as degrees
+     * @param city   The city
+     * @param zip    The postal code
      */
     public static void retrieveWeather(LatLng latLng, String city, String zip) {
         Map<String, Object> map = new HashMap<>();
@@ -68,7 +69,13 @@ public class WeatherUtils {
         }
     }
 
-    private static JSONObject retrieveWeatherJSON(final String endpoint) {
+    /**
+     * Makes request to Open Weather Maps API to retrieve weather information
+     *
+     * @param endpoint The request endpoint to Open Weather Maps API
+     */
+    @SuppressLint("StaticFieldLeak")
+    private static void retrieveWeatherJSON(final String endpoint) {
         // create asynctask
         new AsyncTask<String, Void, JSONObject>() {
 
@@ -127,7 +134,6 @@ public class WeatherUtils {
             }
         }.execute();
 
-        return null;
     }
 
     /**
@@ -138,17 +144,17 @@ public class WeatherUtils {
      * <p>map.put("myName", "Leonard");</p>
      * </code>
      * <p>
-     * the call {@code format("hello %(myName)", map)} returns "hello Leonard"
+     * The call {@code format("hello %(myName)", map)} returns "hello Leonard"
      * <p>
      * It replaces every occurrence of a named placeholder with its given value
      * in the map. If there is a named place holder which is not found in the
      * map then the string will retain that placeholder. Likewise, if there is
      * an entry in the map that does not have its respective placeholder, it is
-     * ignored.
+     * ignored
      *
-     * @param str    string to format
-     * @param values to replace
-     * @return formatted string
+     * @param str    String to format
+     * @param values Generic values
+     * @return Formatted String value
      */
     public static String format(String str, Map<String, Object> values) {
         StringBuilder builder = new StringBuilder(str);
