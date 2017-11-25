@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 
 ext {
     developerId = 'drxeno02'
@@ -11,7 +26,6 @@ ext {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
 
     // construct version name
     def versionMajor = 1
@@ -25,7 +39,6 @@ android {
         targetSdkVersion 26
         versionCode code
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // enabling multidex support
         multiDexEnabled true
@@ -72,4 +85,10 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':AmazonAffiliateFramework')
     api project(':ApplicationFramework')
+    api('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+        transitive = true;
+    }
 }
+
+// THIS IS REQUIRED FOR FIREBASE (KEEP HERE)
+apply plugin: 'com.google.gms.google-services'
