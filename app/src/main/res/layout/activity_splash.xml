@@ -20,7 +20,7 @@
         android:layout_below="@+id/splashImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:text="@string/txt_title"
+        android:text="@string/u_buy"
         android:textSize="@dimen/font_size_26"/>
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="@string/txt_creators"
+        android:text="@string/creators"
         android:textSize="@dimen/font_size_20"/>
 
     <ProgressBar

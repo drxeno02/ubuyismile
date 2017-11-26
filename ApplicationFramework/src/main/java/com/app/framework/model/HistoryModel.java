@@ -1,4 +1,4 @@
-package model;
+package com.app.framework.model;
 
 /**
  * Created by LJTat on 5/7/2017.

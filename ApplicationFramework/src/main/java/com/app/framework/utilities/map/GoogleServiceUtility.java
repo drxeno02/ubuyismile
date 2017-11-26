@@ -564,7 +564,7 @@ public class GoogleServiceUtility {
                                 JSONArray stepsObject = legsObject.getJSONObject(0).getJSONArray(KEY_STEPS);
                                 if (stepsObject.length() > 0) {
                                     for (int i = 0; i < stepsObject.length(); i++) {
-                                        // create turn by turn model object
+                                        // create turn by turn com.app.framework.model object
                                         TurnByTurnModel turnByTurnModel = new TurnByTurnModel();
                                         // current step distance
                                         turnByTurnModel.currentStepDistance = stepsObject.getJSONObject(i).getJSONObject(KEY_DISTANCE).getString(KEY_TEXT);

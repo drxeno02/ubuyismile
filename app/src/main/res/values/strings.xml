@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">UBuyISmile</string>
-	<string name="txt_title">U Buy I Smile</string>
-	<string name="txt_creators">by Leonard Tatum &amp; Jeremy Garcia</string>
+	<string name="u_buy">U Buy I Smile</string>
+	<string name="browse">Browse</string>
+	<string name="creators">by Leonard Tatum &amp; Jeremy Garcia</string>
 
 	<!-- headers -->
 	<string name="share">Share</string>

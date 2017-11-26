@@ -4,6 +4,7 @@
     android:layout_height="140dp"
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
+    android:layout_centerVertical="true"
     android:orientation="horizontal"
     android:padding="16dp">
 
@@ -21,5 +22,5 @@
         android:layout_marginStart="10dp"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_22"
-        android:text="@string/txt_title" />
+        android:text="@string/u_buy" />
 </LinearLayout>

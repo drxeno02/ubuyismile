@@ -127,7 +127,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-        setupDrawerIcons(navigationView);
     }
 
     /**
@@ -138,17 +137,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     /**
-     * Method is used to setup drawer icons
-     */
-    private void setupDrawerIcons(NavigationView navigationView) {
-        Menu menu = navigationView.getMenu();
-        // TODO manage menu icons
-    }
-
-    /**
      * Method is used to enable/disable drawer
      *
-     * @param isEnabled
+     * @param isEnabled True to enable drawer interaction, otherwise disable interaction
      */
     public void toggleDrawerState(boolean isEnabled) {
         if (!FrameworkUtils.checkIfNull(mDrawerLayout)) {
