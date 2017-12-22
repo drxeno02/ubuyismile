@@ -13,40 +13,31 @@ public class Enum {
 
         ALL("All"),
         APPAREL("Apparel"),
+        APPLIANCES("Appliances"),
         AUTOMOTIVE("Automotive"),
         BABY("Baby"),
         BEAUTY("Beauty"),
         BOOKS("Books"),
-        CLASSICAL("Classical"),
         DVD("DVD"),
         ELECTRONICS("Electronics"),
-        FOREIGN_BOOKS("ForeignBooks"),
         GROCERY("Grocery"),
         HEALTH_AND_PERSONAL_CARE("HealthPersonalCare"),
         HOME_AND_GARDEN("HomeGarden"),
         JEWELRY("Jewelry"),
         KINDLE_STORE("KindleStore"),
-        KITCHEN("Kitchen"),
-        LIGHTING("Lighting"),
-        MAGAZINES("Magazines"),
-        MARKETPLACE("Marketplace"),
-        MP3_DOWNLOADS("MP3Downloads"),
+        LAWN_AND_GARDEN("LawnAndGarden"),
+        LUGGAGE_AND_BAGS("Luggage"),
+        LUXURY_BEAUTY("LuxuryBeauty"),
         MUSIC("Music"),
         MUSICAL_INSTRUMENTS("MusicalInstruments"),
-        MUSIC_TRACKS("MusicTracks"),
         OFFICE_PRODUCTS("OfficeProducts"),
-        OUTDOOR_LIVING("OutdoorLiving"),
-        OUTLET("Outlet"),
+        AMAZON_PANTRY("Pantry"),
         PC_HARDWARE("PCHardware"),
-        PHOTO("Photo"),
+        PET_SUPPLIES("PetSupplies"),
         SHOES("Shoes"),
         SOFTWARE("Software"),
-        SOFTWARE_VIDEO_GAMES("SoftwareVideoGames"),
         SPORTING_GOODS("SportingGoods"),
-        TOOLS("Tools"),
         TOYS("Toys"),
-        VHS("VHS"),
-        VIDEO("Video"),
         VIDEO_GAMES("VideoGames"),
         WATCHES("Watches");
 
@@ -126,6 +117,54 @@ public class Enum {
          * Gives the value used in the URL request that represents this item information
          *
          * @return The value used in the URL request that represents this item information
+         */
+        public String getRequestValue() {
+            return requestValue;
+        }
+    }
+
+    public enum ItemBrowseNodeId {
+
+        ALL(""),
+        APPAREL("1571272031"),
+        APPLIANCES("5122349031"),
+        AUTOMOTIVE("4772061031"),
+        BABY("1571275031"),
+        BEAUTY("1355017031"),
+        BOOKS("976390031"),
+        DVD("976417031"),
+        ELECTRONICS("976420031"),
+        GROCERY("2454179031"),
+        HEALTH_AND_PERSONAL_CARE("1350385031"),
+        HOME_AND_GARDEN("2454176031"),
+        JEWELRY("1951049031"),
+        KINDLE_STORE("1571278031"),
+        LAWN_AND_GARDEN("2454175031"),
+        LUGGAGE_AND_BAGS("2454170031"),
+        LUXURY_BEAUTY("5311359031"),
+        MUSIC("976446031"),
+        MUSICAL_INSTRUMENTS("3677698031"),
+        OFFICE_PRODUCTS("2454173031"),
+        AMAZON_PANTRY("9574332031"),
+        PC_HARDWARE("976393031"),
+        PET_SUPPLIES("4740420031"),
+        SHOES("1571284031"),
+        SOFTWARE("976452031"),
+        SPORTING_GOODS("1984444031"),
+        TOYS("1350381031"),
+        VIDEO_GAMES("976461031"),
+        WATCHES("1350388031");
+
+        private final String requestValue;
+
+        ItemBrowseNodeId(final String requestValue) {
+            this.requestValue = requestValue;
+        }
+
+        /**
+         * Gives the value used in the URL request that represents this item category
+         *
+         * @return The value used in the URL request that represents this item category
          */
         public String getRequestValue() {
             return requestValue;

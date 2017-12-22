@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 // top-level build file to help synchronize library versions
 ext {
     supportLib = "26.1.0"
-    googleLib = "11.6.0"
-    firebaseLib = "11.6.0"
+    googleLib = "11.6.2"
+    firebaseLib = "11.6.2"
     facebookLib = "4.27.0"
 }
 

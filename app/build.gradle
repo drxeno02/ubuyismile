@@ -35,10 +35,10 @@ android {
 
     defaultConfig {
         applicationId "com.blog.ljtatum.ubuyismile"
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         minSdkVersion 18
         targetSdkVersion 26
         versionCode code
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         // enabling multidex support
         multiDexEnabled true
@@ -82,7 +82,6 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':AmazonAffiliateFramework')
     api project(':ApplicationFramework')
     api('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {

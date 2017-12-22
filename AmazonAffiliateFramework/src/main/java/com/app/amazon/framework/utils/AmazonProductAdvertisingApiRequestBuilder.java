@@ -51,6 +51,10 @@ public class AmazonProductAdvertisingApiRequestBuilder {
         return new AdvertisingApiItemSearchRequestBuilder(keywords);
     }
 
+    public static AdvertisingApiItemBrowseNodeRequestBuilder forItemBrowse(final Enum.ItemBrowseNodeId browseNodeId) {
+        return new AdvertisingApiItemBrowseNodeRequestBuilder(browseNodeId);
+    }
+
     /**
      * A builder that simplifies the creation of URLs for ItemSearch requests
      *
@@ -276,6 +280,89 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("SearchIndex", "All");
             requestParams.put("IdType", itemId.getType().getRequestValue());
             requestParams.put("ItemId", itemId.getValue());
+            requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
+            requestParams.put("AssociateTag", authentication.getAssociateTag());
+            requestParams.put("Timestamp", authentication.getTimestamp());
+
+            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
+                    requestParams, authentication.getAwsSecretKey());
+        }
+    }
+
+    /**
+     * A builder that simplifies the creation of URLs for ItemLookup requests
+     *
+     */
+    public static final class AdvertisingApiItemBrowseNodeRequestBuilder {
+
+        private static final String OPERATION = "BrowseNodeLookup";
+
+        private final List<Enum.ItemInformation> responseGroup = new ArrayList<>();
+        private final Enum.ItemBrowseNodeId browseNodeId;
+
+        /**
+         * Method is used to set item id for lookup
+         *
+         * @param browseNodeId
+         */
+        private AdvertisingApiItemBrowseNodeRequestBuilder(final Enum.ItemBrowseNodeId browseNodeId) {
+            this.browseNodeId = browseNodeId;
+        }
+
+        /**
+         * Adds the given {@link Enum.ItemInformation} to the response group
+         *
+         * @param itemInformation The {@link Enum.ItemInformation} that shall be added to the response group
+         * @return The current {@link AdvertisingApiItemLookupRequestBuilder}
+         */
+        public AdvertisingApiItemBrowseNodeRequestBuilder includeInformationAbout(final Enum.ItemInformation itemInformation) {
+            responseGroup.add(itemInformation);
+            return this;
+        }
+
+        /**
+         * Creates the signed request http-url for the given service using the given {@link AmazonWebServiceAuthentication}
+         *
+         * @param serviceLocation The location of the Amazon service that shall be used
+         * @param authentication  The {@link AmazonWebServiceAuthentication} that shall be used
+         * @return The created signed request url
+         */
+        public String createRequestUrlFor(final Enum.AmazonWebServiceLocation serviceLocation,
+                                          final AmazonWebServiceAuthentication authentication) {
+            // return signed request url
+            return createRequestUrlFor(serviceLocation, authentication, HTTP_PROTOCOL);
+        }
+
+        /**
+         * Creates the signed request https-url for the given service using the given {@link AmazonWebServiceAuthentication}
+         *
+         * @param serviceLocation The location of the Amazon service that shall be used
+         * @param authentication  The {@link AmazonWebServiceAuthentication} that shall be used
+         * @return The created signed request url
+         */
+        public String createSecureRequestUrlFor(final Enum.AmazonWebServiceLocation serviceLocation,
+                                                final AmazonWebServiceAuthentication authentication) {
+            // return signed request url
+            return createRequestUrlFor(serviceLocation, authentication, HTTPS_PROTOCOL);
+        }
+
+        /**
+         * Creates the signed request https-url for the given service using the given {@link AmazonWebServiceAuthentication}
+         *
+         * @param serviceLocation The location of the Amazon service that shall be used
+         * @param authentication The {@link AmazonWebServiceAuthentication} that shall be used
+         * @param protocol HTTP protocol
+         * @return The created signed request url
+         */
+        private String createRequestUrlFor(final Enum.AmazonWebServiceLocation serviceLocation,
+                                           final AmazonWebServiceAuthentication authentication, final String protocol) {
+
+            final Map<String, String> requestParams = new LinkedHashMap<>();
+            requestParams.put("Service", SERVICE);
+            requestParams.put("Operation", OPERATION);
+            requestParams.put("ResponseGroup", createResponseGroupRequestValue(responseGroup));
+            requestParams.put("SearchIndex", "All");
+            requestParams.put("BrowseNodeId", browseNodeId.getRequestValue());
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
             requestParams.put("AssociateTag", authentication.getAssociateTag());
             requestParams.put("Timestamp", authentication.getTimestamp());

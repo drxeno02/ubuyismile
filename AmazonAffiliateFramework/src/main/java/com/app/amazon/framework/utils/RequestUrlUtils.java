@@ -1,5 +1,7 @@
 package com.app.amazon.framework.utils;
 
+import android.util.Log;
+
 import com.app.framework.utilities.FrameworkUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -18,6 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class RequestUrlUtils {
+    private static final String REQ = "req-";
 
     private static final String HMAC_SHA256_ALGORITHM = "HmacSHA256";
     private static final String UTF8_CHARSET = "UTF-8";
@@ -44,6 +47,7 @@ public class RequestUrlUtils {
 
         final String canonicalizeRequestParams = RequestUrlUtils.canonicalizeParameters(requestParams);
         final String signature = RequestUrlUtils.createSignature(amazonServiceUrl, route, canonicalizeRequestParams, secretKey);
+        Log.d(REQ, (protocol + amazonServiceUrl + route + "?" + canonicalizeRequestParams + "&Signature=" + signature));
         return protocol + amazonServiceUrl + route + "?" + canonicalizeRequestParams + "&Signature=" + signature;
     }
 
@@ -70,7 +74,7 @@ public class RequestUrlUtils {
     }
 
     private static String hmac(final String stringToSign, final String awsSecretKey) {
-        String signature = null;
+        String signature;
         final byte[] data;
         final byte[] rawHmac;
         try {

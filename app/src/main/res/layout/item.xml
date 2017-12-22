@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/scaling_170">
+
+    <ImageView
+        android:layout_marginLeft="@dimen/scaling_20"
+        android:layout_marginStart="@dimen/scaling_20"
+        android:layout_marginBottom="@dimen/scaling_20"
+        android:src="@drawable/plus_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_width="@dimen/scaling_50"
+        android:layout_height="@dimen/scaling_50" />
+
+</RelativeLayout>

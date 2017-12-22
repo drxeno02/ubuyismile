@@ -44,6 +44,8 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -75,13 +77,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 getResources().getString(R.string.amazon_access_key),
                 getResources().getString(R.string.amazon_secret_key));
 
+        // 076243631X
+//        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
+//                .forItemLookup("B00W0TD6Y6", ItemId.Type.ISBN)
+//                .includeInformationAbout(Enum.ItemInformation.ATTRIBUTES)
+//                .includeInformationAbout(Enum.ItemInformation.IMAGES)
+//                .includeInformationAbout(Enum.ItemInformation.EDITORIAL_REVIEW)
+//                .includeInformationAbout(Enum.ItemInformation.REVIEWS)
+//                .includeInformationAbout(Enum.ItemInformation.OFFERS)
+//                .includeInformationAbout(Enum.ItemInformation.OFFER_FULL)
+//                .includeInformationAbout(Enum.ItemInformation.OFFER_SUMMARY)
+//                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
+
         final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
-                .forItemLookup("076243631X", ItemId.Type.ISBN)
+                .forItemSearch("All")
                 .includeInformationAbout(Enum.ItemInformation.ATTRIBUTES)
                 .includeInformationAbout(Enum.ItemInformation.IMAGES)
+                .includeInformationAbout(Enum.ItemInformation.EDITORIAL_REVIEW)
+                .includeInformationAbout(Enum.ItemInformation.REVIEWS)
+                .includeInformationAbout(Enum.ItemInformation.OFFERS)
+                .includeInformationAbout(Enum.ItemInformation.OFFER_FULL)
+                .includeInformationAbout(Enum.ItemInformation.OFFER_SUMMARY)
                 .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
 
-        Log.e("TEST", "request url= " + requestUrl);
         mAsyncTask = new RequestTask().execute(requestUrl);
     }
 
@@ -235,154 +253,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            ItemModel DOMParse = DOMParse(result);
-            Logger.e("Datmug", "DOM Parse: " + DOMParse.toString());
+//            List<String> responseList = splitEqually(result, 650);
+//            for (int i = 0; i < responseList.size(); i++) {
+//                Logger.v("TEST", "" + responseList.get(i));
+//            }
 
             ItemModel SAXParse = SAXParse(result);
-            Logger.e("Datmug", "SAX Parse: " + SAXParse.toString());
+            Logger.e("TEST", "SAX Parse: " + SAXParse.toString());
+
+            List<String> responseList = splitEqually(SAXParse.toString(), 500);
+            for (int i = 0; i < responseList.size(); i++) {
+                Logger.v("TEST", "" + responseList.get(i));
+            }
         }
     }
 
-    private static ItemModel DOMParse(String result) {
-        ItemModel item = new ItemModel();
+    public static List<String> splitEqually(String text, int size) {
+        // Give the list the right capacity to start with. You could use an array
+        // instead if you wanted.
+        List<String> ret = new ArrayList<String>((text.length() + size - 1) / size);
 
-        if (!FrameworkUtils.isStringEmpty(result)) {
-            try {
-                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                Document doc = dBuilder.parse(new InputSource(new StringReader(result)));
-
-                if (!FrameworkUtils.checkIfNull(doc)) {
-                    doc.getDocumentElement().normalize();
-
-                    // get the document's root XML node
-                    NodeList nodeListRoot = doc.getChildNodes();
-
-                    // navigate down the hierarchy to get to the ItemLookupResponse node
-                    Node nodeItemLookupResponse = XMLParserUtils.getNode("ItemLookupResponse", nodeListRoot);
-                    if (!FrameworkUtils.checkIfNull(nodeItemLookupResponse)) {
-
-                        // navigate down the hierarchy to get to the Items node
-                        Node nodeItems = XMLParserUtils.getNode("Items", nodeItemLookupResponse.getChildNodes());
-                        if (!FrameworkUtils.checkIfNull(nodeItems)) {
-
-                            // navigate down the hierarchy to get to the Item node
-                            Node nodeItem = XMLParserUtils.getNode("Item", nodeItems.getChildNodes());
-                            if (!FrameworkUtils.checkIfNull(nodeItem)) {
-
-                                // load the item's data from the XML
-                                NodeList nodeListItem = nodeItem.getChildNodes();
-                                item.asin = XMLParserUtils.getNodeValue("ASIN", nodeListItem);
-                                item.detailPageURL = XMLParserUtils.getNodeValue("DetailPageURL", nodeListItem);
-                                item.itemLinks = new ArrayList<>();
-
-                                Node nodeItemLinks = XMLParserUtils.getNode("ItemLinks", nodeListItem);
-                                if (!FrameworkUtils.checkIfNull(nodeItemLinks)) {
-                                    Element elementItemLinks = (Element) nodeItemLinks;
-                                    for (int i = 0; i < nodeItemLinks.getChildNodes().getLength(); i++) {
-                                        ItemModel.ItemLink itemLink = new ItemModel().new ItemLink();
-                                        itemLink.description = elementItemLinks.getElementsByTagName("Description").item(i).getTextContent();
-                                        itemLink.url = elementItemLinks.getElementsByTagName("URL").item(i).getTextContent();
-                                        item.itemLinks.add(itemLink);
-                                    }
-                                }
-
-                                Node nodeImageSets = XMLParserUtils.getNode("ImageSets", nodeListItem);
-                                if (!FrameworkUtils.checkIfNull(nodeImageSets)) {
-                                    for (int i = 0; i < nodeImageSets.getChildNodes().getLength(); i++) {
-                                        ItemModel.ImageSet imageSet = new ItemModel().new ImageSet();
-                                        Node nodeImageSet = nodeImageSets.getChildNodes().item(i);
-                                        imageSet.category = XMLParserUtils.getNodeAttr("Category", nodeImageSet);
-
-                                        Node nodeSwatchImage = XMLParserUtils.getNode("SwatchImage", nodeImageSet.getChildNodes());
-                                        if (!FrameworkUtils.checkIfNull(nodeSwatchImage)) {
-                                            ItemModel.ItemImage itemImage = new ItemModel().new ItemImage();
-                                            itemImage.url = XMLParserUtils.getNodeValue("URL", nodeSwatchImage.getChildNodes());
-                                            itemImage.height = Integer.parseInt(XMLParserUtils.getNodeValue("Height", nodeSwatchImage.getChildNodes()));
-                                            itemImage.width = Integer.parseInt(XMLParserUtils.getNodeValue("Width", nodeSwatchImage.getChildNodes()));
-                                            imageSet.swatchImage = itemImage;
-                                        }
-
-                                        Node nodeThumbnailImage = XMLParserUtils.getNode("ThumbnailImage", nodeImageSet.getChildNodes());
-                                        if (!FrameworkUtils.checkIfNull(nodeThumbnailImage)) {
-                                            ItemModel.ItemImage itemImage = new ItemModel().new ItemImage();
-                                            itemImage.url = XMLParserUtils.getNodeValue("URL", nodeThumbnailImage.getChildNodes());
-                                            itemImage.height = Integer.parseInt(XMLParserUtils.getNodeValue("Height", nodeThumbnailImage.getChildNodes()));
-                                            itemImage.width = Integer.parseInt(XMLParserUtils.getNodeValue("Width", nodeThumbnailImage.getChildNodes()));
-                                            imageSet.thumbnailImage = itemImage;
-                                        }
-
-                                        Node nodeTinyImage = XMLParserUtils.getNode("TinyImage", nodeImageSet.getChildNodes());
-                                        if (!FrameworkUtils.checkIfNull(nodeTinyImage)) {
-                                            ItemModel.ItemImage itemImage = new ItemModel().new ItemImage();
-                                            itemImage.url = XMLParserUtils.getNodeValue("URL", nodeTinyImage.getChildNodes());
-                                            itemImage.height = Integer.parseInt(XMLParserUtils.getNodeValue("Height", nodeTinyImage.getChildNodes()));
-                                            itemImage.width = Integer.parseInt(XMLParserUtils.getNodeValue("Width", nodeTinyImage.getChildNodes()));
-                                            imageSet.tinyImage = itemImage;
-                                        }
-
-                                        Node nodeSmallImage = XMLParserUtils.getNode("SmallImage", nodeImageSet.getChildNodes());
-                                        if (!FrameworkUtils.checkIfNull(nodeSmallImage)) {
-                                            ItemModel.ItemImage itemImage = new ItemModel().new ItemImage();
-                                            itemImage.url = XMLParserUtils.getNodeValue("URL", nodeSmallImage.getChildNodes());
-                                            itemImage.height = Integer.parseInt(XMLParserUtils.getNodeValue("Height", nodeSmallImage.getChildNodes()));
-                                            itemImage.width = Integer.parseInt(XMLParserUtils.getNodeValue("Width", nodeSmallImage.getChildNodes()));
-                                            imageSet.smallImage = itemImage;
-                                        }
-
-                                        Node nodeMediumImage = XMLParserUtils.getNode("MediumImage", nodeImageSet.getChildNodes());
-                                        if (!FrameworkUtils.checkIfNull(nodeMediumImage)) {
-                                            ItemModel.ItemImage itemImage = new ItemModel().new ItemImage();
-                                            itemImage.url = XMLParserUtils.getNodeValue("URL", nodeMediumImage.getChildNodes());
-                                            itemImage.height = Integer.parseInt(XMLParserUtils.getNodeValue("Height", nodeMediumImage.getChildNodes()));
-                                            itemImage.width = Integer.parseInt(XMLParserUtils.getNodeValue("Width", nodeMediumImage.getChildNodes()));
-                                            imageSet.mediumImage = itemImage;
-                                        }
-
-                                        Node nodeLargeImage = XMLParserUtils.getNode("LargeImage", nodeImageSet.getChildNodes());
-                                        if (!FrameworkUtils.checkIfNull(nodeLargeImage)) {
-                                            ItemModel.ItemImage itemImage = new ItemModel().new ItemImage();
-                                            itemImage.url = XMLParserUtils.getNodeValue("URL", nodeLargeImage.getChildNodes());
-                                            itemImage.height = Integer.parseInt(XMLParserUtils.getNodeValue("Height", nodeLargeImage.getChildNodes()));
-                                            itemImage.width = Integer.parseInt(XMLParserUtils.getNodeValue("Width", nodeLargeImage.getChildNodes()));
-                                            imageSet.largeImage = itemImage;
-                                        }
-
-                                        item.imageSets.add(imageSet);
-                                    }
-                                }
-
-                                Node nodeItemAttributes = XMLParserUtils.getNode("ItemAttributes", nodeListItem);
-                                if (!FrameworkUtils.checkIfNull(nodeItemAttributes)) {
-                                    NodeList nodeListItemAttributes = nodeItemAttributes.getChildNodes();
-                                    item.itemAttributes = new ItemModel().new ItemAttributes();
-                                    item.itemAttributes.author = XMLParserUtils.getNodeValue("Author", nodeListItemAttributes);
-                                    item.itemAttributes.ean = XMLParserUtils.getNodeValue("EAN", nodeListItemAttributes);
-                                    item.itemAttributes.isbn = XMLParserUtils.getNodeValue("ISBN", nodeListItemAttributes);
-                                    item.itemAttributes.title = XMLParserUtils.getNodeValue("Title", nodeListItemAttributes);
-
-                                    Node nodeListPrice = XMLParserUtils.getNode("ListPrice", nodeListItemAttributes);
-                                    if (!FrameworkUtils.checkIfNull(nodeListPrice)) {
-                                        ItemModel.ListPrice listPrice = new ItemModel().new ListPrice();
-                                        listPrice.amount = Integer.parseInt(XMLParserUtils.getNodeValue("Amount", nodeListPrice.getChildNodes()));
-                                        listPrice.currencyCode = XMLParserUtils.getNodeValue("CurrencyCode", nodeListPrice.getChildNodes());
-                                        listPrice.formattedPrice = XMLParserUtils.getNodeValue("FormattedPrice", nodeListPrice.getChildNodes());
-                                        item.itemAttributes.listPrice = listPrice;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        for (int start = 0; start < text.length(); start += size) {
+            ret.add(text.substring(start, Math.min(text.length(), start + size)));
         }
-        return item;
+        return ret;
     }
 
     private static ItemModel SAXParse(String result) {
@@ -414,6 +308,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         private ItemModel.ItemImage tempItemImage;
         private ItemModel.ItemAttributes tempItemAttributes;
         private ItemModel.ListPrice tempListPrice;
+        private ItemModel.Language tempLanguage;
         private StringBuilder stringBuilder;
         private boolean isAppendCharacters;
 
@@ -450,6 +345,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 tempItemAttributes = new ItemModel().new ItemAttributes();
             } else if (qName.equalsIgnoreCase("ListPrice")) {
                 tempListPrice = new ItemModel().new ListPrice();
+            } else if (qName.equalsIgnoreCase("Languages")) {
+                tempLanguage = new ItemModel().new Language();
             }
 
             // append characters when parsing a URL. This is because DefaultHandler splits strings
@@ -459,6 +356,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
+            Logger.e("TEST", "qName= " + qName + " // stringBuilder.toString()= " + stringBuilder.toString());
+
             if (!FrameworkUtils.checkIfNull(item)) {
                 if (qName.equalsIgnoreCase("ASIN")) {
                     item.asin = stringBuilder.toString();
@@ -511,6 +410,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 } else if (!FrameworkUtils.checkIfNull(tempItemAttributes)) {
                     if (qName.equalsIgnoreCase("Author")) {
                         tempItemAttributes.author = stringBuilder.toString();
+                    } else if (qName.equalsIgnoreCase("Binding")) {
+                        tempItemAttributes.binding = stringBuilder.toString();
                     } else if (qName.equalsIgnoreCase("EAN")) {
                         tempItemAttributes.ean = stringBuilder.toString();
                     } else if (qName.equalsIgnoreCase("ISBN")) {
@@ -527,6 +428,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             tempListPrice.currencyCode = stringBuilder.toString();
                         } else if (qName.equalsIgnoreCase("FormattedPrice")) {
                             tempListPrice.formattedPrice = stringBuilder.toString();
+                        }
+                    } else if (qName.equalsIgnoreCase("Language")) {
+                        tempItemAttributes.languages.add(tempLanguage);
+                        tempImageSet = null;
+                    } else if (!FrameworkUtils.checkIfNull(tempLanguage)) {
+                        if (qName.equalsIgnoreCase("Name")) {
+                            tempLanguage.name = stringBuilder.toString();
+                        } else if (qName.equalsIgnoreCase("Type")) {
+                            tempLanguage.type = stringBuilder.toString();
                         }
                     }
                 }

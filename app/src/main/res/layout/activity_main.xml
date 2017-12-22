@@ -7,7 +7,9 @@
                 android:background="@color/material_teal_200_color_code"
                 tools:context=".activity.MainActivity">
 
+    <!-- toolbat -->
     <LinearLayout
+        android:id="@+id/ll_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -27,4 +29,32 @@
             android:layout_height="3dp"
             android:background="@drawable/toolbar_shadow"/>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/ll_toolbar"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scaling_60">
+
+        <ImageView
+            android:layout_marginTop="@dimen/scaling_5"
+            android:layout_marginLeft="@dimen/scaling_5"
+            android:layout_marginStart="@dimen/scaling_5"
+            android:layout_width="20dp"
+            android:src="@drawable/close_black"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/scaling_25"
+            android:layout_marginStart="@dimen/scaling_25"
+            android:layout_marginRight="@dimen/scaling_25"
+            android:layout_marginEnd="@dimen/scaling_25"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
 </RelativeLayout>
