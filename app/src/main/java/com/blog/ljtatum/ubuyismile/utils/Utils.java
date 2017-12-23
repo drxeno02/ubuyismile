@@ -32,7 +32,7 @@ public class Utils {
      * Method is used for printing the memory usage. This is used
      * only for verbosity mode
      *
-     * @param name  fragment or class simple name
+     * @param name fragment or class simple name
      */
     @SuppressWarnings({"ConstantConditions", "PointlessBooleanExpression"})
     public static void printMemory(@NonNull String name) {

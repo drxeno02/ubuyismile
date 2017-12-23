@@ -62,6 +62,7 @@ public class AmazonWebServiceAuthentication {
 
     /**
      * Get the timestamp
+     *
      * @return The current date and time
      */
     public String getTimestamp() {

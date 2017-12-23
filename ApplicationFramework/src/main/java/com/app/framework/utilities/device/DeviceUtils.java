@@ -2,7 +2,7 @@
  * Copyright (c) 2014-present, ZTRIP. All rights reserved.
  */
 
-package com.app.framework.utilities;
+package com.app.framework.utilities.device;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
 import com.app.framework.constants.Constants;
+import com.app.framework.utilities.FrameworkUtils;
 
 /**
  * Created by leonard on 9/29/2015.

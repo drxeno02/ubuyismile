@@ -1,8 +1,6 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,55 +9,35 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
-import com.app.amazon.framework.model.ItemId;
-import com.app.amazon.framework.utils.AmazonProductAdvertisingApiRequestBuilder;
+import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
-import com.app.amazon.framework.utils.XMLParserUtils;
-import com.app.framework.utilities.DeviceUtils;
+import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.utilities.FrameworkUtils;
+import com.app.framework.utilities.device.DeviceUtils;
+import com.app.framework.utilities.dialog.DialogUtils;
+import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
-import com.blog.ljtatum.ubuyismile.logger.Logger;
+import com.blog.ljtatum.ubuyismile.model.ChableeModel;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Context mContext;
-    private Activity mActivity;
-    private AsyncTask mAsyncTask;
-
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -72,35 +50,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initializeHandlers();
         initializeListeners();
 
+        // uncomment below to create firebase db
+        //createFirebaseDb();
+
         AmazonWebServiceAuthentication authentication = AmazonWebServiceAuthentication.create(
                 getResources().getString(R.string.amazon_tag),
                 getResources().getString(R.string.amazon_access_key),
                 getResources().getString(R.string.amazon_secret_key));
 
-        // 076243631X
+        // B00W0TD6Y6 - Poetry in Programming
+        // 076243631X - Mammoth Book of Tattoos
 //        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
-//                .forItemLookup("B00W0TD6Y6", ItemId.Type.ISBN)
-//                .includeInformationAbout(Enum.ItemInformation.ATTRIBUTES)
-//                .includeInformationAbout(Enum.ItemInformation.IMAGES)
-//                .includeInformationAbout(Enum.ItemInformation.EDITORIAL_REVIEW)
-//                .includeInformationAbout(Enum.ItemInformation.REVIEWS)
-//                .includeInformationAbout(Enum.ItemInformation.OFFERS)
-//                .includeInformationAbout(Enum.ItemInformation.OFFER_FULL)
-//                .includeInformationAbout(Enum.ItemInformation.OFFER_SUMMARY)
+//                .forItemLookup("B00W0TD6Y6, 076243631X", ItemId.Type.ISBN)
+//                .includeInformationAbout(Enum.ResponseGroupItemLookup.IMAGES)
 //                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
 
-        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
-                .forItemSearch("All")
-                .includeInformationAbout(Enum.ItemInformation.ATTRIBUTES)
-                .includeInformationAbout(Enum.ItemInformation.IMAGES)
-                .includeInformationAbout(Enum.ItemInformation.EDITORIAL_REVIEW)
-                .includeInformationAbout(Enum.ItemInformation.REVIEWS)
-                .includeInformationAbout(Enum.ItemInformation.OFFERS)
-                .includeInformationAbout(Enum.ItemInformation.OFFER_FULL)
-                .includeInformationAbout(Enum.ItemInformation.OFFER_SUMMARY)
-                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
+//        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
+//                .forItemSearch("Title, Total, Rest"                                                                                                                                     )
+//                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
 
-        mAsyncTask = new RequestTask().execute(requestUrl);
+//        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
+//                .forItemBrowse(Enum.ItemBrowseNodeId.VIDEO_GAMES)
+//                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
+
+//        mAsyncTask = new RequestTask().execute(requestUrl);
     }
 
     /**
@@ -108,7 +81,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void initializeViews() {
         mContext = MainActivity.this;
-        mActivity = MainActivity.this;
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -151,7 +123,43 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to initialize listeners and callbacks
      */
     private void initializeListeners() {
+        // OnAWSRequestListener
+        RequestManager.onAWSRequestListener(new OnAWSRequestListener() {
+            @Override
+            public void onAWSSuccess(@NonNull String response) {
+                // retrieve item model
+                ItemModel itemModel = SAXParse(response);
+            }
+        });
 
+        // OnFirebaseValueListener
+        FirebaseUtils.onFirebaseValueListener(new OnFirebaseValueListener() {
+            @Override
+            public void onUpdateDataChange(DataSnapshot dataSnapshot) {
+                // do nothing
+            }
+
+            @Override
+            public void onUpdateDatabaseError(DatabaseError databaseError) {
+                // do nothing
+            }
+
+            @Override
+            public void onRetrieveDataChange(DataSnapshot dataSnapshot) {
+                // dismiss progress dialog
+                DialogUtils.dismissProgressDialog();
+            }
+
+            @Override
+            public void onRetrieveDataError(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void retrieveFirebaseData() {
+        // show progress dialog
+        DialogUtils.showProgressDialog(mContext);
     }
 
     /**
@@ -227,229 +235,65 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     /**
-     * embedded class to make HTTP requests to retrieve the default referee reward credit amount
+     * Method is used to create/populate database on Firebase with empty data
      */
-    @SuppressWarnings("deprecation")
-    private static class RequestTask extends AsyncTask<String, String, String> {
+    private void createFirebaseDb() {
 
-        @NonNull
-        @Override
-        protected String doInBackground(String... urls) {
-            String resResult = "";
-            if (!FrameworkUtils.checkIfNull(urls)) {
-                try {
-                    URL url = new URL(urls[0]);
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(url.openStream()));
-                    resResult = buffer.readLine();
-                    buffer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return resResult;
+        // setup Chablee database
+        HashMap<String, ChableeModel> mapChablee = new HashMap<>();
+        for (int i = 0; i < 250; i++) {
+            ChableeModel chableeModel = new ChableeModel();
+            chableeModel.title = " ";
+            chableeModel.description = " ";
+            chableeModel.price = " ";
+            chableeModel.salePrice = " ";
+            chableeModel.purchaseUrl = " ";
+            chableeModel.imageUrl1 = " ";
+            chableeModel.imageUrl2 = " ";
+            chableeModel.imageUrl3 = " ";
+            chableeModel.imageUrl4 = " ";
+            chableeModel.imageUrl5 = " ";
+            // add to hashmap
+            mapChablee.put(String.valueOf(i), chableeModel);
         }
+        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.RINGS.toString());
+        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.NECKLACES.toString());
+        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.GEMSTONE.toString());
+        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.ROCKS.toString());
 
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-//            List<String> responseList = splitEqually(result, 650);
-//            for (int i = 0; i < responseList.size(); i++) {
-//                Logger.v("TEST", "" + responseList.get(i));
-//            }
-
-            ItemModel SAXParse = SAXParse(result);
-            Logger.e("TEST", "SAX Parse: " + SAXParse.toString());
-
-            List<String> responseList = splitEqually(SAXParse.toString(), 500);
-            for (int i = 0; i < responseList.size(); i++) {
-                Logger.v("TEST", "" + responseList.get(i));
-            }
+        // setup Amazon database
+        HashMap<String, String> mapAmazon = new HashMap<>();
+        for (int i = 0; i < 500; i++) {
+            mapAmazon.put(String.valueOf(i), " ");
         }
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.APPAREL.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.APPLIANCES.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.AUTOMOTIVE.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.BABY.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.BEAUTY.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.BOOKS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.DVD.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.ELECTRONICS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.GROCERY.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.HOME_AND_GARDEN.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.JEWELRY.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.KINDLE_STORE.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.LAWN_AND_GARDEN.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.LUGGAGE_AND_BAGS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.LUXURY_BEAUTY.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.MUSIC.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.OFFICE_PRODUCTS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.AMAZON_PANTRY.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.PC_HARDWARE.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.PET_SUPPLIES.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.SHOES.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.SOFTWARE.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.SPORTING_GOODS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.TOYS.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.VIDEO_GAMES.toString());
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.WATCHES.toString());
     }
 
-    public static List<String> splitEqually(String text, int size) {
-        // Give the list the right capacity to start with. You could use an array
-        // instead if you wanted.
-        List<String> ret = new ArrayList<String>((text.length() + size - 1) / size);
-
-        for (int start = 0; start < text.length(); start += size) {
-            ret.add(text.substring(start, Math.min(text.length(), start + size)));
-        }
-        return ret;
-    }
-
-    private static ItemModel SAXParse(String result) {
-        ItemModel item = new ItemModel();
-
-        if (!FrameworkUtils.isStringEmpty(result)) {
-            try {
-                SAXParserFactory factory = SAXParserFactory.newInstance();
-                SAXParser saxParser = factory.newSAXParser();
-                SAXParserHandler userHandler = new SAXParserHandler();
-                saxParser.parse(new InputSource(new StringReader(result)), userHandler);
-                item = userHandler.item;
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return item;
-    }
-
-    private static class SAXParserHandler extends DefaultHandler {
-
-        private ItemModel item;
-        private ItemModel.ItemLink tempItemLink;
-        private ItemModel.ImageSet tempImageSet;
-        private ItemModel.ItemImage tempItemImage;
-        private ItemModel.ItemAttributes tempItemAttributes;
-        private ItemModel.ListPrice tempListPrice;
-        private ItemModel.Language tempLanguage;
-        private StringBuilder stringBuilder;
-        private boolean isAppendCharacters;
-
-        private SAXParserHandler() {
-            item = null;
-            stringBuilder = new StringBuilder();
-        }
-
-        @Override
-        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-            if (qName.equalsIgnoreCase("Item")) {
-                item = new ItemModel();
-            } else if (qName.equalsIgnoreCase("ItemLink")) {
-                tempItemLink = new ItemModel().new ItemLink();
-            } else if (qName.equalsIgnoreCase("ImageSet")) {
-                tempImageSet = new ItemModel().new ImageSet();
-                if (!FrameworkUtils.checkIfNull(attributes)) {
-                    for (int i = 0; i < attributes.getLength(); i++) {
-                        if (attributes.getQName(i).equalsIgnoreCase("Category")) {
-                            tempImageSet.category = attributes.getValue(i);
-                            break;
-                        }
-                    }
-                }
-            } else if (!FrameworkUtils.checkIfNull(tempImageSet) &&
-                    (qName.equalsIgnoreCase("SwatchImage") ||
-                            qName.equalsIgnoreCase("ThumbnailImage") ||
-                            qName.equalsIgnoreCase("TinyImage") ||
-                            qName.equalsIgnoreCase("SmallImage") ||
-                            qName.equalsIgnoreCase("MediumImage") ||
-                            qName.equalsIgnoreCase("LargeImage"))) {
-                tempItemImage = new ItemModel().new ItemImage();
-            } else if (qName.equalsIgnoreCase("ItemAttributes")) {
-                tempItemAttributes = new ItemModel().new ItemAttributes();
-            } else if (qName.equalsIgnoreCase("ListPrice")) {
-                tempListPrice = new ItemModel().new ListPrice();
-            } else if (qName.equalsIgnoreCase("Languages")) {
-                tempLanguage = new ItemModel().new Language();
-            }
-
-            // append characters when parsing a URL. This is because DefaultHandler splits strings
-            // when escape characters (i.e. '&') are present
-            isAppendCharacters = qName.toLowerCase().contains("url");
-        }
-
-        @Override
-        public void endElement(String uri, String localName, String qName) throws SAXException {
-            Logger.e("TEST", "qName= " + qName + " // stringBuilder.toString()= " + stringBuilder.toString());
-
-            if (!FrameworkUtils.checkIfNull(item)) {
-                if (qName.equalsIgnoreCase("ASIN")) {
-                    item.asin = stringBuilder.toString();
-                } else if (qName.equalsIgnoreCase("DetailPageURL")) {
-                    item.detailPageURL = stringBuilder.toString();
-                } else if (qName.equalsIgnoreCase("ItemLink")) {
-                    item.itemLinks.add(tempItemLink);
-                    tempItemLink = null;
-                } else if (!FrameworkUtils.checkIfNull(tempItemLink)) {
-                    if (qName.equalsIgnoreCase("Description")) {
-                        tempItemLink.description = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("URL")) {
-                        tempItemLink.url = stringBuilder.toString();
-                    }
-                } else if (qName.equalsIgnoreCase("ImageSet")) {
-                    item.imageSets.add(tempImageSet);
-                    tempImageSet = null;
-                } else if (!FrameworkUtils.checkIfNull(tempImageSet) &&
-                        (qName.equalsIgnoreCase("SwatchImage") ||
-                                qName.equalsIgnoreCase("ThumbnailImage") ||
-                                qName.equalsIgnoreCase("TinyImage") ||
-                                qName.equalsIgnoreCase("SmallImage") ||
-                                qName.equalsIgnoreCase("MediumImage") ||
-                                qName.equalsIgnoreCase("LargeImage"))) {
-                    if (qName.equalsIgnoreCase("SwatchImage")) {
-                        tempImageSet.swatchImage = tempItemImage;
-                    } else if (qName.equalsIgnoreCase("ThumbnailImage")) {
-                        tempImageSet.thumbnailImage = tempItemImage;
-                    } else if (qName.equalsIgnoreCase("TinyImage")) {
-                        tempImageSet.tinyImage = tempItemImage;
-                    } else if (qName.equalsIgnoreCase("SmallImage")) {
-                        tempImageSet.smallImage = tempItemImage;
-                    } else if (qName.equalsIgnoreCase("MediumImage")) {
-                        tempImageSet.mediumImage = tempItemImage;
-                    } else if (qName.equalsIgnoreCase("LargeImage")) {
-                        tempImageSet.largeImage = tempItemImage;
-                    }
-                    tempItemImage = null;
-                } else if (!FrameworkUtils.checkIfNull(tempItemImage)) {
-                    if (qName.equalsIgnoreCase("URL")) {
-                        tempItemImage.url = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("Height")) {
-                        tempItemImage.height = Integer.parseInt(stringBuilder.toString());
-                    } else if (qName.equalsIgnoreCase("Width")) {
-                        tempItemImage.width = Integer.parseInt(stringBuilder.toString());
-                    }
-                } else if (qName.equalsIgnoreCase("ItemAttributes")) {
-                    item.itemAttributes = tempItemAttributes;
-                    tempItemAttributes = null;
-                } else if (!FrameworkUtils.checkIfNull(tempItemAttributes)) {
-                    if (qName.equalsIgnoreCase("Author")) {
-                        tempItemAttributes.author = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("Binding")) {
-                        tempItemAttributes.binding = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("EAN")) {
-                        tempItemAttributes.ean = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("ISBN")) {
-                        tempItemAttributes.isbn = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("Title")) {
-                        tempItemAttributes.title = stringBuilder.toString();
-                    } else if (qName.equalsIgnoreCase("ListPrice")) {
-                        tempItemAttributes.listPrice = tempListPrice;
-                        tempListPrice = null;
-                    } else if (!FrameworkUtils.checkIfNull(tempListPrice)) {
-                        if (qName.equalsIgnoreCase("Amount")) {
-                            tempListPrice.amount = Integer.parseInt(stringBuilder.toString());
-                        } else if (qName.equalsIgnoreCase("CurrencyCode")) {
-                            tempListPrice.currencyCode = stringBuilder.toString();
-                        } else if (qName.equalsIgnoreCase("FormattedPrice")) {
-                            tempListPrice.formattedPrice = stringBuilder.toString();
-                        }
-                    } else if (qName.equalsIgnoreCase("Language")) {
-                        tempItemAttributes.languages.add(tempLanguage);
-                        tempImageSet = null;
-                    } else if (!FrameworkUtils.checkIfNull(tempLanguage)) {
-                        if (qName.equalsIgnoreCase("Name")) {
-                            tempLanguage.name = stringBuilder.toString();
-                        } else if (qName.equalsIgnoreCase("Type")) {
-                            tempLanguage.type = stringBuilder.toString();
-                        }
-                    }
-                }
-            }
-            stringBuilder.setLength(0);
-        }
-
-        @Override
-        public void characters(char ch[], int start, int length) throws SAXException {
-            if (!isAppendCharacters) {
-                stringBuilder.setLength(0);
-            }
-            stringBuilder.append(ch, start, length);
-        }
-    }
 }

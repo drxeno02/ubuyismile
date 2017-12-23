@@ -2,9 +2,11 @@
  * Copyright (c) 2014-present, ZTRIP. All rights reserved.
  */
 
-package com.app.framework.utilities;
+package com.app.framework.utilities.error;
 
 import android.content.Context;
+
+import com.app.framework.utilities.FrameworkUtils;
 
 /**
  * Created by leonard on 11/13/2015.

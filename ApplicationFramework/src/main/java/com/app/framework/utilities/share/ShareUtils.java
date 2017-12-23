@@ -1,6 +1,5 @@
-package com.app.framework.utilities;
+package com.app.framework.utilities.share;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,8 +8,7 @@ import android.net.Uri;
 
 import com.app.framework.R;
 import com.app.framework.enums.Enum;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
+import com.app.framework.utilities.FrameworkUtils;
 
 import java.util.List;
 

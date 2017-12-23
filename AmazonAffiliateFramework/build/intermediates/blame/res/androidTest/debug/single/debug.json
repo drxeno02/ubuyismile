@@ -2248,6 +2248,10 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-hdpi-v4\\ic_vol_type_tv_dark.png"
     },
     {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_dialog_progress.xml.flat",
+        "source": "C:\\AndroidStudio\\Workspace\\ubuyismile\\ApplicationFramework\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_progress.xml"
+    },
+    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_basic_placemark.kml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\8a89eae49dc095d707f8bbcf8c083655\\res\\raw\\amu_basic_placemark.kml"
     },

@@ -18,6 +18,9 @@ public class ItemModel {
     @SerializedName("ItemAttributes")
     public ItemAttributes itemAttributes;
 
+    /**
+     * Constructor
+     */
     public ItemModel() {
         itemLinks = new ArrayList<>();
         imageSets = new ArrayList<>();
@@ -39,6 +42,9 @@ public class ItemModel {
         return stringBuilder.toString();
     }
 
+    /**
+     * Embedded class for Amazon item links
+     */
     public class ItemLink {
 
         @SerializedName("Description")
@@ -53,9 +59,11 @@ public class ItemModel {
             stringBuilder.append("\n - URL : ").append(url);
             return stringBuilder.toString();
         }
-
     }
 
+    /**
+     * Embedded class for Amazon image sets
+     */
     public class ImageSet {
 
         @SerializedName("Category")
@@ -91,9 +99,11 @@ public class ItemModel {
                     largeImage.toString() : null);
             return stringBuilder.toString();
         }
-
     }
 
+    /**
+     * Embedded class for Amazon images
+     */
     public class ItemImage {
 
         @SerializedName("URL")
@@ -114,6 +124,9 @@ public class ItemModel {
 
     }
 
+    /**
+     * Embedded class for Amazon item attributes
+     */
     public class ItemAttributes {
 
         @SerializedName("Author")
@@ -143,9 +156,11 @@ public class ItemModel {
                     languages.toString() : null);
             return stringBuilder.toString();
         }
-
     }
 
+    /**
+     * Embedded class for Amazon language
+     */
     public class Language {
 
         @SerializedName("Name")
@@ -163,6 +178,9 @@ public class ItemModel {
         }
     }
 
+    /**
+     * Embedded class for Amazon item prices
+     */
     public class ListPrice {
 
         @SerializedName("Amount")

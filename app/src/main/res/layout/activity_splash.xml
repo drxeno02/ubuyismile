@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/material_teal_200_color_code"
-                android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/material_teal_200_color_code"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/splashImage"
@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/textView1"
@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="@string/u_buy"
-        android:textSize="@dimen/font_size_26"/>
+        android:textSize="@dimen/font_size_26" />
 
     <TextView
         android:id="@+id/textView2"
@@ -31,7 +31,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/creators"
-        android:textSize="@dimen/font_size_20"/>
+        android:textSize="@dimen/font_size_20" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -40,6 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>

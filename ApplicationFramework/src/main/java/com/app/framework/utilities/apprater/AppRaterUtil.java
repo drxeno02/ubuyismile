@@ -1,4 +1,4 @@
-package com.app.framework.utilities;
+package com.app.framework.utilities.apprater;
 
 import android.app.Activity;
 import android.app.AlertDialog;

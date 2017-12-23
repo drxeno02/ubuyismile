@@ -1,4 +1,4 @@
-package com.app.framework.utilities;
+package com.app.framework.utilities.network;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.app.framework.utilities.FrameworkUtils;
 
 import java.util.Locale;
 

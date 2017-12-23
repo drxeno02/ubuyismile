@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.app.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
-import com.app.framework.utilities.ShareUtils;
+import com.app.framework.utilities.share.ShareUtils;
 import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;

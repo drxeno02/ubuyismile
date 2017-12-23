@@ -56,14 +56,79 @@ public class AmazonProductAdvertisingApiRequestBuilder {
     }
 
     /**
-     * A builder that simplifies the creation of URLs for ItemSearch requests
+     * Method is used to create response group request (LOOKUP)
      *
+     * @param responseGroup List of item information to query
+     * @return ResponseGroup e.g. type of values to return
+     */
+    private static String createResponseGroupRequestLookup(final List<Enum.ResponseGroupItemLookup> responseGroup) {
+        // add item attributes to response group if none was selected
+        if (responseGroup.size() == 0) {
+            responseGroup.add(Enum.ResponseGroupItemLookup.SMALL);
+        }
+
+        StringBuilder responseGroupRequestValue = new StringBuilder();
+        for (int i = 0; i < responseGroup.size(); i++) {
+            if (i != 0) {
+                responseGroupRequestValue.append(",");
+            }
+            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
+        }
+        return responseGroupRequestValue.toString();
+    }
+
+    /**
+     * Method is used to create response group request (SEARCH)
+     *
+     * @param responseGroup List of item information to query
+     * @return ResponseGroup e.g. type of values to return
+     */
+    private static String createResponseGroupRequestSearch(final List<Enum.ResponseGroupItemSearch> responseGroup) {
+        // add item attributes to response group if none was selected
+        if (responseGroup.size() == 0) {
+            responseGroup.add(Enum.ResponseGroupItemSearch.SMALL);
+        }
+
+        StringBuilder responseGroupRequestValue = new StringBuilder();
+        for (int i = 0; i < responseGroup.size(); i++) {
+            if (i != 0) {
+                responseGroupRequestValue.append(",");
+            }
+            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
+        }
+        return responseGroupRequestValue.toString();
+    }
+
+    /**
+     * Method is used to create response group request (BROWSE)
+     *
+     * @param responseGroup List of item information to query
+     * @return ResponseGroup e.g. type of values to return
+     */
+    private static String createResponseGroupRequestBrowse(final List<Enum.ResponseGroupItemBrowseNode> responseGroup) {
+        // add item attributes to response group if none was selected
+        if (responseGroup.size() == 0) {
+            responseGroup.add(Enum.ResponseGroupItemBrowseNode.BROWSE_NODE_INFO);
+        }
+
+        StringBuilder responseGroupRequestValue = new StringBuilder();
+        for (int i = 0; i < responseGroup.size(); i++) {
+            if (i != 0) {
+                responseGroupRequestValue.append(",");
+            }
+            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
+        }
+        return responseGroupRequestValue.toString();
+    }
+
+    /**
+     * A builder that simplifies the creation of URLs for ItemSearch requests
      */
     public static final class AdvertisingApiItemSearchRequestBuilder {
 
         private static final String OPERATION = "ItemSearch";
 
-        private final List<Enum.ItemInformation> alResponseGroup = new ArrayList<>();
+        private final List<Enum.ResponseGroupItemSearch> alResponseGroup = new ArrayList<>();
         private final String keywords;
 
         private Enum.ItemCondition itemCondition = Enum.ItemCondition.ALL; // default
@@ -79,7 +144,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
         /**
          * Sets the {@link Enum.ItemCondition} to filter the result of the returned items
          *
-         * @param itemCondition The {@link Enum.ItemInformation} to filter the result of the returned items
+         * @param itemCondition The {@link Enum.ItemCondition} to filter the result of the returned items
          * @return The current {@link AdvertisingApiItemSearchRequestBuilder}
          */
         public AdvertisingApiItemSearchRequestBuilder filterByCondition(final Enum.ItemCondition itemCondition) {
@@ -88,12 +153,12 @@ public class AmazonProductAdvertisingApiRequestBuilder {
         }
 
         /**
-         * Adds the given {@link Enum.ItemInformation} to the response group
+         * Adds the given {@link Enum.ResponseGroupItemSearch} to the response group
          *
-         * @param itemInformation The {@link Enum.ItemInformation} that shall be added to the response group
+         * @param itemInformation The {@link Enum.ResponseGroupItemSearch} that shall be added to the response group
          * @return The current {@link AdvertisingApiItemSearchRequestBuilder}
          */
-        public AdvertisingApiItemSearchRequestBuilder includeInformationAbout(final Enum.ItemInformation itemInformation) {
+        public AdvertisingApiItemSearchRequestBuilder includeInformationAbout(final Enum.ResponseGroupItemSearch itemInformation) {
             alResponseGroup.add(itemInformation);
             return this;
         }
@@ -163,8 +228,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
          * Creates the signed request https-url for the given service using the given {@link AmazonWebServiceAuthentication}
          *
          * @param serviceLocation The location of the Amazon service that shall be used
-         * @param authentication The {@link AmazonWebServiceAuthentication} that shall be used
-         * @param protocol HTTPS protocol
+         * @param authentication  The {@link AmazonWebServiceAuthentication} that shall be used
+         * @param protocol        HTTPS protocol
          * @return The created signed request url
          */
         private String createRequestUrlFor(final Enum.AmazonWebServiceLocation serviceLocation,
@@ -178,7 +243,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("Keywords", keywords);
             requestParams.put("Operation", OPERATION);
             requestParams.put("Service", SERVICE);
-            requestParams.put("ResponseGroup", createResponseGroupRequestValue(alResponseGroup));
+            requestParams.put("ResponseGroup", createResponseGroupRequestSearch(alResponseGroup));
             requestParams.put("Timestamp", authentication.getTimestamp());
             if (maximumPrice != -1) {
                 requestParams.put("MaximumPrice", "" + maximumPrice);
@@ -194,13 +259,12 @@ public class AmazonProductAdvertisingApiRequestBuilder {
 
     /**
      * A builder that simplifies the creation of URLs for ItemLookup requests
-     *
      */
     public static final class AdvertisingApiItemLookupRequestBuilder {
 
         private static final String OPERATION = "ItemLookup";
 
-        private final List<Enum.ItemInformation> responseGroup = new ArrayList<>();
+        private final List<Enum.ResponseGroupItemLookup> responseGroup = new ArrayList<>();
         private final ItemId itemId;
 
         private Enum.ItemCondition itemCondition = Enum.ItemCondition.ALL;
@@ -215,12 +279,12 @@ public class AmazonProductAdvertisingApiRequestBuilder {
         }
 
         /**
-         * Adds the given {@link Enum.ItemInformation} to the response group
+         * Adds the given {@link Enum.ResponseGroupItemLookup} to the response group
          *
-         * @param itemInformation The {@link Enum.ItemInformation} that shall be added to the response group
+         * @param itemInformation The {@link Enum.ResponseGroupItemLookup} that shall be added to the response group
          * @return The current {@link AdvertisingApiItemLookupRequestBuilder}
          */
-        public AdvertisingApiItemLookupRequestBuilder includeInformationAbout(final Enum.ItemInformation itemInformation) {
+        public AdvertisingApiItemLookupRequestBuilder includeInformationAbout(final Enum.ResponseGroupItemLookup itemInformation) {
             responseGroup.add(itemInformation);
             return this;
         }
@@ -228,7 +292,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
         /**
          * Sets the {@link Enum.ItemCondition} to filter the result of the returned items
          *
-         * @param itemCondition The {@link Enum.ItemInformation} to filter the result of the returned items
+         * @param itemCondition The {@link Enum.ItemCondition} to filter the result of the returned items
          * @return The current {@link AdvertisingApiItemLookupRequestBuilder}
          */
         public AdvertisingApiItemLookupRequestBuilder filterByCondition(final Enum.ItemCondition itemCondition) {
@@ -266,8 +330,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
          * Creates the signed request https-url for the given service using the given {@link AmazonWebServiceAuthentication}
          *
          * @param serviceLocation The location of the Amazon service that shall be used
-         * @param authentication The {@link AmazonWebServiceAuthentication} that shall be used
-         * @param protocol HTTP protocol
+         * @param authentication  The {@link AmazonWebServiceAuthentication} that shall be used
+         * @param protocol        HTTP protocol
          * @return The created signed request url
          */
         private String createRequestUrlFor(final Enum.AmazonWebServiceLocation serviceLocation,
@@ -276,7 +340,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             final Map<String, String> requestParams = new LinkedHashMap<>();
             requestParams.put("Service", SERVICE);
             requestParams.put("Operation", OPERATION);
-            requestParams.put("ResponseGroup", createResponseGroupRequestValue(responseGroup));
+            requestParams.put("ResponseGroup", createResponseGroupRequestLookup(responseGroup));
             requestParams.put("SearchIndex", "All");
             requestParams.put("IdType", itemId.getType().getRequestValue());
             requestParams.put("ItemId", itemId.getValue());
@@ -291,31 +355,32 @@ public class AmazonProductAdvertisingApiRequestBuilder {
 
     /**
      * A builder that simplifies the creation of URLs for ItemLookup requests
-     *
      */
     public static final class AdvertisingApiItemBrowseNodeRequestBuilder {
 
         private static final String OPERATION = "BrowseNodeLookup";
 
-        private final List<Enum.ItemInformation> responseGroup = new ArrayList<>();
+        private final List<Enum.ResponseGroupItemBrowseNode> responseGroup = new ArrayList<>();
         private final Enum.ItemBrowseNodeId browseNodeId;
 
         /**
          * Method is used to set item id for lookup
          *
-         * @param browseNodeId
+         * @param browseNodeId A positive integer that uniquely identifies a product group,
+         *                     such as Literature & Fiction: (17), Medicine: (13996),
+         *                     and Mystery & Thrillers: (18)
          */
         private AdvertisingApiItemBrowseNodeRequestBuilder(final Enum.ItemBrowseNodeId browseNodeId) {
             this.browseNodeId = browseNodeId;
         }
 
         /**
-         * Adds the given {@link Enum.ItemInformation} to the response group
+         * Adds the given {@link Enum.ResponseGroupItemBrowseNode} to the response group
          *
-         * @param itemInformation The {@link Enum.ItemInformation} that shall be added to the response group
+         * @param itemInformation The {@link Enum.ResponseGroupItemBrowseNode} that shall be added to the response group
          * @return The current {@link AdvertisingApiItemLookupRequestBuilder}
          */
-        public AdvertisingApiItemBrowseNodeRequestBuilder includeInformationAbout(final Enum.ItemInformation itemInformation) {
+        public AdvertisingApiItemBrowseNodeRequestBuilder includeInformationAbout(final Enum.ResponseGroupItemBrowseNode itemInformation) {
             responseGroup.add(itemInformation);
             return this;
         }
@@ -350,8 +415,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
          * Creates the signed request https-url for the given service using the given {@link AmazonWebServiceAuthentication}
          *
          * @param serviceLocation The location of the Amazon service that shall be used
-         * @param authentication The {@link AmazonWebServiceAuthentication} that shall be used
-         * @param protocol HTTP protocol
+         * @param authentication  The {@link AmazonWebServiceAuthentication} that shall be used
+         * @param protocol        HTTP protocol
          * @return The created signed request url
          */
         private String createRequestUrlFor(final Enum.AmazonWebServiceLocation serviceLocation,
@@ -360,7 +425,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             final Map<String, String> requestParams = new LinkedHashMap<>();
             requestParams.put("Service", SERVICE);
             requestParams.put("Operation", OPERATION);
-            requestParams.put("ResponseGroup", createResponseGroupRequestValue(responseGroup));
+            requestParams.put("ResponseGroup", createResponseGroupRequestBrowse(responseGroup));
             requestParams.put("SearchIndex", "All");
             requestParams.put("BrowseNodeId", browseNodeId.getRequestValue());
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
@@ -370,27 +435,5 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }
-    }
-
-    /**
-     * Method is used to create response group request
-     *
-     * @param responseGroup List of item information to query
-     * @return
-     */
-    private static String createResponseGroupRequestValue(final List<Enum.ItemInformation> responseGroup) {
-        // add item attributes to response group if none was selected
-        if (responseGroup.size() == 0) {
-            responseGroup.add(Enum.ItemInformation.ATTRIBUTES);
-        }
-
-        StringBuilder responseGroupRequestValue = new StringBuilder();
-        for (int i = 0; i < responseGroup.size(); i++) {
-            if (i != 0) {
-                responseGroupRequestValue.append(",");
-            }
-            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
-        }
-        return responseGroupRequestValue.toString();
     }
 }
