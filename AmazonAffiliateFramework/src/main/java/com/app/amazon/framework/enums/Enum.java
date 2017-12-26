@@ -39,6 +39,7 @@ public class Enum {
     public enum ItemCategory {
 
         ALL("All"),
+        DEALS("Deals"), // not part of amazon. Item category added for firebase db
         APPAREL("Apparel"),
         APPLIANCES("Appliances"),
         AUTOMOTIVE("Automotive"),

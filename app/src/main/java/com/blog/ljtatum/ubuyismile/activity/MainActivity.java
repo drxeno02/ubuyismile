@@ -24,6 +24,8 @@ import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
+import com.blog.ljtatum.ubuyismile.model.AmazonData;
+import com.blog.ljtatum.ubuyismile.model.AmazonModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeModel;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private Context mContext;
     private DrawerLayout mDrawerLayout;
+    private ArrayList<String> alAmazonCategories;
+    private int categoryIndex = 0; // default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void initializeViews() {
         mContext = MainActivity.this;
+        alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -158,8 +163,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void retrieveFirebaseData() {
-        // show progress dialog
-        DialogUtils.showProgressDialog(mContext);
+        if (categoryIndex == 0) {
+            // show progress dialog
+            DialogUtils.showProgressDialog(mContext);
+        }
+
+
+
     }
 
     /**
@@ -266,6 +276,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         for (int i = 0; i < 500; i++) {
             mapAmazon.put(String.valueOf(i), " ");
         }
+        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.DEALS.toString());
         FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.APPAREL.toString());
         FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.APPLIANCES.toString());
         FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.AUTOMOTIVE.toString());

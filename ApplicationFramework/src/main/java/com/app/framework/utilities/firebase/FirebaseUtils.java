@@ -20,6 +20,7 @@ import java.util.List;
 
 public class FirebaseUtils {
     private static final String TAG = FirebaseUtils.class.getSimpleName();
+    private static final String FIREBASE_REQ = "firebase req-";
 
     private static final String ASIN = "ASIN";
     private static final String CHABLEE = "CHABLEE";
@@ -52,14 +53,13 @@ public class FirebaseUtils {
      *
      * @param itemCategory Category for item
      */
-    public static void retrieveItemAmazon(String itemCategory) {
-
+    public static void retrieveItemsAmazon(String itemCategory) {
+        Log.d(FIREBASE_REQ, "category (AMAZON): " + itemCategory);
         // database reference
         mQueryDbReference = FirebaseDatabase.getInstance().getReference(itemCategory).child(ASIN);
         mQueryDbReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("TEST", "dataSnapshot= " + dataSnapshot);
                 if (!FrameworkUtils.checkIfNull(mFirebaseValueListener)) {
                     mFirebaseValueListener.onRetrieveDataChange(dataSnapshot);
                 }
@@ -82,8 +82,8 @@ public class FirebaseUtils {
      *
      * @param itemCategory Category for item
      */
-    public static void retrieveItemChablee(String itemCategory) {
-
+    public static void retrieveItemsChablee(String itemCategory) {
+        Log.d(FIREBASE_REQ, "category (CHABLEE): " + itemCategory);
         // database reference
         mQueryDbReference = FirebaseDatabase.getInstance().getReference(CHABLEE).child(itemCategory).child(ITEM);
         mQueryDbReference.addListenerForSingleValueEvent(new ValueEventListener() {
