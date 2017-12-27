@@ -163,6 +163,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onRetrieveDataChange(DataSnapshot dataSnapshot) {
                 Logger.v("TEST", "dataSnapshot= " + dataSnapshot);
+
+                if (!FrameworkUtils.checkIfNull(dataSnapshot)) {
+                    populateDataLists(dataSnapshot);
+                }
+
                 if (!isAmazonFirebaseDataRetrieved) {
                     if (categoryIndex < alAmazonCategories.size()) {
                         // increase category index
@@ -183,6 +188,121 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             }
         });
+    }
+
+    private void populateDataLists(DataSnapshot dataSnapshot) {
+        if (!isAmazonFirebaseDataRetrieved) {
+
+            HashMap<String, AmazonModel> map = new HashMap<>();
+
+            if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DEALS.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.APPAREL.toString())) {
+
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.APPLIANCES.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.AUTOMOTIVE.toString())) {
+
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BABY.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BEAUTY.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BOOKS.toString())) {
+                    ArrayList<AmazonModel> alBooks = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
+                                !FrameworkUtils.isStringEmpty(snapshot.getValue().toString())) {
+                            AmazonModel amazonModel = new AmazonModel();
+                            amazonModel.category = alAmazonCategories.get(categoryIndex);
+                            amazonModel.asin = snapshot.getValue().toString();
+                            alBooks.add(amazonModel);
+                        }
+                    }
+                    // set book list
+                    AmazonData.setBooks(alBooks);
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DVD.toString())) {
+
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.ELECTRONICS.toString())) {
+
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.GROCERY.toString())) {
+
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.HOME_AND_GARDEN.toString())) {
+
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.JEWELRY.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.KINDLE_STORE.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LAWN_AND_GARDEN.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LUGGAGE_AND_BAGS.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LUXURY_BEAUTY.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.MUSIC.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.OFFICE_PRODUCTS.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.AMAZON_PANTRY.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.PC_HARDWARE.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.PET_SUPPLIES.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SHOES.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SOFTWARE.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SPORTING_GOODS.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.TOYS.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.VIDEO_GAMES.toString())) {
+
+            } else if (categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.WATCHES.toString())) {
+
+            }
+
+
+        }
     }
 
     /**
