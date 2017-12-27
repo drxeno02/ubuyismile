@@ -1,5 +1,8 @@
 package com.blog.ljtatum.ubuyismile.model;
 
+import com.app.amazon.framework.enums.Enum;
+import com.app.framework.utilities.firebase.FirebaseUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -25,5 +28,19 @@ public class ChableeData {
      */
     public static void setChablee(ArrayList<AmazonModel> alChablee) {
         ChableeData.alChablee = alChablee;
+    }
+
+    /**
+     * Method is used to retrieve a list of all Chablee categories
+     *
+     * @return List of Chablee categories
+     */
+    public static ArrayList<String> getChableeCategories() {
+        ArrayList<String> alChableeCategories = new ArrayList<>();
+        alChableeCategories.add(Enum.ItemCategoryChablee.RINGS.toString());
+        alChableeCategories.add(Enum.ItemCategoryChablee.NECKLACES.toString());
+        alChableeCategories.add(Enum.ItemCategoryChablee.GEMSTONE.toString());
+        alChableeCategories.add(Enum.ItemCategoryChablee.ROCKS.toString());
+        return alChableeCategories;
     }
 }

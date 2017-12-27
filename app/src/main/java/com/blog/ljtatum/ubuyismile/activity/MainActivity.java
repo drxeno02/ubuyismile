@@ -24,8 +24,10 @@ import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
+import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonModel;
+import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ChableeModel;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.google.firebase.database.DataSnapshot;
@@ -41,8 +43,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private Context mContext;
     private DrawerLayout mDrawerLayout;
-    private ArrayList<String> alAmazonCategories;
+    private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
+    private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved;
+
+    // amazon web service authentication
+    AmazonWebServiceAuthentication mAmazonAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +59,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initializeViews();
         initializeHandlers();
         initializeListeners();
+        retrieveFirebaseData();
 
         // uncomment below to create firebase db
         //createFirebaseDb();
 
-        AmazonWebServiceAuthentication authentication = AmazonWebServiceAuthentication.create(
-                getResources().getString(R.string.amazon_tag),
-                getResources().getString(R.string.amazon_access_key),
-                getResources().getString(R.string.amazon_secret_key));
+
 
         // B00W0TD6Y6 - Poetry in Programming
         // 076243631X - Mammoth Book of Tattoos
@@ -86,13 +90,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initializeViews() {
         mContext = MainActivity.this;
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
+        alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
+
+        // instantiate amazon auth
+        mAmazonAuth = AmazonWebServiceAuthentication.create(
+                getResources().getString(R.string.amazon_tag),
+                getResources().getString(R.string.amazon_access_key),
+                getResources().getString(R.string.amazon_secret_key));
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
             @Override
             public void onDrawerClosed(View view) {
@@ -151,8 +162,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             @Override
             public void onRetrieveDataChange(DataSnapshot dataSnapshot) {
-                // dismiss progress dialog
-                DialogUtils.dismissProgressDialog();
+                Logger.v("TEST", "dataSnapshot= " + dataSnapshot);
+                if (!isAmazonFirebaseDataRetrieved) {
+                    if (categoryIndex < alAmazonCategories.size()) {
+                        // increase category index
+                        categoryIndex++;
+                        retrieveFirebaseData();
+                    }
+                } else if (!isChableeFirebaseDataRetrieved) {
+                    if (categoryIndex < alAmazonCategories.size()) {
+                        // increase category index
+                        categoryIndex++;
+                        retrieveFirebaseData();
+                    }
+                }
             }
 
             @Override
@@ -162,14 +185,45 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         });
     }
 
+    /**
+     * Method is used to retrieve Firebase data
+     */
     private void retrieveFirebaseData() {
         if (categoryIndex == 0) {
             // show progress dialog
             DialogUtils.showProgressDialog(mContext);
         }
 
+        // retrieve more data from amazon so long that category index is less than
+        // amazon category list size otherwise retrieve Chablee data
+        if (!isAmazonFirebaseDataRetrieved) {
+            if (categoryIndex < alAmazonCategories.size()) {
+                // retrieve data (AMAZON)
+                FirebaseUtils.retrieveItemsAmazon(alAmazonCategories.get(categoryIndex));
+            } else {
+                // reset
+                categoryIndex = 0;
+                // amazon queries completed
+                isAmazonFirebaseDataRetrieved = true;
+                // retrieve data (CHABLEE)
+                FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
+            }
+        } else if (!isChableeFirebaseDataRetrieved) {
+            if (categoryIndex < alChableeCategories.size()) {
+                // retrieve data (CHABLEE)
+                FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
+            } else {
+                // reset
+                categoryIndex = 0;
+                // amazon queries completed
+                isChableeFirebaseDataRetrieved = true;
 
-
+                if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
+                    // dismiss progress dialog
+                    DialogUtils.dismissProgressDialog();
+                }
+            }
+        }
     }
 
     /**
