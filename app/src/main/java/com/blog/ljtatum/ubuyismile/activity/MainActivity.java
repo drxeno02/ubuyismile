@@ -17,6 +17,7 @@ import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
 import com.app.framework.listeners.OnFirebaseValueListener;
+import com.app.framework.model.HistoryModel;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
@@ -47,7 +48,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private int categoryIndex = 0; // default
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved;
 
-    // amazon web service authentication
+    // Amazon web service authentication
     AmazonWebServiceAuthentication mAmazonAuth;
 
     @Override
@@ -62,7 +63,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         retrieveFirebaseData();
 
         // uncomment below to create firebase db
-        //createFirebaseDb();
+//        createFirebaseDb();
 
 
 
@@ -92,7 +93,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
 
-        // instantiate amazon auth
+        // instantiate Amazon auth
         mAmazonAuth = AmazonWebServiceAuthentication.create(
                 getResources().getString(R.string.amazon_tag),
                 getResources().getString(R.string.amazon_access_key),
@@ -175,7 +176,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         retrieveFirebaseData();
                     }
                 } else if (!isChableeFirebaseDataRetrieved) {
-                    if (categoryIndex < alAmazonCategories.size()) {
+                    if (categoryIndex < alChableeCategories.size()) {
                         // increase category index
                         categoryIndex++;
                         retrieveFirebaseData();
@@ -193,115 +194,147 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void populateDataLists(DataSnapshot dataSnapshot) {
         if (!isAmazonFirebaseDataRetrieved) {
 
-            HashMap<String, AmazonModel> map = new HashMap<>();
-
-            if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DEALS.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.APPAREL.toString())) {
-
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.APPLIANCES.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.AUTOMOTIVE.toString())) {
-
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BABY.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BEAUTY.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BOOKS.toString())) {
-                    ArrayList<AmazonModel> alBooks = new ArrayList<>();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
-                                !FrameworkUtils.isStringEmpty(snapshot.getValue().toString())) {
-                            AmazonModel amazonModel = new AmazonModel();
-                            amazonModel.category = alAmazonCategories.get(categoryIndex);
-                            amazonModel.asin = snapshot.getValue().toString();
-                            alBooks.add(amazonModel);
-                        }
-                    }
-                    // set book list
-                    AmazonData.setBooks(alBooks);
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DVD.toString())) {
-
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.ELECTRONICS.toString())) {
-
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.GROCERY.toString())) {
-
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.HOME_AND_GARDEN.toString())) {
-
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.JEWELRY.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.KINDLE_STORE.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LAWN_AND_GARDEN.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LUGGAGE_AND_BAGS.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LUXURY_BEAUTY.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.MUSIC.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.OFFICE_PRODUCTS.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.AMAZON_PANTRY.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.PC_HARDWARE.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.PET_SUPPLIES.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SHOES.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SOFTWARE.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SPORTING_GOODS.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.TOYS.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.VIDEO_GAMES.toString())) {
-
-            } else if (categoryIndex < alAmazonCategories.size() &&
-                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.WATCHES.toString())) {
-
+            ArrayList<AmazonModel> alData = new ArrayList<>();
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
+                        !FrameworkUtils.isStringEmpty(snapshot.getValue().toString())) {
+                    AmazonModel amazonModel = new AmazonModel();
+                    amazonModel.category = alAmazonCategories.get(categoryIndex);
+                    amazonModel.asin = snapshot.getValue().toString();
+                    alData.add(amazonModel);
+                }
             }
 
+            if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DEALS.toString())) {
+                // set deals list
+                AmazonData.setDeals(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.APPAREL.toString())) {
+                // set apparel list
+                AmazonData.setApparel(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.APPLIANCES.toString())) {
+                // set appliances list
+                AmazonData.setAppliances(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.AUTOMOTIVE.toString())) {
+                // set automotive list
+                AmazonData.setAutomotive(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BABY.toString())) {
+                // set baby list
+                AmazonData.setBaby(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BEAUTY.toString())) {
+                // set beauty list
+                AmazonData.setBeauty(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BOOKS.toString())) {
+                    // set book list
+                    AmazonData.setBooks(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DVD.toString())) {
+                // set DVD list
+                AmazonData.setDVD(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.ELECTRONICS.toString())) {
+                // set electronics list
+                AmazonData.setElectronics(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.GROCERY.toString())) {
+                // set grocery list
+                AmazonData.setGrocery(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString())) {
+                // set health and personal care list
+                AmazonData.setHealthPesonalCare(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.HOME_AND_GARDEN.toString())) {
+                // set home and garden list
+                AmazonData.setHomeGarden(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.JEWELRY.toString())) {
+                // set jewelry list
+                AmazonData.setJewelry(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.KINDLE_STORE.toString())) {
+                // set kindle store list
+                AmazonData.setKindleStore(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LAWN_AND_GARDEN.toString())) {
+                // set lawn and garden list
+                AmazonData.setLawnGarden(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LUGGAGE_AND_BAGS.toString())) {
+                // set luggage bugs list
+                AmazonData.setLuggageBags(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.LUXURY_BEAUTY.toString())) {
+                // set luxery and beauty list
+                AmazonData.setLuxeryBeauty(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.MUSIC.toString())) {
+                // set music list
+                AmazonData.setMusic(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString())) {
+                // set musical instruments list
+                AmazonData.setMusicalInstruments(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.OFFICE_PRODUCTS.toString())) {
+                // set office products list
+                AmazonData.setOfficeProducts(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.AMAZON_PANTRY.toString())) {
+                // set Amazon pantry list
+                AmazonData.setAmazonPantry(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.PC_HARDWARE.toString())) {
+                // set pc hardware list
+                AmazonData.setPCHardware(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.PET_SUPPLIES.toString())) {
+                // set pet supplies list
+                AmazonData.setPetSupplies(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SHOES.toString())) {
+                // set shoes list
+                AmazonData.setShoes(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SOFTWARE.toString())) {
+                // set software list
+                AmazonData.setSoftware(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.SPORTING_GOODS.toString())) {
+                // set sporting goods list
+                AmazonData.setSportingGoods(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.TOYS.toString())) {
+                // set toys list
+                AmazonData.setToys(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.VIDEO_GAMES.toString())) {
+                // set videogames list
+                AmazonData.setVideoGames(alData);
+            } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
+                    alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.WATCHES.toString())) {
+                // set watches list
+                AmazonData.setWatches(alData);
+            }
 
+        } else if (!isChableeFirebaseDataRetrieved) {
+            ArrayList<ChableeModel> alData = new ArrayList<>();
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                if (!FrameworkUtils.checkIfNull(snapshot.getValue())) {
+                    ChableeModel chableeModel = snapshot.getValue(ChableeModel.class);
+                    alData.add(chableeModel);
+                }
+            }
+        } else {
+            // Amazon and Chablee requests made
+            // make Amazon requests
+            AmazonData.getAmazonASINRequest(AmazonData.getBooks());
         }
     }
 
@@ -314,8 +347,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             DialogUtils.showProgressDialog(mContext);
         }
 
-        // retrieve more data from amazon so long that category index is less than
-        // amazon category list size otherwise retrieve Chablee data
+        // retrieve more data from Amazon so long that category index is less than
+        // Amazon category list size otherwise retrieve Chablee data
         if (!isAmazonFirebaseDataRetrieved) {
             if (categoryIndex < alAmazonCategories.size()) {
                 // retrieve data (AMAZON)
@@ -323,7 +356,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             } else {
                 // reset
                 categoryIndex = 0;
-                // amazon queries completed
+                // Amazon queries completed
                 isAmazonFirebaseDataRetrieved = true;
                 // retrieve data (CHABLEE)
                 FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
@@ -335,7 +368,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             } else {
                 // reset
                 categoryIndex = 0;
-                // amazon queries completed
+                // Chablee queries completed
                 isChableeFirebaseDataRetrieved = true;
 
                 if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
@@ -425,7 +458,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // setup Chablee database
         HashMap<String, ChableeModel> mapChablee = new HashMap<>();
-        for (int i = 0; i < 250; i++) {
+        for (int i = 0; i < 50; i++) {
             ChableeModel chableeModel = new ChableeModel();
             chableeModel.title = " ";
             chableeModel.description = " ";
@@ -437,9 +470,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             chableeModel.imageUrl3 = " ";
             chableeModel.imageUrl4 = " ";
             chableeModel.imageUrl5 = " ";
+            chableeModel.isFeatured = false;
+            chableeModel.isMostPopular = false;
             // add to hashmap
             mapChablee.put(String.valueOf(i), chableeModel);
         }
+        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.CROWNS.toString());
         FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.RINGS.toString());
         FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.NECKLACES.toString());
         FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.GEMSTONE.toString());
@@ -447,7 +483,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // setup Amazon database
         HashMap<String, String> mapAmazon = new HashMap<>();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 50; i++) {
             mapAmazon.put(String.valueOf(i), " ");
         }
         FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.DEALS.toString());

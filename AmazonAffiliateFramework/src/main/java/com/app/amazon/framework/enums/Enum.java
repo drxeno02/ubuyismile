@@ -11,6 +11,7 @@ public class Enum {
      */
     public enum ItemCategoryChablee {
 
+        CROWNS("Crowns"),
         RINGS("Rings"),
         NECKLACES("Necklaces"),
         GEMSTONE("Gemstone"),

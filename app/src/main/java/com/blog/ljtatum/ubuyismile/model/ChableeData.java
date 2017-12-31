@@ -37,6 +37,7 @@ public class ChableeData {
      */
     public static ArrayList<String> getChableeCategories() {
         ArrayList<String> alChableeCategories = new ArrayList<>();
+        alChableeCategories.add(Enum.ItemCategoryChablee.CROWNS.toString());
         alChableeCategories.add(Enum.ItemCategoryChablee.RINGS.toString());
         alChableeCategories.add(Enum.ItemCategoryChablee.NECKLACES.toString());
         alChableeCategories.add(Enum.ItemCategoryChablee.GEMSTONE.toString());
