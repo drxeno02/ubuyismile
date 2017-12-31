@@ -17,7 +17,6 @@ import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
 import com.app.framework.listeners.OnFirebaseValueListener;
-import com.app.framework.model.HistoryModel;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
@@ -326,10 +325,33 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (!isChableeFirebaseDataRetrieved) {
             ArrayList<ChableeModel> alData = new ArrayList<>();
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                if (!FrameworkUtils.checkIfNull(snapshot.getValue())) {
-                    ChableeModel chableeModel = snapshot.getValue(ChableeModel.class);
+                ChableeModel chableeModel = snapshot.getValue(ChableeModel.class);
+                if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
+                        !FrameworkUtils.checkIfNull(chableeModel)) {
+                    chableeModel.category = alChableeCategories.get(categoryIndex);
                     alData.add(chableeModel);
                 }
+            }
+            if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
+                    alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
+                // set crown list
+                ChableeData.setCrowns(alData);
+            } else if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
+                    alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
+                // set rings list
+                ChableeData.setRings(alData);
+            } else if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
+                    alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
+                // set necklaces list
+                ChableeData.setNecklaces(alData);
+            } else if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
+                    alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.GEMSTONE.toString())) {
+                // set gemstone list
+                ChableeData.setGemstone(alData);
+            } else if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
+                    alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
+                // set rocks list
+                ChableeData.setRocks(alData);
             }
         } else {
             // Amazon and Chablee requests made

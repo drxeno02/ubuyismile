@@ -6,6 +6,6 @@ package com.blog.ljtatum.ubuyismile.model;
 
 public class ChableeModel {
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
-            imageUrl3, imageUrl4, imageUrl5;
+            imageUrl3, imageUrl4, imageUrl5, category;
     public boolean isFeatured, isMostPopular;
 }

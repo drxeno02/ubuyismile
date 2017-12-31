@@ -1,7 +1,6 @@
 package com.blog.ljtatum.ubuyismile.model;
 
 import com.app.amazon.framework.enums.Enum;
-import com.app.framework.utilities.firebase.FirebaseUtils;
 
 import java.util.ArrayList;
 
@@ -10,24 +9,100 @@ import java.util.ArrayList;
  */
 
 public class ChableeData {
-    private static ArrayList<AmazonModel> alChablee = new ArrayList<>();
+    private static ArrayList<ChableeModel> alCrowns = new ArrayList<>();
+    private static ArrayList<ChableeModel> alRings = new ArrayList<>();
+    private static ArrayList<ChableeModel> alNecklaces = new ArrayList<>();
+    private static ArrayList<ChableeModel> alGemstone = new ArrayList<>();
+    private static ArrayList<ChableeModel> alRocks = new ArrayList<>();
 
     /**
-     * Getter for Chablee items
+     * Getter for Chablee crown items
      *
-     * @return List of Chablee items
+     * @return List of Chablee crown items
      */
-    public static ArrayList<AmazonModel> getChablee() {
-        return alChablee;
+    public static ArrayList<ChableeModel> getCrowns() {
+        return alCrowns;
     }
 
     /**
-     * Setter for Chablee items
+     * Setter for Chablee crown items
      *
-     * @param alChablee List of Chablee items
+     * @param alCrowns List of Chablee crown items
      */
-    public static void setChablee(ArrayList<AmazonModel> alChablee) {
-        ChableeData.alChablee = alChablee;
+    public static void setCrowns(ArrayList<ChableeModel> alCrowns) {
+        ChableeData.alCrowns = alCrowns;
+    }
+
+    /**
+     * Getter for Chablee rings items
+     *
+     * @return List of Chablee rings items
+     */
+    public static ArrayList<ChableeModel> getRings() {
+        return alRings;
+    }
+
+    /**
+     * Setter for Chablee rings items
+     *
+     * @param alRings List of Chablee rings items
+     */
+    public static void setRings(ArrayList<ChableeModel> alRings) {
+        ChableeData.alRings = alRings;
+    }
+
+    /**
+     * Getter for Chablee necklaces items
+     *
+     * @return List of Chablee necklaces items
+     */
+    public static ArrayList<ChableeModel> getNecklaces() {
+        return alNecklaces;
+    }
+
+    /**
+     * Setter for Chablee necklaces items
+     *
+     * @param alNecklaces List of Chablee necklaces items
+     */
+    public static void setNecklaces(ArrayList<ChableeModel> alNecklaces) {
+        ChableeData.alNecklaces = alNecklaces;
+    }
+
+    /**
+     * Getter for Chablee gemstone items
+     *
+     * @return List of Chablee gemstone items
+     */
+    public static ArrayList<ChableeModel> getGemstone() {
+        return alGemstone;
+    }
+
+    /**
+     * Setter for Chablee gemstone items
+     *
+     * @param alGemstone List of Chablee gemstone items
+     */
+    public static void setGemstone(ArrayList<ChableeModel> alGemstone) {
+        ChableeData.alGemstone = alGemstone;
+    }
+
+    /**
+     * Getter for Chablee rocks items
+     *
+     * @return List of Chablee rocks items
+     */
+    public static ArrayList<ChableeModel> getRocks() {
+        return alRocks;
+    }
+
+    /**
+     * Setter for Chablee rocks items
+     *
+     * @param alRocks List of Chablee rocks items
+     */
+    public static void setRocks(ArrayList<ChableeModel> alRocks) {
+        ChableeData.alRocks = alRocks;
     }
 
     /**
