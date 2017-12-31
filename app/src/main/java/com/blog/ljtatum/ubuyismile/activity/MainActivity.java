@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         RequestManager.onAWSRequestListener(new OnAWSRequestListener() {
             @Override
             public void onAWSSuccess(@NonNull String response) {
-                // retrieve item model
+                // retrieve item_a model
                 ItemModel itemModel = SAXParse(response);
             }
         });
@@ -344,10 +344,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
                 // set necklaces list
                 ChableeData.setNecklaces(alData);
-            } else if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
-                    alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.GEMSTONE.toString())) {
-                // set gemstone list
-                ChableeData.setGemstone(alData);
             } else if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
                     alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
                 // set rocks list

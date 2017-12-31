@@ -31,10 +31,6 @@
                 android:icon="@drawable/necklaces"
                 android:title="@string/menu_necklaces" />
             <item
-                android:id="@+id/nav_chablee_gemstone"
-                android:icon="@drawable/gemstone"
-                android:title="@string/menu_gemstone" />
-            <item
                 android:id="@+id/nav_chablee_rocks"
                 android:icon="@drawable/rocks"
                 android:title="@string/menu_rocks" />

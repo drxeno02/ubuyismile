@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription">
+
+    <RelativeLayout
+        android:id="@+id/rl_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scaling_170">
+
+        <!-- sale price percentage -->
+        <TextView
+            android:id="@+id/tv_sale_perc"
+            android:layout_width="@dimen/scaling_44"
+            android:layout_height="@dimen/scaling_20"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/scaling_10"
+            android:layout_marginTop="@dimen/scaling_10"
+            android:background="@drawable/pill_black"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_14"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <!-- background -->
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/scaling_170"
+            android:scaleType="centerCrop" />
+
+        <!-- label -->
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/scaling_34"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/edge_left_black"
+            android:gravity="center"
+            android:padding="@dimen/scaling_4"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_wrapper"
+        android:layout_marginTop="@dimen/scaling_10"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/scaling_10"
+        android:paddingLeft="@dimen/scaling_10"
+        android:paddingRight="@dimen/scaling_10"
+        android:paddingStart="@dimen/scaling_10"
+        android:weightSum="1">
+
+        <!-- title -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.85"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16" />
+
+        <!-- price -->
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:textColor="@color/material_green_400_color_code"
+            android:textSize="@dimen/font_size_16" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -57,10 +57,18 @@
     <string name="menu_header_chablee">Chablee\'s Handmade Jewelry</string>
 
     <!-- menu options Chablee -->
-    <string name="menu_crowns">Crowns</string>
+    <string name="menu_crowns">Gemstone Crowns</string>
     <string name="menu_rings">Rings</string>
-    <string name="menu_necklaces">Necklaces</string>
+    <string name="menu_necklaces">Necklaces &amp; Body Chains</string>
     <string name="menu_gemstone">Gemstone</string>
     <string name="menu_rocks">Rocks</string>
+
+    <!-- labels -->
+    <string name="label_new">New</string>
+    <string name="label_sale">Sale</string>
+    <string name="label_most_popular">Most Popular</string>
+    <string name="label_almost_gone">Almost Gone</string>
+    <string name="label_top_seller">Top Seller</string>
+    <string name="label_leonard_recommendation">Leonard\'s Recommendation</string>
 
 </resources>

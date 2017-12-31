@@ -12,7 +12,6 @@ public class ChableeData {
     private static ArrayList<ChableeModel> alCrowns = new ArrayList<>();
     private static ArrayList<ChableeModel> alRings = new ArrayList<>();
     private static ArrayList<ChableeModel> alNecklaces = new ArrayList<>();
-    private static ArrayList<ChableeModel> alGemstone = new ArrayList<>();
     private static ArrayList<ChableeModel> alRocks = new ArrayList<>();
 
     /**
@@ -70,24 +69,6 @@ public class ChableeData {
     }
 
     /**
-     * Getter for Chablee gemstone items
-     *
-     * @return List of Chablee gemstone items
-     */
-    public static ArrayList<ChableeModel> getGemstone() {
-        return alGemstone;
-    }
-
-    /**
-     * Setter for Chablee gemstone items
-     *
-     * @param alGemstone List of Chablee gemstone items
-     */
-    public static void setGemstone(ArrayList<ChableeModel> alGemstone) {
-        ChableeData.alGemstone = alGemstone;
-    }
-
-    /**
      * Getter for Chablee rocks items
      *
      * @return List of Chablee rocks items
@@ -115,7 +96,6 @@ public class ChableeData {
         alChableeCategories.add(Enum.ItemCategoryChablee.CROWNS.toString());
         alChableeCategories.add(Enum.ItemCategoryChablee.RINGS.toString());
         alChableeCategories.add(Enum.ItemCategoryChablee.NECKLACES.toString());
-        alChableeCategories.add(Enum.ItemCategoryChablee.GEMSTONE.toString());
         alChableeCategories.add(Enum.ItemCategoryChablee.ROCKS.toString());
         return alChableeCategories;
     }

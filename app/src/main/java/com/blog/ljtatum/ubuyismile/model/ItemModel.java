@@ -43,7 +43,7 @@ public class ItemModel {
     }
 
     /**
-     * Embedded class for Amazon item links
+     * Embedded class for Amazon item_a links
      */
     public class ItemLink {
 
@@ -125,7 +125,7 @@ public class ItemModel {
     }
 
     /**
-     * Embedded class for Amazon item attributes
+     * Embedded class for Amazon item_a attributes
      */
     public class ItemAttributes {
 
@@ -179,7 +179,7 @@ public class ItemModel {
     }
 
     /**
-     * Embedded class for Amazon item prices
+     * Embedded class for Amazon item_a prices
      */
     public class ListPrice {
 
