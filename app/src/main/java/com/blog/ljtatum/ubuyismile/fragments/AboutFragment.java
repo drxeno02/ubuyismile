@@ -58,7 +58,7 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
         ivLinkedin = mRootView.findViewById(R.id.iv_linkedin);
 
         // set fragment header
-        tvFragmentHeader.setText(getResources().getString(R.string.about));
+        tvFragmentHeader.setText(getResources().getString(R.string.menu_about));
         // set app version
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
         // set copyright year

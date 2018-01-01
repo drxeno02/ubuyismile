@@ -30,6 +30,7 @@ import com.blog.ljtatum.ubuyismile.model.AmazonModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ChableeModel;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
+import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -42,6 +43,7 @@ import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Context mContext;
+    private ErrorUtils mErrorUtils;
     private DrawerLayout mDrawerLayout;
     private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
@@ -89,6 +91,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void initializeViews() {
         mContext = MainActivity.this;
+        mErrorUtils = new ErrorUtils();
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
 
@@ -185,11 +188,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             @Override
             public void onRetrieveDataError(DatabaseError databaseError) {
-
+                // display error dialog
+                mErrorUtils.showError(MainActivity.this,
+                        mContext.getResources().getString(R.string.default_error_message), "");
             }
         });
     }
 
+    /**
+     * Method is used to populate models with data
+     * @param dataSnapshot data retrieved from firebase
+     */
     private void populateDataLists(DataSnapshot dataSnapshot) {
         if (!isAmazonFirebaseDataRetrieved) {
 

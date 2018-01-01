@@ -1,14 +1,10 @@
 <resources>
     <string name="app_name">UBuyISmile</string>
     <string name="u_buy">U Buy I Smile</string>
-    <string name="browse">Browse</string>
     <string name="creators">by Leonard Tatum &amp; Jeremy Garcia</string>
 
-    <!-- headers -->
-    <string name="share">Share</string>
-    <string name="about">About</string>
-    <string name="privacy">Privacy</string>
-    <string name="setting">Settings</string>
+    <!-- adapter -->
+    <string name="percent_sale">-%1$s\%%</string>
 
     <!-- about -->
     <string name="follow_me">Follow Me:</string>
@@ -70,5 +66,9 @@
     <string name="label_almost_gone">Almost Gone</string>
     <string name="label_top_seller">Top Seller</string>
     <string name="label_leonard_recommendation">Leonard\'s Recommendation</string>
+
+    <!-- error messages -->
+    <string name="default_error_message">Sorry, we\'re having trouble connecting to our servers.
+        Please check your connection and try again later.</string>
 
 </resources>

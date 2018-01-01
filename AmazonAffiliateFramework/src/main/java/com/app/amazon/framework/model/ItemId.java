@@ -123,12 +123,8 @@ public class ItemId {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this ID type
-         *
-         * @return The value used in the URL request that represents this ID type
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }

@@ -123,4 +123,23 @@ public class Utils {
             }
         }
     }
+
+    /**
+     * Method is used to strip away all non-numeric characters and/or spaces
+     * @param value Dollar amount to convert to double value
+     * @return Dollar amount with special characters and/or spaces
+     */
+    public static double getDollarValue(@NonNull String value) {
+        return Double.parseDouble(value.replaceAll("[^\\d.]", "").trim());
+    }
+
+    /**
+     * Method is used to calculate the percent sale for prices
+     * @param price The original price
+     * @param salePrice The sale price
+     * @return The percent sale for prices
+     */
+    public static int calculatePercSale(@NonNull double price, @NonNull double salePrice) {
+        return (int) (1 - (salePrice / price)) * 100;
+    }
 }

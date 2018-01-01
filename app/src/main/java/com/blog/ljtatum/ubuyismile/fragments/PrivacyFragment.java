@@ -42,7 +42,7 @@ public class PrivacyFragment extends BaseFragment implements View.OnClickListene
         tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
 
         // set fragment header
-        tvFragmentHeader.setText(getResources().getString(R.string.privacy));
+        tvFragmentHeader.setText(getResources().getString(R.string.menu_privacy));
     }
 
     /**

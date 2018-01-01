@@ -23,12 +23,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item category
-         *
-         * @return The value used in the URL request that represents this item category
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -76,12 +72,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item category
-         *
-         * @return The value used in the URL request that represents this item category
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -103,12 +95,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item condition
-         *
-         * @return The value used in the URL request that represents this item condition
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -148,12 +136,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item information
-         *
-         * @return The value used in the URL request that represents this item information
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -207,12 +191,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item information
-         *
-         * @return The value used in the URL request that represents this item information
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -236,12 +216,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item information
-         *
-         * @return The value used in the URL request that represents this item information
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -300,12 +276,8 @@ public class Enum {
             this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the value used in the URL request that represents this item category
-         *
-         * @return The value used in the URL request that represents this item category
-         */
-        public String getRequestValue() {
+        @Override
+        public String toString() {
             return requestValue;
         }
     }
@@ -327,21 +299,17 @@ public class Enum {
         FR("webservices.amazon.fr"),
         IT("webservices.amazon.it");
 
-        private final String webServiceUrl;
+        private final String requestValue;
 
-        AmazonWebServiceLocation(final String webServiceUrl) {
-            this.webServiceUrl = webServiceUrl;
+        AmazonWebServiceLocation(final String requestValue) {
+            this.requestValue = requestValue;
         }
 
-        /**
-         * Gives the listing of the available Amazon web services for different locations
-         *
-         * @return The listing of the available Amazon web services for different locations
-         */
-        public String getWebServiceUrl() {
-            return webServiceUrl;
+        @Override
+        public String toString() {
+            return requestValue;
         }
-
     }
+
 
 }

@@ -72,7 +72,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             if (i != 0) {
                 responseGroupRequestValue.append(",");
             }
-            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
+            responseGroupRequestValue.append(responseGroup.get(i).toString());
         }
         return responseGroupRequestValue.toString();
     }
@@ -94,7 +94,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             if (i != 0) {
                 responseGroupRequestValue.append(",");
             }
-            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
+            responseGroupRequestValue.append(responseGroup.get(i).toString());
         }
         return responseGroupRequestValue.toString();
     }
@@ -116,7 +116,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             if (i != 0) {
                 responseGroupRequestValue.append(",");
             }
-            responseGroupRequestValue.append(responseGroup.get(i).getRequestValue());
+            responseGroupRequestValue.append(responseGroup.get(i).toString());
         }
         return responseGroupRequestValue.toString();
     }
@@ -238,8 +238,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             final Map<String, String> requestParams = new LinkedHashMap<>();
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
             requestParams.put("AssociateTag", authentication.getAssociateTag());
-            requestParams.put("Condition", itemCondition.getRequestValue());
-            requestParams.put("SearchIndex", itemCategory.getRequestValue());
+            requestParams.put("Condition", itemCondition.toString());
+            requestParams.put("SearchIndex", itemCategory.toString());
             requestParams.put("Keywords", keywords);
             requestParams.put("Operation", OPERATION);
             requestParams.put("Service", SERVICE);
@@ -252,7 +252,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
                 requestParams.put("MinimumPrice", "" + minimumPrice);
             }
 
-            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
+            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.toString(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }
     }
@@ -342,13 +342,13 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("Operation", OPERATION);
             requestParams.put("ResponseGroup", createResponseGroupRequestLookup(responseGroup));
             requestParams.put("SearchIndex", "All");
-            requestParams.put("IdType", itemId.getType().getRequestValue());
+            requestParams.put("IdType", itemId.getType().toString());
             requestParams.put("ItemId", itemId.getValue());
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
             requestParams.put("AssociateTag", authentication.getAssociateTag());
             requestParams.put("Timestamp", authentication.getTimestamp());
 
-            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
+            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.toString(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }
     }
@@ -427,12 +427,12 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("Operation", OPERATION);
             requestParams.put("ResponseGroup", createResponseGroupRequestBrowse(responseGroup));
             requestParams.put("SearchIndex", "All");
-            requestParams.put("BrowseNodeId", browseNodeId.getRequestValue());
+            requestParams.put("BrowseNodeId", browseNodeId.toString());
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
             requestParams.put("AssociateTag", authentication.getAssociateTag());
             requestParams.put("Timestamp", authentication.getTimestamp());
 
-            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
+            return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.toString(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }
     }
