@@ -8,14 +8,16 @@ public class Enum {
 
     /**
      * Enum used to select category for item query, e.g. electronics, apparel (CHABLEE)
+     * <p>Item category used in Firebase request. The String value is case sensitive,
+     * keep all upppercase</p>
      */
     public enum ItemCategoryChablee {
 
-        CROWNS("Crowns"),
-        RINGS("Rings"),
-        NECKLACES("Necklaces"),
-        GEMSTONE("Gemstone"),
-        ROCKS("Rocks");
+        CROWNS("CROWNS"),
+        RINGS("RINGS"),
+        NECKLACES("NECKLACES"),
+        GEMSTONE("GEMSTONE"),
+        ROCKS("ROCKS");
 
         private final String requestValue;
 
@@ -32,6 +34,7 @@ public class Enum {
 
     /**
      * Enum used to select category for item query, e.g. electronics, apparel (AMAZON)
+     * <p>Item category used in Firebase request. The String value is case sensitive</p>
      */
     public enum ItemCategory {
 

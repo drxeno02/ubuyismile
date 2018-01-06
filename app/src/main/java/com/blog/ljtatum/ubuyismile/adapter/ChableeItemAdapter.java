@@ -50,26 +50,41 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
         final int index = holder.getAdapterPosition();
 
         // set visibility
-        if ((Utils.getDollarValue(alItems.get(position).salePrice) > 0) &&
+        if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
+                !FrameworkUtils.isStringEmpty(alItems.get(position).price)) &&
+                (Utils.getDollarValue(alItems.get(position).salePrice) > 0) &&
                 (Utils.getDollarValue(alItems.get(position).salePrice) <
                 Utils.getDollarValue(alItems.get(position).price))) {
             FrameworkUtils.setViewVisible(holder.tvSalePerc);
-            // set value
+            // set percent sale value
             holder.tvSalePerc.setText(mContext.getResources().getString(R.string.percent_sale,
                     String.valueOf(Utils.calculatePercSale(Utils.getDollarValue(alItems.get(position).price),
                     Utils.getDollarValue(alItems.get(position).salePrice)))));
         }
 
         // set values
-
-
-
+        holder.tvTitle.setText(alItems.get(position).title);
+        holder.tvLabel.setText(alItems.get(position).label);
+        holder.tvPrice.setText(alItems.get(position).price);
 
     }
 
     @Override
     public int getItemCount() {
         return alItems.size();
+    }
+
+    /**
+     * Method is used to update trip history data
+     *
+     * @param alItems List of completed status trips. Populated from model class
+     *              {@link com.blog.ljtatum.ubuyismile.model.ChableeModel}
+     */
+    public void updateData(@NonNull ArrayList<ChableeModel> alItems) {
+        if (alItems.size() > 0 && !alItems.isEmpty()) {
+            this.alItems = alItems;
+            notifyDataSetChanged();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

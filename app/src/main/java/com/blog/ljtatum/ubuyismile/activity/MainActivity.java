@@ -22,7 +22,9 @@ import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
+import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
@@ -361,7 +363,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             // Amazon and Chablee requests made
             // make Amazon requests
-            AmazonData.getAmazonASINRequest(AmazonData.getBooks());
+//            AmazonData.getAmazonASINRequest(AmazonData.getBooks());
         }
     }
 
@@ -428,6 +430,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
+        Bundle args = new Bundle();
         switch (item.getItemId()) {
             case R.id.nav_browse:
 
@@ -437,6 +440,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case R.id.nav_settings:
 
+                break;
+            case R.id.nav_chablee_crowns:
+                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
+                fragment = new ChableeFragment();
+                fragment.setArguments(args);
+                break;
+            case R.id.nav_chablee_rings:
+                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.RINGS.toString());
+                fragment = new ChableeFragment();
+                fragment.setArguments(args);
+                break;
+            case R.id.nav_chablee_necklaces:
+                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.NECKLACES.toString());
+                fragment = new ChableeFragment();
+                fragment.setArguments(args);
+                break;
+            case R.id.nav_chablee_rocks:
+                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.ROCKS.toString());
+                fragment = new ChableeFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_all_good_deals:
 
