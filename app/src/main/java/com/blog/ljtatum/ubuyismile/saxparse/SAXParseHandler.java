@@ -1,7 +1,7 @@
 package com.blog.ljtatum.ubuyismile.saxparse;
 
 import com.app.framework.utilities.FrameworkUtils;
-import com.blog.ljtatum.ubuyismile.model.ItemModel;
+import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -21,13 +21,13 @@ import javax.xml.parsers.SAXParserFactory;
 
 public class SAXParseHandler extends DefaultHandler {
 
-    private ItemModel item;
-    private ItemModel.ItemLink tempItemLink;
-    private ItemModel.ImageSet tempImageSet;
-    private ItemModel.ItemImage tempItemImage;
-    private ItemModel.ItemAttributes tempItemAttributes;
-    private ItemModel.ListPrice tempListPrice;
-    private ItemModel.Language tempLanguage;
+    private AmazonResponseModel item;
+    private AmazonResponseModel.ItemLink tempItemLink;
+    private AmazonResponseModel.ImageSet tempImageSet;
+    private AmazonResponseModel.ItemImage tempItemImage;
+    private AmazonResponseModel.ItemAttributes tempItemAttributes;
+    private AmazonResponseModel.ListPrice tempListPrice;
+    private AmazonResponseModel.Language tempLanguage;
     private StringBuilder stringBuilder;
     private boolean isAppendCharacters;
 
@@ -37,13 +37,13 @@ public class SAXParseHandler extends DefaultHandler {
     }
 
     /**
-     * Method is used to retrieve an ItemModel {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     * Method is used to retrieve an AmazonResponseModel {@link AmazonResponseModel}
      *
      * @param result AWS response
-     * @return ItemModel {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     * @return AmazonResponseModel {@link AmazonResponseModel}
      */
-    public static ItemModel SAXParse(String result) {
-        ItemModel item = new ItemModel();
+    public static AmazonResponseModel SAXParse(String result) {
+        AmazonResponseModel item = new AmazonResponseModel();
 
         if (!FrameworkUtils.isStringEmpty(result)) {
             try {
@@ -66,11 +66,11 @@ public class SAXParseHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (qName.equalsIgnoreCase("Item")) {
-            item = new ItemModel();
+            item = new AmazonResponseModel();
         } else if (qName.equalsIgnoreCase("ItemLink")) {
-            tempItemLink = new ItemModel().new ItemLink();
+            tempItemLink = new AmazonResponseModel().new ItemLink();
         } else if (qName.equalsIgnoreCase("ImageSet")) {
-            tempImageSet = new ItemModel().new ImageSet();
+            tempImageSet = new AmazonResponseModel().new ImageSet();
             if (!FrameworkUtils.checkIfNull(attributes)) {
                 for (int i = 0; i < attributes.getLength(); i++) {
                     if (attributes.getQName(i).equalsIgnoreCase("Category")) {
@@ -86,13 +86,13 @@ public class SAXParseHandler extends DefaultHandler {
                         qName.equalsIgnoreCase("SmallImage") ||
                         qName.equalsIgnoreCase("MediumImage") ||
                         qName.equalsIgnoreCase("LargeImage"))) {
-            tempItemImage = new ItemModel().new ItemImage();
+            tempItemImage = new AmazonResponseModel().new ItemImage();
         } else if (qName.equalsIgnoreCase("ItemAttributes")) {
-            tempItemAttributes = new ItemModel().new ItemAttributes();
+            tempItemAttributes = new AmazonResponseModel().new ItemAttributes();
         } else if (qName.equalsIgnoreCase("ListPrice")) {
-            tempListPrice = new ItemModel().new ListPrice();
+            tempListPrice = new AmazonResponseModel().new ListPrice();
         } else if (qName.equalsIgnoreCase("Languages")) {
-            tempLanguage = new ItemModel().new Language();
+            tempLanguage = new AmazonResponseModel().new Language();
         }
 
         // append characters when parsing a URL. This is because DefaultHandler splits strings

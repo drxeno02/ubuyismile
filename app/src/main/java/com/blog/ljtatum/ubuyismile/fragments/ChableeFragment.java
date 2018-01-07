@@ -3,21 +3,14 @@ package com.blog.ljtatum.ubuyismile.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
-import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.adapter.ChableeItemAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
@@ -25,7 +18,6 @@ import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ChableeModel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by LJTat on 1/3/2018.
@@ -51,6 +43,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
 
         // instantiate views
         initializeViews();
+        initializeListeners();
         initializeHandlers();
         getBundle();
 
@@ -77,9 +70,17 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
     }
 
     /**
+     * Method is used to initialize listeners and callbacks
+     */
+    private void initializeListeners() {
+
+    }
+
+    /**
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
+
     }
 
     /**

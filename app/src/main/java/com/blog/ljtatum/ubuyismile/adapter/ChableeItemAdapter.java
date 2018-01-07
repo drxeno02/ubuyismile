@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
-import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ChableeModel;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,6 +29,7 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
 
     /**
      * Constructor
+     *
      * @param context Interface to global information about an application environment
      * @param alItems List of items to display
      */
@@ -49,23 +50,26 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         final int index = holder.getAdapterPosition();
 
-        // set visibility
+        // sale price percentage
         if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
                 !FrameworkUtils.isStringEmpty(alItems.get(position).price)) &&
                 (Utils.getDollarValue(alItems.get(position).salePrice) > 0) &&
                 (Utils.getDollarValue(alItems.get(position).salePrice) <
-                Utils.getDollarValue(alItems.get(position).price))) {
+                        Utils.getDollarValue(alItems.get(position).price))) {
+            // set visibility
             FrameworkUtils.setViewVisible(holder.tvSalePerc);
             // set percent sale value
             holder.tvSalePerc.setText(mContext.getResources().getString(R.string.percent_sale,
                     String.valueOf(Utils.calculatePercSale(Utils.getDollarValue(alItems.get(position).price),
-                    Utils.getDollarValue(alItems.get(position).salePrice)))));
+                            Utils.getDollarValue(alItems.get(position).salePrice)))));
         }
 
         // set values
         holder.tvTitle.setText(alItems.get(position).title);
         holder.tvLabel.setText(alItems.get(position).label);
-        holder.tvPrice.setText(alItems.get(position).price);
+        holder.tvPrice.setText(mContext.getResources().getString(R.string.dollar_format, alItems.get(position).price));
+        // set image
+        Picasso.with(mContext).load(alItems.get(position).imageUrl1).into(holder.ivBg);
 
     }
 
@@ -78,7 +82,7 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
      * Method is used to update trip history data
      *
      * @param alItems List of completed status trips. Populated from model class
-     *              {@link com.blog.ljtatum.ubuyismile.model.ChableeModel}
+     *                {@link com.blog.ljtatum.ubuyismile.model.ChableeModel}
      */
     public void updateData(@NonNull ArrayList<ChableeModel> alItems) {
         if (alItems.size() > 0 && !alItems.isEmpty()) {

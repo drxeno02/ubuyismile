@@ -26,12 +26,11 @@ import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
-import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonModel;
+import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ChableeModel;
-import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -149,7 +148,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onAWSSuccess(@NonNull String response) {
                 // retrieve item_a model
-                ItemModel itemModel = SAXParse(response);
+                AmazonResponseModel itemModel = SAXParse(response);
             }
         });
 
@@ -167,8 +166,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             @Override
             public void onRetrieveDataChange(DataSnapshot dataSnapshot) {
-                Logger.v("TEST", "dataSnapshot= " + dataSnapshot);
-
                 if (!FrameworkUtils.checkIfNull(dataSnapshot)) {
                     populateDataLists(dataSnapshot);
                 }
@@ -363,7 +360,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             // Amazon and Chablee requests made
             // make Amazon requests
-//            AmazonData.getAmazonASINRequest(AmazonData.getBooks());
+            AmazonData.getAmazonASINRequest(AmazonData.getBooks());
         }
     }
 

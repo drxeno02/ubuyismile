@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class ItemModel {
+public class AmazonResponseModel {
 
     @SerializedName("ASIN")
     public String asin;
@@ -21,7 +21,7 @@ public class ItemModel {
     /**
      * Constructor
      */
-    public ItemModel() {
+    public AmazonResponseModel() {
         itemLinks = new ArrayList<>();
         imageSets = new ArrayList<>();
         itemAttributes = new ItemAttributes();
@@ -43,7 +43,7 @@ public class ItemModel {
     }
 
     /**
-     * Embedded class for Amazon item_a links
+     * Embedded class for Amazon item links
      */
     public class ItemLink {
 
@@ -125,7 +125,7 @@ public class ItemModel {
     }
 
     /**
-     * Embedded class for Amazon item_a attributes
+     * Embedded class for Amazon item attributes
      */
     public class ItemAttributes {
 
@@ -179,7 +179,7 @@ public class ItemModel {
     }
 
     /**
-     * Embedded class for Amazon item_a prices
+     * Embedded class for Amazon item prices
      */
     public class ListPrice {
 

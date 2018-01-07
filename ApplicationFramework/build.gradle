@@ -63,6 +63,7 @@ android {
         api 'com.facebook.android:facebook-android-sdk:4.28.0'
         api 'com.firebaseui:firebase-ui-database:1.2.0'
         api 'com.flurry.android:analytics:6.4.2'
+        api 'com.squareup.picasso:picasso:2.5.2'
         api files('libs/commons-codec-1.9.jar')
 
         // Unit testing dependencies

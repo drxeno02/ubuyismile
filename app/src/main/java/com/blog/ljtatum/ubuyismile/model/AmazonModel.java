@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public class AmazonModel {
-    public String category, asin, label;
+    public String category, asin, label, timestamp;
 }
