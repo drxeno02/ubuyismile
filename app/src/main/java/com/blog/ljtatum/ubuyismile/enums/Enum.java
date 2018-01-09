@@ -11,12 +11,14 @@ public class Enum {
      */
     public enum ItemLabel {
 
+        NONE("None"),
         NEW("New"),
         SALE("Sale"),
         MOST_POPULAR("Most Popular"),
         ALMOST_GONE("Almost Gone"),
         TOP_SELLER("Top Seller"),
-        LEONARD_RECOMMENDATION("Leonard's Recommendation");
+        SUPER_HOT("Super Hot"),
+        LEONARD_FAVORITE("Leonard's Favorite");
 
         private final String requestValue;
 

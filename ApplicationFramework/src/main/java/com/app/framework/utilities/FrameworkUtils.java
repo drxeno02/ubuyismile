@@ -96,6 +96,17 @@ public class FrameworkUtils {
     /**
      * Method is used to get formatted date and time
      *
+     * @return Current date and time
+     */
+    public static String getCurrentDateTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH);
+        return formatter.format(calendar.getTime());
+    }
+
+    /**
+     * Method is used to get formatted date and time
+     *
      * @param dateFormat The format of the date
      * @return Current date and time
      */

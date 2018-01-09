@@ -23,7 +23,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_14"
             android:textStyle="bold"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
         <!-- background -->
         <ImageView
@@ -32,17 +32,39 @@
             android:layout_height="@dimen/scaling_170"
             android:scaleType="centerCrop" />
 
-        <!-- label -->
-        <TextView
-            android:id="@+id/tv_label"
+        <LinearLayout
+            android:id="@+id/ll_label_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/scaling_34"
             android:layout_alignParentBottom="true"
             android:background="@drawable/edge_left_black"
-            android:gravity="center"
-            android:padding="@dimen/scaling_4"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_16" />
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <!-- label icon -->
+            <ImageView
+                android:id="@+id/iv_label_icon"
+                android:layout_width="@dimen/scaling_20"
+                android:layout_height="@dimen/scaling_20"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/scaling_4"
+                android:gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+
+            <!-- label -->
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/scaling_10"
+                android:layout_marginStart="@dimen/scaling_4"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -1,6 +1,7 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
@@ -55,6 +58,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer);
 
@@ -208,6 +215,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     AmazonModel amazonModel = new AmazonModel();
                     amazonModel.category = alAmazonCategories.get(categoryIndex);
                     amazonModel.asin = snapshot.getValue().toString();
+                    amazonModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
+                    amazonModel.timestamp = FrameworkUtils.getCurrentDateTime();
                     alData.add(amazonModel);
                 }
             }
@@ -337,6 +346,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
                         !FrameworkUtils.checkIfNull(chableeModel)) {
                     chableeModel.category = alChableeCategories.get(categoryIndex);
+                    chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
+                    chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
                     alData.add(chableeModel);
                 }
             }
