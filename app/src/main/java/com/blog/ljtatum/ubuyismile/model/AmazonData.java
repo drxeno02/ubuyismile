@@ -15,35 +15,35 @@ import java.util.stream.Collectors;
  */
 
 public class AmazonData {
-    private static ArrayList<AmazonModel> alDeals = new ArrayList<>();
-    private static ArrayList<AmazonModel> alApparel = new ArrayList<>();
-    private static ArrayList<AmazonModel> alAppliances = new ArrayList<>();
-    private static ArrayList<AmazonModel> alAutomotive = new ArrayList<>();
-    private static ArrayList<AmazonModel> alBaby = new ArrayList<>();
-    private static ArrayList<AmazonModel> alBeauty = new ArrayList<>();
-    private static ArrayList<AmazonModel> alBooks = new ArrayList<>();
-    private static ArrayList<AmazonModel> alDVD = new ArrayList<>();
-    private static ArrayList<AmazonModel> alElectronics = new ArrayList<>();
-    private static ArrayList<AmazonModel> alGrocery = new ArrayList<>();
-    private static ArrayList<AmazonModel> alHealthPesonalCare = new ArrayList<>();
-    private static ArrayList<AmazonModel> alHomeGarden = new ArrayList<>();
-    private static ArrayList<AmazonModel> alJewelry = new ArrayList<>();
-    private static ArrayList<AmazonModel> alKindleStore = new ArrayList<>();
-    private static ArrayList<AmazonModel> alLawnGarden = new ArrayList<>();
-    private static ArrayList<AmazonModel> alLuggageBags = new ArrayList<>();
-    private static ArrayList<AmazonModel> alLuxeryBeauty = new ArrayList<>();
-    private static ArrayList<AmazonModel> alMusic = new ArrayList<>();
-    private static ArrayList<AmazonModel> alMusicalInstruments = new ArrayList<>();
-    private static ArrayList<AmazonModel> alOfficeProducts = new ArrayList<>();
-    private static ArrayList<AmazonModel> alAmazonPantry = new ArrayList<>();
-    private static ArrayList<AmazonModel> alPCHardware = new ArrayList<>();
-    private static ArrayList<AmazonModel> alPetSupplies = new ArrayList<>();
-    private static ArrayList<AmazonModel> alShoes = new ArrayList<>();
-    private static ArrayList<AmazonModel> alSoftware = new ArrayList<>();
-    private static ArrayList<AmazonModel> alSportingGoods = new ArrayList<>();
-    private static ArrayList<AmazonModel> alToys = new ArrayList<>();
-    private static ArrayList<AmazonModel> alVideoGames = new ArrayList<>();
-    private static ArrayList<AmazonModel> alWatches = new ArrayList<>();
+    private static ArrayList<ItemModel> alDeals = new ArrayList<>();
+    private static ArrayList<ItemModel> alApparel = new ArrayList<>();
+    private static ArrayList<ItemModel> alAppliances = new ArrayList<>();
+    private static ArrayList<ItemModel> alAutomotive = new ArrayList<>();
+    private static ArrayList<ItemModel> alBaby = new ArrayList<>();
+    private static ArrayList<ItemModel> alBeauty = new ArrayList<>();
+    private static ArrayList<ItemModel> alBooks = new ArrayList<>();
+    private static ArrayList<ItemModel> alDVD = new ArrayList<>();
+    private static ArrayList<ItemModel> alElectronics = new ArrayList<>();
+    private static ArrayList<ItemModel> alGrocery = new ArrayList<>();
+    private static ArrayList<ItemModel> alHealthPesonalCare = new ArrayList<>();
+    private static ArrayList<ItemModel> alHomeGarden = new ArrayList<>();
+    private static ArrayList<ItemModel> alJewelry = new ArrayList<>();
+    private static ArrayList<ItemModel> alKindleStore = new ArrayList<>();
+    private static ArrayList<ItemModel> alLawnGarden = new ArrayList<>();
+    private static ArrayList<ItemModel> alLuggageBags = new ArrayList<>();
+    private static ArrayList<ItemModel> alLuxeryBeauty = new ArrayList<>();
+    private static ArrayList<ItemModel> alMusic = new ArrayList<>();
+    private static ArrayList<ItemModel> alMusicalInstruments = new ArrayList<>();
+    private static ArrayList<ItemModel> alOfficeProducts = new ArrayList<>();
+    private static ArrayList<ItemModel> alAmazonPantry = new ArrayList<>();
+    private static ArrayList<ItemModel> alPCHardware = new ArrayList<>();
+    private static ArrayList<ItemModel> alPetSupplies = new ArrayList<>();
+    private static ArrayList<ItemModel> alShoes = new ArrayList<>();
+    private static ArrayList<ItemModel> alSoftware = new ArrayList<>();
+    private static ArrayList<ItemModel> alSportingGoods = new ArrayList<>();
+    private static ArrayList<ItemModel> alToys = new ArrayList<>();
+    private static ArrayList<ItemModel> alVideoGames = new ArrayList<>();
+    private static ArrayList<ItemModel> alWatches = new ArrayList<>();
 
     /**
      * Method is used to retrieve a list of all Amazon categories
@@ -85,7 +85,7 @@ public class AmazonData {
     }
 
     @SuppressLint("NewApi")
-    public static String getAmazonASINRequest(@NonNull ArrayList<AmazonModel> asinList) {
+    public static String getAmazonASINRequest(@NonNull ArrayList<ItemModel> asinList) {
         // append all asin numbers for Amazon request
         StringBuilder asinRequest = new StringBuilder();
         for (int i = 0; i < asinList.size(); i++) {
@@ -103,7 +103,7 @@ public class AmazonData {
      *
      * @return List of deals items
      */
-    public static ArrayList<AmazonModel> getDeals() {
+    public static ArrayList<ItemModel> getDeals() {
         return alDeals;
     }
 
@@ -112,7 +112,7 @@ public class AmazonData {
      *
      * @param alDeals List of deals items
      */
-    public static void setDeals(ArrayList<AmazonModel> alDeals) {
+    public static void setDeals(ArrayList<ItemModel> alDeals) {
         AmazonData.alDeals = alDeals;
     }
 
@@ -121,7 +121,7 @@ public class AmazonData {
      *
      * @return List of apparel items
      */
-    public static ArrayList<AmazonModel> getApparel() {
+    public static ArrayList<ItemModel> getApparel() {
         return alApparel;
     }
 
@@ -130,7 +130,7 @@ public class AmazonData {
      *
      * @param alApparel List of apparel items
      */
-    public static void setApparel(ArrayList<AmazonModel> alApparel) {
+    public static void setApparel(ArrayList<ItemModel> alApparel) {
         AmazonData.alApparel = alApparel;
     }
 
@@ -139,7 +139,7 @@ public class AmazonData {
      *
      * @return List of appliances items
      */
-    public static ArrayList<AmazonModel> getAppliances() {
+    public static ArrayList<ItemModel> getAppliances() {
         return alAppliances;
     }
 
@@ -148,7 +148,7 @@ public class AmazonData {
      *
      * @param alAppliances List of appliances items
      */
-    public static void setAppliances(ArrayList<AmazonModel> alAppliances) {
+    public static void setAppliances(ArrayList<ItemModel> alAppliances) {
         AmazonData.alAppliances = alAppliances;
     }
 
@@ -157,7 +157,7 @@ public class AmazonData {
      *
      * @return List of automotive items
      */
-    public static ArrayList<AmazonModel> getAutomotive() {
+    public static ArrayList<ItemModel> getAutomotive() {
         return alAutomotive;
     }
 
@@ -166,7 +166,7 @@ public class AmazonData {
      *
      * @param alAutomotive List of automotive items
      */
-    public static void setAutomotive(ArrayList<AmazonModel> alAutomotive) {
+    public static void setAutomotive(ArrayList<ItemModel> alAutomotive) {
         AmazonData.alAutomotive = alAutomotive;
     }
 
@@ -175,7 +175,7 @@ public class AmazonData {
      *
      * @return List of baby items
      */
-    public static ArrayList<AmazonModel> getBaby() {
+    public static ArrayList<ItemModel> getBaby() {
         return alBaby;
     }
 
@@ -184,7 +184,7 @@ public class AmazonData {
      *
      * @param alBaby List of baby items
      */
-    public static void setBaby(ArrayList<AmazonModel> alBaby) {
+    public static void setBaby(ArrayList<ItemModel> alBaby) {
         AmazonData.alBaby = alBaby;
     }
 
@@ -193,7 +193,7 @@ public class AmazonData {
      *
      * @return List of beauty items
      */
-    public static ArrayList<AmazonModel> getBeauty() {
+    public static ArrayList<ItemModel> getBeauty() {
         return alBeauty;
     }
 
@@ -202,7 +202,7 @@ public class AmazonData {
      *
      * @param alBeauty List of beauty items
      */
-    public static void setBeauty(ArrayList<AmazonModel> alBeauty) {
+    public static void setBeauty(ArrayList<ItemModel> alBeauty) {
         AmazonData.alBeauty = alBeauty;
     }
 
@@ -211,7 +211,7 @@ public class AmazonData {
      *
      * @return List of books items
      */
-    public static ArrayList<AmazonModel> getBooks() {
+    public static ArrayList<ItemModel> getBooks() {
         return alBooks;
     }
 
@@ -220,7 +220,7 @@ public class AmazonData {
      *
      * @param alBooks List of books items
      */
-    public static void setBooks(ArrayList<AmazonModel> alBooks) {
+    public static void setBooks(ArrayList<ItemModel> alBooks) {
         AmazonData.alBooks = alBooks;
     }
 
@@ -229,7 +229,7 @@ public class AmazonData {
      *
      * @return List of DVD items
      */
-    public static ArrayList<AmazonModel> getDVD() {
+    public static ArrayList<ItemModel> getDVD() {
         return alDVD;
     }
 
@@ -238,7 +238,7 @@ public class AmazonData {
      *
      * @param alDVD List of DVD items
      */
-    public static void setDVD(ArrayList<AmazonModel> alDVD) {
+    public static void setDVD(ArrayList<ItemModel> alDVD) {
         AmazonData.alDVD = alDVD;
     }
 
@@ -247,7 +247,7 @@ public class AmazonData {
      *
      * @return List of electronics items
      */
-    public static ArrayList<AmazonModel> getElectronics() {
+    public static ArrayList<ItemModel> getElectronics() {
         return alElectronics;
     }
 
@@ -256,7 +256,7 @@ public class AmazonData {
      *
      * @param alElectronics List of electronics items
      */
-    public static void setElectronics(ArrayList<AmazonModel> alElectronics) {
+    public static void setElectronics(ArrayList<ItemModel> alElectronics) {
         AmazonData.alElectronics = alElectronics;
     }
 
@@ -265,7 +265,7 @@ public class AmazonData {
      *
      * @return List of grocery items
      */
-    public static ArrayList<AmazonModel> getGrocery() {
+    public static ArrayList<ItemModel> getGrocery() {
         return alGrocery;
     }
 
@@ -274,7 +274,7 @@ public class AmazonData {
      *
      * @param alGrocery List of grocery items
      */
-    public static void setGrocery(ArrayList<AmazonModel> alGrocery) {
+    public static void setGrocery(ArrayList<ItemModel> alGrocery) {
         AmazonData.alGrocery = alGrocery;
     }
 
@@ -283,7 +283,7 @@ public class AmazonData {
      *
      * @return List of health and personal care items
      */
-    public static ArrayList<AmazonModel> getHealthPesonalCare() {
+    public static ArrayList<ItemModel> getHealthPesonalCare() {
         return alHealthPesonalCare;
     }
 
@@ -292,7 +292,7 @@ public class AmazonData {
      *
      * @param alHealthPesonalCare List of health and personal care items
      */
-    public static void setHealthPesonalCare(ArrayList<AmazonModel> alHealthPesonalCare) {
+    public static void setHealthPesonalCare(ArrayList<ItemModel> alHealthPesonalCare) {
         AmazonData.alHealthPesonalCare = alHealthPesonalCare;
     }
 
@@ -301,7 +301,7 @@ public class AmazonData {
      *
      * @return List of home and garden items
      */
-    public static ArrayList<AmazonModel> getHomeGarden() {
+    public static ArrayList<ItemModel> getHomeGarden() {
         return alHomeGarden;
     }
 
@@ -310,7 +310,7 @@ public class AmazonData {
      *
      * @param alHomeGarden List of home and garden items
      */
-    public static void setHomeGarden(ArrayList<AmazonModel> alHomeGarden) {
+    public static void setHomeGarden(ArrayList<ItemModel> alHomeGarden) {
         AmazonData.alHomeGarden = alHomeGarden;
     }
 
@@ -319,7 +319,7 @@ public class AmazonData {
      *
      * @return List of jewelry items
      */
-    public static ArrayList<AmazonModel> getJewelry() {
+    public static ArrayList<ItemModel> getJewelry() {
         return alJewelry;
     }
 
@@ -328,7 +328,7 @@ public class AmazonData {
      *
      * @param alJewelry List of jewelry items
      */
-    public static void setJewelry(ArrayList<AmazonModel> alJewelry) {
+    public static void setJewelry(ArrayList<ItemModel> alJewelry) {
         AmazonData.alJewelry = alJewelry;
     }
 
@@ -337,7 +337,7 @@ public class AmazonData {
      *
      * @return List of kindle store items
      */
-    public static ArrayList<AmazonModel> getKindleStore() {
+    public static ArrayList<ItemModel> getKindleStore() {
         return alKindleStore;
     }
 
@@ -346,7 +346,7 @@ public class AmazonData {
      *
      * @param alKindleStore List of kindle store items
      */
-    public static void setKindleStore(ArrayList<AmazonModel> alKindleStore) {
+    public static void setKindleStore(ArrayList<ItemModel> alKindleStore) {
         AmazonData.alKindleStore = alKindleStore;
     }
 
@@ -355,7 +355,7 @@ public class AmazonData {
      *
      * @return List of lawn and garden items
      */
-    public static ArrayList<AmazonModel> getLawnGarden() {
+    public static ArrayList<ItemModel> getLawnGarden() {
         return alLawnGarden;
     }
 
@@ -364,7 +364,7 @@ public class AmazonData {
      *
      * @param alLawnGarden List of lawn and garden items
      */
-    public static void setLawnGarden(ArrayList<AmazonModel> alLawnGarden) {
+    public static void setLawnGarden(ArrayList<ItemModel> alLawnGarden) {
         AmazonData.alLawnGarden = alLawnGarden;
     }
 
@@ -373,7 +373,7 @@ public class AmazonData {
      *
      * @return List of luggage items
      */
-    public static ArrayList<AmazonModel> getLuggageBags() {
+    public static ArrayList<ItemModel> getLuggageBags() {
         return alLuggageBags;
     }
 
@@ -382,7 +382,7 @@ public class AmazonData {
      *
      * @param alLuggageBags List of luggage items
      */
-    public static void setLuggageBags(ArrayList<AmazonModel> alLuggageBags) {
+    public static void setLuggageBags(ArrayList<ItemModel> alLuggageBags) {
         AmazonData.alLuggageBags = alLuggageBags;
     }
 
@@ -391,7 +391,7 @@ public class AmazonData {
      *
      * @return List of luxery and beauty items
      */
-    public static ArrayList<AmazonModel> getLuxeryBeauty() {
+    public static ArrayList<ItemModel> getLuxeryBeauty() {
         return alLuxeryBeauty;
     }
 
@@ -400,7 +400,7 @@ public class AmazonData {
      *
      * @param alLuxeryBeauty List of luxery and beauty items
      */
-    public static void setLuxeryBeauty(ArrayList<AmazonModel> alLuxeryBeauty) {
+    public static void setLuxeryBeauty(ArrayList<ItemModel> alLuxeryBeauty) {
         AmazonData.alLuxeryBeauty = alLuxeryBeauty;
     }
 
@@ -409,7 +409,7 @@ public class AmazonData {
      *
      * @return List of music items
      */
-    public static ArrayList<AmazonModel> getMusic() {
+    public static ArrayList<ItemModel> getMusic() {
         return alMusic;
     }
 
@@ -418,7 +418,7 @@ public class AmazonData {
      *
      * @param alMusic List of music items
      */
-    public static void setMusic(ArrayList<AmazonModel> alMusic) {
+    public static void setMusic(ArrayList<ItemModel> alMusic) {
         AmazonData.alMusic = alMusic;
     }
 
@@ -427,7 +427,7 @@ public class AmazonData {
      *
      * @return List of musical instruments items
      */
-    public static ArrayList<AmazonModel> getMusicalInstruments() {
+    public static ArrayList<ItemModel> getMusicalInstruments() {
         return alMusicalInstruments;
     }
 
@@ -436,7 +436,7 @@ public class AmazonData {
      *
      * @param alMusicalInstruments List of musical instruments items
      */
-    public static void setMusicalInstruments(ArrayList<AmazonModel> alMusicalInstruments) {
+    public static void setMusicalInstruments(ArrayList<ItemModel> alMusicalInstruments) {
         AmazonData.alMusicalInstruments = alMusicalInstruments;
     }
 
@@ -445,7 +445,7 @@ public class AmazonData {
      *
      * @return List of office supplies items
      */
-    public static ArrayList<AmazonModel> getOfficeProducts() {
+    public static ArrayList<ItemModel> getOfficeProducts() {
         return alOfficeProducts;
     }
 
@@ -454,7 +454,7 @@ public class AmazonData {
      *
      * @param alOfficeProducts List of office supplies items
      */
-    public static void setOfficeProducts(ArrayList<AmazonModel> alOfficeProducts) {
+    public static void setOfficeProducts(ArrayList<ItemModel> alOfficeProducts) {
         AmazonData.alOfficeProducts = alOfficeProducts;
     }
 
@@ -463,7 +463,7 @@ public class AmazonData {
      *
      * @return List of amazon pantry items
      */
-    public static ArrayList<AmazonModel> getAmazonPantry() {
+    public static ArrayList<ItemModel> getAmazonPantry() {
         return alAmazonPantry;
     }
 
@@ -472,7 +472,7 @@ public class AmazonData {
      *
      * @param alAmazonPantry List of amazon pantry items
      */
-    public static void setAmazonPantry(ArrayList<AmazonModel> alAmazonPantry) {
+    public static void setAmazonPantry(ArrayList<ItemModel> alAmazonPantry) {
         AmazonData.alAmazonPantry = alAmazonPantry;
     }
 
@@ -481,7 +481,7 @@ public class AmazonData {
      *
      * @return List of PC hardware items
      */
-    public static ArrayList<AmazonModel> getPCHardware() {
+    public static ArrayList<ItemModel> getPCHardware() {
         return alPCHardware;
     }
 
@@ -490,7 +490,7 @@ public class AmazonData {
      *
      * @param alPCHardware List of PC hardware items
      */
-    public static void setPCHardware(ArrayList<AmazonModel> alPCHardware) {
+    public static void setPCHardware(ArrayList<ItemModel> alPCHardware) {
         AmazonData.alPCHardware = alPCHardware;
     }
 
@@ -499,7 +499,7 @@ public class AmazonData {
      *
      * @return List of pet supplies items
      */
-    public static ArrayList<AmazonModel> getPetSupplies() {
+    public static ArrayList<ItemModel> getPetSupplies() {
         return alPetSupplies;
     }
 
@@ -508,7 +508,7 @@ public class AmazonData {
      *
      * @param alPetSupplies List of pet supplies items
      */
-    public static void setPetSupplies(ArrayList<AmazonModel> alPetSupplies) {
+    public static void setPetSupplies(ArrayList<ItemModel> alPetSupplies) {
         AmazonData.alPetSupplies = alPetSupplies;
     }
 
@@ -517,7 +517,7 @@ public class AmazonData {
      *
      * @return List of shoes items
      */
-    public static ArrayList<AmazonModel> getShoes() {
+    public static ArrayList<ItemModel> getShoes() {
         return alShoes;
     }
 
@@ -526,7 +526,7 @@ public class AmazonData {
      *
      * @param alShoes List of shoes items
      */
-    public static void setShoes(ArrayList<AmazonModel> alShoes) {
+    public static void setShoes(ArrayList<ItemModel> alShoes) {
         AmazonData.alShoes = alShoes;
     }
 
@@ -535,7 +535,7 @@ public class AmazonData {
      *
      * @return List of software items
      */
-    public static ArrayList<AmazonModel> getSoftware() {
+    public static ArrayList<ItemModel> getSoftware() {
         return alSoftware;
     }
 
@@ -544,7 +544,7 @@ public class AmazonData {
      *
      * @param alSoftware List of software items
      */
-    public static void setSoftware(ArrayList<AmazonModel> alSoftware) {
+    public static void setSoftware(ArrayList<ItemModel> alSoftware) {
         AmazonData.alSoftware = alSoftware;
     }
 
@@ -553,7 +553,7 @@ public class AmazonData {
      *
      * @return List of sporting goods items
      */
-    public static ArrayList<AmazonModel> getSportingGoods() {
+    public static ArrayList<ItemModel> getSportingGoods() {
         return alSportingGoods;
     }
 
@@ -562,7 +562,7 @@ public class AmazonData {
      *
      * @param alSportingGoods List of sporting goods items
      */
-    public static void setSportingGoods(ArrayList<AmazonModel> alSportingGoods) {
+    public static void setSportingGoods(ArrayList<ItemModel> alSportingGoods) {
         AmazonData.alSportingGoods = alSportingGoods;
     }
 
@@ -571,7 +571,7 @@ public class AmazonData {
      *
      * @return List of toys items
      */
-    public static ArrayList<AmazonModel> getToys() {
+    public static ArrayList<ItemModel> getToys() {
         return alToys;
     }
 
@@ -580,7 +580,7 @@ public class AmazonData {
      *
      * @param alToys List of toys items
      */
-    public static void setToys(ArrayList<AmazonModel> alToys) {
+    public static void setToys(ArrayList<ItemModel> alToys) {
         AmazonData.alToys = alToys;
     }
 
@@ -589,7 +589,7 @@ public class AmazonData {
      *
      * @return List of video games items
      */
-    public static ArrayList<AmazonModel> getVideoGames() {
+    public static ArrayList<ItemModel> getVideoGames() {
         return alVideoGames;
     }
 
@@ -598,7 +598,7 @@ public class AmazonData {
      *
      * @param alVideoGames List of video games items
      */
-    public static void setVideoGames(ArrayList<AmazonModel> alVideoGames) {
+    public static void setVideoGames(ArrayList<ItemModel> alVideoGames) {
         AmazonData.alVideoGames = alVideoGames;
     }
 
@@ -607,7 +607,7 @@ public class AmazonData {
      *
      * @return List of watches items
      */
-    public static ArrayList<AmazonModel> getWatches() {
+    public static ArrayList<ItemModel> getWatches() {
         return alWatches;
     }
 
@@ -616,7 +616,7 @@ public class AmazonData {
      *
      * @param alWatches List of watches items
      */
-    public static void setWatches(ArrayList<AmazonModel> alWatches) {
+    public static void setWatches(ArrayList<ItemModel> alWatches) {
         AmazonData.alWatches = alWatches;
     }
 }

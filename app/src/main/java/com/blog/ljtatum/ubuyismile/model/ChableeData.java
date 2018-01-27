@@ -12,17 +12,17 @@ import java.util.ArrayList;
  */
 
 public class ChableeData {
-    private static ArrayList<ChableeModel> alCrowns = new ArrayList<>();
-    private static ArrayList<ChableeModel> alRings = new ArrayList<>();
-    private static ArrayList<ChableeModel> alNecklaces = new ArrayList<>();
-    private static ArrayList<ChableeModel> alRocks = new ArrayList<>();
+    private static ArrayList<ItemModel> alCrowns = new ArrayList<>();
+    private static ArrayList<ItemModel> alRings = new ArrayList<>();
+    private static ArrayList<ItemModel> alNecklaces = new ArrayList<>();
+    private static ArrayList<ItemModel> alRocks = new ArrayList<>();
 
     /**
      * Getter for Chablee crown items
      *
      * @return List of Chablee crown items
      */
-    public static ArrayList<ChableeModel> getCrowns() {
+    public static ArrayList<ItemModel> getCrowns() {
         return alCrowns;
     }
 
@@ -31,7 +31,7 @@ public class ChableeData {
      *
      * @param alCrowns List of Chablee crown items
      */
-    public static void setCrowns(ArrayList<ChableeModel> alCrowns) {
+    public static void setCrowns(ArrayList<ItemModel> alCrowns) {
         ChableeData.alCrowns = filterItemList(alCrowns);
     }
 
@@ -40,7 +40,7 @@ public class ChableeData {
      *
      * @return List of Chablee rings items
      */
-    public static ArrayList<ChableeModel> getRings() {
+    public static ArrayList<ItemModel> getRings() {
         return alRings;
     }
 
@@ -49,7 +49,7 @@ public class ChableeData {
      *
      * @param alRings List of Chablee rings items
      */
-    public static void setRings(ArrayList<ChableeModel> alRings) {
+    public static void setRings(ArrayList<ItemModel> alRings) {
         ChableeData.alRings = filterItemList(alRings);
     }
 
@@ -58,7 +58,7 @@ public class ChableeData {
      *
      * @return List of Chablee necklaces items
      */
-    public static ArrayList<ChableeModel> getNecklaces() {
+    public static ArrayList<ItemModel> getNecklaces() {
         return alNecklaces;
     }
 
@@ -67,7 +67,7 @@ public class ChableeData {
      *
      * @param alNecklaces List of Chablee necklaces items
      */
-    public static void setNecklaces(ArrayList<ChableeModel> alNecklaces) {
+    public static void setNecklaces(ArrayList<ItemModel> alNecklaces) {
         ChableeData.alNecklaces = filterItemList(alNecklaces);
     }
 
@@ -76,7 +76,7 @@ public class ChableeData {
      *
      * @return List of Chablee rocks items
      */
-    public static ArrayList<ChableeModel> getRocks() {
+    public static ArrayList<ItemModel> getRocks() {
         return alRocks;
     }
 
@@ -85,7 +85,7 @@ public class ChableeData {
      *
      * @param alRocks List of Chablee rocks items
      */
-    public static void setRocks(ArrayList<ChableeModel> alRocks) {
+    public static void setRocks(ArrayList<ItemModel> alRocks) {
         ChableeData.alRocks = filterItemList(alRocks);
     }
 
@@ -110,26 +110,29 @@ public class ChableeData {
      * @param alItems List of Chablee items
      * @return Filtered list of Chablee items
      */
-    private static ArrayList<ChableeModel> filterItemList(@NonNull ArrayList<ChableeModel> alItems) {
-        ArrayList<ChableeModel> filteredItems = new ArrayList<>();
+    private static ArrayList<ItemModel> filterItemList(@NonNull ArrayList<ItemModel> alItems) {
+        ArrayList<ItemModel> filteredItems = new ArrayList<>();
         for (int i = 0; i < alItems.size(); i++) {
             if (!FrameworkUtils.isStringEmpty(alItems.get(i).title)) {
-                ChableeModel chableeModel = new ChableeModel();
-                chableeModel.price = alItems.get(i).price;
-                chableeModel.salePrice = alItems.get(i).salePrice;
-                chableeModel.title = alItems.get(i).title;
-                chableeModel.description = alItems.get(i).description;
-                chableeModel.imageUrl1 = alItems.get(i).imageUrl1;
-                chableeModel.imageUrl2 = alItems.get(i).imageUrl2;
-                chableeModel.imageUrl3 = alItems.get(i).imageUrl3;
-                chableeModel.imageUrl4 = alItems.get(i).imageUrl4;
-                chableeModel.imageUrl5 = alItems.get(i).imageUrl5;
-                chableeModel.category = alItems.get(i).category;
-                chableeModel.label = alItems.get(i).label;
-                chableeModel.timestamp = alItems.get(i).timestamp;
-                chableeModel.isFeatured = alItems.get(i).isFeatured;
-                chableeModel.isMostPopular = alItems.get(i).isMostPopular;
-                filteredItems.add(chableeModel);
+                ItemModel itemModel = new ItemModel();
+                itemModel.price = alItems.get(i).price;
+                itemModel.salePrice = alItems.get(i).salePrice;
+                itemModel.title = alItems.get(i).title;
+                itemModel.description = alItems.get(i).description;
+                itemModel.imageUrl1 = alItems.get(i).imageUrl1;
+                itemModel.imageUrl2 = alItems.get(i).imageUrl2;
+                itemModel.imageUrl3 = alItems.get(i).imageUrl3;
+                itemModel.imageUrl4 = alItems.get(i).imageUrl4;
+                itemModel.imageUrl5 = alItems.get(i).imageUrl5;
+                itemModel.category = alItems.get(i).category;
+                itemModel.label = alItems.get(i).label;
+                itemModel.timestamp = alItems.get(i).timestamp;
+                itemModel.isFeatured = alItems.get(i).isFeatured;
+                itemModel.isMostPopular = alItems.get(i).isMostPopular;
+                itemModel.isBrowseItem = alItems.get(i).isBrowseItem;
+                itemModel.isFeatured = alItems.get(i).isFeatured;
+                itemModel.isMostPopular = alItems.get(i).isMostPopular;
+                filteredItems.add(itemModel);
             }
         }
         return filteredItems;

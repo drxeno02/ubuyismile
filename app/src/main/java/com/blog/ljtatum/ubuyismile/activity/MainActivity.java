@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,16 +27,17 @@ import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
-import com.blog.ljtatum.ubuyismile.model.AmazonModel;
 import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
-import com.blog.ljtatum.ubuyismile.model.ChableeModel;
+import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
+import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -52,6 +55,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved;
+
+    // adapter
+    private LinearLayoutManager mLayoutManager;
+    private ItemAdapter mItemAdapter;
+    private RecyclerView rvItems;
+    private ArrayList<ItemModel> alItems;
 
     // Amazon web service authentication
     AmazonWebServiceAuthentication mAmazonAuth;
@@ -73,7 +82,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // uncomment below to create firebase db
 //        createFirebaseDb();
-
 
 
         // B00W0TD6Y6 - Poetry in Programming
@@ -102,12 +110,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mErrorUtils = new ErrorUtils();
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
+        alItems = new ArrayList<>();
 
         // instantiate Amazon auth
         mAmazonAuth = AmazonWebServiceAuthentication.create(
                 getResources().getString(R.string.amazon_tag),
                 getResources().getString(R.string.amazon_access_key),
                 getResources().getString(R.string.amazon_secret_key));
+
+        // initialize adapter
+        mLayoutManager = new LinearLayoutManager(mContext);
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvItems = findViewById(R.id.rv_items);
+        rvItems.setLayoutManager(mLayoutManager);
+        mItemAdapter = new ItemAdapter(mContext, alItems,
+                com.blog.ljtatum.ubuyismile.enums.Enum.AdapterType.BROWSE);
+        rvItems.setAdapter(mItemAdapter);
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -176,7 +194,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 if (!FrameworkUtils.checkIfNull(dataSnapshot)) {
                     populateDataLists(dataSnapshot);
                 }
-
                 if (!isAmazonFirebaseDataRetrieved) {
                     if (categoryIndex < alAmazonCategories.size()) {
                         // increase category index
@@ -203,21 +220,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     /**
      * Method is used to populate models with data
+     *
      * @param dataSnapshot data retrieved from firebase
      */
     private void populateDataLists(DataSnapshot dataSnapshot) {
         if (!isAmazonFirebaseDataRetrieved) {
 
-            ArrayList<AmazonModel> alData = new ArrayList<>();
+            ArrayList<ItemModel> alData = new ArrayList<>();
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
                         !FrameworkUtils.isStringEmpty(snapshot.getValue().toString())) {
-                    AmazonModel amazonModel = new AmazonModel();
-                    amazonModel.category = alAmazonCategories.get(categoryIndex);
-                    amazonModel.asin = snapshot.getValue().toString();
-                    amazonModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
-                    amazonModel.timestamp = FrameworkUtils.getCurrentDateTime();
-                    alData.add(amazonModel);
+                    ItemModel itemModel = new ItemModel();
+                    itemModel.category = alAmazonCategories.get(categoryIndex);
+                    itemModel.asin = snapshot.getValue().toString();
+                    itemModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
+                    itemModel.timestamp = FrameworkUtils.getCurrentDateTime();
+                    itemModel.isBrowseItem = Utils.isBrowseItem();
+                    alData.add(itemModel);
                 }
             }
 
@@ -247,8 +266,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 AmazonData.setBeauty(alData);
             } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
                     alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.BOOKS.toString())) {
-                    // set book list
-                    AmazonData.setBooks(alData);
+                // set book list
+                AmazonData.setBooks(alData);
             } else if (alData.size() > 0 && categoryIndex < alAmazonCategories.size() &&
                     alAmazonCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategory.DVD.toString())) {
                 // set DVD list
@@ -340,14 +359,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
 
         } else if (!isChableeFirebaseDataRetrieved) {
-            ArrayList<ChableeModel> alData = new ArrayList<>();
+            ArrayList<ItemModel> alData = new ArrayList<>();
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                ChableeModel chableeModel = snapshot.getValue(ChableeModel.class);
+                ItemModel chableeModel = snapshot.getValue(ItemModel.class);
                 if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
                         !FrameworkUtils.checkIfNull(chableeModel)) {
                     chableeModel.category = alChableeCategories.get(categoryIndex);
                     chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                     chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
+                    chableeModel.isBrowseItem = Utils.isBrowseItem();
                     alData.add(chableeModel);
                 }
             }
@@ -409,11 +429,264 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 isChableeFirebaseDataRetrieved = true;
 
                 if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
-                    // dismiss progress dialog
-                    DialogUtils.dismissProgressDialog();
+                    // set browse data
+                    setBrowseAdapter();
                 }
             }
         }
+    }
+
+    /**
+     * Method is used to display Browse items. These are randomly selected items chosen to
+     * be highlighted during initial load
+     */
+    private void setBrowseAdapter() {
+        // add Amazon browse items to list
+        for (int i = 0; i < AmazonData.getAmazonCategories().size(); i++) {
+            if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.DEALS.toString())) {
+                for (int j = 0; j < AmazonData.getDeals().size(); j++) {
+                    if (AmazonData.getDeals().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getDeals().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.APPAREL.toString())) {
+                for (int j = 0; j < AmazonData.getApparel().size(); j++) {
+                    if (AmazonData.getApparel().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getApparel().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.APPLIANCES.toString())) {
+                for (int j = 0; j < AmazonData.getAppliances().size(); j++) {
+                    if (AmazonData.getAppliances().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getAppliances().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.AUTOMOTIVE.toString())) {
+                for (int j = 0; j < AmazonData.getAutomotive().size(); j++) {
+                    if (AmazonData.getAutomotive().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getAutomotive().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.BABY.toString())) {
+                for (int j = 0; j < AmazonData.getBaby().size(); j++) {
+                    if (AmazonData.getBaby().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getBaby().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.BEAUTY.toString())) {
+                for (int j = 0; j < AmazonData.getBeauty().size(); j++) {
+                    if (AmazonData.getBeauty().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getBeauty().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.BOOKS.toString())) {
+                for (int j = 0; j < AmazonData.getBooks().size(); j++) {
+                    if (AmazonData.getBooks().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getBooks().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.DVD.toString())) {
+                for (int j = 0; j < AmazonData.getDVD().size(); j++) {
+                    if (AmazonData.getDVD().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getDVD().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.ELECTRONICS.toString())) {
+                for (int j = 0; j < AmazonData.getElectronics().size(); j++) {
+                    if (AmazonData.getElectronics().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getElectronics().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.GROCERY.toString())) {
+                for (int j = 0; j < AmazonData.getGrocery().size(); j++) {
+                    if (AmazonData.getGrocery().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getGrocery().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString())) {
+                for (int j = 0; j < AmazonData.getHealthPesonalCare().size(); j++) {
+                    if (AmazonData.getHealthPesonalCare().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getHealthPesonalCare().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.HOME_AND_GARDEN.toString())) {
+                for (int j = 0; j < AmazonData.getHomeGarden().size(); j++) {
+                    if (AmazonData.getHomeGarden().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getHomeGarden().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.JEWELRY.toString())) {
+                for (int j = 0; j < AmazonData.getJewelry().size(); j++) {
+                    if (AmazonData.getJewelry().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getJewelry().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.KINDLE_STORE.toString())) {
+                for (int j = 0; j < AmazonData.getKindleStore().size(); j++) {
+                    if (AmazonData.getKindleStore().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getKindleStore().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.LAWN_AND_GARDEN.toString())) {
+                for (int j = 0; j < AmazonData.getLawnGarden().size(); j++) {
+                    if (AmazonData.getLawnGarden().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getLawnGarden().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.LUGGAGE_AND_BAGS.toString())) {
+                for (int j = 0; j < AmazonData.getLuggageBags().size(); j++) {
+                    if (AmazonData.getLuggageBags().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getLuggageBags().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.LUXURY_BEAUTY.toString())) {
+                for (int j = 0; j < AmazonData.getLuxeryBeauty().size(); j++) {
+                    if (AmazonData.getLuxeryBeauty().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getLuxeryBeauty().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.MUSIC.toString())) {
+                for (int j = 0; j < AmazonData.getMusic().size(); j++) {
+                    if (AmazonData.getMusic().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getMusic().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString())) {
+                for (int j = 0; j < AmazonData.getMusicalInstruments().size(); j++) {
+                    if (AmazonData.getMusicalInstruments().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getMusicalInstruments().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.OFFICE_PRODUCTS.toString())) {
+                for (int j = 0; j < AmazonData.getOfficeProducts().size(); j++) {
+                    if (AmazonData.getOfficeProducts().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getOfficeProducts().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.AMAZON_PANTRY.toString())) {
+                for (int j = 0; j < AmazonData.getAmazonPantry().size(); j++) {
+                    if (AmazonData.getAmazonPantry().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getAmazonPantry().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.PC_HARDWARE.toString())) {
+                for (int j = 0; j < AmazonData.getPCHardware().size(); j++) {
+                    if (AmazonData.getPCHardware().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getPCHardware().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.PET_SUPPLIES.toString())) {
+                for (int j = 0; j < AmazonData.getPetSupplies().size(); j++) {
+                    if (AmazonData.getPetSupplies().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getPetSupplies().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.SHOES.toString())) {
+                for (int j = 0; j < AmazonData.getShoes().size(); j++) {
+                    if (AmazonData.getShoes().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getShoes().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.SOFTWARE.toString())) {
+                for (int j = 0; j < AmazonData.getSoftware().size(); j++) {
+                    if (AmazonData.getSoftware().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getSoftware().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.SPORTING_GOODS.toString())) {
+                for (int j = 0; j < AmazonData.getSportingGoods().size(); j++) {
+                    if (AmazonData.getSportingGoods().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getSportingGoods().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.TOYS.toString())) {
+                for (int j = 0; j < AmazonData.getToys().size(); j++) {
+                    if (AmazonData.getToys().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getToys().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.VIDEO_GAMES.toString())) {
+                for (int j = 0; j < AmazonData.getVideoGames().size(); j++) {
+                    if (AmazonData.getVideoGames().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getVideoGames().get(j));
+                    }
+                }
+            } else if (AmazonData.getAmazonCategories().get(i).equalsIgnoreCase(Enum.ItemCategory.WATCHES.toString())) {
+                for (int j = 0; j < AmazonData.getWatches().size(); j++) {
+                    if (AmazonData.getWatches().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(AmazonData.getWatches().get(j));
+                    }
+                }
+            }
+        }
+
+        // add Chablee items to list
+        for (int i = 0; i < ChableeData.getChableeCategories().size(); i++) {
+            if (ChableeData.getChableeCategories().get(i).equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
+                for (int j = 0; j < ChableeData.getCrowns().size(); j++) {
+                    if (ChableeData.getCrowns().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(ChableeData.getCrowns().get(j));
+                    }
+                }
+            } else if (ChableeData.getChableeCategories().get(i).equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
+                for (int j = 0; j < ChableeData.getRings().size(); j++) {
+                    if (ChableeData.getRings().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(ChableeData.getRings().get(j));
+                    }
+                }
+            } else if (ChableeData.getChableeCategories().get(i).equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
+                for (int j = 0; j < ChableeData.getNecklaces().size(); j++) {
+                    if (ChableeData.getNecklaces().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(ChableeData.getNecklaces().get(j));
+                    }
+                }
+            } else if (ChableeData.getChableeCategories().get(i).equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
+                for (int j = 0; j < ChableeData.getRocks().size(); j++) {
+                    if (ChableeData.getRocks().get(j).isBrowseItem) {
+                        // add browse item
+                        alItems.add(ChableeData.getRocks().get(j));
+                    }
+                }
+            }
+        }
+
+        // set adapter
+        mItemAdapter.updateData(alItems);
+
+        // dismiss progress dialog
+        DialogUtils.dismissProgressDialog();
     }
 
     /**
@@ -515,9 +788,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void createFirebaseDb() {
 
         // setup Chablee database
-        HashMap<String, ChableeModel> mapChablee = new HashMap<>();
+        HashMap<String, ItemModel> mapChablee = new HashMap<>();
         for (int i = 0; i < 50; i++) {
-            ChableeModel chableeModel = new ChableeModel();
+            ItemModel chableeModel = new ItemModel();
             chableeModel.title = " ";
             chableeModel.description = " ";
             chableeModel.price = " ";

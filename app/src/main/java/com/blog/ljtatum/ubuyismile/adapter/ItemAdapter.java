@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
-import com.blog.ljtatum.ubuyismile.model.ChableeModel;
+import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -25,11 +25,12 @@ import java.util.ArrayList;
  * Created by LJTat on 12/31/2017.
  */
 
-public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private final Context mContext;
     private final int DEFAULT_IMAGE_SIZE = 500;
-    private ArrayList<ChableeModel> alItems;
+    private ArrayList<ItemModel> alItems;
+    private Enum.AdapterType mAdapterType;
 
     /**
      * Constructor
@@ -37,7 +38,8 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
      * @param context Interface to global information about an application environment
      * @param alItems List of items to display
      */
-    public ChableeItemAdapter(Context context, ArrayList<ChableeModel> alItems) {
+    public ItemAdapter(Context context, ArrayList<ItemModel> alItems, Enum.AdapterType adapterType) {
+        mAdapterType = adapterType;
         mContext = context;
         this.alItems = alItems;
     }
@@ -45,8 +47,11 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
-        return new ChableeItemAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
+        if (mAdapterType.equals(Enum.AdapterType.CHABLEE)) {
+            v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
+        }
+        return new ItemAdapter.ViewHolder(v);
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -118,9 +123,9 @@ public class ChableeItemAdapter extends RecyclerView.Adapter<ChableeItemAdapter.
      * Method is used to update trip history data
      *
      * @param alItems List of completed status trips. Populated from model class
-     *                {@link com.blog.ljtatum.ubuyismile.model.ChableeModel}
+     *                {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
      */
-    public void updateData(@NonNull ArrayList<ChableeModel> alItems) {
+    public void updateData(@NonNull ArrayList<ItemModel> alItems) {
         if (alItems.size() > 0 && !alItems.isEmpty()) {
             this.alItems = alItems;
             notifyDataSetChanged();

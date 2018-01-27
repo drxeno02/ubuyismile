@@ -10,10 +10,10 @@ public class Enum {
      * Enum used to categorize items
      */
     public enum ItemLabel {
-
         NONE("None"),
         NEW("New"),
         SALE("Sale"),
+        FEATURED("Featured"),
         MOST_POPULAR("Most Popular"),
         ALMOST_GONE("Almost Gone"),
         TOP_SELLER("Top Seller"),
@@ -30,5 +30,13 @@ public class Enum {
         public String toString() {
             return requestValue;
         }
+    }
+
+    /**
+     * Method is used to set adapter type
+     */
+    public enum AdapterType {
+        BROWSE,
+        CHABLEE;
     }
 }

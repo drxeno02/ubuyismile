@@ -14,8 +14,7 @@ import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
-import com.blog.ljtatum.ubuyismile.model.AmazonModel;
-import com.blog.ljtatum.ubuyismile.model.ChableeModel;
+import com.blog.ljtatum.ubuyismile.model.ItemModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -136,6 +135,7 @@ public class Utils {
 
     /**
      * Method is used to strip away all non-numeric characters and/or spaces
+     *
      * @param value Dollar amount to convert to double value
      * @return Dollar amount without special characters and/or spaces
      */
@@ -145,7 +145,8 @@ public class Utils {
 
     /**
      * Method is used to calculate the percent sale for prices
-     * @param price The original price
+     *
+     * @param price     The original price
      * @param salePrice The sale price
      * @return The percent sale for prices
      */
@@ -161,8 +162,9 @@ public class Utils {
 
     /**
      * Method is used to determine if the 'New' item label is valid
+     *
      * @param timestamp String time representation to be converted to a Calendar object
-     * {@link java.util.Calendar} with given date and time
+     *                  {@link java.util.Calendar} with given date and time
      * @return True if the 'New' item label is valid
      */
     public static boolean isNewItemTimeValid(@NonNull String timestamp) {
@@ -183,8 +185,23 @@ public class Utils {
         return false;
     }
 
+    /**
+     * Method is a random generator that will return a true or false value
+     * @return Random true value, otherwise false
+     */
+    public static boolean isBrowseItem() {
+        Random rand = new Random();
+        return rand.nextInt(101) < 25;
+    }
 
-    public static String retrieveAmazonItemLabel(@NonNull AmazonModel amazonModel) {
+    /**
+     * Method is used to retrieve item labels
+     *
+     * @param amazonModel AmazonModel{@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     *                    that represents Amazon item properties
+     * @return Item label
+     */
+    public static String retrieveAmazonItemLabel(@NonNull ItemModel amazonModel) {
         if (!isNewItemTimeValid(amazonModel.timestamp)) {
             for (int i = 0; i < 5; i++) {
                 Random rand = new Random();
@@ -214,38 +231,50 @@ public class Utils {
         return Enum.ItemLabel.NEW.toString();
     }
 
-    public static String retrieveChableeItemLabel(@NonNull ChableeModel chableeModel) {
+    /**
+     * Method is used to retrieve item labels
+     *
+     * @param chableeModel ChableeModel {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     *                     that represents Chablee item properties
+     * @return Item label
+     */
+    public static String retrieveChableeItemLabel(@NonNull ItemModel chableeModel) {
         if (!isNewItemTimeValid(chableeModel.timestamp)) {
-            // check if item is on sale
-            double price = Utils.getDollarValue(chableeModel.price);
-            double salePrice = Utils.getDollarValue(chableeModel.salePrice);
-            if (salePrice > 0 && salePrice < price) {
-                // return 'Sale' label
-                return Enum.ItemLabel.SALE.toString();
+            if (chableeModel.isFeatured) {
+                // return 'None' label
+                return Enum.ItemLabel.FEATURED.toString();
+            } else if (chableeModel.isMostPopular) {
+                // return 'None' label
+                return Enum.ItemLabel.MOST_POPULAR.toString();
             } else {
-                for (int i = 0; i < 5; i++) {
-                    Random rand = new Random();
-                    if (rand.nextInt(101) < 5) {
-                        if (i == 0) {
-                            // return 'Most Popular' label
-                            return Enum.ItemLabel.MOST_POPULAR.toString();
-                        } else if (i == 1) {
-                            // return 'Almost Gone' label
-                            return Enum.ItemLabel.ALMOST_GONE.toString();
-                        } else if (i == 2) {
-                            // return 'Top Seller' label
-                            return Enum.ItemLabel.TOP_SELLER.toString();
-                        } else if (i == 3) {
-                            // return 'Leonard Recommendation' label
-                            return Enum.ItemLabel.LEONARD_FAVORITE.toString();
-                        } else if (i == 4) {
-                            // return 'Super Hot' label
-                            return Enum.ItemLabel.SUPER_HOT.toString();
+                // check if item is on sale
+                double price = Utils.getDollarValue(chableeModel.price);
+                double salePrice = Utils.getDollarValue(chableeModel.salePrice);
+                if (salePrice > 0 && salePrice < price) {
+                    // return 'Sale' label
+                    return Enum.ItemLabel.SALE.toString();
+                } else {
+                    for (int i = 0; i < 5; i++) {
+                        Random rand = new Random();
+                        if (rand.nextInt(101) < 4) {
+                            if (i == 0) {
+                                // return 'Almost Gone' label
+                                return Enum.ItemLabel.ALMOST_GONE.toString();
+                            } else if (i == 1) {
+                                // return 'Top Seller' label
+                                return Enum.ItemLabel.TOP_SELLER.toString();
+                            } else if (i == 2) {
+                                // return 'Leonard Recommendation' label
+                                return Enum.ItemLabel.LEONARD_FAVORITE.toString();
+                            } else if (i == 3) {
+                                // return 'Super Hot' label
+                                return Enum.ItemLabel.SUPER_HOT.toString();
+                            }
                         }
                     }
+                    // return 'None' label
+                    return Enum.ItemLabel.NONE.toString();
                 }
-                // return 'None' label
-                return Enum.ItemLabel.NONE.toString();
             }
         }
         // return 'New' label

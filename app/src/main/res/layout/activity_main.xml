@@ -7,7 +7,7 @@
     android:background="@color/material_teal_200_color_code"
     tools:context=".activity.MainActivity">
 
-    <!-- toolbat -->
+    <!-- toolbar -->
     <LinearLayout
         android:id="@+id/ll_toolbar"
         android:layout_width="match_parent"
@@ -30,7 +30,9 @@
             android:background="@drawable/toolbar_shadow" />
     </LinearLayout>
 
+    <!-- information bar -->
     <RelativeLayout
+        android:id="@+id/rl_info_wrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/scaling_60"
         android:layout_below="@+id/ll_toolbar"
@@ -55,6 +57,17 @@
             android:textColor="@color/black" />
 
     </RelativeLayout>
+
+    <!-- list of items -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_items"
+        android:layout_below="@+id/rl_info_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:scrollbars="none" />
 
 
 </RelativeLayout>

@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
-import com.blog.ljtatum.ubuyismile.adapter.ChableeItemAdapter;
+import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
-import com.blog.ljtatum.ubuyismile.model.ChableeModel;
+import com.blog.ljtatum.ubuyismile.model.ItemModel;
 
 import java.util.ArrayList;
 
@@ -31,9 +31,9 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
 
     // adapter
     private LinearLayoutManager mLayoutManager;
-    private ChableeItemAdapter mChableeItemAdapter;
+    private ItemAdapter mItemAdapter;
     private RecyclerView rvItems;
-    private ArrayList<ChableeModel> alItems;
+    private ArrayList<ItemModel> alItems;
 
 
     @Nullable
@@ -64,8 +64,9 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         mLayoutManager = new LinearLayoutManager(mContext);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvItems.setLayoutManager(mLayoutManager);
-        mChableeItemAdapter = new ChableeItemAdapter(mContext, alItems);
-        rvItems.setAdapter(mChableeItemAdapter);
+        mItemAdapter = new ItemAdapter(mContext, alItems,
+                com.blog.ljtatum.ubuyismile.enums.Enum.AdapterType.CHABLEE);
+        rvItems.setAdapter(mItemAdapter);
 
     }
 
@@ -102,7 +103,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         }
 
         // set adapter
-        mChableeItemAdapter.updateData(alItems);
+        mItemAdapter.updateData(alItems);
     }
 
     @Override
