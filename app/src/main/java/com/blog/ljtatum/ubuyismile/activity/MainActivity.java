@@ -29,9 +29,12 @@ import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
+import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
+import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
@@ -43,6 +46,7 @@ import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 
@@ -55,6 +59,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved;
+
+    // database
+    private ItemProvider mItemProvider;
+    private List<ItemDatabaseModel> alItemDb;
 
     // adapter
     private LinearLayoutManager mLayoutManager;
@@ -78,7 +86,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initializeViews();
         initializeHandlers();
         initializeListeners();
-        retrieveFirebaseData();
+
+        // retrieve items from firebase to add to SQLite db
+        if (alItemDb.size() == 0 && alItemDb.isEmpty()) {
+            retrieveFirebaseData();
+            updateSQLiteDb();
+        } else {
+            Logger.e("TEST", "sqlite db updated successfully");
+
+            for (int i = 0; i < alItemDb.size(); i++) {
+                Logger.v("TEST", "category= " + alItemDb.get(i).category);
+                Logger.v("TEST", "asin= " + alItemDb.get(i).asin);
+                Logger.v("TEST", "label= " + alItemDb.get(i).label);
+                Logger.v("TEST", "timestamp= " + alItemDb.get(i).timestamp);
+                Logger.v("TEST", "price= " + alItemDb.get(i).price);
+                Logger.v("TEST", "salePrice= " + alItemDb.get(i).salePrice);
+                Logger.v("TEST", "title= " + alItemDb.get(i).title);
+                Logger.v("TEST", "description= " + alItemDb.get(i).description);
+                Logger.v("TEST", "purchaseUrl= " + alItemDb.get(i).purchaseUrl);
+                Logger.v("TEST", "imageUrl1= " + alItemDb.get(i).imageUrl1);
+                Logger.v("TEST", "imageUrl2= " + alItemDb.get(i).imageUrl2);
+                Logger.v("TEST", "imageUrl3= " + alItemDb.get(i).imageUrl3);
+                Logger.v("TEST", "imageUrl4= " + alItemDb.get(i).imageUrl4);
+                Logger.v("TEST", "imageUrl5= " + alItemDb.get(i).imageUrl5);
+                Logger.v("TEST", "isBrowseItem= " + alItemDb.get(i).isBrowseItem);
+                Logger.v("TEST", "isFeatured= " + alItemDb.get(i).isFeatured);
+                Logger.v("TEST", "isMostPopular= " + alItemDb.get(i).isMostPopular);
+            }
+        }
 
         // uncomment below to create firebase db
 //        createFirebaseDb();
@@ -111,6 +146,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
         alItems = new ArrayList<>();
+
+        // instantiate SQLite database
+        mItemProvider = new ItemProvider(mContext);
+        alItemDb = mItemProvider.getAllInfo();
 
         // instantiate Amazon auth
         mAmazonAuth = AmazonWebServiceAuthentication.create(
@@ -230,6 +269,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
                         !FrameworkUtils.isStringEmpty(snapshot.getValue().toString())) {
+                    // local data
                     ItemModel itemModel = new ItemModel();
                     itemModel.category = alAmazonCategories.get(categoryIndex);
                     itemModel.asin = snapshot.getValue().toString();
@@ -237,6 +277,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     itemModel.timestamp = FrameworkUtils.getCurrentDateTime();
                     itemModel.isBrowseItem = Utils.isBrowseItem();
                     alData.add(itemModel);
+
+                    // stored data
+                    ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                    itemDatabaseModel.category = itemModel.category;
+                    itemDatabaseModel.asin = itemModel.asin;
+                    itemDatabaseModel.label = itemModel.label;
+                    itemDatabaseModel.timestamp = itemModel.timestamp;
+                    itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
+                    alItemDb.add(itemDatabaseModel);
                 }
             }
 
@@ -687,6 +736,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // dismiss progress dialog
         DialogUtils.dismissProgressDialog();
+    }
+
+    /**
+     * Method is used to update SQLite db
+     */
+    private void updateSQLiteDb() {
+        if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
+            mItemProvider.updateAll(alItemDb);
+        }
     }
 
     /**
