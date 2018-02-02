@@ -69,6 +69,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_bg_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_wrapper"
@@ -93,7 +94,7 @@
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:layout_weight=".15"
-            android:textColor="@color/material_green_400_color_code"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_size_16" />
 
     </LinearLayout>

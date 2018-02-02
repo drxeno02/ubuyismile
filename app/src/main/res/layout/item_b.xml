@@ -69,15 +69,12 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_bg_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_wrapper"
-        android:layout_marginTop="@dimen/scaling_10"
+        android:padding="@dimen/scaling_10"
         android:orientation="horizontal"
-        android:paddingEnd="@dimen/scaling_10"
-        android:paddingLeft="@dimen/scaling_10"
-        android:paddingRight="@dimen/scaling_10"
-        android:paddingStart="@dimen/scaling_10"
         android:weightSum="1">
 
         <!-- title -->

@@ -59,6 +59,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final int index = holder.getAdapterPosition();
 
+        // set background
+        if (mAdapterType.equals(Enum.AdapterType.CHABLEE)) {
+            if (position % 2 == 0) {
+                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
+            } else {
+                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_a100_color_code));
+            }
+        }
+
         // sale price percentage
         if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
                 !FrameworkUtils.isStringEmpty(alItems.get(position).price)) &&
@@ -134,13 +143,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final LinearLayout llLabelWrapper;
+        private final LinearLayout llLabelWrapper, llBgWrapper;
         private final TextView tvSalePerc, tvLabel, tvTitle, tvPrice;
         private final ImageView ivBg, ivLabelIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            llBgWrapper = itemView.findViewById(R.id.ll_bg_wrapper);
             llLabelWrapper = itemView.findViewById(R.id.ll_label_wrapper);
             tvSalePerc = itemView.findViewById(R.id.tv_sale_perc);
             tvLabel = itemView.findViewById(R.id.tv_label);
