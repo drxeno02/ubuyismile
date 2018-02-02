@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.app.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
-import com.app.framework.utilities.ShareUtils;
+import com.app.framework.utilities.share.ShareUtils;
 import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
@@ -29,7 +29,7 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
 
     private Context mContext;
     private View mRootView;
-    private TextView tvAppVersion, tvCopyright, tvFragmentHeader, tvFeedbackEmail;
+    private TextView tvFragmentHeader, tvAppVersion, tvCopyright, tvFeedbackEmail;
     private ImageView ivFb, ivTwitter, ivLinkedin;
 
     @Nullable
@@ -49,16 +49,16 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
      */
     private void initializeViews() {
         mContext = getActivity();
+        tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
         tvAppVersion = mRootView.findViewById(R.id.tv_app_version);
         tvCopyright = mRootView.findViewById(R.id.tv_copyright);
-        tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
         tvFeedbackEmail = mRootView.findViewById(R.id.tv_feedback_email);
         ivFb = mRootView.findViewById(R.id.iv_fb);
         ivTwitter = mRootView.findViewById(R.id.iv_twitter);
         ivLinkedin = mRootView.findViewById(R.id.iv_linkedin);
 
         // set fragment header
-        tvFragmentHeader.setText(getResources().getString(R.string.about));
+        tvFragmentHeader.setText(getResources().getString(R.string.menu_about));
         // set app version
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
         // set copyright year

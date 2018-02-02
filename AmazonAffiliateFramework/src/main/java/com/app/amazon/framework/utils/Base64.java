@@ -11,7 +11,8 @@ public class Base64 {
     /**
      * Constructor
      */
-    private Base64() {}
+    private Base64() {
+    }
 
     /**
      * Returns a {@link Encoder} that encodes using the
@@ -40,18 +41,8 @@ public class Base64 {
      */
     static class Encoder {
 
-        private final byte[] newline;
-        private final int linemax;
-        private final boolean isURL;
-        private final boolean doPadding;
-
-        private Encoder(final boolean isURL, final byte[] newline, final int linemax, final boolean doPadding) {
-            this.isURL = isURL;
-            this.newline = newline;
-            this.linemax = linemax;
-            this.doPadding = doPadding;
-        }
-
+        // encoder type
+        static final Encoder RFC4648 = new Encoder(false, null, -1, true);
         /**
          * This array is a lookup table that translates 6-bit positive integer
          * index values into their "Base64 Alphabet" equivalents as specified
@@ -64,7 +55,6 @@ public class Base64 {
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
         };
-
         /**
          * It's the lookup table for "URL and Filename safe Base64" as specified
          * in Table 2 of the RFC 4648, with the '+' and '/' changed to '-' and
@@ -77,9 +67,17 @@ public class Base64 {
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_'
         };
+        private final byte[] newline;
+        private final int linemax;
+        private final boolean isURL;
+        private final boolean doPadding;
 
-        // encoder type
-        static final Encoder RFC4648 = new Encoder(false, null, -1, true);
+        private Encoder(final boolean isURL, final byte[] newline, final int linemax, final boolean doPadding) {
+            this.isURL = isURL;
+            this.newline = newline;
+            this.linemax = linemax;
+            this.doPadding = doPadding;
+        }
 
         private int outLength(final int srclen) {
             int len;
@@ -191,14 +189,6 @@ public class Base64 {
      */
     private static class Decoder {
 
-        private final boolean isURL;
-        private final boolean isMIME;
-
-        private Decoder(final boolean isURL, final boolean isMIME) {
-            this.isURL = isURL;
-            this.isMIME = isMIME;
-        }
-
         /**
          * Lookup table for decoding unicode characters drawn from the
          * "Base64 Alphabet" (as specified in Table 1 of RFC 2045) into
@@ -207,6 +197,11 @@ public class Base64 {
          * the array are encoded to -1
          */
         private static final int[] fromBase64 = new int[256];
+        /**
+         * Lookup table for decoding "URL and Filename safe Base64 Alphabet"
+         * as specified in Table2 of the RFC 4648.
+         */
+        private static final int[] fromBase64URL = new int[256];
 
         static {
             Arrays.fill(fromBase64, -1);
@@ -215,17 +210,19 @@ public class Base64 {
             fromBase64['='] = -2;
         }
 
-        /**
-         * Lookup table for decoding "URL and Filename safe Base64 Alphabet"
-         * as specified in Table2 of the RFC 4648.
-         */
-        private static final int[] fromBase64URL = new int[256];
-
         static {
             Arrays.fill(fromBase64URL, -1);
             for (int i = 0; i < Encoder.toBase64URL.length; i++)
                 fromBase64URL[Encoder.toBase64URL[i]] = i;
             fromBase64URL['='] = -2;
+        }
+
+        private final boolean isURL;
+        private final boolean isMIME;
+
+        private Decoder(final boolean isURL, final boolean isMIME) {
+            this.isURL = isURL;
+            this.isMIME = isMIME;
         }
 
     }

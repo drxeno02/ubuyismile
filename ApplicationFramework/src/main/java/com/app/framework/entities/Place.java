@@ -6,14 +6,6 @@ import android.support.annotation.NonNull;
 
 public class Place implements Parcelable {
 
-    public String placeId, description, primaryText, secondaryText;
-
-    /**
-     * Constructor
-     */
-    public Place() {
-    }
-
     /**
      * Create a new instance of the Parcelable class, instantiating it from the given Parcel
      * whose data had previously been written
@@ -33,6 +25,13 @@ public class Place implements Parcelable {
             return new Place[size];
         }
     };
+    public String placeId, description, primaryText, secondaryText;
+
+    /**
+     * Constructor
+     */
+    public Place() {
+    }
 
     /**
      * Set parsable data

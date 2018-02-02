@@ -12,7 +12,16 @@ import android.util.DisplayMetrics;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.enums.Enum;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
+import com.blog.ljtatum.ubuyismile.model.ItemModel;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by leonard on 9/22/2017.
@@ -32,7 +41,7 @@ public class Utils {
      * Method is used for printing the memory usage. This is used
      * only for verbosity mode
      *
-     * @param name  fragment or class simple name
+     * @param name fragment or class simple name
      */
     @SuppressWarnings({"ConstantConditions", "PointlessBooleanExpression"})
     public static void printMemory(@NonNull String name) {
@@ -122,5 +131,153 @@ public class Utils {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Method is used to strip away all non-numeric characters and/or spaces
+     *
+     * @param value Dollar amount to convert to double value
+     * @return Dollar amount without special characters and/or spaces
+     */
+    public static double getDollarValue(@NonNull String value) {
+        return Double.parseDouble(value.replaceAll("[^\\d.]", "").trim());
+    }
+
+    /**
+     * Method is used to calculate the percent sale for prices
+     *
+     * @param price     The original price
+     * @param salePrice The sale price
+     * @return The percent sale for prices
+     */
+    public static int calculatePercSale(@NonNull double price, @NonNull double salePrice) {
+        return ((int) (salePrice / price) * 100 > 0 ? (int) (salePrice / price) * 100 : 1);
+    }
+
+    /**
+     * Method is used to determine if the 'New' item label is valid
+     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
+     * @return True if the 'New' item label is valid
+     */
+
+    /**
+     * Method is used to determine if the 'New' item label is valid
+     *
+     * @param timestamp String time representation to be converted to a Calendar object
+     *                  {@link java.util.Calendar} with given date and time
+     * @return True if the 'New' item label is valid
+     */
+    public static boolean isNewItemTimeValid(@NonNull String timestamp) {
+        // add 14 days to original calendar
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH);
+        try {
+            calendar.setTime(formatter.parse(timestamp));
+            calendar.add(Calendar.DAY_OF_YEAR, 14);
+            Date modifiedOrigDate = calendar.getTime();
+            // current date
+            Calendar calToday = Calendar.getInstance();
+            Date todayDate = calToday.getTime();
+            return todayDate.before(modifiedOrigDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Method is a random generator that will return a true or false value
+     * @return Random true value, otherwise false
+     */
+    public static boolean isBrowseItem() {
+        Random rand = new Random();
+        return rand.nextInt(101) < 25;
+    }
+
+    /**
+     * Method is used to retrieve item labels
+     *
+     * @param amazonModel AmazonModel{@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     *                    that represents Amazon item properties
+     * @return Item label
+     */
+    public static String retrieveAmazonItemLabel(@NonNull ItemModel amazonModel) {
+        if (!isNewItemTimeValid(amazonModel.timestamp)) {
+            for (int i = 0; i < 5; i++) {
+                Random rand = new Random();
+                if (rand.nextInt(101) < 5) {
+                    if (i == 0) {
+                        // return 'Most Popular' label
+                        return Enum.ItemLabel.MOST_POPULAR.toString();
+                    } else if (i == 1) {
+                        // return 'Almost Gone' label
+                        return Enum.ItemLabel.ALMOST_GONE.toString();
+                    } else if (i == 2) {
+                        // return 'Top Seller' label
+                        return Enum.ItemLabel.TOP_SELLER.toString();
+                    } else if (i == 3) {
+                        // return 'Leonard Recommendation' label
+                        return Enum.ItemLabel.LEONARD_FAVORITE.toString();
+                    } else if (i == 4) {
+                        // return 'Super Hot' label
+                        return Enum.ItemLabel.SUPER_HOT.toString();
+                    }
+                }
+            }
+            // return 'None' label
+            return Enum.ItemLabel.NONE.toString();
+        }
+        // return 'New' label
+        return Enum.ItemLabel.NEW.toString();
+    }
+
+    /**
+     * Method is used to retrieve item labels
+     *
+     * @param chableeModel ChableeModel {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     *                     that represents Chablee item properties
+     * @return Item label
+     */
+    public static String retrieveChableeItemLabel(@NonNull ItemModel chableeModel) {
+        if (!isNewItemTimeValid(chableeModel.timestamp)) {
+            if (chableeModel.isFeatured) {
+                // return 'None' label
+                return Enum.ItemLabel.FEATURED.toString();
+            } else if (chableeModel.isMostPopular) {
+                // return 'None' label
+                return Enum.ItemLabel.MOST_POPULAR.toString();
+            } else {
+                // check if item is on sale
+                double price = Utils.getDollarValue(chableeModel.price);
+                double salePrice = Utils.getDollarValue(chableeModel.salePrice);
+                if (salePrice > 0 && salePrice < price) {
+                    // return 'Sale' label
+                    return Enum.ItemLabel.SALE.toString();
+                } else {
+                    for (int i = 0; i < 5; i++) {
+                        Random rand = new Random();
+                        if (rand.nextInt(101) < 4) {
+                            if (i == 0) {
+                                // return 'Almost Gone' label
+                                return Enum.ItemLabel.ALMOST_GONE.toString();
+                            } else if (i == 1) {
+                                // return 'Top Seller' label
+                                return Enum.ItemLabel.TOP_SELLER.toString();
+                            } else if (i == 2) {
+                                // return 'Leonard Recommendation' label
+                                return Enum.ItemLabel.LEONARD_FAVORITE.toString();
+                            } else if (i == 3) {
+                                // return 'Super Hot' label
+                                return Enum.ItemLabel.SUPER_HOT.toString();
+                            }
+                        }
+                    }
+                    // return 'None' label
+                    return Enum.ItemLabel.NONE.toString();
+                }
+            }
+        }
+        // return 'New' label
+        return Enum.ItemLabel.NEW.toString();
     }
 }

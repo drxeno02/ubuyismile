@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/material_grey_300_color_code"
-              android:clickable="true"
-              android:orientation="vertical"
-              tools:ignore="KeyboardInaccessibleWidget">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_grey_300_color_code"
+    android:clickable="true"
+    android:orientation="vertical"
+    tools:ignore="KeyboardInaccessibleWidget">
 
     <include
         layout="@layout/fragment_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp" />
 
     <!-- description text -->
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_size_24"/>
+            android:textSize="@dimen/font_size_24" />
 
         <TextView
             android:id="@+id/tv_app_version"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_size_16"/>
+            android:textSize="@dimen/font_size_16" />
 
         <TextView
             android:id="@+id/tv_copyright"
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:text="@string/copyright_year"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_size_18"/>
+            android:textSize="@dimen/font_size_18" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:gravity="center"
             android:text="@string/about_desc"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_size_18"/>
+            android:textSize="@dimen/font_size_18" />
 
     </LinearLayout>
 
@@ -69,7 +69,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/follow_me"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_size_18"/>
+        android:textSize="@dimen/font_size_18" />
 
     <!-- social media -->
     <LinearLayout
@@ -89,21 +89,21 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="0.25"
-            android:src="@drawable/fb_02"/>
+            android:src="@drawable/fb_02" />
 
         <ImageView
             android:id="@+id/iv_twitter"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="0.25"
-            android:src="@drawable/twitter_02"/>
+            android:src="@drawable/twitter_02" />
 
         <ImageView
             android:id="@+id/iv_linkedin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/linkedin_01"/>
+            android:src="@drawable/linkedin_01" />
 
     </LinearLayout>
 
@@ -119,6 +119,6 @@
         android:gravity="center"
         android:text="@string/feedback_email"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_size_18"/>
+        android:textSize="@dimen/font_size_18" />
 
 </LinearLayout>

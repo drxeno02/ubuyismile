@@ -21,6 +21,7 @@ public class RequestManager extends AsyncTask<String, String, String> {
 
     /**
      * Method is used to set callback for when AWS request is made and response is received
+     *
      * @param listener Callback for when AWS request is made and response is received
      */
     public static void onAWSRequestListener(OnAWSRequestListener listener) {

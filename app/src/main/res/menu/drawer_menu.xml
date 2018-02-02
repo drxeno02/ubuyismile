@@ -4,44 +4,68 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_browse"
+            android:icon="@drawable/browse"
             android:title="@string/menu_browse" />
         <item
             android:id="@+id/nav_search"
+            android:icon="@drawable/search"
             android:title="@string/menu_search" />
         <item
             android:id="@+id/nav_settings"
+            android:icon="@drawable/settings"
             android:title="@string/menu_settings" />
     </group>
+
+    <item android:title="@string/menu_header_chablee">
+        <menu>
+            <item
+                android:id="@+id/nav_chablee_crowns"
+                android:icon="@drawable/crowns"
+                android:title="@string/menu_crowns" />
+            <item
+                android:id="@+id/nav_chablee_rings"
+                android:icon="@drawable/rings"
+                android:title="@string/menu_rings" />
+            <item
+                android:id="@+id/nav_chablee_necklaces"
+                android:icon="@drawable/necklaces"
+                android:title="@string/menu_necklaces" />
+            <item
+                android:id="@+id/nav_chablee_rocks"
+                android:icon="@drawable/rocks"
+                android:title="@string/menu_rocks" />
+        </menu>
+    </item>
 
     <item android:title="@string/menu_header_goods">
         <menu>
             <item
                 android:id="@+id/nav_all_good_deals"
-                android:icon="@drawable/about"
+                android:icon="@drawable/deals"
                 android:title="@string/menu_all_goods_deals" />
             <item
                 android:id="@+id/nav_quick_search_books"
-                android:icon="@drawable/about"
+                android:icon="@drawable/books"
                 android:title="@string/menu_quick_search_books" />
             <item
                 android:id="@+id/nav_quick_search_electronics"
-                android:icon="@drawable/about"
+                android:icon="@drawable/electronics"
                 android:title="@string/menu_quick_search_electronics" />
             <item
                 android:id="@+id/nav_quick_search_food"
-                android:icon="@drawable/about"
+                android:icon="@drawable/food"
                 android:title="@string/menu_quick_search_food" />
             <item
                 android:id="@+id/nav_quick_search_health_beauty"
-                android:icon="@drawable/about"
+                android:icon="@drawable/health"
                 android:title="@string/menu_quick_search_health_beauty" />
             <item
                 android:id="@+id/nav_quick_search_movies"
-                android:icon="@drawable/about"
+                android:icon="@drawable/movies"
                 android:title="@string/menu_quick_search_movies" />
             <item
                 android:id="@+id/nav_quick_search_video_games"
-                android:icon="@drawable/about"
+                android:icon="@drawable/games"
                 android:title="@string/menu_quick_search_video_games" />
         </menu>
     </item>

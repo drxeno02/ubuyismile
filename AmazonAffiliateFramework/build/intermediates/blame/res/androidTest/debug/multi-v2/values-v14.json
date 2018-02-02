@@ -1,26 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\JAVASDK\\AndroidStudio\\AS_Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\leonard\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\33b81301546f5ee0540949f5b72ae5be\\res\\values-v14\\values-v14.xml",
-                    "from": {
-                        "startLines": "2,7,8,9,15",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "55,331,402,485,895",
-                        "endLines": "6,7,8,14,20",
-                        "endColumns": "12,70,82,12,12",
-                        "endOffsets": "326,397,480,890,1312"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\richard\\AndroidStudioProjects\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\richard\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e950ef1cce8f1d158b1aaa29800e236e\\res\\values-v14\\values-v14.xml",
+                    "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\values-v14\\values-v14.xml",
                     "from": {
                         "startLines": "2,7,8,9,15",
                         "startColumns": "4,4,4,4,4",

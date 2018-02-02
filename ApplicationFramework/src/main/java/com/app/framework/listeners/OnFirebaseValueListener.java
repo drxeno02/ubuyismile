@@ -10,14 +10,30 @@ import com.google.firebase.database.DatabaseError;
 public interface OnFirebaseValueListener {
 
     /**
-     * Interface for when firebase data has changed
-     * @param dataSnapshot Updated data
+     * Interface to retrieve data from firebase
+     *
+     * @param dataSnapshot An instance that contains data from a Firebase location
      */
-    void onDataChange(DataSnapshot dataSnapshot);
+    void onUpdateDataChange(DataSnapshot dataSnapshot);
 
     /**
-     * Interface for when there is an error interfacing with firebase
-     * @param databaseError Database error
+     * Interface for when data retrieval fails
+     *
+     * @param databaseError The Firebase error
      */
-    void onCancelled(DatabaseError databaseError);
+    void onUpdateDatabaseError(DatabaseError databaseError);
+
+    /**
+     * Interface to retrieve data from firebase that has been filtered
+     *
+     * @param dataSnapshot An instance that contains data from a Firebase location
+     */
+    void onRetrieveDataChange(DataSnapshot dataSnapshot);
+
+    /**
+     * Interface for when data retrieval fails while trying to filter
+     *
+     * @param databaseError The Firebase error
+     */
+    void onRetrieveDataError(DatabaseError databaseError);
 }

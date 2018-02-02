@@ -4,6 +4,7 @@
 
 package com.app.framework.utilities;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,10 +13,15 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
 import android.view.View;
 
 import com.app.framework.constants.Constants;
+import com.app.framework.sharedpref.SharedPref;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedReader;
@@ -31,7 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
+import java.util.Random;
 
 /**
  * Created by leonard on 11/13/2015.
@@ -88,107 +94,51 @@ public class FrameworkUtils {
     }
 
     /**
-     * Method is used to convert String date time to Calendar object; MM/dd/yyyy hh:mm:ss a
+     * Method is used to get formatted date and time
      *
-     * @param dateTime String value representation of date and time
-     * @return Converted calendar object {@link java.util.Calendar} with given date and time
+     * @return Current date and time
      */
-    public static Calendar convertStringDateTimeToCalendar(String dateTime, String timezone) {
-        // remove T from dateTime string
-        // e.g. 2017-05-11T17:34:36.999
-        dateTime = dateTime.replace('T', ' ');
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH);
-        formatter.setTimeZone(!FrameworkUtils.isStringEmpty(timezone) ?
-                TimeZone.getTimeZone(timezone) : TimeZone.getDefault());
-        try {
-            calendar.setTime(formatter.parse(dateTime));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return calendar;
-    }
-
-    /**
-     * Method is used to get formatted date and time; MM/dd/yyyy hh:mm:ss a
-     *
-     * @return Formatted date and time; MM/dd/yyyy hh:mm:ss a
-     */
-    public static String getCurrentDateMonthDayYear() {
+    public static String getCurrentDateTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH);
         return formatter.format(calendar.getTime());
     }
 
     /**
-     * Method is used to get formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS
+     * Method is used to get formatted date and time
      *
-     * @return Formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS
+     * @param dateFormat The format of the date
+     * @return Current date and time
      */
-    public static String getCurrentDateYearMonthDay() {
+    public static String getCurrentDateTime(String dateFormat) {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
         return formatter.format(calendar.getTime());
     }
 
     /**
-     * Method is used to get formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+     * Method is used to parse formatted date
      *
-     * @param timezone Time zone of the calendar used by this date format
-     * @return Formatted date and time; yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+     * @param calendar   Calendar object {@link java.util.Calendar} with given date and time
+     * @param dateFormat Method is used to parse formatted date
+     * @return Formatted date and time
      */
-    public static String getCurrentDateYearMonthDay(String timezone) {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-        if (!FrameworkUtils.isStringEmpty(timezone)) {
-            formatter.setTimeZone(TimeZone.getTimeZone(timezone));
-        }
+    public static String parseDateTime(Calendar calendar, String dateFormat) {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
         return formatter.format(calendar.getTime());
     }
 
     /**
-     * Method is used to get formatted date and time; dd/MM/yyyy hh:mm:ss
+     * Method is used to parse formatted date
      *
-     * @return Formatted date and time; dd/MM/yyyy hh:mm:ss
+     * @param date       The date to parse
+     * @param dateFormat Method is used to parse formatted date
+     * @return Formatted date and time
+     * @throws ParseException Thrown when the string being parsed is not in the correct form
      */
-    public static String getCurrentDateDayMonthYear() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ENGLISH);
-        return formatter.format(calendar.getTime());
-    }
-
-    /**
-     * Method is used to parse formatted date; MM/dd/yyyy
-     *
-     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
-     * @return Formatted date; MM/dd/yyyy
-     */
-    public static String parseDate(Calendar calendar) {
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-        return formatter.format(calendar.getTime());
-    }
-
-    /**
-     * Method is used to parse month and day; MM dd
-     *
-     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
-     * @return Formatted date; MM dd
-     */
-    public static String parseMonthDay(Calendar calendar) {
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
-        return formatter.format(calendar.getTime());
-    }
-
-
-    /**
-     * Method is used to parse formatted time; HH:mm
-     *
-     * @param calendar Calendar object {@link java.util.Calendar} with given date and time
-     * @return Formatted time; HH:mm
-     */
-    public static String parseTime(Calendar calendar) {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-        return formatter.format(calendar.getTime());
+    public static Date parseDateTime(String date, String dateFormat) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
+        return formatter.parse(date);
     }
 
     /**
@@ -200,6 +150,24 @@ public class FrameworkUtils {
     public static String parseDayOfTheWeek(Calendar calendar) {
         Date date = calendar.getTime();
         return new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime());
+    }
+
+    /**
+     * Method is used to convert date to another formatted date
+     *
+     * @param date       The date to parse
+     * @param dateFormat Method is used to parse formatted date
+     * @return The date string value converted from Date object
+     */
+    public static String convertDateFormat(String date, String dateFormat) {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
+        Date dateObj = null;
+        try {
+            dateObj = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter.format(dateObj);
     }
 
     /**
@@ -226,6 +194,38 @@ public class FrameworkUtils {
         return calendarA.get(Calendar.YEAR) == calendarB.get(Calendar.YEAR) &&
                 calendarA.get(Calendar.DAY_OF_MONTH) == calendarB.get(Calendar.DAY_OF_MONTH) &&
                 calendarA.get(Calendar.DAY_OF_YEAR) == calendarB.get(Calendar.DAY_OF_YEAR);
+    }
+
+    /**
+     * Method is used to compare any date passed in as paramater to current date to see
+     * which date-time combination is sooner or later
+     *
+     * @param minDate    A specific moment in time, with millisecond precision
+     * @param dateTime   String value representation of date and time
+     * @param dateFormat Method is used to parse formatted date
+     * @return True if input date is after the current date
+     */
+    public static boolean isDateAfterCurrentDate(@NonNull Date minDate, @NonNull String dateTime, String dateFormat) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH);
+        formatter.format(minDate.getTime());
+        try {
+            Date parsedDate = parseDateTime(dateTime, "MM/dd/yyyy hh:mm:ss a");
+            return parsedDate.after(minDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Method is used to convert double to dollar format
+     *
+     * @param value Value to convert to dollar format
+     * @return Dollar formatted value
+     */
+    public static String convertToDollarFormat(double value) {
+        DecimalFormat formater = new DecimalFormat("0.00");
+        return formater.format(value);
     }
 
     /**
@@ -434,7 +434,7 @@ public class FrameworkUtils {
      */
     public static void setFocusWithDelay(int delay, View... view) {
         for (final View v : view) {
-            if (!checkIfNull(v)) {
+            if (!FrameworkUtils.checkIfNull(v)) {
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -497,7 +497,7 @@ public class FrameworkUtils {
      * sometime cause crashes when objects and views are not fully animated or instantiated.
      * This helper method helps minimize and control UI interaction and flow
      *
-     * @return True if clicks have not occurred within 300ms window
+     * @return True if view interaction has not been interacted with for set time
      */
     public static boolean isViewClickable() {
         /*
@@ -516,8 +516,9 @@ public class FrameworkUtils {
     /**
      * Method is used to encode an url string
      *
-     * @param str
-     * @return
+     * @param str Token to encode
+     * @return Value that has been encoded using the format required by
+     * application/x-www-form-urlencoded MIME content type
      */
     public static String urlEncode(String str) {
         try {
@@ -526,5 +527,45 @@ public class FrameworkUtils {
             e.printStackTrace();
             throw new RuntimeException("URLEncoder.encode() failed for " + str);
         }
+    }
+
+    /**
+     * Return an unique UDID for the current android device. As with all UDIDs, this
+     * unique ID is likely to be unique across all devices. The UDID is generated
+     * using ANDROID_ID as the base key if appropriate, fallback on TelephoneManager.getDeviceId().
+     * If both of these fail, the hardcoded value of 'android' with concatenated random value.
+     * For example android_1723
+     *
+     * @param context Interface to global information about an application environment
+     * @return Unique identifier
+     */
+    @SuppressLint({"MissingPermission", "HardwareIds"})
+    @Nullable
+    public static String getAndroidId(@NonNull Context context) {
+        SharedPref sharedPref = new SharedPref(context, Constants.PREF_FILE_NAME);
+        if (isStringEmpty(sharedPref.getStringPref(Constants.KEY_ANDROID_ID, ""))) {
+            // check if android id is null
+            if (isStringEmpty(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID))) {
+                // android id is null, try telephony device id
+                // @note this does not work for phones without data plan
+                if (isStringEmpty(((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId())) {
+                    // return 'android' + random value 1-1000
+                    Random rand = new Random();
+                    String randValue = String.valueOf(rand.nextInt(1000) + 1);
+                    sharedPref.setPref(Constants.KEY_ANDROID_ID, Constants.ANDROID.concat("_").concat(randValue));
+                    return Constants.ANDROID.concat("_").concat(randValue);
+                } else {
+                    // return telephony device id
+                    sharedPref.setPref(Constants.KEY_ANDROID_ID, ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
+                    return ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+                }
+            } else {
+                // return android id
+                sharedPref.setPref(Constants.KEY_ANDROID_ID, Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
+                return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            }
+        }
+        // return shared id stored in shared prefs
+        return sharedPref.getStringPref(Constants.KEY_ANDROID_ID, "");
     }
 }

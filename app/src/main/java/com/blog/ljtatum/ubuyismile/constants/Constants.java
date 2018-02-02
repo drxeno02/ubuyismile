@@ -13,11 +13,8 @@ public class Constants {
     // verbose mode; true to see verbosity mode otherwise false
     public static final boolean DEBUG_VERBOSE = true;
 
-    // AWS Access key ID
-    public static final String AWS_ACCESS_KEY = "";
-
-    // AWS Secret key
-    public static final String AWS_SECRET_KEY = "";
+    // bundle keys
+    public static final String KEY_CATEGORY = "key_category";
 
 
 }

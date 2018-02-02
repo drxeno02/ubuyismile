@@ -9,32 +9,6 @@ public class ItemId {
     private final String VALUE;
     private final Type TYPE;
 
-    /**
-     * The {@link ItemId.Type} contains all available IDs managed by Amazon
-     */
-    public enum Type {
-
-        ASIN("ASIN"),
-        ISBN("ISBN"),
-        UPC("UPC"),
-        EAN("EAN");
-
-        private final String requestValue;
-
-        Type(final String requestValue) {
-            this.requestValue = requestValue;
-        }
-
-        /**
-         * Gives the value used in the URL request that represents this ID type
-         *
-         * @return The value used in the URL request that represents this ID type
-         */
-        public String getRequestValue() {
-            return requestValue;
-        }
-    }
-
     private ItemId(final String value, final Type type) {
         this.VALUE = value;
         this.TYPE = type;
@@ -131,6 +105,28 @@ public class ItemId {
     @Override
     public String toString() {
         return "AmazonItemId{" + "value='" + VALUE + '\'' + ", type=" + TYPE + '}';
+    }
+
+    /**
+     * The {@link ItemId.Type} contains all available IDs managed by Amazon
+     */
+    public enum Type {
+
+        ASIN("ASIN"),
+        ISBN("ISBN"),
+        UPC("UPC"),
+        EAN("EAN");
+
+        private final String requestValue;
+
+        Type(final String requestValue) {
+            this.requestValue = requestValue;
+        }
+
+        @Override
+        public String toString() {
+            return requestValue;
+        }
     }
 
 }

@@ -78,6 +78,11 @@ public class JsonRequest extends JsonObjectRequest {
         mErrorListener = errorListener;
     }
 
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        return !FrameworkUtils.checkIfNull(mHeaders) && mHeaders.size() > 0 ? mHeaders : super.getHeaders();
+    }
+
     /**
      * Set custom headers
      *
@@ -85,11 +90,6 @@ public class JsonRequest extends JsonObjectRequest {
      */
     public void setHeaders(Map<String, String> headers) {
         mHeaders = headers;
-    }
-
-    @Override
-    public Map<String, String> getHeaders() throws AuthFailureError {
-        return !FrameworkUtils.checkIfNull(mHeaders) && mHeaders.size() > 0 ? mHeaders : super.getHeaders();
     }
 
     @Override
