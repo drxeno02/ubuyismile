@@ -6,7 +6,7 @@ import android.database.Cursor;
 /**
  * Created by anthony on 5/12/15.
  */
-interface DatabaseModel {
+public interface DatabaseModel {
     <T extends DatabaseModel> T fromCursor(Cursor cursor);
 
     /**
