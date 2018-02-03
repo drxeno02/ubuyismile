@@ -124,9 +124,16 @@ public class ItemProvider {
     }
 
     /**
-     * Store user session information in SQLite database when registering a user
+     * Create database
      */
-    public void create(ItemDatabaseModel session) {
-        mProvider.create(session);
+    public void create(ItemDatabaseModel itemDatabaseModel) {
+        mProvider.create(itemDatabaseModel);
+    }
+
+
+    public void create(List<ItemDatabaseModel> alItemDb) {
+        for (int i = 0; i < alItemDb.size(); i++) {
+
+        }
     }
 }

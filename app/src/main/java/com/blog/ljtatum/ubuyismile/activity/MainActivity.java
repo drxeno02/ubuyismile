@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // retrieve items from firebase to add to SQLite db
         if (alItemDb.size() == 0 && alItemDb.isEmpty()) {
             retrieveFirebaseData();
-            updateSQLiteDb();
         } else {
             Logger.e("TEST", "sqlite db updated successfully");
 
@@ -149,7 +148,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
-        alItemDb = mItemProvider.getAllInfo();
+        alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
+                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
 
         // instantiate Amazon auth
         mAmazonAuth = AmazonWebServiceAuthentication.create(
@@ -284,7 +284,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     itemDatabaseModel.asin = itemModel.asin;
                     itemDatabaseModel.label = itemModel.label;
                     itemDatabaseModel.timestamp = itemModel.timestamp;
+                    itemDatabaseModel.price = "";
+                    itemDatabaseModel.salePrice = "";
+                    itemDatabaseModel.title = "";
+                    itemDatabaseModel.description = "";
+                    itemDatabaseModel.purchaseUrl = "";
+                    itemDatabaseModel.imageUrl1 = "";
+                    itemDatabaseModel.imageUrl2 = "";
+                    itemDatabaseModel.imageUrl3 = "";
+                    itemDatabaseModel.imageUrl4 = "";
+                    itemDatabaseModel.imageUrl5 = "";
                     itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
+                    itemDatabaseModel.isFeatured = false;
+                    itemDatabaseModel.isMostPopular = false;
                     alItemDb.add(itemDatabaseModel);
                 }
             }
@@ -418,6 +430,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
                     chableeModel.isBrowseItem = Utils.isBrowseItem();
                     alData.add(chableeModel);
+
+                    // stored data
+                    ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                    itemDatabaseModel.category = chableeModel.category;
+                    itemDatabaseModel.asin = "";
+                    itemDatabaseModel.label = chableeModel.label;
+                    itemDatabaseModel.timestamp = chableeModel.timestamp;
+                    itemDatabaseModel.price = "";
+                    itemDatabaseModel.salePrice = "";
+                    itemDatabaseModel.title = "";
+                    itemDatabaseModel.description = "";
+                    itemDatabaseModel.purchaseUrl = "";
+                    itemDatabaseModel.imageUrl1 = "";
+                    itemDatabaseModel.imageUrl2 = "";
+                    itemDatabaseModel.imageUrl3 = "";
+                    itemDatabaseModel.imageUrl4 = "";
+                    itemDatabaseModel.imageUrl5 = "";
+                    itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
+                    itemDatabaseModel.isFeatured = false;
+                    itemDatabaseModel.isMostPopular = false;
+                    alItemDb.add(itemDatabaseModel);
                 }
             }
             if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
@@ -480,6 +513,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
                     // set browse data
                     setBrowseAdapter();
+                    // update SQLite db
+                    updateSQLiteDb();
                 }
             }
         }
@@ -743,7 +778,43 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void updateSQLiteDb() {
         if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
-            mItemProvider.updateAll(alItemDb);
+//            mItemProvider.updateAll(alItemDb);
+
+
+            Logger.e("TEST", "alItemDb  size= " + alItemDb.size());
+            for (int i = 0; i < alItemDb.size(); i++) {
+                if (i == 0) {
+                    Logger.e("TEST", "creating database like a mug");
+                    mItemProvider.create(alItemDb.get(0));
+                } else {
+                    Logger.e("TEST", "updating whole database");
+                    mItemProvider.update(alItemDb.get(i));
+                }
+            }
+
+            List<ItemDatabaseModel> test = new ArrayList<>();
+            test = mItemProvider.getAllInfo();
+            Logger.v("TEST", "----------------------------------------------------");
+            Logger.v("TEST", "DB size= " + test.size());
+            for (int i = 0; i < test.size(); i++) {
+                Logger.v("TEST", "category= " + test.get(i).category);
+                Logger.v("TEST", "asin= " + test.get(i).asin);
+                Logger.v("TEST", "label= " + test.get(i).label);
+                Logger.v("TEST", "timestamp= " + test.get(i).timestamp);
+                Logger.v("TEST", "price= " + test.get(i).price);
+                Logger.v("TEST", "salePrice= " + test.get(i).salePrice);
+                Logger.v("TEST", "title= " + test.get(i).title);
+                Logger.v("TEST", "description= " + test.get(i).description);
+                Logger.v("TEST", "purchaseUrl= " + test.get(i).purchaseUrl);
+                Logger.v("TEST", "imageUrl1= " + test.get(i).imageUrl1);
+                Logger.v("TEST", "imageUrl2= " + test.get(i).imageUrl2);
+                Logger.v("TEST", "imageUrl3= " + test.get(i).imageUrl3);
+                Logger.v("TEST", "imageUrl4= " + test.get(i).imageUrl4);
+                Logger.v("TEST", "imageUrl5= " + test.get(i).imageUrl5);
+                Logger.v("TEST", "isBrowseItem= " + test.get(i).isBrowseItem);
+                Logger.v("TEST", "isFeatured= " + test.get(i).isFeatured);
+                Logger.v("TEST", "isMostPopular= " + test.get(i).isMostPopular);
+            }
         }
     }
 
