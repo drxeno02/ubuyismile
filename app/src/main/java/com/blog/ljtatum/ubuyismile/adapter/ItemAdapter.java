@@ -2,6 +2,7 @@ package com.blog.ljtatum.ubuyismile.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -47,9 +48,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
+        View v;
         if (mAdapterType.equals(Enum.AdapterType.CHABLEE)) {
             v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
+        } else {
+            v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
         }
         return new ItemAdapter.ViewHolder(v);
     }
@@ -75,11 +78,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 (Utils.getDollarValue(alItems.get(position).salePrice) <
                         Utils.getDollarValue(alItems.get(position).price))) {
             // set visibility
-            FrameworkUtils.setViewVisible(holder.tvSalePerc);
+            FrameworkUtils.setViewVisible(holder.tvSalePerc, holder.tvScratchPrice);
             // set percent sale value
             holder.tvSalePerc.setText(mContext.getResources().getString(R.string.percent_sale,
                     String.valueOf(Utils.calculatePercSale(Utils.getDollarValue(alItems.get(position).price),
                             Utils.getDollarValue(alItems.get(position).salePrice)))));
+            // set price as sale price and price
+            holder.tvPrice.setText(mContext.getResources().getString(
+                    R.string.dollar_format, alItems.get(position).salePrice));
+            holder.tvScratchPrice.setText(mContext.getResources().getString(
+                    R.string.dollar_format, alItems.get(position).price));
+            holder.tvScratchPrice.setPaintFlags(holder.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            // set visibility
+            FrameworkUtils.setViewGone(holder.tvSalePerc);
+            FrameworkUtils.setViewInvisible(holder.tvScratchPrice);
+            holder.tvPrice.setText(mContext.getResources().getString(
+                    R.string.dollar_format, alItems.get(position).price));
         }
 
         // label
@@ -114,7 +129,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         // set values
         holder.tvTitle.setText(alItems.get(position).title);
-        holder.tvPrice.setText(mContext.getResources().getString(R.string.dollar_format, alItems.get(position).price));
         // set image
         Picasso.with(mContext).load(alItems.get(position).imageUrl1)
                 .placeholder(R.drawable.no_image_available)
@@ -144,7 +158,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final LinearLayout llLabelWrapper, llBgWrapper;
-        private final TextView tvSalePerc, tvLabel, tvTitle, tvPrice;
+        private final TextView tvSalePerc, tvLabel, tvTitle, tvPrice, tvScratchPrice;
         private final ImageView ivBg, ivLabelIcon;
 
         public ViewHolder(@NonNull View itemView) {
@@ -156,6 +170,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             tvLabel = itemView.findViewById(R.id.tv_label);
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvPrice = itemView.findViewById(R.id.tv_price);
+            tvScratchPrice = itemView.findViewById(R.id.tv_scratch_price);
             ivBg = itemView.findViewById(R.id.iv_bg);
             ivLabelIcon = itemView.findViewById(R.id.iv_label_icon);
         }

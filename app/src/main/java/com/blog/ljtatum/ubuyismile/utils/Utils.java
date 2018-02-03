@@ -151,7 +151,7 @@ public class Utils {
      * @return The percent sale for prices
      */
     public static int calculatePercSale(@NonNull double price, @NonNull double salePrice) {
-        return ((int) (salePrice / price) * 100 > 0 ? (int) (salePrice / price) * 100 : 1);
+        return ((int) ((salePrice / price) * 100) > 0 ? (int) ((salePrice / price) * 100) : 1);
     }
 
     /**
