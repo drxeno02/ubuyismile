@@ -1,5 +1,6 @@
 package com.blog.ljtatum.ubuyismile.databases;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -254,11 +255,63 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
     }
 
     /**
+     * Method is used to insert data on database
+     *
+     * @param alItemDb List of items to insert into database
+     * @param where    The optional WHERE clause to apply when updating. Passing null will
+     *                 update all rows
+     */
+    public void insert(List<ItemDatabaseModel> alItemDb, String[] where) {
+        mDatabase = getWritableDatabase();
+        if (mDatabase.isOpen()) {
+            ContentValues values = new ContentValues();
+            for (int i = 0; i < alItemDb.size(); i++) {
+                values.put(where[0], alItemDb.get(i).category);
+                values.put(where[1], alItemDb.get(i).asin);
+                values.put(where[2], alItemDb.get(i).label);
+                values.put(where[3], alItemDb.get(i).timestamp);
+                values.put(where[4], alItemDb.get(i).price);
+                values.put(where[5], alItemDb.get(i).salePrice);
+                values.put(where[6], alItemDb.get(i).title);
+                values.put(where[7], alItemDb.get(i).description);
+                values.put(where[8], alItemDb.get(i).purchaseUrl);
+                values.put(where[9], alItemDb.get(i).imageUrl1);
+                values.put(where[10], alItemDb.get(i).imageUrl2);
+                values.put(where[11], alItemDb.get(i).imageUrl3);
+                values.put(where[12], alItemDb.get(i).imageUrl4);
+                values.put(where[13], alItemDb.get(i).imageUrl5);
+                values.put(where[14], alItemDb.get(i).isBrowseItem);
+                values.put(where[15], alItemDb.get(i).isFeatured);
+                values.put(where[16], alItemDb.get(i).isMostPopular);
+                // insert into table
+                mDatabase.insert(ItemSchema.TABLE_NAME, null, values);
+            }
+        }
+    }
+
+    /**
      * Method is used to delete all data
      *
      * @param tableName
      */
     public void deleteAllData(String tableName) {
         mDatabase.execSQL("delete from " + tableName);
+    }
+
+    /**
+     * Method is used to retrieve the amount of database rows
+     *
+     * @return The amount of database rows
+     */
+    public int getDatabaseRowCount() {
+        String countQuery = "SELECT  * FROM " + ItemSchema.TABLE_NAME;
+        mDatabase = getReadableDatabase();
+        if (mDatabase.isOpen()) {
+            Cursor cursor = mDatabase.rawQuery(countQuery, null);
+            int count = cursor.getCount();
+            cursor.close();
+            return count;
+        }
+        return 0;
     }
 }

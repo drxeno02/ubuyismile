@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private DrawerLayout mDrawerLayout;
     private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
-    private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved;
+    private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved, isDbEmpty;
 
     // database
     private ItemProvider mItemProvider;
@@ -149,7 +149,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
-        alItemDb = mItemProvider.getAllInfo();
+        alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
+                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
+        isDbEmpty = alItemDb.size() == 0;
 
         // instantiate Amazon auth
         mAmazonAuth = AmazonWebServiceAuthentication.create(
@@ -278,14 +280,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     itemModel.isBrowseItem = Utils.isBrowseItem();
                     alData.add(itemModel);
 
-                    // stored data
-//                    ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
-//                    itemDatabaseModel.category = itemModel.category;
-//                    itemDatabaseModel.asin = itemModel.asin;
-//                    itemDatabaseModel.label = itemModel.label;
-//                    itemDatabaseModel.timestamp = itemModel.timestamp;
-//                    itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
-//                    alItemDb.add(itemDatabaseModel);
+                    if (isDbEmpty) {
+                        // stored data
+                        ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                        itemDatabaseModel.category = itemModel.category;
+                        itemDatabaseModel.asin = itemModel.asin;
+                        itemDatabaseModel.label = itemModel.label;
+                        itemDatabaseModel.timestamp = itemModel.timestamp;
+                        itemDatabaseModel.price = "";
+                        itemDatabaseModel.salePrice = "";
+                        itemDatabaseModel.title = "";
+                        itemDatabaseModel.description = "";
+                        itemDatabaseModel.purchaseUrl = "";
+                        itemDatabaseModel.imageUrl1 = "";
+                        itemDatabaseModel.imageUrl2 = "";
+                        itemDatabaseModel.imageUrl3 = "";
+                        itemDatabaseModel.imageUrl4 = "";
+                        itemDatabaseModel.imageUrl5 = "";
+                        itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
+                        itemDatabaseModel.isFeatured = false;
+                        itemDatabaseModel.isMostPopular = false;
+                        alItemDb.add(itemDatabaseModel);
+                    }
                 }
             }
 
@@ -414,10 +430,37 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 if (!FrameworkUtils.checkIfNull(snapshot.getValue()) &&
                         !FrameworkUtils.checkIfNull(chableeModel)) {
                     chableeModel.category = alChableeCategories.get(categoryIndex);
+                    chableeModel.asin = ""; // no asin for Chablee items
                     chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                     chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
                     chableeModel.isBrowseItem = Utils.isBrowseItem();
                     alData.add(chableeModel);
+
+                    // only add data if it exists. This is enforced by the required
+                    // title and description values
+                    if (isDbEmpty && !FrameworkUtils.isStringEmpty(chableeModel.title) &&
+                            !FrameworkUtils.isStringEmpty(chableeModel.description)) {
+                        // stored data
+                        ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                        itemDatabaseModel.category = chableeModel.category;
+                        itemDatabaseModel.asin = chableeModel.asin;
+                        itemDatabaseModel.label = chableeModel.label;
+                        itemDatabaseModel.timestamp = chableeModel.timestamp;
+                        itemDatabaseModel.price = chableeModel.price;
+                        itemDatabaseModel.salePrice = chableeModel.salePrice;
+                        itemDatabaseModel.title = chableeModel.title;
+                        itemDatabaseModel.description = chableeModel.description;
+                        itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
+                        itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
+                        itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
+                        itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
+                        itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
+                        itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
+                        itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
+                        itemDatabaseModel.isFeatured = chableeModel.isFeatured;
+                        itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
+                        alItemDb.add(itemDatabaseModel);
+                    }
                 }
             }
             if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
@@ -480,6 +523,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
                     // set browse data
                     setBrowseAdapter();
+
+                    if (isDbEmpty) {
+                        createSQLiteDb();
+                    }
                 }
             }
         }
@@ -741,9 +788,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     /**
      * Method is used to update SQLite db
      */
-    private void updateSQLiteDb() {
+    private void createSQLiteDb() {
         if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
-            mItemProvider.updateAll(alItemDb);
+            mItemProvider.insert(alItemDb);
         }
     }
 

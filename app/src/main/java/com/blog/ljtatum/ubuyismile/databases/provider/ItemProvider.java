@@ -15,6 +15,12 @@ import java.util.List;
 
 public class ItemProvider {
 
+    private final String[] ARRY_CATEGORIES = {ItemSchema.CATEGORY, ItemSchema.ASIN, ItemSchema.LABEL,
+            ItemSchema.TIMESTAMP, ItemSchema.PRICE, ItemSchema.SALE_PRICE, ItemSchema.TITLE,
+            ItemSchema.DESCRIPTION, ItemSchema.PURCHASE_URL, ItemSchema.IMAGE_URL_1,
+            ItemSchema.IMAGE_URL_2, ItemSchema.IMAGE_URL_3, ItemSchema.IMAGE_URL_4,
+            ItemSchema.IMAGE_URL_5, ItemSchema.IS_BROWSABLE, ItemSchema.IS_FEATURED,
+            ItemSchema.IS_MOST_POPULAR};
     private final DatabaseProvider<ItemDatabaseModel> mProvider;
 
     /**
@@ -65,7 +71,7 @@ public class ItemProvider {
     }
 
     /**
-     * Method is used to update item db
+     * Method is used to update item db (used for single update)
      *
      * @param itemDatabaseModel The item to update in db
      */
@@ -94,26 +100,8 @@ public class ItemProvider {
      *
      * @param alItemDb List of items to update in db
      */
-    public void updateAll(List<ItemDatabaseModel> alItemDb) {
-        for (int i = 0; i < alItemDb.size(); i++) {
-            mProvider.update(alItemDb.get(i), ItemSchema.CATEGORY + " = ?", new String[]{alItemDb.get(i).category});
-            mProvider.update(alItemDb.get(i), ItemSchema.ASIN + " = ?", new String[]{alItemDb.get(i).asin});
-            mProvider.update(alItemDb.get(i), ItemSchema.LABEL + " = ?", new String[]{alItemDb.get(i).label});
-            mProvider.update(alItemDb.get(i), ItemSchema.TIMESTAMP + " = ?", new String[]{alItemDb.get(i).timestamp});
-            mProvider.update(alItemDb.get(i), ItemSchema.PRICE + " = ?", new String[]{alItemDb.get(i).price});
-            mProvider.update(alItemDb.get(i), ItemSchema.SALE_PRICE + " = ?", new String[]{alItemDb.get(i).salePrice});
-            mProvider.update(alItemDb.get(i), ItemSchema.TITLE + " = ?", new String[]{alItemDb.get(i).title});
-            mProvider.update(alItemDb.get(i), ItemSchema.DESCRIPTION + " = ?", new String[]{alItemDb.get(i).description});
-            mProvider.update(alItemDb.get(i), ItemSchema.PURCHASE_URL + " = ?", new String[]{alItemDb.get(i).purchaseUrl});
-            mProvider.update(alItemDb.get(i), ItemSchema.IMAGE_URL_1 + " = ?", new String[]{alItemDb.get(i).imageUrl1});
-            mProvider.update(alItemDb.get(i), ItemSchema.IMAGE_URL_2 + " = ?", new String[]{alItemDb.get(i).imageUrl2});
-            mProvider.update(alItemDb.get(i), ItemSchema.IMAGE_URL_3 + " = ?", new String[]{alItemDb.get(i).imageUrl3});
-            mProvider.update(alItemDb.get(i), ItemSchema.IMAGE_URL_4 + " = ?", new String[]{alItemDb.get(i).imageUrl4});
-            mProvider.update(alItemDb.get(i), ItemSchema.IMAGE_URL_5 + " = ?", new String[]{alItemDb.get(i).imageUrl5});
-            mProvider.update(alItemDb.get(i), ItemSchema.IS_BROWSABLE + " = ?", new String[]{String.valueOf(alItemDb.get(i).isBrowseItem)});
-            mProvider.update(alItemDb.get(i), ItemSchema.IS_FEATURED + " = ?", new String[]{String.valueOf(alItemDb.get(i).isFeatured)});
-            mProvider.update(alItemDb.get(i), ItemSchema.IS_MOST_POPULAR + " = ?", new String[]{String.valueOf(alItemDb.get(i).isMostPopular)});
-        }
+    public void insert(List<ItemDatabaseModel> alItemDb) {
+        mProvider.insert(alItemDb, ARRY_CATEGORIES);
     }
 
     /**
@@ -124,9 +112,18 @@ public class ItemProvider {
     }
 
     /**
-     * Store user session information in SQLite database when registering a user
+     * Create database with data (used for single update)
      */
     public void create(ItemDatabaseModel session) {
         mProvider.create(session);
+    }
+
+    /**
+     * Method is used to retrieve the number of database entries
+     *
+     * @return The number of database entries
+     */
+    public int getCount() {
+        return mProvider.getDatabaseRowCount();
     }
 }
