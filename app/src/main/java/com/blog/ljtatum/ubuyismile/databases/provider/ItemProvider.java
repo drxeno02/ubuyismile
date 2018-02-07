@@ -113,9 +113,10 @@ public class ItemProvider {
 
     /**
      * Create database with data (used for single update)
+     * @param itemDatabaseModel Item to create/instantiate database with
      */
-    public void create(ItemDatabaseModel session) {
-        mProvider.create(session);
+    public void create(ItemDatabaseModel itemDatabaseModel) {
+        mProvider.create(itemDatabaseModel);
     }
 
     /**
