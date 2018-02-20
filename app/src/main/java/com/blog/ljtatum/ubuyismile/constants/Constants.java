@@ -16,5 +16,4 @@ public class Constants {
     // bundle keys
     public static final String KEY_CATEGORY = "key_category";
 
-
 }

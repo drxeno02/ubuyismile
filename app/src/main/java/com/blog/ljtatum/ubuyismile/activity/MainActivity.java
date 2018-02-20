@@ -40,6 +40,7 @@ import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
+import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -145,6 +146,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
         alItems = new ArrayList<>();
+
+        // track Happiness
+        HappinessUtils.trackHappiness(null);
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
