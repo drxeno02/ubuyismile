@@ -10,6 +10,7 @@ public class ItemSchema implements BaseColumns {
     // table name
     public static final String TABLE_NAME = "item_table";
 
+    // database keys
     public static final String CATEGORY = "category";
     public static final String ASIN = "asin";
     public static final String LABEL = "label";
