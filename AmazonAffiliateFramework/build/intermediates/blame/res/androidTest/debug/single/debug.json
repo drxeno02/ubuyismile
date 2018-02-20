@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_04_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_04_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_notification_skip_prev.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_notification_skip_prev.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_04_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_04_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_collapse_00009.png.flat",
@@ -24,12 +24,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_08_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_messenger_button_send_blue_round.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\layout\\messenger_button_send_blue_round.xml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_mini_controller_rewind30.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_mini_controller_rewind30.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_messenger_button_send_blue_round.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\layout\\messenger_button_send_blue_round.xml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -40,12 +40,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-mdpi-v4\\ic_close_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_connecting_05_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_connecting_05_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_select_dialog_item_material.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_connecting_05_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_connecting_05_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_13_dark.png.flat",
@@ -56,12 +56,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_cast_disabled_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_18_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_18_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_tint_default.xml.flat",
@@ -76,16 +76,16 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-v23\\abc_control_background_material.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_mr_button_disabled_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-hdpi-v4\\ic_mr_button_disabled_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_19_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_19_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_disabled_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_disabled_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_19_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_19_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_mr_button_disabled_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-hdpi-v4\\ic_mr_button_disabled_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_on_21_dark.png.flat",
@@ -100,16 +100,16 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_pause_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_quantum_ic_skip_previous_white_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-mdpi-v4\\quantum_ic_skip_previous_white_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_quantum_ic_skip_previous_white_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-mdpi-v4\\quantum_ic_skip_previous_white_36.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
@@ -208,24 +208,24 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_play_arrow_grey600_48.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_notification_pause.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_notification_pause.xml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_connecting_16_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_16_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_connecting_01_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_01_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_notification_pause.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_notification_pause.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_13_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_13_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_volume_up_grey600_36.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_volume_up_grey600_36.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_13_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_13_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_connecting_01_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_01_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_connecting_07_light.png.flat",
@@ -296,12 +296,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\4d8c710edee2715c48c7b53e80bc553d\\res\\drawable-hdpi-v4\\notification_bg_normal.9.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_replay_30_grey600_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_replay_30_grey600_36.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_19_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_19_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_replay_30_grey600_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_replay_30_grey600_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_close_light.png.flat",
@@ -556,24 +556,24 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-common-4.28.0.aar\\88c2ddbda0e2c0e76ed9fbd095515d17\\res\\layout\\com_facebook_activity_layout.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_cast_off_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-mdpi-v4\\ic_cast_off_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_action.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\4d8c710edee2715c48c7b53e80bc553d\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_cast_off_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-mdpi-v4\\ic_cast_off_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_volume_up_white_36.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_volume_up_white_36.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_quantum_ic_skip_next_white_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_skip_next_white_36.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_04_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_04_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_quantum_ic_skip_next_white_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_skip_next_white_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -588,12 +588,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable\\ic_collapse.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_close_dark.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-hdpi-v4\\ic_close_dark.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_close_dark.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-hdpi-v4\\ic_close_dark.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_audiotrack_light.png.flat",
@@ -684,12 +684,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_on_20_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_09_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_09_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
@@ -884,12 +884,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_14_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-hdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_10_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_10_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-hdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_quantum_ic_cast_connected_white_24.png.flat",
@@ -972,12 +972,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxxhdpi-v4\\ic_group_expand_14.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_08.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_08.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_collapse_00008.png.flat",
@@ -1000,12 +1000,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_media_play_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_connecting_17_dark.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_connecting_17_dark.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_vol_type_speaker_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-mdpi-v4\\ic_vol_type_speaker_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_connecting_17_dark.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_connecting_17_dark.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_media_play_dark.png.flat",
@@ -1020,12 +1020,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_volume_up_white_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_volume_up_white_36.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_19_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_19_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_volume_up_white_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_volume_up_white_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_multiple_placemarks.kml.flat",
@@ -1088,12 +1088,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\drawable\\messenger_button_white_bg_selector.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_stop_grey600_48.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_stop_grey600_48.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_media_pause.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-mdpi-v4\\ic_media_pause.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_stop_grey600_48.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_stop_grey600_48.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_com_facebook_button_icon_blue.png.flat",
@@ -1144,16 +1144,16 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_16_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-tvdpi-v4_ic_plusone_medium_off_client.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-11.6.2.aar\\262edf21a320d84fd2eb424b48b05902\\res\\drawable-tvdpi-v4\\ic_plusone_medium_off_client.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_connecting_17_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_17_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_list_selector_background_transition_holo_light.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_connecting_17_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_17_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-tvdpi-v4_ic_plusone_medium_off_client.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-11.6.2.aar\\262edf21a320d84fd2eb424b48b05902\\res\\drawable-tvdpi-v4\\ic_plusone_medium_off_client.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_btn_colored_text_material.xml.flat",
@@ -1248,12 +1248,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-mdpi-v4\\ic_cast_grey.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_com_facebook_tooltip_black_topnub.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\c0d699e0f6f1e5dc2481b3251bc54c94\\res\\drawable-mdpi-v4\\com_facebook_tooltip_black_topnub.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_03_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_03_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_com_facebook_tooltip_black_topnub.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\c0d699e0f6f1e5dc2481b3251bc54c94\\res\\drawable-mdpi-v4\\com_facebook_tooltip_black_topnub.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_powered_by_google_dark.png.flat",
@@ -1272,12 +1272,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_12_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_12_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_connecting_13_dark.png.flat",
@@ -1316,12 +1316,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-ldrtl-xxxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_09_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_09_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_grey.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_grey.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_09_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_09_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_collapse_00010.png.flat",
@@ -1388,24 +1388,24 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_01_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_abc_color_highlight_material.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\color-v23\\abc_color_highlight_material.xml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_plusone_standard_off_client.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-11.6.2.aar\\262edf21a320d84fd2eb424b48b05902\\res\\drawable-xhdpi-v4\\ic_plusone_standard_off_client.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_abc_color_highlight_material.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_on_06_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_on_06_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_12_dark.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_12_dark.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_12_dark.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_12_dark.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_quantum_ic_replay_30_white_24.png.flat",
@@ -1416,20 +1416,20 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_art_track_grey600_48.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_art_track_grey600_48.png"
-    },
-    {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_expanded_controller_pause.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_expanded_controller_pause.xml"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_ground_overlay.kml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\8a89eae49dc095d707f8bbcf8c083655\\res\\raw\\amu_ground_overlay.kml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_route_on_15_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_on_15_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_ground_overlay.kml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\8a89eae49dc095d707f8bbcf8c083655\\res\\raw\\amu_ground_overlay.kml"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_expanded_controller_pause.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_expanded_controller_pause.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_art_track_grey600_48.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_art_track_grey600_48.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_search_url_text.xml.flat",
@@ -1500,12 +1500,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-mdpi-v4\\cast_abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_skip_previous_white_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_skip_previous_white_36.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_07_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_07_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_skip_previous_white_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_skip_previous_white_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_action_tombstone.xml.flat",
@@ -1524,12 +1524,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_collapse_00011.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxxhdpi-v4\\ic_collapse_00011.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ic_go_search_api_material.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable\\abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_collapse_00011.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxxhdpi-v4\\ic_collapse_00011.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_05_light.png.flat",
@@ -1588,12 +1588,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxxhdpi-v4\\quantum_ic_clear_white_24.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_notification_tile_bg.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\4d8c710edee2715c48c7b53e80bc553d\\res\\drawable\\notification_tile_bg.xml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_mr_button_light.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable\\mr_button_light.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_notification_tile_bg.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\4d8c710edee2715c48c7b53e80bc553d\\res\\drawable\\notification_tile_bg.xml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_design_ic_visibility_off.png.flat",
@@ -1724,12 +1724,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_on_20_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_com_facebook_button_login_background.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\c0d699e0f6f1e5dc2481b3251bc54c94\\res\\drawable\\com_facebook_button_login_background.xml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_com_facebook_button_login_background.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\c0d699e0f6f1e5dc2481b3251bc54c94\\res\\drawable\\com_facebook_button_login_background.xml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_multigeometry_placemarks.kml.flat",
@@ -1788,20 +1788,20 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_14_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_cast_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\cast_abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_powered_by_google_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-places-11.6.2.aar\\dc4fe451a3a83f5b0e7cee8d1d318092\\res\\drawable-hdpi-v4\\powered_by_google_dark.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_17_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_17_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_cast_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\cast_abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_quantum_ic_volume_off_grey600_36.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_volume_off_grey600_36.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_route_on_17_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_on_17_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-watch-v20_common_google_signin_btn_text_dark_normal.xml.flat",
@@ -1936,12 +1936,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\drawable\\messenger_button_blue_bg_selector.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_stop_white_24.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_stop_white_24.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_12_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_12_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_stop_white_24.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_stop_white_24.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_play_arrow_grey600_36.png.flat",
@@ -1992,12 +1992,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\4d8c710edee2715c48c7b53e80bc553d\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_messenger_bubble_large_white.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\drawable-hdpi-v4\\messenger_bubble_large_white.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_quantum_ic_closed_caption_grey600_36.png.flat",
@@ -2032,16 +2032,16 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_stop_grey600_48.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_com_facebook_button_icon_blue.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-common-4.28.0.aar\\88c2ddbda0e2c0e76ed9fbd095515d17\\res\\drawable-mdpi-v4\\com_facebook_button_icon_blue.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_dialog_close_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-hdpi-v4\\ic_dialog_close_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_cast_ic_mini_controller_play_large.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_mini_controller_play_large.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_dialog_close_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-hdpi-v4\\ic_dialog_close_light.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_com_facebook_button_icon_blue.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-common-4.28.0.aar\\88c2ddbda0e2c0e76ed9fbd095515d17\\res\\drawable-mdpi-v4\\com_facebook_button_icon_blue.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_close_light.png.flat",
@@ -2064,20 +2064,20 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-common-4.28.0.aar\\88c2ddbda0e2c0e76ed9fbd095515d17\\res\\drawable\\com_facebook_favicon_blue.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_14.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_14.png"
-    },
-    {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_tooltip.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\layout\\tooltip.xml"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_05_dark.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_05_dark.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_design_navigation_item.xml.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\4af9518d794351ccca16e57e3d4d5717\\res\\layout\\design_navigation_item.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_05_dark.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_05_dark.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_tooltip.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\layout\\tooltip.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_14.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_14.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_quantum_ic_forward_30_grey600_36.png.flat",
@@ -2096,12 +2096,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_07_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_messenger_button_send_round_shadow.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\drawable-xxhdpi-v4\\messenger_button_send_round_shadow.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_media_pause.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_pause.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_messenger_button_send_round_shadow.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\drawable-xxhdpi-v4\\messenger_button_send_round_shadow.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_play_arrow_grey600_48.png.flat",
@@ -2180,12 +2180,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_08_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_messenger_button_send_white_round.xml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\layout\\messenger_button_send_white_round.xml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_media_play_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_media_play_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_messenger_button_send_white_round.xml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\layout\\messenger_button_send_white_round.xml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_05_dark.png.flat",
@@ -2208,16 +2208,16 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-messenger-4.28.0.aar\\b88ef800976f82b413d814f0004f74ff\\res\\drawable-xxhdpi-v4\\messenger_bubble_small_blue.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_quantum_ic_replay_30_white_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_replay_30_white_36.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_com_facebook_tooltip_black_background.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\c0d699e0f6f1e5dc2481b3251bc54c94\\res\\drawable-mdpi-v4\\com_facebook_tooltip_black_background.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_com_facebook_tooltip_black_background.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\c0d699e0f6f1e5dc2481b3251bc54c94\\res\\drawable-mdpi-v4\\com_facebook_tooltip_black_background.9.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_quantum_ic_replay_30_white_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xhdpi-v4\\quantum_ic_replay_30_white_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_mr_ic_media_route_on_dark.xml.flat",
@@ -2252,28 +2252,28 @@
         "source": "C:\\AndroidStudio\\Workspace\\ubuyismile\\ApplicationFramework\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_progress.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_basic_placemark.kml.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\8a89eae49dc095d707f8bbcf8c083655\\res\\raw\\amu_basic_placemark.kml"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_06_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_06_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_amu_basic_placemark.kml.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\8a89eae49dc095d707f8bbcf8c083655\\res\\raw\\amu_basic_placemark.kml"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_09_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_09_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_05.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_05.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_05.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_05.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_common_full_open_on_phone.png.flat",
@@ -2296,12 +2296,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\8affde3fe73580eee995071278183cbc\\res\\layout\\notification_template_big_media.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_12_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_12_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_quantum_ic_volume_off_white_36.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxxhdpi-v4\\quantum_ic_volume_off_white_36.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_12_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_12_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
@@ -2396,12 +2396,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable\\cast_ic_mini_controller_closed_caption.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.2.aar\\45d9b0b64fc15c8411f7724bfb08e3b9\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_mr_button_disconnected_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-hdpi-v4\\ic_mr_button_disconnected_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.6.2.aar\\45d9b0b64fc15c8411f7724bfb08e3b9\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_collapse_00004.png.flat",
@@ -2488,12 +2488,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxhdpi-v4\\ic_media_route_on_02_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_forward_30_white_24.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_forward_30_white_24.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_close_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-hdpi-v4\\ic_close_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_quantum_ic_forward_30_white_24.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-hdpi-v4\\quantum_ic_forward_30_white_24.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_com_facebook_smart_device_dialog_fragment.xml.flat",
@@ -2604,12 +2604,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_media_play.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_design_ic_visibility_off.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\4af9518d794351ccca16e57e3d4d5717\\res\\drawable-xxxhdpi-v4\\design_ic_visibility_off.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_13_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_13_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_design_ic_visibility_off.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\4af9518d794351ccca16e57e3d4d5717\\res\\drawable-xxxhdpi-v4\\design_ic_visibility_off.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -2752,12 +2752,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-share-4.28.0.aar\\91bcc6986883e89c65fb8750d4df5992\\res\\drawable-mdpi-v4\\com_facebook_button_send_icon_blue.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_02_light.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_02_light.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_20_dark.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_20_dark.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_02_light.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_02_light.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
@@ -2792,12 +2792,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-25.2.0.aar\\c15e9d54c8a346cd5b017c66975c6321\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_10_light.png"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_closed_caption_white_36.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_closed_caption_white_36.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_pause_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xxxhdpi-v4\\ic_pause_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_quantum_ic_closed_caption_white_36.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-11.6.2.aar\\f15848c50fa1b87d0cb162f4afe76c0d\\res\\drawable-xxhdpi-v4\\quantum_ic_closed_caption_white_36.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_bar_title_item.xml.flat",
@@ -2848,12 +2848,12 @@
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7cfc944d5ab94c153c15c6dec56ba23d\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_plusone_standard_off_client.png.flat",
-        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-11.6.2.aar\\262edf21a320d84fd2eb424b48b05902\\res\\drawable-hdpi-v4\\ic_plusone_standard_off_client.png"
-    },
-    {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_speaker_light.png.flat",
         "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-24.0.0.aar\\2dc16bd195a471e81664f883ed747199\\res\\drawable-xhdpi-v4\\ic_speaker_light.png"
+    },
+    {
+        "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_plusone_standard_off_client.png.flat",
+        "source": "C:\\Users\\LJTat\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-11.6.2.aar\\262edf21a320d84fd2eb424b48b05902\\res\\drawable-hdpi-v4\\ic_plusone_standard_off_client.png"
     },
     {
         "merged": "C:\\AndroidStudio\\Workspace\\ubuyismile\\AmazonAffiliateFramework\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
