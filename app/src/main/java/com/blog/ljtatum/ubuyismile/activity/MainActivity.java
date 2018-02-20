@@ -34,6 +34,7 @@ import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
+import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
@@ -52,7 +53,9 @@ import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
 
+    private static final String ID_PREFIX = "id_";
     private Context mContext;
     private ErrorUtils mErrorUtils;
     private DrawerLayout mDrawerLayout;
@@ -62,7 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     // database
     private ItemProvider mItemProvider;
-    private List<ItemDatabaseModel> alItemDb;
+    private List<ItemDatabaseModel> alItemDb, alItemDbTemp;
 
     // adapter
     private LinearLayoutManager mLayoutManager;
@@ -88,35 +91,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initializeListeners();
         retrieveFirebaseData();
 
-        // retrieve items from firebase to add to SQLite db
-//        if (alItemDb.size() == 0 && alItemDb.isEmpty()) {
-//            retrieveFirebaseData();
-//            updateSQLiteDb();
-//        } else {
-//            Logger.e("TEST", "sqlite db updated successfully");
-//
-//            for (int i = 0; i < alItemDb.size(); i++) {
-//                Logger.v("TEST", "category= " + alItemDb.get(i).category);
-//                Logger.v("TEST", "asin= " + alItemDb.get(i).asin);
-//                Logger.v("TEST", "label= " + alItemDb.get(i).label);
-//                Logger.v("TEST", "timestamp= " + alItemDb.get(i).timestamp);
-//                Logger.v("TEST", "price= " + alItemDb.get(i).price);
-//                Logger.v("TEST", "salePrice= " + alItemDb.get(i).salePrice);
-//                Logger.v("TEST", "title= " + alItemDb.get(i).title);
-//                Logger.v("TEST", "description= " + alItemDb.get(i).description);
-//                Logger.v("TEST", "purchaseUrl= " + alItemDb.get(i).purchaseUrl);
-//                Logger.v("TEST", "imageUrl1= " + alItemDb.get(i).imageUrl1);
-//                Logger.v("TEST", "imageUrl2= " + alItemDb.get(i).imageUrl2);
-//                Logger.v("TEST", "imageUrl3= " + alItemDb.get(i).imageUrl3);
-//                Logger.v("TEST", "imageUrl4= " + alItemDb.get(i).imageUrl4);
-//                Logger.v("TEST", "imageUrl5= " + alItemDb.get(i).imageUrl5);
-//                Logger.v("TEST", "isBrowseItem= " + alItemDb.get(i).isBrowseItem);
-//                Logger.v("TEST", "isFeatured= " + alItemDb.get(i).isFeatured);
-//                Logger.v("TEST", "isMostPopular= " + alItemDb.get(i).isMostPopular);
-//            }
-//        }
-
-        // uncomment below to create firebase db
+        // uncomment below to create firebase db. Will also reset all data
 //        createFirebaseDb();
 
 
@@ -147,6 +122,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
         alItems = new ArrayList<>();
+        alItemDbTemp = new ArrayList<>();
 
         // track Happiness
         HappinessUtils.trackHappiness(null);
@@ -243,15 +219,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     if (categoryIndex < alAmazonCategories.size()) {
                         // increase category index
                         categoryIndex++;
-                        retrieveFirebaseData();
                     }
                 } else if (!isChableeFirebaseDataRetrieved) {
                     if (categoryIndex < alChableeCategories.size()) {
                         // increase category index
                         categoryIndex++;
-                        retrieveFirebaseData();
                     }
                 }
+                // retrieve firebase data
+                retrieveFirebaseData();
             }
 
             @Override
@@ -304,7 +280,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
                         itemDatabaseModel.isFeatured = false;
                         itemDatabaseModel.isMostPopular = false;
-                        alItemDb.add(itemDatabaseModel);
+                        alItemDbTemp.add(itemDatabaseModel);
+                    } else {
+                        // TODO interate through SQLite db and update values
                     }
                 }
             }
@@ -450,6 +428,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.asin = chableeModel.asin;
                         itemDatabaseModel.label = chableeModel.label;
                         itemDatabaseModel.timestamp = chableeModel.timestamp;
+                        itemDatabaseModel.itemId = chableeModel.itemId;
                         itemDatabaseModel.price = chableeModel.price;
                         itemDatabaseModel.salePrice = chableeModel.salePrice;
                         itemDatabaseModel.title = chableeModel.title;
@@ -463,7 +442,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
                         itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                         itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
-                        alItemDb.add(itemDatabaseModel);
+                        alItemDbTemp.add(itemDatabaseModel);
+                    } else {
+                        for (int i = 0; i < alItemDb.size(); i++) {
+                            if (alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
+                                Logger.e("TEST", "updating item id= " + alItemDb.get(i).itemId + " //@index= " + i);
+                            }
+                        }
                     }
                 }
             }
@@ -529,7 +514,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     setBrowseAdapter();
 
                     if (isDbEmpty) {
+                        Logger.e(TAG, "database created");
                         createSQLiteDb();
+                    } else {
+                        Logger.e(TAG, "database is not empty :: size= " + alItemDb.size());
+                        printDb();
                     }
                 }
             }
@@ -892,6 +881,39 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     /**
+     * Method is used to print contents of the database
+     */
+    private void printDb() {
+//        if (FrameworkUtils.checkIfNull(alItemDb) || alItemDb.size() == 0 || alItemDb.isEmpty()) {
+//            return;
+//        }
+
+        List<ItemDatabaseModel> test = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
+                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
+        Logger.e("TEST", "test size= " + test.size());
+
+        for (int i = 0; i < test.size(); i++) {
+            Logger.v(TAG, "category= " + test.get(i).category);
+            Logger.v(TAG, "asin= " + test.get(i).asin);
+            Logger.v(TAG, "label= " + test.get(i).label);
+            Logger.v(TAG, "timestamp= " + test.get(i).timestamp);
+            Logger.v(TAG, "price= " + test.get(i).price);
+            Logger.v(TAG, "salePrice= " + test.get(i).salePrice);
+            Logger.v(TAG, "title= " + test.get(i).title);
+            Logger.v(TAG, "description= " + test.get(i).description);
+            Logger.v(TAG, "purchaseUrl= " + test.get(i).purchaseUrl);
+            Logger.v(TAG, "imageUrl1= " + test.get(i).imageUrl1);
+            Logger.v(TAG, "imageUrl2= " + test.get(i).imageUrl2);
+            Logger.v(TAG, "imageUrl3= " + test.get(i).imageUrl3);
+            Logger.v(TAG, "imageUrl4= " + test.get(i).imageUrl4);
+            Logger.v(TAG, "imageUrl5= " + test.get(i).imageUrl5);
+            Logger.v(TAG, "isBrowseItem= " + test.get(i).isBrowseItem);
+            Logger.v(TAG, "isFeatured= " + test.get(i).isFeatured);
+            Logger.v(TAG, "isMostPopular= " + test.get(i).isMostPopular);
+        }
+    }
+
+    /**
      * Method is used to create/populate database on Firebase with empty data
      */
     private void createFirebaseDb() {
@@ -900,6 +922,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         HashMap<String, ItemModel> mapChablee = new HashMap<>();
         for (int i = 0; i < 50; i++) {
             ItemModel chableeModel = new ItemModel();
+            chableeModel.itemId = ID_PREFIX.concat(String.valueOf(i));
             chableeModel.title = " ";
             chableeModel.description = " ";
             chableeModel.price = " ";

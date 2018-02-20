@@ -12,7 +12,7 @@ import com.blog.ljtatum.ubuyismile.databases.schema.ItemSchema;
 public class ItemDatabaseModel implements DatabaseModel {
 
     // base values
-    public String category, asin, label, timestamp;
+    public String category, asin, label, timestamp, itemId;
     public boolean isBrowseItem;
 
     // Chablee specific values
@@ -27,6 +27,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         item.asin = cursor.getString(cursor.getColumnIndex(ItemSchema.ASIN));
         item.label = cursor.getString(cursor.getColumnIndex(ItemSchema.LABEL));
         item.timestamp = cursor.getString(cursor.getColumnIndex(ItemSchema.TIMESTAMP));
+        item.itemId = cursor.getString(cursor.getColumnIndex(ItemSchema.ITEM_ID));
         item.price = cursor.getString(cursor.getColumnIndex(ItemSchema.PRICE));
         item.salePrice = cursor.getString(cursor.getColumnIndex(ItemSchema.SALE_PRICE));
         item.title = cursor.getString(cursor.getColumnIndex(ItemSchema.TITLE));
@@ -50,6 +51,7 @@ public class ItemDatabaseModel implements DatabaseModel {
                 ItemSchema.ASIN,
                 ItemSchema.LABEL,
                 ItemSchema.TIMESTAMP,
+                ItemSchema.ITEM_ID,
                 ItemSchema.PRICE,
                 ItemSchema.SALE_PRICE,
                 ItemSchema.TITLE,
@@ -73,6 +75,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         values.put(ItemSchema.ASIN, asin);
         values.put(ItemSchema.LABEL, label);
         values.put(ItemSchema.TIMESTAMP, timestamp);
+        values.put(ItemSchema.ITEM_ID, itemId);
         values.put(ItemSchema.PRICE, price);
         values.put(ItemSchema.SALE_PRICE, salePrice);
         values.put(ItemSchema.TITLE, title);

@@ -6,7 +6,7 @@ package com.blog.ljtatum.ubuyismile.model;
 
 public class ItemModel {
     // base values
-    public String category, asin, label, timestamp;
+    public String category, asin, label, timestamp, itemId;
     public boolean isBrowseItem;
 
     // Chablee specific values

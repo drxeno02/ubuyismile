@@ -15,6 +15,7 @@ public class ItemSchema implements BaseColumns {
     public static final String ASIN = "asin";
     public static final String LABEL = "label";
     public static final String TIMESTAMP = "timestamp";
+    public static final String ITEM_ID = "item_id";
     public static final String PRICE = "price";
     public static final String SALE_PRICE = "sale_price";
     public static final String TITLE = "title";
@@ -42,6 +43,7 @@ public class ItemSchema implements BaseColumns {
         sb.append(ASIN + " TEXT NOT NULL, ");
         sb.append(LABEL + " TEXT NOT NULL, ");
         sb.append(TIMESTAMP + " TEXT NOT NULL, ");
+        sb.append(ITEM_ID + " TEXT NOT NULL, ");
         sb.append(PRICE + " TEXT NOT NULL, ");
         sb.append(SALE_PRICE + " TEXT NOT NULL, ");
         sb.append(TITLE + " TEXT NOT NULL, ");

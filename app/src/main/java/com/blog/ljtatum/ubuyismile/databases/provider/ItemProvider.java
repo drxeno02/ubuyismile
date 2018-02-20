@@ -62,7 +62,6 @@ public class ItemProvider {
             return (!FrameworkUtils.checkIfNull(data) && data.size() > 0) ? data : null;
         } catch (InstantiationException e) {
             e.printStackTrace();
-            ;
             return null;
         } catch (IllegalAccessException e) {
             e.printStackTrace();
