@@ -57,6 +57,7 @@ public class HappinessUtils {
         }
 
         Random rand = new Random();
+        boolean isHappinessScoreChanged = false;
         int points;
         int score = mSharedPref.getIntPref(HAPPINESS_SCORE, -1);
 
@@ -72,6 +73,7 @@ public class HappinessUtils {
                 // use timestamp to determine positive or negative Happiness score
                 int daysBetweenDates = FrameworkUtils.getDaysBetweenDates(timestamp,
                         mSharedPref.getStringPref(APP_LAUNCH_TIMESTAMP, timestamp));
+                Logger.i(TAG, "Days between dates: " + daysBetweenDates);
                 // counter representing sets of maximum logged days
                 int counter = 1;
                 while ((daysBetweenDates / counter) / MAX_NUM_DAYS_LOGGED_OUT >= 1) {
@@ -91,10 +93,7 @@ public class HappinessUtils {
             // increment event
             mSharedPref.setPref(EVENT_CONTENT_COUNTER, (mSharedPref.getIntPref(EVENT_CONTENT_COUNTER, 0) + 1));
             if (mSharedPref.getIntPref(EVENT_CONTENT_COUNTER, 0) >= CONTENT_VISIT_THRESHOLD) {
-                points = rand.nextInt(1) + 1;
-                int updatedScore = (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points) > 100 ? 100 :
-                        (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points);
-                mSharedPref.setPref(HAPPINESS_SCORE, updatedScore);
+                isHappinessScoreChanged = true;
                 // reset value
                 mSharedPref.setPref(EVENT_CONTENT_COUNTER, 0);
             }
@@ -102,13 +101,50 @@ public class HappinessUtils {
             // increment event
             mSharedPref.setPref(EVENT_CONTENT_ITEM_DETAIL_COUNTER, (mSharedPref.getIntPref(EVENT_CONTENT_ITEM_DETAIL_COUNTER, 0) + 1));
             if (mSharedPref.getIntPref(EVENT_CONTENT_ITEM_DETAIL_COUNTER, 0) >= ITEM_DETAIL_VISIT_THRESHOLD) {
-                points = rand.nextInt(1) + 1;
-                int updatedScore = (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points) > 100 ? 100 :
-                        (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points);
-                mSharedPref.setPref(HAPPINESS_SCORE, updatedScore);
+                isHappinessScoreChanged = true;
                 // reset value
                 mSharedPref.setPref(EVENT_CONTENT_ITEM_DETAIL_COUNTER, 0);
             }
+        } else if (event.equalsIgnoreCase(EVENT_ABOUT_COUNTER)) {
+            // increment event
+            mSharedPref.setPref(EVENT_ABOUT_COUNTER, (mSharedPref.getIntPref(EVENT_ABOUT_COUNTER, 0) + 1));
+            if (mSharedPref.getIntPref(EVENT_ABOUT_COUNTER, 0) >= ABOUT_VISIT_THRESHOLD) {
+                isHappinessScoreChanged = true;
+                // reset value
+                mSharedPref.setPref(EVENT_ABOUT_COUNTER, 0);
+            }
+        } else if (event.equalsIgnoreCase(EVENT_ABOUT_SHARE_COUNTER)) {
+            // increment event
+            mSharedPref.setPref(EVENT_ABOUT_SHARE_COUNTER, (mSharedPref.getIntPref(EVENT_ABOUT_SHARE_COUNTER, 0) + 1));
+            if (mSharedPref.getIntPref(EVENT_ABOUT_SHARE_COUNTER, 0) >= ABOUT_SHARE_THRESHOLD) {
+                isHappinessScoreChanged = true;
+                // reset value
+                mSharedPref.setPref(EVENT_ABOUT_SHARE_COUNTER, 0);
+            }
+        } else if (event.equalsIgnoreCase(EVENT_SEARH_COUNTER)) {
+            // increment event
+            mSharedPref.setPref(EVENT_SEARH_COUNTER, (mSharedPref.getIntPref(EVENT_SEARH_COUNTER, 0) + 1));
+            if (mSharedPref.getIntPref(EVENT_SEARH_COUNTER, 0) >= SEARCH_THRESHOLD) {
+                isHappinessScoreChanged = true;
+                // reset value
+                mSharedPref.setPref(EVENT_SEARH_COUNTER, 0);
+            }
+        } else if (event.equalsIgnoreCase(EVENT_ITEM_FEEDBACK_COUNTER)) {
+            // increment event
+            mSharedPref.setPref(EVENT_ITEM_FEEDBACK_COUNTER, (mSharedPref.getIntPref(EVENT_ITEM_FEEDBACK_COUNTER, 0) + 1));
+            if (mSharedPref.getIntPref(EVENT_ITEM_FEEDBACK_COUNTER, 0) >= FEEDBACK_VISIT_THRESHOLD) {
+                isHappinessScoreChanged = true;
+                // reset value
+                mSharedPref.setPref(EVENT_ITEM_FEEDBACK_COUNTER, 0);
+            }
+        }
+
+        // update score
+        if (isHappinessScoreChanged) {
+            points = rand.nextInt(1) + 1;
+            int updatedScore = (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points) > 100 ? 100 :
+                    (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points);
+            mSharedPref.setPref(HAPPINESS_SCORE, updatedScore);
         }
 
         // print results

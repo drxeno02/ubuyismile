@@ -18,6 +18,7 @@ import com.app.framework.utilities.share.ShareUtils;
 import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
+import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 
 import java.util.Calendar;
 
@@ -57,6 +58,9 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
         ivTwitter = mRootView.findViewById(R.id.iv_twitter);
         ivLinkedin = mRootView.findViewById(R.id.iv_linkedin);
 
+        // track Happiness
+        HappinessUtils.trackHappiness(HappinessUtils.EVENT_ABOUT_COUNTER);
+
         // set fragment header
         tvFragmentHeader.setText(getResources().getString(R.string.menu_about));
         // set app version
@@ -94,12 +98,18 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
                 popBackStack();
                 break;
             case R.id.iv_fb:
+                // track Happiness
+                HappinessUtils.trackHappiness(HappinessUtils.EVENT_ABOUT_SHARE_COUNTER);
                 ShareUtils.openSocialMediaViaIntent(mContext, Enum.SocialMedia.FB, true);
                 break;
             case R.id.iv_twitter:
+                // track Happiness
+                HappinessUtils.trackHappiness(HappinessUtils.EVENT_ABOUT_SHARE_COUNTER);
                 ShareUtils.openSocialMediaViaIntent(mContext, Enum.SocialMedia.TWITTER, true);
                 break;
             case R.id.iv_linkedin:
+                // track Happiness
+                HappinessUtils.trackHappiness(HappinessUtils.EVENT_ABOUT_SHARE_COUNTER);
                 ShareUtils.openSocialMediaViaIntent(mContext, Enum.SocialMedia.LINKEDIN, true);
                 break;
             default:

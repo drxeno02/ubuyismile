@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
+import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 
 /**
  * Created by leonard on 10/23/2017.
@@ -43,6 +44,9 @@ public class PrivacyFragment extends BaseFragment implements View.OnClickListene
 
         // set fragment header
         tvFragmentHeader.setText(getResources().getString(R.string.menu_privacy));
+
+        // track Happiness
+        HappinessUtils.trackHappiness(HappinessUtils.EVENT_CONTENT_COUNTER);
     }
 
     /**
