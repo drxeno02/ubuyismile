@@ -38,6 +38,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by leonard on 11/13/2015.
@@ -215,6 +216,28 @@ public class FrameworkUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * Method is used to come two timestamps and determine the difference in days between the dates
+     * @param dateA String value representation of date and time
+     * @param dateB String value representation of date and time
+     * @return
+     */
+    public static int getDaysBetweenDates(String dateA, String dateB) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH);
+        Date startDate, endDate;
+        long numberOfDays = 0;
+        try {
+            startDate = formatter.parse(dateA);
+            endDate = formatter.parse(dateB);
+
+            long timeDiff = endDate.getTime() - startDate.getTime();
+            numberOfDays = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return (int) numberOfDays;
     }
 
     /**

@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         alItemDbTemp = new ArrayList<>();
 
         // track Happiness
-        HappinessUtils.trackHappiness(null);
+        HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
