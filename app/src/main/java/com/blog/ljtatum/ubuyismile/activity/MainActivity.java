@@ -884,32 +884,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to print contents of the database
      */
     private void printDb() {
-//        if (FrameworkUtils.checkIfNull(alItemDb) || alItemDb.size() == 0 || alItemDb.isEmpty()) {
-//            return;
-//        }
+        if (FrameworkUtils.checkIfNull(alItemDb) || alItemDb.size() == 0 || alItemDb.isEmpty()) {
+            return;
+        }
 
-        List<ItemDatabaseModel> test = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
-                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
-        Logger.e("TEST", "test size= " + test.size());
-
-        for (int i = 0; i < test.size(); i++) {
-            Logger.v(TAG, "category= " + test.get(i).category);
-            Logger.v(TAG, "asin= " + test.get(i).asin);
-            Logger.v(TAG, "label= " + test.get(i).label);
-            Logger.v(TAG, "timestamp= " + test.get(i).timestamp);
-            Logger.v(TAG, "price= " + test.get(i).price);
-            Logger.v(TAG, "salePrice= " + test.get(i).salePrice);
-            Logger.v(TAG, "title= " + test.get(i).title);
-            Logger.v(TAG, "description= " + test.get(i).description);
-            Logger.v(TAG, "purchaseUrl= " + test.get(i).purchaseUrl);
-            Logger.v(TAG, "imageUrl1= " + test.get(i).imageUrl1);
-            Logger.v(TAG, "imageUrl2= " + test.get(i).imageUrl2);
-            Logger.v(TAG, "imageUrl3= " + test.get(i).imageUrl3);
-            Logger.v(TAG, "imageUrl4= " + test.get(i).imageUrl4);
-            Logger.v(TAG, "imageUrl5= " + test.get(i).imageUrl5);
-            Logger.v(TAG, "isBrowseItem= " + test.get(i).isBrowseItem);
-            Logger.v(TAG, "isFeatured= " + test.get(i).isFeatured);
-            Logger.v(TAG, "isMostPopular= " + test.get(i).isMostPopular);
+        for (int i = 0; i < alItemDb.size(); i++) {
+            Logger.v(TAG, "category= " + alItemDb.get(i).category);
+            Logger.v(TAG, "asin= " + alItemDb.get(i).asin);
+            Logger.v(TAG, "label= " + alItemDb.get(i).label);
+            Logger.v(TAG, "timestamp= " + alItemDb.get(i).timestamp);
+            Logger.v(TAG, "price= " + alItemDb.get(i).price);
+            Logger.v(TAG, "salePrice= " + alItemDb.get(i).salePrice);
+            Logger.v(TAG, "title= " + alItemDb.get(i).title);
+            Logger.v(TAG, "description= " + alItemDb.get(i).description);
+            Logger.v(TAG, "purchaseUrl= " + alItemDb.get(i).purchaseUrl);
+            Logger.v(TAG, "imageUrl1= " + alItemDb.get(i).imageUrl1);
+            Logger.v(TAG, "imageUrl2= " + alItemDb.get(i).imageUrl2);
+            Logger.v(TAG, "imageUrl3= " + alItemDb.get(i).imageUrl3);
+            Logger.v(TAG, "imageUrl4= " + alItemDb.get(i).imageUrl4);
+            Logger.v(TAG, "imageUrl5= " + alItemDb.get(i).imageUrl5);
+            Logger.v(TAG, "isBrowseItem= " + alItemDb.get(i).isBrowseItem);
+            Logger.v(TAG, "isFeatured= " + alItemDb.get(i).isFeatured);
+            Logger.v(TAG, "isMostPopular= " + alItemDb.get(i).isMostPopular);
         }
     }
 
@@ -980,4 +976,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.WATCHES.toString());
     }
 
+    @Override
+    protected void onPause() {
+        Logger.e("TEST", "isOnPause called");
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.e("TEST", "is OnResune called");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

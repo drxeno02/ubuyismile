@@ -60,8 +60,45 @@
     <string name="menu_gemstone">Gemstone</string>
     <string name="menu_rocks">Rocks</string>
 
+    <!-- messages : neutral -->
+    <string name="neutral_01">Hi, my name is L. Keep me happy by purchasing any items you wish</string>
+    <string name="neutral_02">L wants to know what you will buy?</string>
+    <string name="neutral_03">L is curious about what you will buy?</string>
+    <string name="neutral_04">Did you know that all money from Chablee purchases go toward a good cause?
+        L is very charitable</string>
+    <string name="neutral_05">L suggests checking out some amazing Rings personally handmade by Chablee</string>
+    <string name="neutral_06">L suggests checking out some amazing Necklaces personally handmade by Chablee</string>
+    <string name="neutral_07">L suggests checking out some amazing Crowns personally handmade by Chablee</string>
+    <string name="neutral_08">L suggests checking out some amazing Rocks personally handmade by Chablee</string>
+    <string name="neutral_09">L suggests checking out some amazing Body Chains personally handmade by Chablee</string>
+
+    <!-- messages : happy -->
+    <string name="happy_01">L is very happy today</string>
+    <string name="happy_02">L is in good spirits!</string>
+    <string name="happy_03">L can\'t stop smiling because of you</string>
+    <string name="happy_04">L just became happier</string>
+    <string name="happy_05">L is rooting for you!</string>
+
+    <!-- messages : unhappy -->
+    <string name="unhappy_01">L is a sad Panda</string>
+    <string name="unhappy_02">L misses you. Where have you been?</string>
+    <string name="unhappy_03">L is disappointed</string>
+    <string name="unhappy_04">L wants to know if you will purchase anything?</string>
+
+    <!-- messages : yes/no -->
+    <string name="yes_no_01">All money from Chablee purchases go toward a good cause!
+        Check out Chablee items?</string>
+    <string name="yes_no_02">L wants to know if you are in a good mood?</string>
+    <string name="yes_no_03">L likes that you are searching for items. Did you find what you were looking for?</string>
+    <string name="yes_no_04">Are there any items you want added to the app?</string>
+    <string name="yes_no_05">Are there any items you wish to add?</string>
+
     <!-- error messages -->
     <string name="default_error_message">Sorry, we\'re having trouble connecting to our servers.
         Please check your connection and try again later.</string>
+
+    <!-- dialog -->
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 
 </resources>

@@ -34,7 +34,7 @@ public class BaseFragment extends Fragment {
     void remove() {
         if (!FrameworkUtils.checkIfNull(getActivity())) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.setCustomAnimations(R.anim.ui_slide_in_from_bottom_frag, R.anim.ui_slide_out_to_bottom_frag);
+            ft.setCustomAnimations(R.anim.ui_slide_in_from_bottom, R.anim.ui_slide_out_to_bottom);
             ft.remove(this).commitAllowingStateLoss();
         }
     }

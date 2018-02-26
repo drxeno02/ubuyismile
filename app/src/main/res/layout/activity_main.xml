@@ -31,32 +31,12 @@
     </LinearLayout>
 
     <!-- information bar -->
-    <RelativeLayout
-        android:id="@+id/rl_info_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/scaling_60"
+    <include
         android:layout_below="@+id/ll_toolbar"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="@dimen/scaling_5"
-            android:layout_marginStart="@dimen/scaling_5"
-            android:layout_marginTop="@dimen/scaling_5"
-            android:src="@drawable/close_black" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/scaling_25"
-            android:layout_marginLeft="@dimen/scaling_25"
-            android:layout_marginRight="@dimen/scaling_25"
-            android:layout_marginStart="@dimen/scaling_25"
-            android:gravity="center_vertical"
-            android:textColor="@color/black" />
-
-    </RelativeLayout>
+        android:id="@+id/rl_info_wrapper"
+        layout="@layout/info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <!-- list of items -->
     <android.support.v7.widget.RecyclerView

@@ -37,9 +37,9 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         // add fragment and transition with animation
-        mFragmentManager.beginTransaction().setCustomAnimations(R.anim.ui_slide_in_from_bottom_frag,
-                R.anim.ui_slide_out_to_bottom_frag, R.anim.ui_slide_in_from_bottom_frag,
-                R.anim.ui_slide_out_to_bottom_frag).add(R.id.frag_container, fragment,
+        mFragmentManager.beginTransaction().setCustomAnimations(R.anim.ui_slide_in_from_bottom,
+                R.anim.ui_slide_out_to_bottom, R.anim.ui_slide_in_from_bottom,
+                R.anim.ui_slide_out_to_bottom).add(R.id.frag_container, fragment,
                 fragment.getClass().getSimpleName()).addToBackStack(null).commit();
     }
 
