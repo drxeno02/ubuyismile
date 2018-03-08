@@ -54,6 +54,7 @@
     <dimen name="scaling_45">40dp</dimen>
     <dimen name="scaling_48">43dp</dimen>
     <dimen name="scaling_50">45dp</dimen>
+    <dimen name="scaling_56">50dp</dimen>
     <dimen name="scaling_60">54dp</dimen>
     <dimen name="scaling_64">58dp</dimen>
     <dimen name="scaling_65">59dp</dimen>
