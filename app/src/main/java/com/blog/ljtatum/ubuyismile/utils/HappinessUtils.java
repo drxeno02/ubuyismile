@@ -48,7 +48,7 @@ public class HappinessUtils {
 
     /**
      * Method is used to update Happiness Score
-     * @param event
+     * @param event The event name that marks a milestone
      */
     public static void trackHappiness(@NonNull String event) {
         if (FrameworkUtils.checkIfNull(mSharedPref)) {
@@ -73,7 +73,7 @@ public class HappinessUtils {
                 // use timestamp to determine positive or negative Happiness score
                 int daysBetweenDates = FrameworkUtils.getDaysBetweenDates(timestamp,
                         mSharedPref.getStringPref(APP_LAUNCH_TIMESTAMP, timestamp));
-                Logger.i(TAG, "Days between dates: " + daysBetweenDates);
+                Logger.i(TAG, "Days Between Dates: " + daysBetweenDates);
                 // counter representing sets of maximum logged days
                 int counter = 1;
                 while ((daysBetweenDates / counter) / MAX_NUM_DAYS_LOGGED_OUT >= 1) {
@@ -82,6 +82,7 @@ public class HappinessUtils {
                 // prepare for negative score
                 if (counter > 1) {
                     points = (rand.nextInt(1) + 1) * counter; // larger penalty
+                    Logger.i(TAG, "Total Points Lost: " + points);
                     int updatedScore = (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) - points) <= 0 ? 0 :
                             (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) - points);
                     mSharedPref.setPref(HAPPINESS_SCORE, updatedScore);
@@ -142,12 +143,13 @@ public class HappinessUtils {
         // update score
         if (isHappinessScoreChanged) {
             points = rand.nextInt(1) + 1;
+            Logger.i(TAG, "Total Points Increased: " + points);
             int updatedScore = (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points) > 100 ? 100 :
                     (mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + points);
             mSharedPref.setPref(HAPPINESS_SCORE, updatedScore);
         }
 
         // print results
-        Logger.i(TAG, "Happiness Score - " + mSharedPref.getIntPref(HAPPINESS_SCORE, -1));
+        Logger.i(TAG, "Happiness Score: " + mSharedPref.getIntPref(HAPPINESS_SCORE, -1));
     }
 }

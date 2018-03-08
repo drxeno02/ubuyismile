@@ -8,15 +8,15 @@ package android.support.compat;
 
 public final class R {
     public static final class attr {
-        public static int font = 0x7f0400e3;
-        public static int fontProviderAuthority = 0x7f0400e5;
-        public static int fontProviderCerts = 0x7f0400e6;
-        public static int fontProviderFetchStrategy = 0x7f0400e7;
-        public static int fontProviderFetchTimeout = 0x7f0400e8;
-        public static int fontProviderPackage = 0x7f0400e9;
-        public static int fontProviderQuery = 0x7f0400ea;
-        public static int fontStyle = 0x7f0400eb;
-        public static int fontWeight = 0x7f0400ec;
+        public static int font = 0x7f0400e6;
+        public static int fontProviderAuthority = 0x7f0400e8;
+        public static int fontProviderCerts = 0x7f0400e9;
+        public static int fontProviderFetchStrategy = 0x7f0400ea;
+        public static int fontProviderFetchTimeout = 0x7f0400eb;
+        public static int fontProviderPackage = 0x7f0400ec;
+        public static int fontProviderQuery = 0x7f0400ed;
+        public static int fontStyle = 0x7f0400ee;
+        public static int fontWeight = 0x7f0400ef;
     }
     public static final class bool {
         public static int abc_action_bar_embed_tabs = 0x7f050001;
@@ -114,14 +114,14 @@ public final class R {
         public static int Widget_Compat_NotificationActionText = 0x7f1601b3;
     }
     public static final class styleable {
-        public static int[] FontFamily = { 0x7f0400e5, 0x7f0400e6, 0x7f0400e7, 0x7f0400e8, 0x7f0400e9, 0x7f0400ea };
+        public static int[] FontFamily = { 0x7f0400e8, 0x7f0400e9, 0x7f0400ea, 0x7f0400eb, 0x7f0400ec, 0x7f0400ed };
         public static int FontFamily_fontProviderAuthority = 0;
         public static int FontFamily_fontProviderCerts = 1;
         public static int FontFamily_fontProviderFetchStrategy = 2;
         public static int FontFamily_fontProviderFetchTimeout = 3;
         public static int FontFamily_fontProviderPackage = 4;
         public static int FontFamily_fontProviderQuery = 5;
-        public static int[] FontFamilyFont = { 0x7f0400e3, 0x7f0400eb, 0x7f0400ec };
+        public static int[] FontFamilyFont = { 0x7f0400e6, 0x7f0400ee, 0x7f0400ef };
         public static int FontFamilyFont_font = 0;
         public static int FontFamilyFont_fontStyle = 1;
         public static int FontFamilyFont_fontWeight = 2;

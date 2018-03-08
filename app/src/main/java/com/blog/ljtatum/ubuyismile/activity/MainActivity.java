@@ -16,11 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
+import com.app.framework.gui.CircleImageView;
 import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.device.DeviceUtils;
@@ -52,7 +56,7 @@ import java.util.List;
 import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String ID_PREFIX = "id_";
@@ -62,6 +66,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved, isDbEmpty;
+
+    // info bar
+    private RelativeLayout rlWrapper;
+    private CircleImageView civEmote;
+    private ImageView ivClose;
+    private TextView tvMessage, tvPositive, tvNegative;
 
     // database
     private ItemProvider mItemProvider;
@@ -127,6 +137,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // track Happiness
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
 
+        // instantiate information bar
+        rlWrapper = findViewById(R.id.rl_wrapper);
+        civEmote = findViewById(R.id.civ_emote);
+        ivClose = findViewById(R.id.iv_close);
+        tvMessage = findViewById(R.id.tv_message);
+        tvPositive = findViewById(R.id.tv_positive);
+        tvNegative = findViewById(R.id.tv_negative);
+
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
         alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
@@ -179,6 +197,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
+        ivClose.setOnClickListener(this);
+        tvPositive.setOnClickListener(this);
+        tvNegative.setOnClickListener(this);
         // navigation drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -807,6 +828,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void onClick(@NonNull View view) {
+        if (!FrameworkUtils.isViewClickable()) {
+            return;
+        }
+
+        switch (view.getId()) {
+            case R.id.iv_close:
+
+                break;
+        }
+
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Bundle args = new Bundle();
@@ -992,4 +1027,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }

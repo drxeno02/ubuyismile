@@ -4,7 +4,7 @@
     android:id="@+id/frag_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_teal_200_color_code"
+    android:background="@color/material_light_blue_400_color_code"
     tools:context=".activity.MainActivity">
 
     <!-- toolbar -->
@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/material_teal_a700_color_code"
+            android:background="@color/material_light_blue_a400_color_code"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -26,7 +26,7 @@
         <View
             android:id="@+id/toolbar_shadow"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="@dimen/scaling_4"
             android:background="@drawable/toolbar_shadow" />
     </LinearLayout>
 
@@ -35,6 +35,7 @@
         android:layout_below="@+id/ll_toolbar"
         android:id="@+id/rl_info_wrapper"
         layout="@layout/info_layout"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -48,6 +49,5 @@
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="none" />
-
 
 </RelativeLayout>

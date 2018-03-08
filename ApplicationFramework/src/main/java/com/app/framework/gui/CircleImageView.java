@@ -1,4 +1,4 @@
-package com.blog.ljtatum.ubuyismile.gui;
+package com.app.framework.gui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -21,16 +21,13 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.app.framework.R;
 import com.app.framework.utilities.FrameworkUtils;
-import com.blog.ljtatum.ubuyismile.R;
-
 
 /**
- * Class is a custom imageView transformer to create circular
- * images with border padding options
- *
- * @author Tatum
+ * Created by LJTat on 3/7/2018.
  */
+
 public class CircleImageView extends NetworkImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
@@ -168,19 +165,6 @@ public class CircleImageView extends NetworkImageView {
         invalidate();
     }
 
-    @NonNull
-    @Override
-    public ScaleType getScaleType() {
-        return SCALE_TYPE;
-    }
-
-    @Override
-    public void setScaleType(ScaleType scaleType) {
-        if (scaleType != SCALE_TYPE) {
-            throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
-        }
-    }
-
     /**
      * Method is used to set the border width
      *
@@ -192,6 +176,19 @@ public class CircleImageView extends NetworkImageView {
         }
         mBorderWidth = borderWidth;
         setup();
+    }
+
+    @NonNull
+    @Override
+    public ScaleType getScaleType() {
+        return SCALE_TYPE;
+    }
+
+    @Override
+    public void setScaleType(ScaleType scaleType) {
+        if (scaleType != SCALE_TYPE) {
+            throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
+        }
     }
 
     /**
@@ -228,7 +225,7 @@ public class CircleImageView extends NetworkImageView {
     /**
      * Method is used to setup the bitmap (image) with style, color, and other attributes
      * <p>It is necessary invalidate the whole view. If the view is visible,
-     * {@link #onDraw(Canvas)} will be called at some point in
+     * {@link #onDraw(android.graphics.Canvas)} will be called at some point in
      * the future<p/>
      */
     private void setup() {
