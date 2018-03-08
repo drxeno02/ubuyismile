@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/material_light_blue_a200_color_code"
+    android:background="@color/material_light_blue_a400_color_code"
     android:layout_height="wrap_content">
 
     <!-- yes/no -->
     <RelativeLayout
-        android:id="@+id/rl_wrapper"
+        android:id="@+id/rl_wrapper_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible">
@@ -18,19 +18,19 @@
 
             <!-- happiness icon -->
             <com.app.framework.gui.CircleImageView
-                android:id="@+id/civ_emote"
+                android:id="@+id/civ_emote_info"
                 android:layout_width="@dimen/scaling_56"
                 android:layout_height="@dimen/scaling_56"
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:layout_marginLeft="@dimen/scaling_5"
-                android:layout_marginStart="@dimen/scaling_5"
-                android:layout_marginTop="@dimen/scaling_5"
+                android:layout_marginLeft="@dimen/scaling_10"
+                android:layout_marginStart="@dimen/scaling_10"
+                android:layout_marginTop="@dimen/scaling_10"
                 android:src="@drawable/happiness_90_01" />
 
             <!-- happiness message -->
             <TextView
-                android:id="@+id/tv_message"
+                android:id="@+id/tv_message_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/scaling_10"
@@ -38,16 +38,16 @@
                 android:layout_marginRight="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:layout_marginTop="@dimen/scaling_5"
-                android:layout_toEndOf="@+id/civ_emote"
-                android:layout_toLeftOf="@+id/iv_close"
-                android:layout_toRightOf="@+id/civ_emote"
-                android:layout_toStartOf="@+id/iv_close"
+                android:layout_toEndOf="@+id/civ_emote_info"
+                android:layout_toLeftOf="@+id/iv_close_info"
+                android:layout_toRightOf="@+id/civ_emote_info"
+                android:layout_toStartOf="@+id/iv_close_info"
                 android:gravity="center_vertical"
                 android:textColor="@color/black" />
 
             <!-- close button -->
             <ImageView
-                android:id="@+id/iv_close"
+                android:id="@+id/iv_close_info"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
@@ -64,14 +64,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_parent"
-            android:layout_marginTop="@dimen/scaling_10"
+            android:layout_marginTop="@dimen/scaling_5"
             android:orientation="horizontal"
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/tv_positive"
+                android:id="@+id/tv_positive_info"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/scaling_30"
+                android:layout_height="@dimen/scaling_34"
                 android:layout_weight="0.5"
                 android:background="@color/material_green_400_color_code"
                 android:gravity="center"
@@ -81,9 +81,9 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/tv_negative"
+                android:id="@+id/tv_negative_info"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/scaling_30"
+                android:layout_height="@dimen/scaling_34"
                 android:layout_weight="0.5"
                 android:background="@color/material_red_600_color_code"
                 android:gravity="center"

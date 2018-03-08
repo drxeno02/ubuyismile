@@ -68,10 +68,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved, isDbEmpty;
 
     // info bar
-    private RelativeLayout rlWrapper;
-    private CircleImageView civEmote;
-    private ImageView ivClose;
-    private TextView tvMessage, tvPositive, tvNegative;
+    private RelativeLayout rlWrapperInfo;
+    private CircleImageView civEmoteInfo;
+    private ImageView ivCloseInfo;
+    private TextView tvMessageInfo, tvPositiveInfo, tvNegativeInfo;
 
     // database
     private ItemProvider mItemProvider;
@@ -138,12 +138,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
 
         // instantiate information bar
-        rlWrapper = findViewById(R.id.rl_wrapper);
-        civEmote = findViewById(R.id.civ_emote);
-        ivClose = findViewById(R.id.iv_close);
-        tvMessage = findViewById(R.id.tv_message);
-        tvPositive = findViewById(R.id.tv_positive);
-        tvNegative = findViewById(R.id.tv_negative);
+        rlWrapperInfo = findViewById(R.id.rl_wrapper_info);
+        civEmoteInfo = findViewById(R.id.civ_emote_info);
+        ivCloseInfo = findViewById(R.id.iv_close_info);
+        tvMessageInfo = findViewById(R.id.tv_message_info);
+        tvPositiveInfo = findViewById(R.id.tv_positive_info);
+        tvNegativeInfo = findViewById(R.id.tv_negative_info);
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
@@ -197,9 +197,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
-        ivClose.setOnClickListener(this);
-        tvPositive.setOnClickListener(this);
-        tvNegative.setOnClickListener(this);
+        ivCloseInfo.setOnClickListener(this);
+        tvPositiveInfo.setOnClickListener(this);
+        tvNegativeInfo.setOnClickListener(this);
         // navigation drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -809,11 +809,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     /**
+     * Method is used to display/hide information bar
+     * @param isEnabled True to display information bar, otherwise false
+     */
+    private void setInfoBar(boolean isEnabled) {
+        if (isEnabled) {
+
+        } else {
+
+        }
+    }
+
+    /**
      * Method is used to enable/disable drawer
      *
      * @param isEnabled True to enable drawer interaction, otherwise disable interaction
      */
-    public void toggleDrawerState(boolean isEnabled) {
+    public void setDrawerState(boolean isEnabled) {
         if (!FrameworkUtils.checkIfNull(mDrawerLayout)) {
             if (isEnabled) {
                 // only unlock (enable) drawer interaction if it is disabled
@@ -834,7 +846,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         switch (view.getId()) {
-            case R.id.iv_close:
+            case R.id.iv_close_info:
 
                 break;
         }

@@ -121,13 +121,13 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         // disable drawer
-        ((MainActivity) mContext).toggleDrawerState(false);
+        ((MainActivity) mContext).setDrawerState(false);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         // enable drawer
-        ((MainActivity) mContext).toggleDrawerState(true);
+        ((MainActivity) mContext).setDrawerState(true);
     }
 }

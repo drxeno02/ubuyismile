@@ -6,7 +6,7 @@
     tools:ignore="ContentDescription">
 
     <RelativeLayout
-        android:id="@+id/rl_wrapper"
+        android:id="@+id/rl_wrapper_info"
         android:layout_width="match_parent"
         android:layout_height="@dimen/scaling_170">
 
@@ -57,7 +57,7 @@
         android:id="@+id/ll_bg_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_wrapper"
+        android:layout_below="@+id/rl_wrapper_info"
         android:padding="@dimen/scaling_10"
         android:orientation="horizontal"
         android:background="@color/material_pink_100_color_code"
