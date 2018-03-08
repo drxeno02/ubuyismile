@@ -6,20 +6,22 @@
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="@dimen/scaling_16">
 
+    <!-- drawer icon -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:src="@mipmap/ic_launcher" />
 
+    <!-- drawer title -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginLeft="@dimen/scaling_10"
+        android:layout_marginStart="@dimen/scaling_10"
         android:text="@string/u_buy"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_22" />
