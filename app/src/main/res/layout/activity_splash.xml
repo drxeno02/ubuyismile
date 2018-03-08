@@ -1,38 +1,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/material_teal_200_color_code"
+    android:background="@color/white"
     android:orientation="vertical">
 
+    <!-- splash icon -->
     <ImageView
-        android:id="@+id/splashImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:id="@+id/iv_splash_icon"
+        android:layout_width="@dimen/scaling_140"
+        android:layout_height="@dimen/scaling_140"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/happiness_80_04" />
 
+    <!-- app title -->
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/splashImage"
+        android:layout_below="@+id/iv_splash_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/scaling_10"
         android:text="@string/u_buy"
-        android:textSize="@dimen/font_size_26" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_30" />
 
+    <!-- divider -->
+    <View
+        android:id="@+id/v_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginBottom="@dimen/scaling_10"
+        android:layout_marginEnd="@dimen/scaling_60"
+        android:layout_marginLeft="@dimen/scaling_60"
+        android:layout_marginRight="@dimen/scaling_60"
+        android:layout_marginStart="@dimen/scaling_60"
+        android:layout_marginTop="@dimen/scaling_10"
+        android:background="@color/black" />
+
+    <!-- authors -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_authors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/v_divider"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/creators"
+        android:textColor="@color/black"
         android:textSize="@dimen/font_size_20" />
 
+    <!-- progress bar -->
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
@@ -40,6 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="@dimen/scaling_20" />
 
 </RelativeLayout>

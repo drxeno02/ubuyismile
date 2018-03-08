@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">UBuyISmile</string>
     <string name="u_buy">U Buy I Smile</string>
-    <string name="creators">by Leonard Tatum &amp; Jeremy Garcia</string>
+    <string name="creators">Leonard Tatum &amp; Jeremy Garcia</string>
 
     <!-- adapter -->
     <string name="percent_sale">-%1$s\%%</string>
