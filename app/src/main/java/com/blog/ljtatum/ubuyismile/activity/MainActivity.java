@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
 import com.app.framework.gui.CircleImageView;
 import com.app.framework.listeners.OnFirebaseValueListener;
+import com.app.framework.sharedpref.SharedPref;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
@@ -52,6 +54,7 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 
@@ -67,11 +70,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private int categoryIndex = 0; // default
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved, isDbEmpty;
 
+    // toolbar
+    private Toolbar mToolbar;
+
     // info bar
-    private RelativeLayout rlWrapperInfo;
+    private LinearLayout llInfo;
+    private RelativeLayout rlInfoBar;
     private CircleImageView civEmoteInfo;
     private ImageView ivCloseInfo;
     private TextView tvMessageInfo, tvPositiveInfo, tvNegativeInfo;
+
+    // shared pref
+    private SharedPref mSharedPref;
 
     // database
     private ItemProvider mItemProvider;
@@ -137,13 +147,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // track Happiness
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
 
-        // instantiate information bar
-        rlWrapperInfo = findViewById(R.id.rl_wrapper_info);
+        // instantiate shared prefs
+        mSharedPref = new SharedPref(mContext, com.app.framework.constants.Constants.PREF_FILE_NAME);
+
+         // instantiate information bar
+        llInfo = findViewById(R.id.ll_info_wrapper);
+        rlInfoBar = findViewById(R.id.rl_info_parent);
         civEmoteInfo = findViewById(R.id.civ_emote_info);
         ivCloseInfo = findViewById(R.id.iv_close_info);
         tvMessageInfo = findViewById(R.id.tv_message_info);
         tvPositiveInfo = findViewById(R.id.tv_positive_info);
         tvNegativeInfo = findViewById(R.id.tv_negative_info);
+
+        // toggle info bar
+        toggleInfoBar(true);
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
@@ -168,10 +185,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+                mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
             @Override
             public void onDrawerClosed(View view) {
@@ -303,7 +320,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.isMostPopular = false;
                         alItemDbTemp.add(itemDatabaseModel);
                     } else {
-                        // TODO interate through SQLite db and update values
+                        // TODO iterate through SQLite db and update values
                     }
                 }
             }
@@ -465,6 +482,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                         alItemDbTemp.add(itemDatabaseModel);
                     } else {
+                        // TODO iterate through SQLite db and update values
                         for (int i = 0; i < alItemDb.size(); i++) {
                             if (alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
                                 Logger.e("TEST", "updating item id= " + alItemDb.get(i).itemId + " //@index= " + i);
@@ -810,15 +828,36 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     /**
      * Method is used to display/hide information bar
-     * @param isEnabled True to display information bar, otherwise false
+     * @param isDisplay True to display information bar, otherwise false
      */
-    private void setInfoBar(boolean isEnabled) {
-        if (isEnabled) {
-
+    public void toggleInfoBar(boolean isDisplay) {
+        if (isDisplay) {
+            if (rlInfoBar.getVisibility() != View.VISIBLE) {
+                if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 3) {
+                    // display information bar 100% of the time
+                    tvMessageInfo.setText(HappinessUtils.retrieveDescription());
+                    civEmoteInfo.setImageDrawable(HappinessUtils.retrieveDrawable());
+                    // set visibility
+                    rlInfoBar.setVisibility(View.VISIBLE);
+                } else {
+                    Random rand = new Random();
+                    // display information bar 30% of the time
+                    if (rand.nextInt(10) <= 3) {
+                        tvMessageInfo.setText(HappinessUtils.retrieveDescription());
+                        civEmoteInfo.setImageDrawable(HappinessUtils.retrieveDrawable());
+                        // set visibility
+                        rlInfoBar.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
         } else {
-
+            if (rlInfoBar.getVisibility() != View.GONE) {
+                rlInfoBar.setVisibility(View.GONE);
+            }
         }
     }
+
+
 
     /**
      * Method is used to enable/disable drawer
@@ -847,7 +886,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         switch (view.getId()) {
             case R.id.iv_close_info:
-
+                // toggle info bar
+                toggleInfoBar(false);
                 break;
         }
 

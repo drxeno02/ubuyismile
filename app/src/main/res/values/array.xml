@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- happy messages -->
+    <string-array name="happy_messages">
+        <item>@string/happy_01</item>
+        <item>@string/happy_02</item>
+        <item>@string/happy_03</item>
+        <item>@string/happy_04</item>
+        <item>@string/happy_05</item>
+    </string-array>
+
+    <!-- neutral messages -->
+    <string-array name="neutral_messages">
+        <item>@string/neutral_01</item>
+        <item>@string/neutral_02</item>
+        <item>@string/neutral_03</item>
+        <item>@string/neutral_04</item>
+        <item>@string/neutral_05</item>
+        <item>@string/neutral_06</item>
+        <item>@string/neutral_07</item>
+        <item>@string/neutral_08</item>
+        <item>@string/neutral_09</item>
+    </string-array>
+
+    <!-- unhappy messages -->
+    <string-array name="unhappy_messages">
+        <item>@string/unhappy_01</item>
+        <item>@string/unhappy_02</item>
+        <item>@string/unhappy_03</item>
+        <item>@string/unhappy_04</item>
+    </string-array>
+
+    <!-- 90s drawables -->
+    <integer-array name="drawable_90">
+        <item>@drawable/happiness_90_01</item>
+        <item>@drawable/happiness_90_02</item>
+        <item>@drawable/happiness_90_03</item>
+        <item>@drawable/happiness_90_04</item>
+        <item>@drawable/happiness_90_05</item>
+        <item>@drawable/happiness_90_06</item>
+        <item>@drawable/happiness_90_07</item>
+        <item>@drawable/happiness_90_08</item>
+        <item>@drawable/happiness_90_09</item>
+        <item>@drawable/happiness_90_10</item>
+        <item>@drawable/happiness_90_11</item>
+        <item>@drawable/happiness_90_12</item>
+        <item>@drawable/happiness_90_13</item>
+        <item>@drawable/happiness_90_14</item>
+        <item>@drawable/happiness_90_15</item>
+        <item>@drawable/happiness_90_16</item>
+    </integer-array>
+
+    <!-- 80s drawables -->
+    <integer-array name="drawable_80">
+        <item>@drawable/happiness_80_01</item>
+        <item>@drawable/happiness_80_02</item>
+        <item>@drawable/happiness_80_03</item>
+        <item>@drawable/happiness_80_04</item>
+        <item>@drawable/happiness_80_05</item>
+        <item>@drawable/happiness_80_06</item>
+        <item>@drawable/happiness_80_07</item>
+        <item>@drawable/happiness_80_08</item>
+        <item>@drawable/happiness_80_09</item>
+        <item>@drawable/happiness_80_10</item>
+        <item>@drawable/happiness_80_11</item>
+    </integer-array>
+
+    <!-- 70s drawables -->
+    <integer-array name="drawable_70">
+        <item>@drawable/happiness_70_01</item>
+        <item>@drawable/happiness_70_02</item>
+        <item>@drawable/happiness_70_03</item>
+        <item>@drawable/happiness_70_04</item>
+        <item>@drawable/happiness_70_05</item>
+        <item>@drawable/happiness_70_06</item>
+        <item>@drawable/happiness_70_07</item>
+        <item>@drawable/happiness_70_08</item>
+        <item>@drawable/happiness_70_09</item>
+    </integer-array>
+
+    <!-- 60s drawables -->
+    <integer-array name="drawable_60">
+        <item>@drawable/happiness_60_01</item>
+        <item>@drawable/happiness_60_02</item>
+        <item>@drawable/happiness_60_03</item>
+        <item>@drawable/happiness_60_04</item>
+        <item>@drawable/happiness_60_05</item>
+        <item>@drawable/happiness_60_06</item>
+    </integer-array>
+
+    <!-- 50s drawables -->
+    <integer-array name="drawable_50">
+        <item>@drawable/happiness_50_01</item>
+        <item>@drawable/happiness_50_02</item>
+        <item>@drawable/happiness_50_03</item>
+        <item>@drawable/happiness_50_04</item>
+        <item>@drawable/happiness_50_05</item>
+        <item>@drawable/happiness_50_06</item>
+    </integer-array>
+
+
+</resources>

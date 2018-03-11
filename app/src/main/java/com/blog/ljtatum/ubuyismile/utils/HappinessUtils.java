@@ -1,14 +1,21 @@
 package com.blog.ljtatum.ubuyismile.utils;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import com.app.framework.constants.Constants;
 import com.app.framework.sharedpref.SharedPref;
 import com.app.framework.utilities.FrameworkUtils;
+import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
@@ -39,11 +46,47 @@ public class HappinessUtils {
     private static final int SEARCH_THRESHOLD = 25; // threshold for searching items
     private static final int FEEDBACK_VISIT_THRESHOLD = 10; // threshold for visiting feedback
 
+    private static String[] arryHappyMessages;
+    private static String[] arryNeutralMessages;
+    private static String[] arryUnHappyMessages;
+    private static TypedArray typedArryDrawable90;
+    private static TypedArray typedArryDrawable80;
+    private static TypedArray typedArryDrawable70;
+    private static TypedArray typedArryDrawable60;
+    private static TypedArray typedArryDrawable50;
 
     private static SharedPref mSharedPref;
+    private static Context mContext;
 
     public HappinessUtils(Context context) {
+        mContext = context;
         mSharedPref = new SharedPref(context, Constants.PREF_FILE_NAME);
+
+        // populate lists
+        populateMessageLists();
+        populateDrawableLists();
+    }
+
+    /**
+     * Method is used to populate message lists
+     */
+    private void populateMessageLists() {
+        // instantiate message lists
+        arryHappyMessages = mContext.getResources().getStringArray(R.array.happy_messages);
+        arryNeutralMessages = mContext.getResources().getStringArray(R.array.neutral_messages);
+        arryUnHappyMessages = mContext.getResources().getStringArray(R.array.unhappy_messages);
+    }
+
+    /**
+     * Method is used to populate drawable lists
+     */
+    private void populateDrawableLists() {
+        // instantiate drawable lists
+        typedArryDrawable90 = mContext.getResources().obtainTypedArray(R.array.drawable_90);
+        typedArryDrawable80 = mContext.getResources().obtainTypedArray(R.array.drawable_80);
+        typedArryDrawable70 = mContext.getResources().obtainTypedArray(R.array.drawable_70);
+        typedArryDrawable60 = mContext.getResources().obtainTypedArray(R.array.drawable_60);
+        typedArryDrawable50 = mContext.getResources().obtainTypedArray(R.array.drawable_50);
     }
 
     /**
@@ -68,7 +111,7 @@ public class HappinessUtils {
 
             if (score == -1) {
                 // default score
-                mSharedPref.setPref(HAPPINESS_SCORE, 80);
+                mSharedPref.setPref(HAPPINESS_SCORE, 81);
             } else {
                 // use timestamp to determine positive or negative Happiness score
                 int daysBetweenDates = FrameworkUtils.getDaysBetweenDates(timestamp,
@@ -151,5 +194,68 @@ public class HappinessUtils {
 
         // print results
         Logger.i(TAG, "Happiness Score: " + mSharedPref.getIntPref(HAPPINESS_SCORE, -1));
+    }
+
+    /**
+     * Method is used to retrieve description
+     * @return An immutable sequence of UTF-16 char
+     */
+    public static String retrieveDescription() {
+        String description;
+        Random rand = new Random();
+        if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 3) {
+            description = mContext.getResources().getString(R.string.neutral_01);
+        } else {
+            if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 80) {
+                // happy messages
+                description = arryHappyMessages[rand.nextInt(arryHappyMessages.length - 1)];
+            } else if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 60 &&
+                    mSharedPref.getIntPref(HAPPINESS_SCORE, 0) <= 80) {
+                // neutral messages
+                description = arryNeutralMessages[rand.nextInt(arryNeutralMessages.length - 1)];
+            } else {
+                // unhappy messages
+                description = arryUnHappyMessages[rand.nextInt(arryUnHappyMessages.length - 1)];
+            }
+        }
+        return description;
+    }
+
+    /**
+     * Method is used to retrieve drawable
+     * @return A Drawable is a general abstraction for "something that can be drawn."
+     */
+    public static Drawable retrieveDrawable() {
+        Drawable drawable;
+        Random rand = new Random();
+        if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 3) {
+            drawable = ContextCompat.getDrawable(mContext, R.drawable.happiness_80_04);
+        } else {
+            if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 90) {
+                // happy messages
+                drawable = ContextCompat.getDrawable(mContext, typedArryDrawable90.getResourceId(
+                        rand.nextInt(typedArryDrawable90.length() - 1), 0));
+            } else if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 80 &&
+                    mSharedPref.getIntPref(HAPPINESS_SCORE, 0) <= 90) {
+                // happy messages
+                drawable = ContextCompat.getDrawable(mContext, typedArryDrawable80.getResourceId(
+                        rand.nextInt(typedArryDrawable80.length() - 1), 0));
+            } else if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 70 &&
+                    mSharedPref.getIntPref(HAPPINESS_SCORE, 0) <= 80) {
+                // neutral messages
+                drawable = ContextCompat.getDrawable(mContext, typedArryDrawable70.getResourceId(
+                        rand.nextInt(typedArryDrawable70.length() - 1), 0));
+            } else if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 60 &&
+                    mSharedPref.getIntPref(HAPPINESS_SCORE, 0) <= 70) {
+                // neutral messages
+                drawable = ContextCompat.getDrawable(mContext, typedArryDrawable60.getResourceId(
+                        rand.nextInt(typedArryDrawable60.length() - 1), 0));
+            } else {
+                // unhappy messages
+                drawable = ContextCompat.getDrawable(mContext, typedArryDrawable50.getResourceId(
+                        rand.nextInt(typedArryDrawable50.length() - 1), 0));
+            }
+        }
+        return drawable;
     }
 }

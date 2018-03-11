@@ -33,19 +33,18 @@
     <!-- information bar -->
     <include
         android:layout_below="@+id/ll_toolbar"
-        android:id="@+id/rl_info_wrapper"
+        android:id="@+id/info_bar"
         layout="@layout/info_layout"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <!-- list of items -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_items"
-        android:layout_below="@+id/rl_info_wrapper"
+        android:layout_below="@+id/info_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/material_orange_100_color_code"
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="none" />

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/material_light_blue_a400_color_code"
     android:layout_height="wrap_content">
 
-    <!-- yes/no -->
     <RelativeLayout
-        android:id="@+id/rl_wrapper_info"
+        android:visibility="gone"
+        android:id="@+id/rl_info_parent"
+        android:background="@color/material_light_blue_a400_color_code"
+        android:paddingBottom="@dimen/scaling_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/rl_parent"
+            android:id="@+id/rl_info_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -42,8 +42,9 @@
                 android:layout_toLeftOf="@+id/iv_close_info"
                 android:layout_toRightOf="@+id/civ_emote_info"
                 android:layout_toStartOf="@+id/iv_close_info"
+                android:textSize="@dimen/font_size_18"
                 android:gravity="center_vertical"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <!-- close button -->
             <ImageView
@@ -61,9 +62,11 @@
 
         <!-- yes/no -->
         <LinearLayout
+            android:id="@+id/ll_info_wrapper"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_parent"
+            android:layout_below="@+id/rl_info_wrapper"
             android:layout_marginTop="@dimen/scaling_5"
             android:orientation="horizontal"
             android:weightSum="1">
