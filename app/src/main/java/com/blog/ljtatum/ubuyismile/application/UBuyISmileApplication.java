@@ -2,6 +2,7 @@ package com.blog.ljtatum.ubuyismile.application;
 
 import android.app.Application;
 
+import com.app.framework.utilities.apprater.AppRaterUtil;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.google.firebase.FirebaseApp;
@@ -16,8 +17,9 @@ public class UBuyISmileApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // instantiate HappinessUtils
+        // instantiate utility classes
         new HappinessUtils(getApplicationContext());
+        new AppRaterUtil(getApplicationContext(), getPackageName());
 
         try {
             // instantiate FireBase
