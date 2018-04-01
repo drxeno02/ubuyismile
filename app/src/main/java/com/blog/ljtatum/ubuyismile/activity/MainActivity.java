@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -85,7 +84,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private List<ItemDatabaseModel> alItemDb, alItemDbTemp;
 
     // adapter
-    private LinearLayoutManager mLayoutManager;
+    private GridLayoutManager mGridLayoutManager;
     private ItemAdapter mItemAdapter;
     private RecyclerView rvItems;
     private ArrayList<ItemModel> alItems;
@@ -168,10 +167,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 getResources().getString(R.string.amazon_secret_key));
 
         // initialize adapter
-        mLayoutManager = new LinearLayoutManager(mContext);
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mGridLayoutManager = new GridLayoutManager(mContext, 2);
+        mGridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         rvItems = findViewById(R.id.rv_items);
-        rvItems.setLayoutManager(mLayoutManager);
+        rvItems.setLayoutManager(mGridLayoutManager);
         mItemAdapter = new ItemAdapter(mContext, alItems,
                 com.blog.ljtatum.ubuyismile.enums.Enum.AdapterType.BROWSE);
         rvItems.setAdapter(mItemAdapter);

@@ -54,44 +54,56 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/ll_bg_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_wrapper"
-        android:padding="@dimen/scaling_10"
-        android:orientation="horizontal"
-        android:background="@color/material_pink_100_color_code"
-        android:weightSum="1">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <!-- title -->
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="0dp"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_marginLeft="@dimen/scaling_5"
+            android:layout_marginStart="@dimen/scaling_5"
+            android:layout_marginRight="@dimen/scaling_5"
+            android:layout_marginEnd="@dimen/scaling_5"
+            android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_16" />
 
-        <!-- scratch price -->
-        <TextView
-            android:id="@+id/tv_scratch_price"
-            android:layout_width="0dp"
-            android:textStyle="bold"
+        <LinearLayout
+            android:id="@+id/ll_bg_wrapper"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".15"
-            android:visibility="invisible"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_16" />
+            android:layout_marginLeft="@dimen/scaling_5"
+            android:layout_marginStart="@dimen/scaling_5"
+            android:layout_marginRight="@dimen/scaling_5"
+            android:layout_marginEnd="@dimen/scaling_5"
+            android:orientation="horizontal">
 
-        <!-- price -->
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="0dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_weight=".15"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_16" />
+            <!-- price -->
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_16"
+                android:textStyle="bold" />
+
+            <!-- scratch price -->
+            <TextView
+                android:id="@+id/tv_scratch_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_16"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
