@@ -22,7 +22,7 @@ import de.keyboardsurfer.android.widget.crouton.LifecycleCallback;
 public class ErrorUtils {
     // how long to display Crouton before it dismisses
     private static final int DURATION = 7000;
-    private static boolean isDisplayed;
+    private boolean isDisplayed;
     private Crouton mCrouton;
 
     /**
@@ -75,9 +75,17 @@ public class ErrorUtils {
     /**
      * Method is used to dismiss error message
      */
-    public void dismissError() {
+    public void dismiss() {
         if (!FrameworkUtils.checkIfNull(mCrouton) && isDisplayed) {
             mCrouton.hide();
         }
+    }
+
+    /**
+     * Method is used to check if message is showing
+     * @return True if message is showing, otherwise false
+     */
+    public boolean isShowing() {
+        return isDisplayed;
     }
 }

@@ -130,7 +130,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         // set values
         holder.tvTitle.setText(alItems.get(position).title);
         // set image
-        Picasso.with(mContext).load(alItems.get(position).imageUrl1)
+        Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItems.get(position).imageUrl1))
                 .placeholder(R.drawable.no_image_available)
                 .resize(DEFAULT_IMAGE_SIZE, DEFAULT_IMAGE_SIZE)
                 .into(holder.ivBg);

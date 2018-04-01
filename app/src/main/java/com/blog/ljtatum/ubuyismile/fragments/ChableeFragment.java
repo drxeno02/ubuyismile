@@ -206,4 +206,13 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View view) {
 
     }
+
+    @Override
+    public void onDetach() {
+        if (!FrameworkUtils.checkIfNull(mErrorUtils)) {
+            // dismiss error dialog
+            mErrorUtils.dismiss();
+        }
+        super.onDetach();
+    }
 }

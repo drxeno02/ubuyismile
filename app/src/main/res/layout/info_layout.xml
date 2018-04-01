@@ -4,7 +4,6 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rl_info_parent"
         android:background="@color/material_light_blue_a400_color_code"
         android:paddingBottom="@dimen/scaling_10"
@@ -49,8 +48,8 @@
             <!-- close button -->
             <ImageView
                 android:id="@+id/iv_close_info"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/scaling_24"
+                android:layout_height="@dimen/scaling_24"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/scaling_5"

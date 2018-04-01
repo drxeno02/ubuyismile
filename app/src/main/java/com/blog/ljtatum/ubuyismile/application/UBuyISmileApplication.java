@@ -19,7 +19,6 @@ public class UBuyISmileApplication extends Application {
 
         // instantiate utility classes
         new HappinessUtils(getApplicationContext());
-        new AppRaterUtil(getApplicationContext(), getPackageName());
 
         try {
             // instantiate FireBase

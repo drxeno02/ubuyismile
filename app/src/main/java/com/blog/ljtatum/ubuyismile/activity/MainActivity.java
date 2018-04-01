@@ -1,8 +1,10 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,19 +18,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
-import com.app.framework.gui.CircleImageView;
 import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.sharedpref.SharedPref;
 import com.app.framework.utilities.FrameworkUtils;
+import com.app.framework.utilities.apprater.AppRaterUtil;
 import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
@@ -47,6 +45,7 @@ import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
+import com.blog.ljtatum.ubuyismile.utils.InfoBarUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,6 +62,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String ID_PREFIX = "id_";
+
+    private Activity mActivity;
     private Context mContext;
     private ErrorUtils mErrorUtils;
     private DrawerLayout mDrawerLayout;
@@ -73,12 +74,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // toolbar
     private Toolbar mToolbar;
 
-    // info bar
-    private LinearLayout llInfo;
-    private RelativeLayout rlInfoBar;
-    private CircleImageView civEmoteInfo;
-    private ImageView ivCloseInfo;
-    private TextView tvMessageInfo, tvPositiveInfo, tvNegativeInfo;
+    // information bar
+    private InfoBarUtils mInfoBarUtils;
 
     // shared pref
     private SharedPref mSharedPref;
@@ -109,7 +106,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initializeViews();
         initializeHandlers();
         initializeListeners();
+        // retrieve firebase data
         retrieveFirebaseData();
+        // toggle information bar
+        toggleInfoBar(true);
 
         // uncomment below to create firebase db. Will also reset all data
 //        createFirebaseDb();
@@ -137,30 +137,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to initialize views
      */
     private void initializeViews() {
+        mActivity = MainActivity.this;
         mContext = MainActivity.this;
         mErrorUtils = new ErrorUtils();
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = ChableeData.getChableeCategories(); // retrieve all Chablee categories
         alItems = new ArrayList<>();
         alItemDbTemp = new ArrayList<>();
-
-        // track Happiness
-        HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
+        mInfoBarUtils = new InfoBarUtils();
 
         // instantiate shared prefs
         mSharedPref = new SharedPref(mContext, com.app.framework.constants.Constants.PREF_FILE_NAME);
 
-         // instantiate information bar
-        llInfo = findViewById(R.id.ll_info_wrapper);
-        rlInfoBar = findViewById(R.id.rl_info_parent);
-        civEmoteInfo = findViewById(R.id.civ_emote_info);
-        ivCloseInfo = findViewById(R.id.iv_close_info);
-        tvMessageInfo = findViewById(R.id.tv_message_info);
-        tvPositiveInfo = findViewById(R.id.tv_positive_info);
-        tvNegativeInfo = findViewById(R.id.tv_negative_info);
+        // rate this app
+        new AppRaterUtil(mContext, getPackageName());
 
-        // toggle info bar
-        toggleInfoBar(true);
+        // track Happiness
+        HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
@@ -214,9 +207,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
-        ivCloseInfo.setOnClickListener(this);
-        tvPositiveInfo.setOnClickListener(this);
-        tvNegativeInfo.setOnClickListener(this);
         // navigation drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -828,36 +818,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     /**
      * Method is used to display/hide information bar
+     *
      * @param isDisplay True to display information bar, otherwise false
      */
     public void toggleInfoBar(boolean isDisplay) {
         if (isDisplay) {
-            if (rlInfoBar.getVisibility() != View.VISIBLE) {
-                if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 3) {
-                    // display information bar 100% of the time
-                    tvMessageInfo.setText(HappinessUtils.retrieveDescription());
-                    civEmoteInfo.setImageDrawable(HappinessUtils.retrieveDrawable());
-                    // set visibility
-                    rlInfoBar.setVisibility(View.VISIBLE);
-                } else {
-                    Random rand = new Random();
-                    // display information bar 30% of the time
-                    if (rand.nextInt(10) <= 3) {
-                        tvMessageInfo.setText(HappinessUtils.retrieveDescription());
-                        civEmoteInfo.setImageDrawable(HappinessUtils.retrieveDrawable());
-                        // set visibility
-                        rlInfoBar.setVisibility(View.VISIBLE);
-                    }
+            if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 5) {
+                // display information bar 100% of the time
+                mInfoBarUtils.showInfoBar(mActivity, false);
+            } else {
+                Random rand = new Random();
+                // display information bar 30% of the time
+                if (rand.nextInt(10) <= 3) {
+                    mInfoBarUtils.showInfoBar(mActivity, false);
                 }
             }
         } else {
-            if (rlInfoBar.getVisibility() != View.GONE) {
-                rlInfoBar.setVisibility(View.GONE);
-            }
+            // display information bar
+            mInfoBarUtils.dismiss();
         }
     }
-
-
 
     /**
      * Method is used to enable/disable drawer
@@ -886,7 +866,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         switch (view.getId()) {
             case R.id.iv_close_info:
-                // toggle info bar
+                // toggle information bar
                 toggleInfoBar(false);
                 break;
         }
@@ -1065,14 +1045,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onPause() {
-        Logger.e("TEST", "isOnPause called");
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Logger.e("TEST", "is OnResune called");
     }
 
     @Override
@@ -1080,4 +1058,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onBackPressed();
     }
 
+    @Override
+    protected void onDestroy() {
+        if (!FrameworkUtils.checkIfNull(mErrorUtils)) {
+            // dismiss error dialog
+            mErrorUtils.dismiss();
+        }
+        if (!FrameworkUtils.checkIfNull(mInfoBarUtils)) {
+            // dismiss information dialog
+            mInfoBarUtils.dismiss();
+        }
+        super.onDestroy();
+    }
 }

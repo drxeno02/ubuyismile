@@ -30,18 +30,10 @@
             android:background="@drawable/toolbar_shadow" />
     </LinearLayout>
 
-    <!-- information bar -->
-    <include
-        android:layout_below="@+id/ll_toolbar"
-        android:id="@+id/info_bar"
-        layout="@layout/info_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <!-- list of items -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_items"
-        android:layout_below="@+id/info_bar"
+        android:layout_below="@+id/ll_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/material_orange_100_color_code"
