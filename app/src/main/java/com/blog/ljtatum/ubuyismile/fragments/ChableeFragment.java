@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
@@ -37,6 +39,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
     private ErrorUtils mErrorUtils;
     private View mRootView;
     private String mCategory;
+    private TextView tvFragmentHeader;
 
     // adapter
     private LinearLayoutManager mLayoutManager;
@@ -55,9 +58,9 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         // instantiate views
         initializeViews();
         initializeListeners();
+        initializeHandlers();
         // retrieve bundle info
         getBundle();
-        initializeHandlers();
 
         return mRootView;
     }
@@ -76,6 +79,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         // initialize views
         rvItems = mRootView.findViewById(R.id.rv_items);
         swipeRefreshLayout = mRootView.findViewById(R.id.sr_layout);
+        tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
 
         // initialize adapter
         mLayoutManager = new LinearLayoutManager(mContext);
@@ -98,6 +102,8 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
+        tvFragmentHeader.setOnClickListener(this);
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -143,12 +149,20 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             mCategory = args.getString(Constants.KEY_CATEGORY, "");
             if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
                 alItems = ChableeData.getCrowns();
+                // set fragment header
+                tvFragmentHeader.setText(getResources().getString(R.string.menu_crowns));
             } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
                 alItems = ChableeData.getRings();
+                // set fragment header
+                tvFragmentHeader.setText(getResources().getString(R.string.menu_rings));
             } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
                 alItems = ChableeData.getNecklaces();
+                // set fragment header
+                tvFragmentHeader.setText(getResources().getString(R.string.menu_necklaces));
             } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
                 alItems = ChableeData.getRocks();
+                // set fragment header
+                tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
             }
         }
 
@@ -204,7 +218,23 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
+        if (!FrameworkUtils.isViewClickable()) {
+            return;
+        }
 
+        switch (view.getId()) {
+            case R.id.tv_fragment_header:
+                remove();
+                popBackStack();
+                break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // disable drawer
+        ((MainActivity) mContext).setDrawerState(false);
     }
 
     @Override
@@ -214,5 +244,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             mErrorUtils.dismiss();
         }
         super.onDetach();
+        // enable drawer
+        ((MainActivity) mContext).setDrawerState(true);
     }
 }
