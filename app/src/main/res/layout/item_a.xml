@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:transitionName="@string/shared_element_transition_name"
     tools:ignore="ContentDescription">
 
     <RelativeLayout
@@ -24,7 +25,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/edge_left_black"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <!-- label icon -->
             <ImageView

@@ -33,9 +33,9 @@ public class Enum {
     }
 
     /**
-     * Method is used to set adapter type
+     * Method is used to set item type
      */
-    public enum AdapterType {
+    public enum ItemType {
         BROWSE,
         CHABLEE;
     }

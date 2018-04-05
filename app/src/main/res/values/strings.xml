@@ -3,6 +3,9 @@
     <string name="u_buy">U Buy I Smile</string>
     <string name="creators">Leonard Tatum &amp; Jeremy Garcia</string>
 
+    <!-- shared element transition -->
+    <string name="shared_element_transition_name">transition</string>
+
     <!-- adapter -->
     <string name="percent_sale">-%1$s\%%</string>
     <string name="dollar_format">$%1$s</string>

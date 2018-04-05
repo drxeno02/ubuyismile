@@ -72,5 +72,6 @@
     <dimen name="scaling_220">198dp</dimen>
     <dimen name="scaling_260">234dp</dimen>
     <dimen name="scaling_280">252dp</dimen>
+    <dimen name="scaling_300">270dp</dimen>
 
 </resources>

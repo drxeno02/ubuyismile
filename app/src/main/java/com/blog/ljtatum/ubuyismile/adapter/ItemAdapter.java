@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
+import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
@@ -29,9 +31,19 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private final Context mContext;
-    private final int DEFAULT_IMAGE_SIZE = 500;
     private ArrayList<ItemModel> alItems;
-    private Enum.AdapterType mAdapterType;
+    private Enum.ItemType mItemType;
+
+    // custom callback
+    private static OnClickAdapterListener mOnClickAdapterListener;
+
+    /**
+     * Method is used to set callback for when item is clicked
+     * @param listener Callback for when item is clicked
+     */
+    public static void onClickAdapterListener(OnClickAdapterListener listener) {
+        mOnClickAdapterListener = listener;
+    }
 
     /**
      * Constructor
@@ -39,17 +51,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * @param context Interface to global information about an application environment
      * @param alItems List of items to display
      */
-    public ItemAdapter(Context context, ArrayList<ItemModel> alItems, Enum.AdapterType adapterType) {
-        mAdapterType = adapterType;
+    public ItemAdapter(Context context, ArrayList<ItemModel> alItems, Enum.ItemType itemType) {
+        mItemType = itemType;
         mContext = context;
         this.alItems = alItems;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
-        if (mAdapterType.equals(Enum.AdapterType.CHABLEE)) {
+        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
             v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
         } else {
             v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
@@ -59,11 +70,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @SuppressLint("StringFormatInvalid")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final int index = holder.getAdapterPosition();
 
         // set background
-        if (mAdapterType.equals(Enum.AdapterType.CHABLEE)) {
+        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
             if (position % 2 == 0) {
                 holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
             } else {
@@ -132,9 +143,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         // set image
         Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItems.get(position).imageUrl1))
                 .placeholder(R.drawable.no_image_available)
-                .resize(DEFAULT_IMAGE_SIZE, DEFAULT_IMAGE_SIZE)
+                .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
                 .into(holder.ivBg);
-
+        // click listener
+        holder.ivBg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!FrameworkUtils.checkIfNull(mOnClickAdapterListener)) {
+                    // set listener
+                    mOnClickAdapterListener.onClick(index, holder.ivBg);
+                }
+            }
+        });
     }
 
     @Override

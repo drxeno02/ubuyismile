@@ -24,7 +24,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/edge_left_black"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <!-- label icon -->
             <ImageView

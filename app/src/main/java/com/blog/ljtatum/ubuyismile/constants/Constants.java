@@ -13,7 +13,13 @@ public class Constants {
     // verbose mode; true to see verbosity mode otherwise false
     public static final boolean DEBUG_VERBOSE = true;
 
+    // default image size
+    public static final int DEFAULT_IMAGE_SIZE_500 = 500;
+    public static final int DEFAULT_IMAGE_SIZE_700 = 700;
+
     // bundle keys
     public static final String KEY_CATEGORY = "key_category";
+    public static final String KEY_ITEM_TYPE = "key_item_type";
+    public static final String KEY_ITEM_POS = "key_item_pos";
 
 }

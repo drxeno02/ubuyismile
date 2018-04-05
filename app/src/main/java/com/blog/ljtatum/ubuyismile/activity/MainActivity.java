@@ -172,7 +172,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         rvItems = findViewById(R.id.rv_items);
         rvItems.setLayoutManager(mGridLayoutManager);
         mItemAdapter = new ItemAdapter(mContext, alItems,
-                com.blog.ljtatum.ubuyismile.enums.Enum.AdapterType.BROWSE);
+                com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE);
         rvItems.setAdapter(mItemAdapter);
 
         // drawer

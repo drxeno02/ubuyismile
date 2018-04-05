@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:transitionName="@string/shared_element_transition_name"
+    android:background="@color/material_pink_100_color_code"
     tools:ignore="ContentDescription">
 
+    <include
+        android:id="@+id/header"
+        layout="@layout/fragment_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/scaling_20" />
 
     <RelativeLayout
         android:id="@+id/rl_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scaling_260">
+        android:layout_height="@dimen/scaling_300"
+        android:layout_below="@id/header">
 
         <LinearLayout
             android:id="@+id/ll_label_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/scaling_34"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/edge_left_black"
             android:orientation="horizontal"
             android:visibility="visible">
@@ -51,9 +60,8 @@
         <ImageView
             android:id="@+id/iv_bg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/scaling_260"
+            android:layout_height="@dimen/scaling_300"
             android:scaleType="centerCrop" />
-
 
         <LinearLayout
             android:id="@+id/ll_desc_wrapper"
@@ -61,33 +69,33 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/black_40"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:padding="@dimen/scaling_10"
+            android:orientation="vertical" >
 
             <!-- title -->
             <TextView
                 android:id="@+id/tv_title"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16" />
+                android:textSize="@dimen/font_size_16"
+                android:textStyle="bold" />
 
             <!-- description -->
             <TextView
                 android:id="@+id/tv_desc"
-                android:layout_marginTop="@dimen/scaling_10"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/scaling_10"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_16" />
-
 
         </LinearLayout>
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>
