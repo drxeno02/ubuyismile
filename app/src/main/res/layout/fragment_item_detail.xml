@@ -72,14 +72,34 @@
             android:padding="@dimen/scaling_10"
             android:orientation="vertical" >
 
-            <!-- title -->
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/scaling_10"
+                android:weightSum="1"
+                android:layout_height="wrap_content">
+
+                <!-- title -->
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_16" />
+
+                <!-- price -->
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="0dp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".15"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_18" />
+
+            </LinearLayout>
 
             <!-- description -->
             <TextView
@@ -94,8 +114,48 @@
 
         </LinearLayout>
 
+        <!-- share and favorite icon -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/scaling_neg_30"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_above="@+id/ll_desc_wrapper"
+            android:layout_height="wrap_content">
+
+            <!-- share icon -->
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="@dimen/scaling_40"
+                android:scaleType="fitXY"
+                android:src="@drawable/share_icon"
+                android:layout_height="@dimen/scaling_40" />
+
+            <!-- favorite icon -->
+            <ImageView
+                android:id="@+id/iv_favorite"
+                android:layout_marginStart="@dimen/scaling_10"
+                android:layout_width="@dimen/scaling_40"
+                android:scaleType="fitXY"
+                android:src="@drawable/favorite_icon"
+                android:layout_height="@dimen/scaling_40" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
+    <!-- buy -->
+    <TextView
+        android:id="@+id/tv_buy"
+        android:layout_below="@+id/rl_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scaling_60"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/material_light_green_400_color_code"
+        android:textSize="@dimen/font_size_20"
+        android:text="@string/buy"/>
 
 </RelativeLayout>

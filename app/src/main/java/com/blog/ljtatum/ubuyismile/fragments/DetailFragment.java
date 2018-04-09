@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,6 +20,8 @@ import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
+import com.blog.ljtatum.ubuyismile.utils.AnimationUtils;
+import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,8 +35,8 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private Context mContext;
     private View mRootView;
 
-    private TextView tvFragmentHeader, tvSalePerc, tvLabel, tvTitle, tvPrice, tvScratchPrice, tvDesc;
-    private ImageView ivBg, ivLabelIcon;
+    private TextView tvFragmentHeader, tvLabel, tvTitle, tvPrice, tvDesc, tvBuy;
+    private ImageView ivBg, ivLabelIcon, ivShare, ivFavorite;
     private LinearLayout llLabelWrapper;
     private RelativeLayout rlParent;
 
@@ -67,13 +70,18 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         llLabelWrapper = mRootView.findViewById(R.id.ll_label_wrapper);
         rlParent = mRootView.findViewById(R.id.rl_parent);
         tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
-//        tvSalePerc = mRootView.findViewById(R.id.tv_sale_perc);
+        tvPrice = mRootView.findViewById(R.id.tv_price);
         tvLabel = mRootView.findViewById(R.id.tv_label);
         tvTitle = mRootView.findViewById(R.id.tv_title);
-//        tvScratchPrice = mRootView.findViewById(R.id.tv_scratch_price);
         tvDesc = mRootView.findViewById(R.id.tv_desc);
+        tvBuy = mRootView.findViewById(R.id.tv_buy);
         ivBg = mRootView.findViewById(R.id.iv_bg);
         ivLabelIcon = mRootView.findViewById(R.id.iv_label_icon);
+        ivShare = mRootView.findViewById(R.id.iv_share);
+        ivFavorite = mRootView.findViewById(R.id.iv_favorite);
+
+        // start animation
+        tvBuy.startAnimation(AnimationUtils.retrieveBlinkAnimation());
     }
 
     /**
@@ -88,8 +96,10 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      */
     private void initializeHandlers() {
         tvFragmentHeader.setOnClickListener(this);
-
-
+        tvBuy.setOnClickListener(this);
+        ivBg.setOnClickListener(this);
+        ivShare.setOnClickListener(this);
+        ivFavorite.setOnClickListener(this);
     }
 
     /**
@@ -100,7 +110,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         if (!FrameworkUtils.checkIfNull(args)) {
             // set position
             mPos = args.getInt(Constants.KEY_ITEM_POS);
-            Logger.e("TEST", "<DetailFragment> pos= " + mPos);
             // set background
             if (args.getString(Constants.KEY_ITEM_TYPE, "").equalsIgnoreCase(
                     com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
@@ -134,32 +143,23 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
+    /**
+     * Method is used to populate item details
+     */
     private void populateItemDetails() {
         // sale price percentage
-//        if ((!FrameworkUtils.isStringEmpty(alItems.get(mPos).salePrice) &&
-//                !FrameworkUtils.isStringEmpty(alItems.get(mPos).price)) &&
-//                (Utils.getDollarValue(alItems.get(mPos).salePrice) > 0) &&
-//                (Utils.getDollarValue(alItems.get(mPos).salePrice) <
-//                        Utils.getDollarValue(alItems.get(mPos).price))) {
-//            // set visibility
-//            FrameworkUtils.setViewVisible(holder.tvSalePerc, holder.tvScratchPrice);
-//            // set percent sale value
-//            holder.tvSalePerc.setText(mContext.getResources().getString(R.string.percent_sale,
-//                    String.valueOf(Utils.calculatePercSale(Utils.getDollarValue(alItems.get(position).price),
-//                            Utils.getDollarValue(alItems.get(position).salePrice)))));
-//            // set price as sale price and price
-//            holder.tvPrice.setText(mContext.getResources().getString(
-//                    R.string.dollar_format, alItems.get(position).salePrice));
-//            holder.tvScratchPrice.setText(mContext.getResources().getString(
-//                    R.string.dollar_format, alItems.get(position).price));
-//            holder.tvScratchPrice.setPaintFlags(holder.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//        } else {
-//            // set visibility
-//            FrameworkUtils.setViewGone(holder.tvSalePerc);
-//            FrameworkUtils.setViewInvisible(holder.tvScratchPrice);
-//            holder.tvPrice.setText(mContext.getResources().getString(
-//                    R.string.dollar_format, alItems.get(position).price));
-//        }
+        if ((!FrameworkUtils.isStringEmpty(alItems.get(mPos).salePrice) &&
+                !FrameworkUtils.isStringEmpty(alItems.get(mPos).price)) &&
+                (Utils.getDollarValue(alItems.get(mPos).salePrice) > 0) &&
+                (Utils.getDollarValue(alItems.get(mPos).salePrice) <
+                        Utils.getDollarValue(alItems.get(mPos).price))) {
+            // set price as sale price and price
+            tvPrice.setText(mContext.getResources().getString(
+                    R.string.dollar_format, alItems.get(mPos).salePrice));
+        } else {
+            tvPrice.setText(mContext.getResources().getString(
+                    R.string.dollar_format, alItems.get(mPos).price));
+        }
 
         // label
         if (!alItems.get(mPos).label.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NONE.toString())) {
@@ -193,8 +193,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
         // set values
         tvTitle.setText(alItems.get(mPos).title);
-//        tvDesc.setText(alItems.get(mPos).description);
-        tvDesc.setText("wfuhwiuefw hwuefhwf hwefuhw euuuue ufhhweu faeaw ufewfwf house fhwfhuwehfw aa cat ahfeuahwfnewuf wwwe what wfhwuaefhwfhe can I afwefwefwaef see uaafuhauefhw up in hefahuhaefw how far in three lines of text");
+        tvDesc.setText(alItems.get(mPos).description);
         // set image
         Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItems.get(mPos).imageUrl1))
                 .placeholder(R.drawable.no_image_available)
@@ -211,10 +210,29 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.tv_fragment_header:
                 remove();
-//                popBackStack();
+                break;
+            case R.id.tv_buy:
+
+                break;
+            case R.id.iv_bg:
+
+                break;
+            case R.id.iv_share:
+
+                break;
+            case R.id.iv_favorite:
+
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // clear animation
+        tvBuy.clearAnimation();
+        System.gc();
     }
 }

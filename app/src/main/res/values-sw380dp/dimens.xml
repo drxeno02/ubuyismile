@@ -73,4 +73,7 @@
     <dimen name="scaling_280">266dp</dimen>
     <dimen name="scaling_300">285dp</dimen>
 
+    <!-- layout dimension attributes (negative) -->
+    <dimen name="scaling_neg_30">-29dp</dimen>
+
 </resources>

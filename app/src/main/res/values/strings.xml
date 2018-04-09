@@ -10,6 +10,9 @@
     <string name="percent_sale">-%1$s\%%</string>
     <string name="dollar_format">$%1$s</string>
 
+    <!-- item details -->
+    <string name="buy">Buy</string>
+
     <!-- about -->
     <string name="follow_me">Follow Me:</string>
     <string name="copyright_year">Copyright %s, Leonard Tatum. All Rights Reserved.</string>
