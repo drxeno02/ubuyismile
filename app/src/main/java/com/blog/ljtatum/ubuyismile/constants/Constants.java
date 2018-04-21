@@ -21,5 +21,6 @@ public class Constants {
     public static final String KEY_CATEGORY = "key_category";
     public static final String KEY_ITEM_TYPE = "key_item_type";
     public static final String KEY_ITEM_POS = "key_item_pos";
+    public static final String KEY_ITEM_PURCHASE_URL = "key_item_url";
 
 }

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_centerVertical="true"
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="horizontal"
-    android:padding="@dimen/scaling_16">
+    android:padding="@dimen/scaling_16"
+    tools:ignore="ContentDescription">
 
     <!-- drawer icon -->
     <ImageView
@@ -20,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/scaling_10"
         android:layout_marginStart="@dimen/scaling_10"
         android:text="@string/u_buy"
         android:textColor="@color/white"

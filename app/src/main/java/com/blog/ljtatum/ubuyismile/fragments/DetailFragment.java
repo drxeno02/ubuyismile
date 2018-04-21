@@ -3,11 +3,11 @@ package com.blog.ljtatum.ubuyismile.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,7 +17,6 @@ import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
-import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.AnimationUtils;
@@ -41,9 +40,8 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private RelativeLayout rlParent;
 
     private int mPos;
-    private String mCategory;
+    private String mCategory, mItemType;
     private ArrayList<ItemModel> alItems;
-    private com.blog.ljtatum.ubuyismile.enums.Enum.ItemType mItemType;
 
     @Nullable
     @Override
@@ -52,7 +50,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
         // instantiate views
         initializeViews();
-        initializeListeners();
         initializeHandlers();
         // retrieve bundle info
         getBundle();
@@ -85,13 +82,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     }
 
     /**
-     * Method is used to initialize listeners and callbacks
-     */
-    private void initializeListeners() {
-
-    }
-
-    /**
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
@@ -110,32 +100,39 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         if (!FrameworkUtils.checkIfNull(args)) {
             // set position
             mPos = args.getInt(Constants.KEY_ITEM_POS);
-            // set background
-            if (args.getString(Constants.KEY_ITEM_TYPE, "").equalsIgnoreCase(
-                    com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
-                rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
-            } else {
-                rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_light_blue_400_color_code));
-            }
-
             // set category
             mCategory = args.getString(Constants.KEY_CATEGORY, "");
-            if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
-                alItems = ChableeData.getCrowns();
-                // set fragment header
-                tvFragmentHeader.setText(getResources().getString(R.string.menu_crowns));
-            } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
-                alItems = ChableeData.getRings();
-                // set fragment header
-                tvFragmentHeader.setText(getResources().getString(R.string.menu_rings));
-            } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
-                alItems = ChableeData.getNecklaces();
-                // set fragment header
-                tvFragmentHeader.setText(getResources().getString(R.string.menu_necklaces));
-            } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
-                alItems = ChableeData.getRocks();
-                // set fragment header
-                tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
+            // set type
+            mItemType = args.getString(Constants.KEY_ITEM_TYPE, "");
+
+            // set background
+            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
+                rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_light_blue_400_color_code));
+            } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
+                rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
+            }
+
+            // set header
+            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
+
+            } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
+                if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
+                    alItems = ChableeData.getCrowns();
+                    // set fragment header
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_crowns));
+                } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
+                    alItems = ChableeData.getRings();
+                    // set fragment header
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_rings));
+                } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
+                    alItems = ChableeData.getNecklaces();
+                    // set fragment header
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_necklaces));
+                } else if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
+                    alItems = ChableeData.getRocks();
+                    // set fragment header
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
+                }
             }
 
             // populate details
@@ -209,10 +206,19 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
         switch (view.getId()) {
             case R.id.tv_fragment_header:
+                // remove fragment
                 remove();
                 break;
             case R.id.tv_buy:
+                Bundle args = new Bundle();
+                args.putInt(Constants.KEY_ITEM_POS, mPos);
+                args.putString(Constants.KEY_CATEGORY, mCategory);
+                args.putString(Constants.KEY_ITEM_TYPE, mItemType);
+                args.putString(Constants.KEY_ITEM_PURCHASE_URL, alItems.get(mPos).purchaseUrl);
 
+                Fragment fragment = new WebViewFragment();
+                fragment.setArguments(args);
+                addFragment(fragment);
                 break;
             case R.id.iv_bg:
 
@@ -233,6 +239,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         super.onDetach();
         // clear animation
         tvBuy.clearAnimation();
+        tvBuy = null;
         System.gc();
     }
 }

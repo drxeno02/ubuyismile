@@ -115,6 +115,7 @@ public class ChableeData {
         for (int i = 0; i < alItems.size(); i++) {
             if (!FrameworkUtils.isStringEmpty(alItems.get(i).title)) {
                 ItemModel itemModel = new ItemModel();
+                itemModel.itemId = alItems.get(i).itemId;
                 itemModel.price = alItems.get(i).price;
                 itemModel.salePrice = alItems.get(i).salePrice;
                 itemModel.title = alItems.get(i).title;
@@ -124,6 +125,7 @@ public class ChableeData {
                 itemModel.imageUrl3 = alItems.get(i).imageUrl3;
                 itemModel.imageUrl4 = alItems.get(i).imageUrl4;
                 itemModel.imageUrl5 = alItems.get(i).imageUrl5;
+                itemModel.purchaseUrl = alItems.get(i).purchaseUrl;
                 itemModel.category = alItems.get(i).category;
                 itemModel.label = alItems.get(i).label;
                 itemModel.timestamp = alItems.get(i).timestamp;

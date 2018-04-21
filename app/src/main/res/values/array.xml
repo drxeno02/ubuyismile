@@ -85,7 +85,6 @@
         <item>@drawable/happiness_60_03</item>
         <item>@drawable/happiness_60_04</item>
         <item>@drawable/happiness_60_05</item>
-        <item>@drawable/happiness_60_06</item>
     </integer-array>
 
     <!-- 50s drawables -->

@@ -4,6 +4,8 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 
+import com.blog.ljtatum.ubuyismile.constants.Durations;
+
 /**
  * Created by LJTat on 4/8/2018.
  */
@@ -16,8 +18,8 @@ public class AnimationUtils {
      */
     public static Animation retrieveBlinkAnimation() {
         // Animation snippet
-        final Animation animation = new AlphaAnimation(1.0F, 0.6F);
-        animation.setDuration(300); // Duration: 300
+        final Animation animation = new AlphaAnimation(1.0F, 0.8F);
+        animation.setDuration(Durations.ANIM_DURATION_MEDIUM_400);
         animation.setInterpolator(new LinearInterpolator());
         // Repeat animation infinitely
         animation.setRepeatCount(Animation.INFINITE);

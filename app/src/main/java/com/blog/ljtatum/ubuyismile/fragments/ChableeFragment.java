@@ -146,8 +146,8 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onClick(int position, View v) {
                 Bundle args = new Bundle();
-                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
                 args.putInt(Constants.KEY_ITEM_POS, position);
+                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
                 args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString());
 
                 Fragment fragment = new DetailFragment();

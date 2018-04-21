@@ -12,6 +12,9 @@
 
     <!-- item details -->
     <string name="buy">Buy</string>
+    <string name="sorry_unable_retrieve_item">Sorry, we are unable to retrieve this item for you.
+        For feedback or support, contact Leonard Tatum at
+		<a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>
 
     <!-- about -->
     <string name="follow_me">Follow Me:</string>
@@ -70,24 +73,24 @@
     <string name="neutral_02">L wants to know what you will buy?</string>
     <string name="neutral_03">L is curious about what you will buy?</string>
     <string name="neutral_04">Did you know that all money from Chablee purchases go toward a good cause?
-        L is very charitable</string>
-    <string name="neutral_05">L suggests checking out some amazing Rings personally handmade by Chablee</string>
-    <string name="neutral_06">L suggests checking out some amazing Necklaces personally handmade by Chablee</string>
-    <string name="neutral_07">L suggests checking out some amazing Crowns personally handmade by Chablee</string>
-    <string name="neutral_08">L suggests checking out some amazing Rocks personally handmade by Chablee</string>
-    <string name="neutral_09">L suggests checking out some amazing Body Chains personally handmade by Chablee</string>
+        L is very charitable.</string>
+    <string name="neutral_05">L suggests checking out some amazing Rings personally handmade by Chablee.</string>
+    <string name="neutral_06">L suggests checking out some amazing Necklaces personally handmade by Chablee.</string>
+    <string name="neutral_07">L suggests checking out some amazing Crowns personally handmade by Chablee.</string>
+    <string name="neutral_08">L suggests checking out some amazing Rocks personally handmade by Chablee.</string>
+    <string name="neutral_09">L suggests checking out some amazing Body Chains personally handmade by Chablee.</string>
 
     <!-- messages : happy -->
-    <string name="happy_01">L is very happy today</string>
+    <string name="happy_01">L is very happy today.</string>
     <string name="happy_02">L is in good spirits!</string>
-    <string name="happy_03">L can\'t stop smiling because of you</string>
-    <string name="happy_04">L just became happier</string>
+    <string name="happy_03">L can\'t stop smiling because of you.</string>
+    <string name="happy_04">L just became happier.</string>
     <string name="happy_05">L is rooting for you!</string>
 
     <!-- messages : unhappy -->
-    <string name="unhappy_01">L is a sad Panda</string>
+    <string name="unhappy_01">L is a sad Panda.</string>
     <string name="unhappy_02">L misses you. Where have you been?</string>
-    <string name="unhappy_03">L is disappointed</string>
+    <string name="unhappy_03">L is disappointed.</string>
     <string name="unhappy_04">L wants to know if you will purchase anything?</string>
 
     <!-- messages : yes/no -->

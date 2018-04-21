@@ -48,14 +48,14 @@
             <!-- close button -->
             <ImageView
                 android:id="@+id/iv_close_info"
-                android:layout_width="@dimen/scaling_24"
-                android:layout_height="@dimen/scaling_24"
+                android:layout_width="@dimen/scaling_26"
+                android:layout_height="@dimen/scaling_26"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/scaling_5"
                 android:layout_marginRight="@dimen/scaling_5"
                 android:layout_marginTop="@dimen/scaling_5"
-                android:src="@drawable/close_black" />
+                android:src="@drawable/close_white" />
 
         </RelativeLayout>
 

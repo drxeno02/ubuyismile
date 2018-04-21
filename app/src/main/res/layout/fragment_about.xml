@@ -11,14 +11,12 @@
     <include
         layout="@layout/fragment_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/scaling_20" />
+        android:layout_height="wrap_content" />
 
     <!-- description text -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/scaling_10"
         android:gravity="center"
         android:orientation="vertical">
 

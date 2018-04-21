@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="40dp"
+    android:layout_height="@dimen/scaling_60"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="@dimen/scaling_5">
 
     <!-- header -->
     <TextView
@@ -11,9 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:drawableLeft="@drawable/arrow_black"
         android:drawablePadding="10dp"
         android:drawableStart="@drawable/arrow_black"
         android:textColor="@color/black"

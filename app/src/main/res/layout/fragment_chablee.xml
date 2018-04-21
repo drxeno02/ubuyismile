@@ -11,15 +11,13 @@
         android:id="@+id/header"
         layout="@layout/fragment_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/scaling_20" />
+        android:layout_height="wrap_content" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/sr_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header"
-        android:layout_marginTop="@dimen/scaling_10">
+        android:layout_below="@id/header">
 
         <!-- list of items -->
         <android.support.v7.widget.RecyclerView

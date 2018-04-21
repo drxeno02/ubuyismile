@@ -78,5 +78,6 @@
 
     <!-- layout dimension attributes (negative) -->
     <dimen name="scaling_neg_30">-30dp</dimen>
+    <dimen name="scaling_neg_40">-40dp</dimen>
 
 </resources>
