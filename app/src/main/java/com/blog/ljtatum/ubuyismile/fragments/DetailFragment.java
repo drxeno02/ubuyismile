@@ -204,24 +204,34 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             return;
         }
 
+        // initialize bundle and fragment
+        Bundle args = new Bundle();
+        Fragment fragment;
+
         switch (view.getId()) {
             case R.id.tv_fragment_header:
                 // remove fragment
                 remove();
                 break;
             case R.id.tv_buy:
-                Bundle args = new Bundle();
                 args.putInt(Constants.KEY_ITEM_POS, mPos);
                 args.putString(Constants.KEY_CATEGORY, mCategory);
                 args.putString(Constants.KEY_ITEM_TYPE, mItemType);
                 args.putString(Constants.KEY_ITEM_PURCHASE_URL, alItems.get(mPos).purchaseUrl);
 
-                Fragment fragment = new WebViewFragment();
+                fragment = new WebViewFragment();
                 fragment.setArguments(args);
                 addFragment(fragment);
                 break;
             case R.id.iv_bg:
+                args.putInt(Constants.KEY_ITEM_POS, mPos);
+                args.putString(Constants.KEY_CATEGORY, mCategory);
+                args.putString(Constants.KEY_ITEM_TYPE, mItemType);
+                args.putString(Constants.KEY_ITEM_PURCHASE_URL, alItems.get(mPos).purchaseUrl);
 
+                fragment = new ItemPreviewFragment();
+                fragment.setArguments(args);
+                addFragment(fragment);
                 break;
             case R.id.iv_share:
 

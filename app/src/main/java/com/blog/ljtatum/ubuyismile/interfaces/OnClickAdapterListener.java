@@ -8,5 +8,5 @@ import android.view.View;
 
 public interface OnClickAdapterListener {
 
-    void onClick(int position, final View v);
+    void onClick(int position);
 }

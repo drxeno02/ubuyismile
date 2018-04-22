@@ -1,12 +1,16 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +24,9 @@ import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
+import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.ChableeData;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
@@ -144,7 +150,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         // onClick listener
         ItemAdapter.onClickAdapterListener(new OnClickAdapterListener() {
             @Override
-            public void onClick(int position, View v) {
+            public void onClick(int position) {
                 Bundle args = new Bundle();
                 args.putInt(Constants.KEY_ITEM_POS, position);
                 args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
@@ -152,55 +158,8 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
 
                 Fragment fragment = new DetailFragment();
                 fragment.setArguments(args);
-
-                /////////////////// delete below
                 addFragment(fragment);
-
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    Logger.e("TEST", "shared elements yea!!");
-//                    setSharedElementReturnTransition(TransitionInflater.from(getActivity()).inflateTransition(R.transition.change_image_transform));
-//                    setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.explode));
-//
-//                    fragment.setSharedElementEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(R.transition.change_image_transform));
-//                    fragment.setEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.explode));
-//
-//                    FragmentTransaction ft = getFragmentManager().beginTransaction()
-//                            .replace(R.id.container, fragment)
-//                            .addToBackStack("transaction")
-//                            .addSharedElement(v, "MyTransition");
-//                    ft.commit();
-//                } else {
-//                    Logger.e("TEST", "transitioning the old way");
-//                    addFragment(fragment);
-//                }
-
-
-                // ----------- old way
-//                Fragment previousFragment = getActivity().getSupportFragmentManager()
-//                        .findFragmentById(R.id.frag_container);
-//                Fragment nextFragment = new DetailFragment();
-//                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//
-//                // 1. Exit for Previous Fragment
-//                Fade exitFade = new Fade();
-//                exitFade.setDuration(10000);
-//                previousFragment.setExitTransition(exitFade);
-//
-//                // 2. Shared Elements Transition
-//                TransitionSet enterTransitionSet = new TransitionSet();
-//                enterTransitionSet.addTransition(TransitionInflater.from(mContext).inflateTransition(android.R.transition.move));
-//                enterTransitionSet.setDuration(10000);
-//                enterTransitionSet.setStartDelay(10000);
-//                nextFragment.setSharedElementEnterTransition(enterTransitionSet);
-
-//                View logo = ButterKnife.findById(this, R.id.fragment1_logo);
-//                fragmentTransaction.addSharedElement(logo, logo.getTransitionName());
-//                fragmentTransaction.replace(R.id.fragment_container, nextFragment);
-//                fragmentTransaction.commitAllowingStateLoss();
-
-//                addFragment(new DetailFragment());
             }
-
         });
     }
 

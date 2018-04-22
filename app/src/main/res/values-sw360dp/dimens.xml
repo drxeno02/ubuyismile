@@ -28,9 +28,6 @@
     <dimen name="font_size_42">41sp</dimen>
 
     <!-- layout dimension attributes 90% -->
-    <dimen name="scaling_neg_8">-7dp</dimen>
-    <dimen name="scaling_neg_12">-11dp</dimen>
-    <dimen name="scaling_neg_35">-32dp</dimen>
     <dimen name="scaling_4">4dp</dimen>
     <dimen name="scaling_5">5dp</dimen>
     <dimen name="scaling_7">6dp</dimen>
@@ -73,9 +70,18 @@
     <dimen name="scaling_260">234dp</dimen>
     <dimen name="scaling_280">252dp</dimen>
     <dimen name="scaling_300">270dp</dimen>
+    <dimen name="scaling_320">288dp</dimen>
+    <dimen name="scaling_340">306dp</dimen>
+    <dimen name="scaling_360">324dp</dimen>
+    <dimen name="scaling_380">342dp</dimen>
 
     <!-- layout dimension attributes (negative) -->
+    <dimen name="scaling_neg_8">-7dp</dimen>
+    <dimen name="scaling_neg_10">-9dp</dimen>
+    <dimen name="scaling_neg_12">-11dp</dimen>
+    <dimen name="scaling_neg_20">-18dp</dimen>
     <dimen name="scaling_neg_30">-27dp</dimen>
+    <dimen name="scaling_neg_35">-32dp</dimen>
     <dimen name="scaling_neg_40">-36dp</dimen>
 
 </resources>

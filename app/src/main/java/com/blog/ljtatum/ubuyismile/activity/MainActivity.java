@@ -827,8 +827,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mInfoBarUtils.showInfoBar(mActivity, false);
             } else {
                 Random rand = new Random();
-                // display information bar 30% of the time
-                if (rand.nextInt(10) <= 3) {
+                // display information bar 20% of the time
+                if (rand.nextInt(10) <= 2) {
                     mInfoBarUtils.showInfoBar(mActivity, false);
                 }
             }

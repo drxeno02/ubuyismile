@@ -4,14 +4,21 @@
     android:id="@+id/rl_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionName="@string/shared_element_transition_name"
     tools:ignore="ContentDescription">
 
     <include
         android:id="@+id/header"
         layout="@layout/fragment_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="@dimen/scaling_50" />
+
+    <!-- background -->
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scaling_300"
+        android:layout_below="@id/header"
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:id="@+id/rl_wrapper"
@@ -20,14 +27,48 @@
         android:layout_below="@id/header">
 
         <LinearLayout
+            android:id="@+id/ll_favorite_indicator_wrapper"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- favorite icon indicator -->
+            <ImageView
+                android:id="@+id/iv_favorite_indicator"
+                android:layout_width="@dimen/scaling_20"
+                android:layout_height="@dimen/scaling_20"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/favorite_icon"
+                android:layout_marginLeft="@dimen/scaling_10"
+                android:layout_marginStart="@dimen/scaling_10"
+                android:gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:visibility="visible" />
+
+            <!-- favorite notification -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/favorite"
+                android:layout_marginLeft="@dimen/scaling_5"
+                android:layout_marginStart="@dimen/scaling_5"
+                android:textSize="@dimen/font_size_14"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/ll_label_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/scaling_34"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/edge_left_black"
+            android:background="@drawable/edge_right_black"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="visible"
+            tools:ignore="RelativeOverlap">
 
             <!-- label icon -->
             <ImageView
@@ -35,6 +76,7 @@
                 android:layout_width="@dimen/scaling_20"
                 android:layout_height="@dimen/scaling_20"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/scaling_4"
                 android:layout_marginStart="@dimen/scaling_4"
                 android:gravity="center_vertical"
                 android:scaleType="fitXY"
@@ -47,6 +89,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/scaling_10"
+                android:layout_marginLeft="@dimen/scaling_4"
+                android:layout_marginRight="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_4"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
@@ -54,61 +98,54 @@
 
         </LinearLayout>
 
-        <!-- background -->
-        <ImageView
-            android:id="@+id/iv_bg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/scaling_300"
-            android:scaleType="centerCrop" />
-
         <LinearLayout
             android:id="@+id/ll_desc_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/black_40"
-            android:padding="@dimen/scaling_10"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="@dimen/scaling_10">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/scaling_5"
-                android:weightSum="1"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <!-- title -->
                 <TextView
                     android:id="@+id/tv_title"
-                    android:ellipsize="end"
-                    android:maxLines="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.60"
-                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_16"
+                    android:textStyle="bold" />
 
                 <!-- price -->
                 <TextView
                     android:id="@+id/tv_price"
                     android:layout_width="0dp"
-                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_weight=".15"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_18" />
+                    android:textSize="@dimen/font_size_18"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <!-- description -->
             <TextView
                 android:id="@+id/tv_desc"
-                android:ellipsize="end"
-                android:maxLines="3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/scaling_10"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_16" />
 
@@ -117,30 +154,33 @@
         <!-- share and favorite icon -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_desc_wrapper"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="@dimen/scaling_neg_40"
+            android:layout_marginBottom="@dimen/scaling_neg_20"
+            android:layout_marginEnd="@dimen/scaling_5"
+            android:layout_marginRight="@dimen/scaling_5"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:layout_above="@+id/ll_desc_wrapper"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
+
+            <!-- favorite icon -->
+            <ImageView
+                android:id="@+id/iv_favorite"
+                android:layout_width="@dimen/scaling_40"
+                android:layout_height="@dimen/scaling_40"
+                android:scaleType="fitXY"
+                android:src="@drawable/favorite_icon" />
 
             <!-- share icon -->
             <ImageView
                 android:id="@+id/iv_share"
                 android:layout_width="@dimen/scaling_40"
-                android:scaleType="fitXY"
-                android:src="@drawable/share_icon"
-                android:layout_height="@dimen/scaling_40" />
-
-            <!-- favorite icon -->
-            <ImageView
-                android:id="@+id/iv_favorite"
+                android:layout_height="@dimen/scaling_40"
+                android:layout_marginLeft="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
-                android:layout_width="@dimen/scaling_40"
                 android:scaleType="fitXY"
-                android:src="@drawable/favorite_icon"
-                android:layout_height="@dimen/scaling_40" />
+                android:src="@drawable/share_icon" />
 
         </LinearLayout>
 
@@ -149,13 +189,13 @@
     <!-- buy -->
     <TextView
         android:id="@+id/tv_buy"
-        android:layout_below="@+id/rl_wrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/scaling_60"
+        android:layout_below="@+id/rl_wrapper"
+        android:background="@color/material_light_green_500_color_code"
         android:gravity="center"
+        android:text="@string/buy"
         android:textColor="@color/white"
-        android:background="@color/material_light_green_400_color_code"
-        android:textSize="@dimen/font_size_20"
-        android:text="@string/buy"/>
+        android:textSize="@dimen/font_size_20" />
 
 </RelativeLayout>
