@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
@@ -167,7 +168,7 @@ public class Utils {
      *                  {@link java.util.Calendar} with given date and time
      * @return True if the 'New' item label is valid
      */
-    public static boolean isNewItemTimeValid(@NonNull String timestamp) {
+    private static boolean isNewItemTimeValid(@NonNull String timestamp) {
         // add 14 days to original calendar
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH);
@@ -238,7 +239,7 @@ public class Utils {
      *                     that represents Chablee item properties
      * @return Item label
      */
-    public static String retrieveChableeItemLabel(@NonNull ItemModel chableeModel) {
+    public static String retrieveChableeItemLabel(@NonNull ItemDatabaseModel chableeModel) {
         if (!isNewItemTimeValid(chableeModel.timestamp)) {
             if (chableeModel.isFeatured) {
                 // return 'None' label

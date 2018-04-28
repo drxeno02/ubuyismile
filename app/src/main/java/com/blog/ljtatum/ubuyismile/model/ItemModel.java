@@ -14,7 +14,7 @@ public class ItemModel {
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
             imageUrl3, imageUrl4, imageUrl5;
-    public boolean isFeatured, isMostPopular;
+    public boolean isFeatured, isMostPopular, isFavorite;
 
     /**
      * Method is used to format image urls

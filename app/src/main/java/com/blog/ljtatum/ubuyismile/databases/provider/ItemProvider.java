@@ -16,11 +16,11 @@ import java.util.List;
 public class ItemProvider {
 
     private final String[] ARRY_CATEGORIES = {ItemSchema.CATEGORY, ItemSchema.ASIN, ItemSchema.LABEL,
-            ItemSchema.TIMESTAMP, ItemSchema.PRICE, ItemSchema.SALE_PRICE, ItemSchema.TITLE,
-            ItemSchema.DESCRIPTION, ItemSchema.PURCHASE_URL, ItemSchema.IMAGE_URL_1,
-            ItemSchema.IMAGE_URL_2, ItemSchema.IMAGE_URL_3, ItemSchema.IMAGE_URL_4,
-            ItemSchema.IMAGE_URL_5, ItemSchema.IS_BROWSABLE, ItemSchema.IS_FEATURED,
-            ItemSchema.IS_MOST_POPULAR};
+            ItemSchema.TIMESTAMP, ItemSchema.ITEM_ID, ItemSchema.PRICE, ItemSchema.SALE_PRICE,
+            ItemSchema.TITLE, ItemSchema.DESCRIPTION, ItemSchema.PURCHASE_URL,
+            ItemSchema.IMAGE_URL_1, ItemSchema.IMAGE_URL_2, ItemSchema.IMAGE_URL_3,
+            ItemSchema.IMAGE_URL_4, ItemSchema.IMAGE_URL_5, ItemSchema.IS_BROWSABLE,
+            ItemSchema.IS_FEATURED, ItemSchema.IS_MOST_POPULAR, ItemSchema.IS_FAVORITE};
     private final DatabaseProvider<ItemDatabaseModel> mProvider;
 
     /**
@@ -79,6 +79,7 @@ public class ItemProvider {
         mProvider.update(itemDatabaseModel, ItemSchema.ASIN + " = ?", new String[]{itemDatabaseModel.asin});
         mProvider.update(itemDatabaseModel, ItemSchema.LABEL + " = ?", new String[]{itemDatabaseModel.label});
         mProvider.update(itemDatabaseModel, ItemSchema.TIMESTAMP + " = ?", new String[]{itemDatabaseModel.timestamp});
+        mProvider.update(itemDatabaseModel, ItemSchema.ITEM_ID + " = ?", new String[]{itemDatabaseModel.itemId});
         mProvider.update(itemDatabaseModel, ItemSchema.PRICE + " = ?", new String[]{itemDatabaseModel.price});
         mProvider.update(itemDatabaseModel, ItemSchema.SALE_PRICE + " = ?", new String[]{itemDatabaseModel.salePrice});
         mProvider.update(itemDatabaseModel, ItemSchema.TITLE + " = ?", new String[]{itemDatabaseModel.title});
@@ -92,6 +93,7 @@ public class ItemProvider {
         mProvider.update(itemDatabaseModel, ItemSchema.IS_BROWSABLE + " = ?", new String[]{String.valueOf(itemDatabaseModel.isBrowseItem)});
         mProvider.update(itemDatabaseModel, ItemSchema.IS_FEATURED + " = ?", new String[]{String.valueOf(itemDatabaseModel.isFeatured)});
         mProvider.update(itemDatabaseModel, ItemSchema.IS_MOST_POPULAR + " = ?", new String[]{String.valueOf(itemDatabaseModel.isMostPopular)});
+        mProvider.update(itemDatabaseModel, ItemSchema.IS_FAVORITE + " = ?", new String[]{String.valueOf(itemDatabaseModel.isFavorite)});
     }
 
     /**

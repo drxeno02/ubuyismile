@@ -307,7 +307,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
                         itemDatabaseModel.isFeatured = false;
                         itemDatabaseModel.isMostPopular = false;
-                        alItemDbTemp.add(itemDatabaseModel);
+                        itemDatabaseModel.isFavorite = false;
+                        alItemDb.add(itemDatabaseModel);
                     } else {
                         // TODO iterate through SQLite db and update values
                     }
@@ -447,39 +448,62 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
                     // only add data if it exists. This is enforced by the required
                     // title and description values
-                    if (isDbEmpty && !FrameworkUtils.isStringEmpty(chableeModel.title) &&
-                            !FrameworkUtils.isStringEmpty(chableeModel.description)) {
-                        // stored data
-                        ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
-                        itemDatabaseModel.category = chableeModel.category;
-                        itemDatabaseModel.asin = chableeModel.asin;
-                        itemDatabaseModel.label = chableeModel.label;
-                        itemDatabaseModel.timestamp = chableeModel.timestamp;
-                        itemDatabaseModel.itemId = chableeModel.itemId;
-                        itemDatabaseModel.price = chableeModel.price;
-                        itemDatabaseModel.salePrice = chableeModel.salePrice;
-                        itemDatabaseModel.title = chableeModel.title;
-                        itemDatabaseModel.description = chableeModel.description;
-                        itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
-                        itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
-                        itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
-                        itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
-                        itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
-                        itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
-                        itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
-                        itemDatabaseModel.isFeatured = chableeModel.isFeatured;
-                        itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
-                        alItemDbTemp.add(itemDatabaseModel);
+                    if (isDbEmpty) {
+                        if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
+                                !FrameworkUtils.isStringEmpty(chableeModel.description)) {
+                            // stored data
+                            ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                            itemDatabaseModel.category = chableeModel.category;
+                            itemDatabaseModel.asin = chableeModel.asin;
+                            itemDatabaseModel.label = chableeModel.label;
+                            itemDatabaseModel.timestamp = chableeModel.timestamp;
+                            itemDatabaseModel.itemId = chableeModel.itemId;
+                            itemDatabaseModel.price = chableeModel.price;
+                            itemDatabaseModel.salePrice = chableeModel.salePrice;
+                            itemDatabaseModel.title = chableeModel.title;
+                            itemDatabaseModel.description = chableeModel.description;
+                            itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
+                            itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
+                            itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
+                            itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
+                            itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
+                            itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
+                            itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
+                            itemDatabaseModel.isFeatured = chableeModel.isFeatured;
+                            itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
+                            itemDatabaseModel.isFavorite = chableeModel.isFavorite;
+                            alItemDb.add(itemDatabaseModel);
+                        }
                     } else {
-                        // TODO iterate through SQLite db and update values
+                        // update database values for existing items
                         for (int i = 0; i < alItemDb.size(); i++) {
-                            if (alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
-                                Logger.e("TEST", "updating item id= " + alItemDb.get(i).itemId + " //@index= " + i);
+                            if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).itemId) &&
+                                    alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
+
+                                // item exists in database
+                                // update dynamically changing data e.g. category, label
+                                alItemDb.get(i).category = chableeModel.category;
+                                alItemDb.get(i).label = Utils.retrieveChableeItemLabel(alItemDb.get(i));
+                                alItemDb.get(i).price = chableeModel.price;
+                                alItemDb.get(i).salePrice = chableeModel.salePrice;
+                                alItemDb.get(i).title = chableeModel.title;
+                                alItemDb.get(i).description = chableeModel.description;
+                                alItemDb.get(i).purchaseUrl = chableeModel.purchaseUrl;
+                                alItemDb.get(i).imageUrl1 = chableeModel.imageUrl1;
+                                alItemDb.get(i).imageUrl2 = chableeModel.imageUrl2;
+                                alItemDb.get(i).imageUrl3 = chableeModel.imageUrl3;
+                                alItemDb.get(i).imageUrl4 = chableeModel.imageUrl4;
+                                alItemDb.get(i).imageUrl5 = chableeModel.imageUrl5;
+                                alItemDb.get(i).isBrowseItem = chableeModel.isBrowseItem;
+                                alItemDb.get(i).isFeatured = chableeModel.isFeatured;
+                                alItemDb.get(i).isMostPopular = chableeModel.isMostPopular;
+                                break;
                             }
                         }
                     }
                 }
             }
+
             if (alData.size() > 0 && categoryIndex < alChableeCategories.size() &&
                     alChableeCategories.get(categoryIndex).equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
                 // set crown list
@@ -546,6 +570,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         createSQLiteDb();
                     } else {
                         Logger.e(TAG, "database is not empty :: size= " + alItemDb.size());
+                        updateSQLiteDb();
                         printDb();
                     }
                 }
@@ -807,11 +832,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     /**
-     * Method is used to update SQLite db
+     * Method is used to create SQLite db
      */
     private void createSQLiteDb() {
         if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
             mItemProvider.insert(alItemDb);
+        }
+    }
+
+    /**
+     * Method is used to update SQLite db
+     */
+    private void updateSQLiteDb() {
+        if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
+            for (int i = 0; i < alItemDb.size(); i++) {
+                mItemProvider.update(alItemDb.get(i));
+            }
         }
     }
 
@@ -972,6 +1008,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Logger.v(TAG, "isBrowseItem= " + alItemDb.get(i).isBrowseItem);
             Logger.v(TAG, "isFeatured= " + alItemDb.get(i).isFeatured);
             Logger.v(TAG, "isMostPopular= " + alItemDb.get(i).isMostPopular);
+            Logger.v(TAG, "isFavorite= " + alItemDb.get(i).isFavorite);
         }
     }
 

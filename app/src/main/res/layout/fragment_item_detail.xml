@@ -28,11 +28,12 @@
 
         <LinearLayout
             android:id="@+id/ll_favorite_indicator_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <!-- favorite icon indicator -->
             <ImageView
@@ -40,22 +41,23 @@
                 android:layout_width="@dimen/scaling_20"
                 android:layout_height="@dimen/scaling_20"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/favorite_icon"
                 android:layout_marginLeft="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:gravity="center_vertical"
                 android:scaleType="fitXY"
+                android:src="@drawable/favorite_icon"
                 android:visibility="visible" />
 
             <!-- favorite notification -->
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/favorite"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/scaling_5"
                 android:layout_marginStart="@dimen/scaling_5"
-                android:textSize="@dimen/font_size_14"
+                android:gravity="center_vertical"
+                android:text="@string/favorite"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/font_size_14" />
 
         </LinearLayout>
 
@@ -66,6 +68,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/edge_right_black"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible"
             tools:ignore="RelativeOverlap">

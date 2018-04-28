@@ -29,6 +29,7 @@ public class ItemSchema implements BaseColumns {
     public static final String IS_BROWSABLE = "is_browsable";
     public static final String IS_FEATURED = "is_featured";
     public static final String IS_MOST_POPULAR = "is_most_popular";
+    public static final String IS_FAVORITE = "is_favorite";
 
     /**
      * Method is used to create a table for user session data
@@ -39,24 +40,25 @@ public class ItemSchema implements BaseColumns {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(");
         sb.append(_ID + " INTEGER PRIMARY KEY, ");
-        sb.append(CATEGORY + " TEXT NOT NULL, ");
-        sb.append(ASIN + " TEXT NOT NULL, ");
-        sb.append(LABEL + " TEXT NOT NULL, ");
-        sb.append(TIMESTAMP + " TEXT NOT NULL, ");
-        sb.append(ITEM_ID + " TEXT NOT NULL, ");
-        sb.append(PRICE + " TEXT NOT NULL, ");
-        sb.append(SALE_PRICE + " TEXT NOT NULL, ");
-        sb.append(TITLE + " TEXT NOT NULL, ");
-        sb.append(DESCRIPTION + " TEXT NOT NULL, ");
-        sb.append(PURCHASE_URL + " TEXT NOT NULL, ");
-        sb.append(IMAGE_URL_1 + " TEXT NOT NULL, ");
-        sb.append(IMAGE_URL_2 + " TEXT NOT NULL, ");
-        sb.append(IMAGE_URL_3 + " TEXT NOT NULL, ");
-        sb.append(IMAGE_URL_4 + " TEXT NOT NULL, ");
-        sb.append(IMAGE_URL_5 + " TEXT NOT NULL, ");
-        sb.append(IS_BROWSABLE + " TEXT NOT NULL, ");
-        sb.append(IS_FEATURED + " TEXT NOT NULL, ");
-        sb.append(IS_MOST_POPULAR + " TEXT NOT NULL");
+        sb.append(CATEGORY + " TEXT, ");
+        sb.append(ASIN + " TEXT, ");
+        sb.append(LABEL + " TEXT, ");
+        sb.append(TIMESTAMP + " TEXT, ");
+        sb.append(ITEM_ID + " TEXT, ");
+        sb.append(PRICE + " TEXT, ");
+        sb.append(SALE_PRICE + " TEXT, ");
+        sb.append(TITLE + " TEXT, ");
+        sb.append(DESCRIPTION + " TEXT, ");
+        sb.append(PURCHASE_URL + " TEXT, ");
+        sb.append(IMAGE_URL_1 + " TEXT, ");
+        sb.append(IMAGE_URL_2 + " TEXT, ");
+        sb.append(IMAGE_URL_3 + " TEXT, ");
+        sb.append(IMAGE_URL_4 + " TEXT, ");
+        sb.append(IMAGE_URL_5 + " TEXT, ");
+        sb.append(IS_BROWSABLE + " TEXT, ");
+        sb.append(IS_FEATURED + " TEXT, ");
+        sb.append(IS_MOST_POPULAR + " TEXT, ");
+        sb.append(IS_FAVORITE + " TEXT");
         sb.append(");");
         return sb.toString();
     }

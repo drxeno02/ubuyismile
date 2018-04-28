@@ -18,7 +18,7 @@ public class ItemDatabaseModel implements DatabaseModel {
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
             imageUrl3, imageUrl4, imageUrl5;
-    public boolean isFeatured, isMostPopular;
+    public boolean isFeatured, isMostPopular, isFavorite;
 
     @Override
     public <T extends DatabaseModel> T fromCursor(Cursor cursor) {
@@ -41,6 +41,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         item.isBrowseItem = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_BROWSABLE)) > 0;
         item.isFeatured = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_FEATURED)) > 0;
         item.isMostPopular = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_MOST_POPULAR)) > 0;
+        item.isFavorite = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_FAVORITE)) > 0;
         return (T) item;
     }
 
@@ -64,7 +65,8 @@ public class ItemDatabaseModel implements DatabaseModel {
                 ItemSchema.IMAGE_URL_5,
                 ItemSchema.IS_BROWSABLE,
                 ItemSchema.IS_FEATURED,
-                ItemSchema.IS_MOST_POPULAR
+                ItemSchema.IS_MOST_POPULAR,
+                ItemSchema.IS_FAVORITE
         };
     }
 
@@ -89,6 +91,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         values.put(ItemSchema.IS_BROWSABLE, isBrowseItem);
         values.put(ItemSchema.IS_FEATURED, isFeatured);
         values.put(ItemSchema.IS_MOST_POPULAR, isMostPopular);
+        values.put(ItemSchema.IS_FAVORITE, isFavorite);
         return values;
     }
 

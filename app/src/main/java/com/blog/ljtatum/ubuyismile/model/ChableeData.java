@@ -129,11 +129,10 @@ public class ChableeData {
                 itemModel.category = alItems.get(i).category;
                 itemModel.label = alItems.get(i).label;
                 itemModel.timestamp = alItems.get(i).timestamp;
-                itemModel.isFeatured = alItems.get(i).isFeatured;
-                itemModel.isMostPopular = alItems.get(i).isMostPopular;
                 itemModel.isBrowseItem = alItems.get(i).isBrowseItem;
                 itemModel.isFeatured = alItems.get(i).isFeatured;
                 itemModel.isMostPopular = alItems.get(i).isMostPopular;
+                itemModel.isFavorite = alItems.get(i).isFavorite;
                 filteredItems.add(itemModel);
             }
         }
