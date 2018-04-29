@@ -32,8 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/scaling_10"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <!-- favorite icon indicator -->
             <ImageView
@@ -45,7 +47,7 @@
                 android:layout_marginStart="@dimen/scaling_10"
                 android:gravity="center_vertical"
                 android:scaleType="fitXY"
-                android:src="@drawable/favorite_icon"
+                android:src="@drawable/favorite_icon_on"
                 android:visibility="visible" />
 
             <!-- favorite notification -->
@@ -55,7 +57,7 @@
                 android:layout_marginLeft="@dimen/scaling_5"
                 android:layout_marginStart="@dimen/scaling_5"
                 android:gravity="center_vertical"
-                android:text="@string/favorite"
+                android:text="@string/favorite_item"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_14" />
 
@@ -173,7 +175,7 @@
                 android:layout_width="@dimen/scaling_40"
                 android:layout_height="@dimen/scaling_40"
                 android:scaleType="fitXY"
-                android:src="@drawable/favorite_icon" />
+                android:src="@drawable/favorite_icon_off" />
 
             <!-- share icon -->
             <ImageView

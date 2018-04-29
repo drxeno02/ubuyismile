@@ -31,5 +31,19 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <!-- no items -->
+    <TextView
+        android:id="@+id/tv_no_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/scaling_20"
+        android:layout_marginLeft="@dimen/scaling_20"
+        android:layout_marginRight="@dimen/scaling_20"
+        android:layout_marginStart="@dimen/scaling_20"
+        android:gravity="center"
+        android:text="@string/no_items"
+        android:textSize="@dimen/font_size_16"
+        android:visibility="gone" />
 
 </RelativeLayout>

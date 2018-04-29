@@ -26,10 +26,13 @@ import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
-import com.blog.ljtatum.ubuyismile.model.ChableeData;
+import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
+import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
+import com.blog.ljtatum.ubuyismile.model.Categories;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -46,7 +49,9 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
     private ImageView ivIcon;
     private LinearLayout llNoPurchaseUrl;
     private RelativeLayout rlParent;
-    private ArrayList<ItemModel> alItems;
+
+    // database
+    private List<ItemDatabaseModel> alItemDb;
 
     @Nullable
     @Override
@@ -69,11 +74,15 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void initializeViews() {
         mContext = getActivity();
-        alItems = new ArrayList<>();
 
         // web view
         wv = mRootView.findViewById(R.id.wv);
         wv.getSettings().setJavaScriptEnabled(true);
+
+        // instantiate SQLite database
+        ItemProvider itemProvider = new ItemProvider(mContext);
+        alItemDb = !FrameworkUtils.checkIfNull(itemProvider.getAllInfo()) ?
+                itemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
 
         llNoPurchaseUrl = mRootView.findViewById(R.id.ll_no_purchase_url);
         rlParent = mRootView.findViewById(R.id.rl_parent);
@@ -137,12 +146,12 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
     private void getBundle() {
         Bundle args = getArguments();
         if (!FrameworkUtils.checkIfNull(args)) {
+            // set position
+            String itemId = args.getString(Constants.KEY_ITEM_ID, "");
             // set category
             String category = args.getString(Constants.KEY_CATEGORY, "");
             // set type
             String itemType = args.getString(Constants.KEY_ITEM_TYPE, "");
-            // set purchase url
-            String purchaseUrl = args.getString(Constants.KEY_ITEM_PURCHASE_URL, "");
 
             // set background
             if (itemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
@@ -156,42 +165,45 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
 
             } else if (itemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
                 if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
-                    alItems = ChableeData.getCrowns();
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_crowns));
                 } else if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
-                    alItems = ChableeData.getRings();
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_rings));
                 } else if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
-                    alItems = ChableeData.getNecklaces();
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_necklaces));
                 } else if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
-                    alItems = ChableeData.getRocks();
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
                 }
             }
 
-            // set web view
-            if (!FrameworkUtils.isStringEmpty(purchaseUrl)) {
-                // set visibility
-                FrameworkUtils.setViewGone(llNoPurchaseUrl);
+            for (int i = 0; i < alItemDb.size(); i++) {
+                if (alItemDb.get(i).itemId.equalsIgnoreCase(itemId)) {
+                    // set web view
+                    if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).purchaseUrl)) {
+                        // set visibility
+                        FrameworkUtils.setViewGone(llNoPurchaseUrl);
 
-                // load website
-                wv.loadUrl(purchaseUrl);
-                // display progress dialog
-                DialogUtils.showProgressDialog(mContext);
-            } else {
-                // set visibility
-                FrameworkUtils.setViewVisible(llNoPurchaseUrl);
+                        // load website
+                        wv.loadUrl(alItemDb.get(i).purchaseUrl);
+                        // display progress dialog
+                        DialogUtils.showProgressDialog(mContext);
+                    } else {
+                        // set visibility
+                        FrameworkUtils.setViewVisible(llNoPurchaseUrl);
 
-                // no purchase url
-                TypedArray typedArryDrawable60 = mContext.getResources().obtainTypedArray(R.array.drawable_60);
-                Random rand = new Random();
-                ivIcon.setImageDrawable(ContextCompat.getDrawable(mContext, typedArryDrawable60.getResourceId(
-                        rand.nextInt(typedArryDrawable60.length() - 1), 0)));
+                        // no purchase url
+                        TypedArray typedArry = mContext.getResources().obtainTypedArray(R.array.drawable_60);
+                        Random rand = new Random();
+                        ivIcon.setImageDrawable(ContextCompat.getDrawable(mContext, typedArry.getResourceId(
+                                rand.nextInt(typedArry.length() - 1), 0)));
+                        typedArry.recycle();
+
+                    }
+                    break;
+                }
             }
         }
     }

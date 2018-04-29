@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
 import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private final Context mContext;
-    private ArrayList<ItemModel> alItems;
+    private ArrayList<ItemDatabaseModel> alItems;
     private Enum.ItemType mItemType;
 
     // custom callback
@@ -52,7 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * @param context Interface to global information about an application environment
      * @param alItems List of items to display
      */
-    public ItemAdapter(Context context, ArrayList<ItemModel> alItems, Enum.ItemType itemType) {
+    public ItemAdapter(Context context, ArrayList<ItemDatabaseModel> alItems, Enum.ItemType itemType) {
         mItemType = itemType;
         mContext = context;
         this.alItems = alItems;
@@ -169,20 +170,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * @param alItems List of completed status trips. Populated from model class
      *                {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
      */
-    public void updateData(@NonNull ArrayList<ItemModel> alItems) {
-        if (alItems.size() > 0 && !alItems.isEmpty()) {
+    public void updateData(@NonNull ArrayList<ItemDatabaseModel> alItems) {
+        if (alItems.size() > 0) {
             this.alItems = alItems;
             notifyDataSetChanged();
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private final LinearLayout llLabelWrapper, llBgWrapper;
         private final TextView tvSalePerc, tvLabel, tvTitle, tvPrice, tvScratchPrice;
         private final ImageView ivBg, ivLabelIcon;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             llBgWrapper = itemView.findViewById(R.id.ll_bg_wrapper);

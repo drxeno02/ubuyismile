@@ -3,13 +3,22 @@
     <string name="u_buy">U Buy I Smile</string>
     <string name="creators">Leonard Tatum &amp; Jeremy Garcia</string>
 
+    <!-- labels -->
+    <string name="no_items">Sorry, we currently have no items for this category. For feedback or
+        support, contact\n Leonard Tatum at <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>
+
+    <!-- share -->
+    <string name="share_option_a">Thinking about buying this. Any thoughts?</string>
+    <string name="share_option_b">Hey, take a look at what I found!</string>
+    <string name="share_option_c">Found this amazing item, what do you think?</string>
+
     <!-- adapter -->
     <string name="percent_sale">-%1$s\%%</string>
     <string name="dollar_format">$%1$s</string>
 
     <!-- favorite -->
     <string name="favorite">Favorite</string>
-    <string name="favorite_item">Favorite Item</string>
+    <string name="favorite_item">Favorite Item!</string>
 
     <!-- item details -->
     <string name="buy">Buy</string>

@@ -33,25 +33,6 @@ public class ItemProvider {
     }
 
     /**
-     * Method is used to return back the first data object in the db
-     *
-     * @return First data object in the db, otherwise null
-     */
-    public ItemDatabaseModel getInfo() {
-        try {
-            List<ItemDatabaseModel> data = mProvider.getAll(ItemDatabaseModel.class);
-            return (!FrameworkUtils.checkIfNull(data) && data.size() > 0) ? data.get(0) : null;
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            ;
-            return null;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * Method is used to return back all data objects in the db
      *
      * @return All data objects in the db, otherwise null

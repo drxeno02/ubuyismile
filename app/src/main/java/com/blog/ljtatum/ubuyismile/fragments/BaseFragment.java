@@ -52,6 +52,25 @@ public class BaseFragment extends Fragment {
     }
 
     /**
+     * Method is used to add fragment to the current stack without animation
+     *
+     * @param fragment    The new Fragment that is going to replace the container
+     */
+    void addFragmentNoAnim(@NonNull Fragment fragment) {
+        if (!FrameworkUtils.checkIfNull(getActivity()) && !FrameworkUtils.checkIfNull(getActivity().getSupportFragmentManager())) {
+            // check if the fragment has been added already
+            Fragment temp = getActivity().getSupportFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName());
+            if (!FrameworkUtils.checkIfNull(temp) && temp.isAdded()) {
+                return;
+            }
+
+            // add fragment and transition with animation
+            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.frag_container, fragment,
+                    fragment.getClass().getSimpleName()).addToBackStack(fragment.getClass().getSimpleName()).commit();
+        }
+    }
+
+    /**
      * Method for removing the Fragment view
      */
     void remove() {
@@ -64,6 +83,20 @@ public class BaseFragment extends Fragment {
             }
         } catch (IllegalStateException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method for removing the Fragment view with no animation
+     */
+    void removeNoAnim() {
+        if (!FrameworkUtils.checkIfNull(getActivity()) && !FrameworkUtils.checkIfNull(getActivity().getSupportFragmentManager())) {
+            try {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.remove(this).commitAllowingStateLoss();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

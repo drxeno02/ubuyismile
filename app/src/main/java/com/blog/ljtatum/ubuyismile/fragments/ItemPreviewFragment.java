@@ -1,34 +1,28 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.app.amazon.framework.enums.Enum;
-import com.app.framework.gui.SwipeGestureUtils;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
-import com.blog.ljtatum.ubuyismile.model.ChableeData;
+import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
+import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
+import com.blog.ljtatum.ubuyismile.model.Categories;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
-import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LJTat on 4/8/2018.
@@ -43,8 +37,10 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
     private ImageView ivItemPreview;
     private TextView tvTitle;
 
-    private int mPos;
-    private ArrayList<ItemModel> alItems;
+    private String mItemId;
+
+    // database
+    private List<ItemDatabaseModel> alItemDb;
 
     @Nullable
     @Override
@@ -65,7 +61,11 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
      */
     private void initializeViews() {
         mContext = getActivity();
-        alItems = new ArrayList<>();
+
+        // instantiate SQLite database
+        ItemProvider itemProvider = new ItemProvider(mContext);
+        alItemDb = !FrameworkUtils.checkIfNull(itemProvider.getAllInfo()) ?
+                itemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
 
         rlParent = mRootView.findViewById(R.id.rl_parent);
         tvTitle = mRootView.findViewById(R.id.tv_title);
@@ -86,43 +86,29 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
         Bundle args = getArguments();
         if (!FrameworkUtils.checkIfNull(args)) {
             // set position
-            mPos = args.getInt(Constants.KEY_ITEM_POS);
-            // set category
-            String category = args.getString(Constants.KEY_CATEGORY, "");
-            // set type
-            String itemType = args.getString(Constants.KEY_ITEM_TYPE, "");
+            mItemId = args.getString(Constants.KEY_ITEM_ID, "");
 
-            // set header
-            if (itemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
-
-            } else if (itemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
-                if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
-                    alItems = ChableeData.getCrowns();
-                } else if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.RINGS.toString())) {
-                    alItems = ChableeData.getRings();
-                } else if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.NECKLACES.toString())) {
-                    alItems = ChableeData.getNecklaces();
-                } else if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.ROCKS.toString())) {
-                    alItems = ChableeData.getRocks();
-                }
-            }
-
-            // populate details
-            populateItemDetails();
+            // set item details
+            setItemDetails();
         }
     }
 
     /**
      * Method is used to populate item details
      */
-    private void populateItemDetails() {
-        // set values
-        tvTitle.setText(alItems.get(mPos).title);
-        // set image
-        Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItems.get(mPos).imageUrl1))
-                .placeholder(R.drawable.no_image_available)
-                .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
-                .into(ivItemPreview);
+    private void setItemDetails() {
+        for (int i = 0; i < alItemDb.size(); i++) {
+            if (alItemDb.get(i).itemId.equalsIgnoreCase(mItemId)) {
+                // set values
+                tvTitle.setText(alItemDb.get(i).title);
+                // set image
+                Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItemDb.get(i).imageUrl1))
+                        .placeholder(R.drawable.no_image_available)
+                        .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
+                        .into(ivItemPreview);
+                break;
+            }
+        }
     }
 
     @Override
@@ -134,7 +120,7 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
         switch (v.getId()) {
             case R.id.rl_parent:
                 // remove fragment
-                remove();
+                removeNoAnim();
                 break;
             default:
                 break;
