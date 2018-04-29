@@ -1,6 +1,7 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -13,6 +14,25 @@ import com.blog.ljtatum.ubuyismile.R;
  */
 
 public class BaseFragment extends Fragment {
+
+    /**
+     * Method for removing a fragment
+     */
+    public interface OnRemoveFragment {
+        void onRemove();
+    }
+
+    @Nullable
+    private OnRemoveFragment mOnRemoveFragment;
+
+    /**
+     * Set onRemoveListener used for inheritance
+     *
+     * @param fragment The Fragment to be removed
+     */
+    public void setOnRemoveListener(OnRemoveFragment fragment) {
+        mOnRemoveFragment = fragment;
+    }
 
     /**
      * Method is used to pop the top state off the back stack. Returns true if there
@@ -97,6 +117,15 @@ public class BaseFragment extends Fragment {
             } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (!FrameworkUtils.checkIfNull(mOnRemoveFragment)) {
+            mOnRemoveFragment.onRemove();
+            mOnRemoveFragment = null;
         }
     }
 }

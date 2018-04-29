@@ -234,7 +234,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
         // initialize bundle and fragment
         Bundle args = new Bundle();
-        Fragment fragment;
+        BaseFragment fragment;
 
         switch (view.getId()) {
             case R.id.tv_fragment_header:

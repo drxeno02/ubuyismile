@@ -1,9 +1,7 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.utilities.FrameworkUtils;
-import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
@@ -162,8 +159,16 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                 args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
                 args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString());
 
-                Fragment fragment = new DetailFragment();
+                BaseFragment fragment = new DetailFragment();
                 fragment.setArguments(args);
+                fragment.setOnRemoveListener(new BaseFragment.OnRemoveFragment() {
+                    @Override
+                    public void onRemove() {
+                        // update database list
+                        alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
+                                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
+                    }
+                });
                 addFragment(fragment);
             }
         });
@@ -227,68 +232,66 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                 chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                 chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
 
-                if (FrameworkUtils.isStringEmpty(chableeModel.title) &&
-                        FrameworkUtils.isStringEmpty(chableeModel.description)) {
-                    return;
-                }
-
-                // update database values for existing items or add new item to database
-                boolean isItemExisting = false;
-                int index = 0;
-                for (int i = 0; i < alItemDb.size(); i++) {
-                    if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).itemId) &&
-                            !FrameworkUtils.isStringEmpty(chableeModel.itemId) &&
-                            alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
-                        // set index
-                        index = i;
-                        // set flag
-                        isItemExisting = true;
-                        break;
+                if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
+                        !FrameworkUtils.isStringEmpty(chableeModel.description)) {
+                    // update database values for existing items or add new item to database
+                    boolean isItemExisting = false;
+                    int index = 0;
+                    for (int i = 0; i < alItemDb.size(); i++) {
+                        if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).itemId) &&
+                                !FrameworkUtils.isStringEmpty(chableeModel.itemId) &&
+                                alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
+                            // set index
+                            index = i;
+                            // set flag
+                            isItemExisting = true;
+                            break;
+                        }
                     }
-                }
 
-                if (isItemExisting) {
-                    // item exists in database
-                    // update dynamically changing data e.g. category, label
-                    alItemDb.get(index).category = chableeModel.category;
-                    alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
-                    alItemDb.get(index).price = chableeModel.price;
-                    alItemDb.get(index).salePrice = chableeModel.salePrice;
-                    alItemDb.get(index).title = chableeModel.title;
-                    alItemDb.get(index).description = chableeModel.description;
-                    alItemDb.get(index).purchaseUrl = chableeModel.purchaseUrl;
-                    alItemDb.get(index).imageUrl1 = chableeModel.imageUrl1;
-                    alItemDb.get(index).imageUrl2 = chableeModel.imageUrl2;
-                    alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
-                    alItemDb.get(index).imageUrl4 = chableeModel.imageUrl4;
-                    alItemDb.get(index).imageUrl5 = chableeModel.imageUrl5;
-                    alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
-                    alItemDb.get(index).isFeatured = chableeModel.isFeatured;
-                    alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
-                } else {
-                    // item does not exist in database
-                    // stored data
-                    ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
-                    itemDatabaseModel.category = chableeModel.category;
-                    itemDatabaseModel.asin = chableeModel.asin;
-                    itemDatabaseModel.label = chableeModel.label;
-                    itemDatabaseModel.timestamp = chableeModel.timestamp;
-                    itemDatabaseModel.itemId = chableeModel.itemId;
-                    itemDatabaseModel.price = chableeModel.price;
-                    itemDatabaseModel.salePrice = chableeModel.salePrice;
-                    itemDatabaseModel.title = chableeModel.title;
-                    itemDatabaseModel.description = chableeModel.description;
-                    itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
-                    itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
-                    itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
-                    itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
-                    itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
-                    itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
-                    itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
-                    itemDatabaseModel.isFeatured = chableeModel.isFeatured;
-                    itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
-                    itemDatabaseModel.isFavorite = chableeModel.isFavorite;
-                    alItemDb.add(itemDatabaseModel);
+                    if (isItemExisting) {
+                        // item exists in database
+                        // update dynamically changing data e.g. category, label
+                        alItemDb.get(index).category = chableeModel.category;
+                        alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
+                        alItemDb.get(index).price = chableeModel.price;
+                        alItemDb.get(index).salePrice = chableeModel.salePrice;
+                        alItemDb.get(index).title = chableeModel.title;
+                        alItemDb.get(index).description = chableeModel.description;
+                        alItemDb.get(index).purchaseUrl = chableeModel.purchaseUrl;
+                        alItemDb.get(index).imageUrl1 = chableeModel.imageUrl1;
+                        alItemDb.get(index).imageUrl2 = chableeModel.imageUrl2;
+                        alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
+                        alItemDb.get(index).imageUrl4 = chableeModel.imageUrl4;
+                        alItemDb.get(index).imageUrl5 = chableeModel.imageUrl5;
+                        alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
+                        alItemDb.get(index).isFeatured = chableeModel.isFeatured;
+                        alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
+                    } else {
+                        // item does not exist in database
+                        // stored data
+                        ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                        itemDatabaseModel.category = chableeModel.category;
+                        itemDatabaseModel.asin = chableeModel.asin;
+                        itemDatabaseModel.label = chableeModel.label;
+                        itemDatabaseModel.timestamp = chableeModel.timestamp;
+                        itemDatabaseModel.itemId = chableeModel.itemId;
+                        itemDatabaseModel.price = chableeModel.price;
+                        itemDatabaseModel.salePrice = chableeModel.salePrice;
+                        itemDatabaseModel.title = chableeModel.title;
+                        itemDatabaseModel.description = chableeModel.description;
+                        itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
+                        itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
+                        itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
+                        itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
+                        itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
+                        itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
+                        itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
+                        itemDatabaseModel.isFeatured = chableeModel.isFeatured;
+                        itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
+                        itemDatabaseModel.isFavorite = chableeModel.isFavorite;
+                        alItemDb.add(itemDatabaseModel);
+                    }
                 }
             }
         }
