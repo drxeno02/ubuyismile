@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.databases.schema.ItemSchema;
+import com.blog.ljtatum.ubuyismile.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,28 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
         return 0;
     }
 
+
+    /**
+     * Method is used to retrieve one data item
+     *
+     * @param selection A filter declaring which rows to return, formatted as an SQL WHERE
+     *                  clause (excluding the WHERE itself). Passing null will return all rows
+     *                  for the given table
+     * @param cls       Returns a new instance of the class represented by this Class, created by
+     *                  invoking the default (that is, zero-argument) constructor
+     * @throws InstantiationException Thrown when a program attempts to access a constructor
+     *                                which is not accessible from the location where the reference is made
+     * @throws IllegalAccessException Thrown when a program attempts to access a field or method
+     *                                which is not accessible from the location where the reference is made
+     */
+    public T getOne(String selection, Class<T> cls) throws InstantiationException, IllegalAccessException {
+        List<T> list = get(selection, cls);
+        if (FrameworkUtils.checkIfNull(list) || list.size() == 0) {
+            return null;
+        }
+        return list.get(0);
+    }
+
     /**
      * Method is used to retrieve data
      *
@@ -166,74 +189,19 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
             try {
                 Cursor cursor = mDatabase.query(model.getTableName(),
                         model.getColumns(), null, null, null, null, null);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()) {
-                    rows.add((T) model.fromCursor(cursor));
-                    cursor.moveToNext();
+                if (!FrameworkUtils.checkIfNull(cursor)) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        rows.add((T) model.fromCursor(cursor));
+                        cursor.moveToNext();
+                    }
+                    cursor.close();
                 }
-                cursor.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return rows;
-    }
-
-    /**
-     * Method is used to retrieve a row of data with sorting options
-     *
-     * @param orderBy How to order the rows, formatted as an SQL ORDER BY clause
-     *                (excluding the ORDER BY itself). Passing null will use the default sort
-     *                order, which may be unordered
-     * @param cls     Returns a new instance of the class represented by this Class, created by
-     *                invoking the default (that is, zero-argument) constructor
-     * @return rows The queried result set
-     * @throws InstantiationException Thrown when a program attempts to access a constructor
-     *                                which is not accessible from the location where the reference is made
-     * @throws IllegalAccessException Thrown when a program attempts to access a field or method
-     *                                which is not accessible from the location where the reference is made
-     */
-    public List<T> getAll(String orderBy, Class<T> cls) throws InstantiationException, IllegalAccessException {
-        List<T> rows = new ArrayList<>();
-        T model = cls.newInstance();
-
-        mDatabase = getWritableDatabase();
-        if (mDatabase.isOpen()) {
-            try {
-                Cursor cursor = mDatabase.query(model.getTableName(),
-                        model.getColumns(), null, null, null, null, orderBy);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()) {
-                    rows.add((T) model.fromCursor(cursor));
-                    cursor.moveToNext();
-                }
-                cursor.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return rows;
-    }
-
-    /**
-     * Method is used to retrieve one data item
-     *
-     * @param selection A filter declaring which rows to return, formatted as an SQL WHERE
-     *                  clause (excluding the WHERE itself). Passing null will return all rows
-     *                  for the given table
-     * @param cls       Returns a new instance of the class represented by this Class, created by
-     *                  invoking the default (that is, zero-argument) constructor
-     * @throws InstantiationException Thrown when a program attempts to access a constructor
-     *                                which is not accessible from the location where the reference is made
-     * @throws IllegalAccessException Thrown when a program attempts to access a field or method
-     *                                which is not accessible from the location where the reference is made
-     */
-    public T getOne(String selection, Class<T> cls) throws InstantiationException, IllegalAccessException {
-        List<T> list = get(selection, cls);
-        if (FrameworkUtils.checkIfNull(list) || list.size() == 0) {
-            return null;
-        }
-        return list.get(0);
     }
 
     /**
@@ -293,7 +261,7 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
     /**
      * Method is used to delete all data
      *
-     * @param tableName
+     * @param tableName Name of table to delete all data from
      */
     public void deleteAllData(String tableName) {
         mDatabase.execSQL("delete from " + tableName);

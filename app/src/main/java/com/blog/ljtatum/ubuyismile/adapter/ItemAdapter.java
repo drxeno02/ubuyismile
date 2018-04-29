@@ -51,12 +51,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * Constructor
      *
      * @param context Interface to global information about an application environment
-     * @param alItems List of items to display
+     * @param items List of items to display
      */
-    public ItemAdapter(Context context, ArrayList<ItemDatabaseModel> alItems, Enum.ItemType itemType) {
+    public ItemAdapter(Context context, ArrayList<ItemDatabaseModel> items, Enum.ItemType itemType) {
         mItemType = itemType;
         mContext = context;
-        this.alItems = alItems;
+        alItems = items;
     }
 
     @Override
@@ -167,12 +167,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     /**
      * Method is used to update trip history data
      *
-     * @param alItems List of completed status trips. Populated from model class
+     * @param items List of completed status trips. Populated from model class
      *                {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
      */
-    public void updateData(@NonNull ArrayList<ItemDatabaseModel> alItems) {
-        if (alItems.size() > 0) {
-            this.alItems = alItems;
+    public void updateData(@NonNull ArrayList<ItemDatabaseModel> items) {
+        if (items.size() > 0) {
+            alItems = items;
             notifyDataSetChanged();
         }
     }

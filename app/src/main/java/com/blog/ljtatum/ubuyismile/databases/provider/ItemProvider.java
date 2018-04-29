@@ -56,25 +56,10 @@ public class ItemProvider {
      * @param itemDatabaseModel The item to update in db
      */
     public void update(ItemDatabaseModel itemDatabaseModel) {
-        mProvider.update(itemDatabaseModel, ItemSchema.CATEGORY + " = ?", new String[]{itemDatabaseModel.category});
-        mProvider.update(itemDatabaseModel, ItemSchema.ASIN + " = ?", new String[]{itemDatabaseModel.asin});
-        mProvider.update(itemDatabaseModel, ItemSchema.LABEL + " = ?", new String[]{itemDatabaseModel.label});
-        mProvider.update(itemDatabaseModel, ItemSchema.TIMESTAMP + " = ?", new String[]{itemDatabaseModel.timestamp});
-        mProvider.update(itemDatabaseModel, ItemSchema.ITEM_ID + " = ?", new String[]{itemDatabaseModel.itemId});
-        mProvider.update(itemDatabaseModel, ItemSchema.PRICE + " = ?", new String[]{itemDatabaseModel.price});
-        mProvider.update(itemDatabaseModel, ItemSchema.SALE_PRICE + " = ?", new String[]{itemDatabaseModel.salePrice});
-        mProvider.update(itemDatabaseModel, ItemSchema.TITLE + " = ?", new String[]{itemDatabaseModel.title});
-        mProvider.update(itemDatabaseModel, ItemSchema.DESCRIPTION + " = ?", new String[]{itemDatabaseModel.description});
-        mProvider.update(itemDatabaseModel, ItemSchema.PURCHASE_URL + " = ?", new String[]{itemDatabaseModel.purchaseUrl});
-        mProvider.update(itemDatabaseModel, ItemSchema.IMAGE_URL_1 + " = ?", new String[]{itemDatabaseModel.imageUrl1});
-        mProvider.update(itemDatabaseModel, ItemSchema.IMAGE_URL_2 + " = ?", new String[]{itemDatabaseModel.imageUrl2});
-        mProvider.update(itemDatabaseModel, ItemSchema.IMAGE_URL_3 + " = ?", new String[]{itemDatabaseModel.imageUrl3});
-        mProvider.update(itemDatabaseModel, ItemSchema.IMAGE_URL_4 + " = ?", new String[]{itemDatabaseModel.imageUrl4});
-        mProvider.update(itemDatabaseModel, ItemSchema.IMAGE_URL_5 + " = ?", new String[]{itemDatabaseModel.imageUrl5});
-        mProvider.update(itemDatabaseModel, ItemSchema.IS_BROWSABLE + " = ?", new String[]{String.valueOf(itemDatabaseModel.isBrowseItem)});
-        mProvider.update(itemDatabaseModel, ItemSchema.IS_FEATURED + " = ?", new String[]{String.valueOf(itemDatabaseModel.isFeatured)});
-        mProvider.update(itemDatabaseModel, ItemSchema.IS_MOST_POPULAR + " = ?", new String[]{String.valueOf(itemDatabaseModel.isMostPopular)});
-        mProvider.update(itemDatabaseModel, ItemSchema.IS_FAVORITE + " = ?", new String[]{String.valueOf(itemDatabaseModel.isFavorite)});
+        mProvider.update(itemDatabaseModel, ItemSchema.ITEM_ID + " = ?",
+                new String[]{itemDatabaseModel.itemId});
+
+
     }
 
     /**
