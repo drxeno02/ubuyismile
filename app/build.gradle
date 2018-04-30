@@ -84,7 +84,7 @@ android {
 dependencies {
     api project(':AmazonAffiliateFramework')
     api project(':ApplicationFramework')
-    api('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+    api('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true;
     }
 }
