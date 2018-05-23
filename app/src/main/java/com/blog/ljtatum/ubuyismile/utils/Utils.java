@@ -252,34 +252,38 @@ public class Utils {
                 // return 'None' label
                 return Enum.ItemLabel.MOST_POPULAR.toString();
             } else {
-                // check if item is on sale
-                double price = Utils.getDollarValue(chableeModel.price);
-                double salePrice = Utils.getDollarValue(chableeModel.salePrice);
-                if (salePrice > 0 && salePrice < price) {
-                    // return 'Sale' label
-                    return Enum.ItemLabel.SALE.toString();
-                } else {
-                    for (int i = 0; i < 5; i++) {
-                        Random rand = new Random();
-                        if (rand.nextInt(101) < 4) {
-                            if (i == 0) {
-                                // return 'Almost Gone' label
-                                return Enum.ItemLabel.ALMOST_GONE.toString();
-                            } else if (i == 1) {
-                                // return 'Top Seller' label
-                                return Enum.ItemLabel.TOP_SELLER.toString();
-                            } else if (i == 2) {
-                                // return 'Leonard Recommendation' label
-                                return Enum.ItemLabel.LEONARD_FAVORITE.toString();
-                            } else if (i == 3) {
-                                // return 'Super Hot' label
-                                return Enum.ItemLabel.SUPER_HOT.toString();
-                            }
+                if (!FrameworkUtils.isStringEmpty(chableeModel.price) &&
+                        !FrameworkUtils.isStringEmpty(chableeModel.salePrice)) {
+                    // check if item is on sale
+                    double price = Utils.getDollarValue(chableeModel.price);
+                    double salePrice = Utils.getDollarValue(chableeModel.salePrice);
+                    if (salePrice > 0 && salePrice < price) {
+                        // return 'Sale' label
+                        return Enum.ItemLabel.SALE.toString();
+                    }
+                }
+
+                // item not on sale
+                for (int i = 0; i < 5; i++) {
+                    Random rand = new Random();
+                    if (rand.nextInt(101) < 4) {
+                        if (i == 0) {
+                            // return 'Almost Gone' label
+                            return Enum.ItemLabel.ALMOST_GONE.toString();
+                        } else if (i == 1) {
+                            // return 'Top Seller' label
+                            return Enum.ItemLabel.TOP_SELLER.toString();
+                        } else if (i == 2) {
+                            // return 'Leonard Recommendation' label
+                            return Enum.ItemLabel.LEONARD_FAVORITE.toString();
+                        } else if (i == 3) {
+                            // return 'Super Hot' label
+                            return Enum.ItemLabel.SUPER_HOT.toString();
                         }
                     }
-                    // return 'None' label
-                    return Enum.ItemLabel.NONE.toString();
                 }
+                // return 'None' label
+                return Enum.ItemLabel.NONE.toString();
             }
         }
         // return 'New' label

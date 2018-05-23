@@ -111,11 +111,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         // label
-        if (!alItems.get(position).label.equalsIgnoreCase(Enum.ItemLabel.NONE.toString())) {
+        if (alItems.get(position).label.equalsIgnoreCase(Enum.ItemLabel.NONE.toString())) {
+            FrameworkUtils.setViewGone(holder.llLabelWrapper);
+        } else {
             // set visibility
             FrameworkUtils.setViewVisible(holder.llLabelWrapper);
+            FrameworkUtils.setViewGone(holder.ivLabelIcon);
             // set value
             holder.tvLabel.setText(alItems.get(position).label);
+            // set text color default
+            holder.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.white));
             if (alItems.get(position).label.equalsIgnoreCase(Enum.ItemLabel.SALE.toString())) {
                 // set visibility
                 FrameworkUtils.setViewVisible(holder.ivLabelIcon);
