@@ -203,4 +203,55 @@
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_20" />
 
+    <!-- favorite items -->
+    <RelativeLayout
+        android:layout_below="@+id/tv_buy"
+        android:id="@+id/rl_favorite_wrapper"
+        android:padding="@dimen/scaling_10"
+        android:background="@color/material_grey_300_color_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- favorite label -->
+    <TextView
+        android:id="@+id/tv_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/favorite"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_20" />
+
+        <TextView
+            android:layout_toEndOf="@+id/tv_favorite"
+            android:id="@+id/tv_favorite_meta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/scaling_10"
+            android:gravity="center_vertical"
+            android:text="@string/favorite"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_20" />
+
+        <!-- arrow -->
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:layout_width="@dimen/scaling_20"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrow_down_black"
+            android:layout_height="@dimen/scaling_20" />
+
+    </RelativeLayout>
+
+    <!-- list of items -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_items"
+        android:layout_below="@+id/rl_favorite_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:scrollbars="none" />
+
 </RelativeLayout>

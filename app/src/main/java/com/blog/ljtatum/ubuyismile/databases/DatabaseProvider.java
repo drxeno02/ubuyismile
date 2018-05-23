@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.databases.schema.ItemSchema;
-import com.blog.ljtatum.ubuyismile.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,19 +97,17 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
      *                    values from whereArgs. The values will be bound as Strings
      * @return 0 if database is not open
      */
-    public int delete(String tableName, String whereClause, String[] whereArgs) {
+    public void delete(String tableName, String whereClause, String[] whereArgs) {
         mDatabase = getWritableDatabase();
         if (mDatabase.isOpen()) {
             try {
-                return mDatabase.delete(tableName, whereClause, whereArgs);
+                mDatabase.delete(tableName, whereClause, whereArgs);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                return mDatabase.delete(tableName, null, null);
+                mDatabase.delete(tableName, null, null);
             }
         }
-        return 0;
     }
-
 
     /**
      * Method is used to retrieve one data item
@@ -156,10 +153,12 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
             try {
                 Cursor cursor = mDatabase.query(model.getTableName(),
                         model.getColumns(), selection, null, null, null, null);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()) {
-                    rows.add((T) model.fromCursor(cursor));
-                    cursor.moveToNext();
+                if (!FrameworkUtils.checkIfNull(cursor)) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        rows.add((T) model.fromCursor(cursor));
+                        cursor.moveToNext();
+                    }
                 }
                 cursor.close();
             } catch (Exception e) {
@@ -195,8 +194,8 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                         rows.add((T) model.fromCursor(cursor));
                         cursor.moveToNext();
                     }
-                    cursor.close();
                 }
+                cursor.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

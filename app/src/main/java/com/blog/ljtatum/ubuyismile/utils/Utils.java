@@ -37,6 +37,7 @@ public class Utils {
     private static final String CONNECTION_TYPE_WIFI = "WIFI";
     private static final String CONNECTION_TYPE_DATA = "MOBILE DATA";
     private static final String NO_CONNECTION = "No connection";
+    private static final String NO_CONNECTION_DATA = "No connection data";
 
     /**
      * Method is used for printing the memory usage. This is used
@@ -81,28 +82,30 @@ public class Utils {
     public static void printInfo(@NonNull Context context, @NonNull Activity activity) {
         if (Constants.DEBUG && Constants.DEBUG_VERBOSE) {
             // detect internet connection
-            String connectionType = "";
+            String connectionType = NO_CONNECTION_DATA;
             final ConnectivityManager connMgr = (ConnectivityManager)
                     context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            NetworkInfo activeNetwork = connMgr.getActiveNetworkInfo();
-            if (!FrameworkUtils.checkIfNull(activeNetwork)) {
-                // connected to the internet
-                if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-                    // connected to wifi
-                    connectionType = CONNECTION_TYPE_WIFI;
-                } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                    // connected to the mobile provider's data plan
-                    connectionType = CONNECTION_TYPE_DATA;
+            if (!FrameworkUtils.checkIfNull(connMgr)) {
+                NetworkInfo activeNetwork = connMgr.getActiveNetworkInfo();
+                if (!FrameworkUtils.checkIfNull(activeNetwork)) {
+                    // connected to the internet
+                    if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                        // connected to wifi
+                        connectionType = CONNECTION_TYPE_WIFI;
+                    } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                        // connected to the mobile provider's data plan
+                        connectionType = CONNECTION_TYPE_DATA;
+                    }
+                } else {
+                    // not connected to the internet
+                    connectionType = NO_CONNECTION;
                 }
-            } else {
-                // not connected to the internet
-                connectionType = NO_CONNECTION;
             }
 
             // determine phone carrier
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            String carrierName = manager.getNetworkOperatorName();
+            String carrierName = !FrameworkUtils.checkIfNull(manager) ? manager.getNetworkOperatorName() : "";
 
             // get display metrics
             DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -188,6 +191,7 @@ public class Utils {
 
     /**
      * Method is a random generator that will return a true or false value
+     *
      * @return Random true value, otherwise false
      */
     public static boolean isBrowseItem() {
