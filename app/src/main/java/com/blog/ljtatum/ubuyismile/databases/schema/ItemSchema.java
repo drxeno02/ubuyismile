@@ -26,6 +26,7 @@ public class ItemSchema implements BaseColumns {
     public static final String IMAGE_URL_3 = "image_url_three";
     public static final String IMAGE_URL_4 = "image_url_four";
     public static final String IMAGE_URL_5 = "image_url_five";
+    public static final String IS_LABEL_SET = "is_label_set";
     public static final String IS_BROWSABLE = "is_browsable";
     public static final String IS_FEATURED = "is_featured";
     public static final String IS_MOST_POPULAR = "is_most_popular";
@@ -55,6 +56,7 @@ public class ItemSchema implements BaseColumns {
         sb.append(IMAGE_URL_3 + " TEXT, ");
         sb.append(IMAGE_URL_4 + " TEXT, ");
         sb.append(IMAGE_URL_5 + " TEXT, ");
+        sb.append(IS_LABEL_SET + " TEXT, ");
         sb.append(IS_BROWSABLE + " TEXT, ");
         sb.append(IS_FEATURED + " TEXT, ");
         sb.append(IS_MOST_POPULAR + " TEXT, ");

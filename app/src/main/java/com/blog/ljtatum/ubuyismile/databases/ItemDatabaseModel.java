@@ -13,7 +13,7 @@ public class ItemDatabaseModel implements DatabaseModel {
 
     // base values
     public String category, asin, label, timestamp, itemId;
-    public boolean isBrowseItem;
+    public boolean isBrowseItem, isLabelSet;
 
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
@@ -38,6 +38,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         item.imageUrl3 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_3));
         item.imageUrl4 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_4));
         item.imageUrl5 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_5));
+        item.isLabelSet = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_LABEL_SET)) > 0;
         item.isBrowseItem = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_BROWSABLE)) > 0;
         item.isFeatured = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_FEATURED)) > 0;
         item.isMostPopular = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_MOST_POPULAR)) > 0;
@@ -63,6 +64,7 @@ public class ItemDatabaseModel implements DatabaseModel {
                 ItemSchema.IMAGE_URL_3,
                 ItemSchema.IMAGE_URL_4,
                 ItemSchema.IMAGE_URL_5,
+                ItemSchema.IS_LABEL_SET,
                 ItemSchema.IS_BROWSABLE,
                 ItemSchema.IS_FEATURED,
                 ItemSchema.IS_MOST_POPULAR,
@@ -88,6 +90,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         values.put(ItemSchema.IMAGE_URL_3, imageUrl3);
         values.put(ItemSchema.IMAGE_URL_4, imageUrl4);
         values.put(ItemSchema.IMAGE_URL_5, imageUrl5);
+        values.put(ItemSchema.IS_LABEL_SET, isLabelSet);
         values.put(ItemSchema.IS_BROWSABLE, isBrowseItem);
         values.put(ItemSchema.IS_FEATURED, isFeatured);
         values.put(ItemSchema.IS_MOST_POPULAR, isMostPopular);

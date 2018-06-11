@@ -19,8 +19,9 @@ public class ItemProvider {
             ItemSchema.TIMESTAMP, ItemSchema.ITEM_ID, ItemSchema.PRICE, ItemSchema.SALE_PRICE,
             ItemSchema.TITLE, ItemSchema.DESCRIPTION, ItemSchema.PURCHASE_URL,
             ItemSchema.IMAGE_URL_1, ItemSchema.IMAGE_URL_2, ItemSchema.IMAGE_URL_3,
-            ItemSchema.IMAGE_URL_4, ItemSchema.IMAGE_URL_5, ItemSchema.IS_BROWSABLE,
-            ItemSchema.IS_FEATURED, ItemSchema.IS_MOST_POPULAR, ItemSchema.IS_FAVORITE};
+            ItemSchema.IMAGE_URL_4, ItemSchema.IMAGE_URL_5, ItemSchema.IS_LABEL_SET,
+            ItemSchema.IS_BROWSABLE, ItemSchema.IS_FEATURED, ItemSchema.IS_MOST_POPULAR,
+            ItemSchema.IS_FAVORITE};
     private final DatabaseProvider<ItemDatabaseModel> mProvider;
 
     /**

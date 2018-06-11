@@ -231,6 +231,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                 chableeModel.asin = ""; // no asin for Chablee items
                 chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                 chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
+                chableeModel.isLabelSet = false;
 
                 if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
                         !FrameworkUtils.isStringEmpty(chableeModel.description)) {
@@ -267,6 +268,8 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
                         alItemDb.get(index).isFeatured = chableeModel.isFeatured;
                         alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
+                        alItemDb.get(index).isLabelSet = !Utils.isItemTimestampBeforeModifiedTimestamp(
+                                alItemDb.get(index), false);
                     } else {
                         // item does not exist in database
                         // stored data
@@ -290,6 +293,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                         itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                         itemDatabaseModel.isFavorite = chableeModel.isFavorite;
+                        itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                         alItemDb.add(itemDatabaseModel);
                     }
                 }

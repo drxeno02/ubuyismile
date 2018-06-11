@@ -9,7 +9,7 @@ public class ItemModel {
 
     // base values
     public String category, asin, label, timestamp, itemId;
-    public boolean isBrowseItem;
+    public boolean isBrowseItem, isLabelSet;
 
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,

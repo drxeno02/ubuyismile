@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final String ID_PREFIX = "id_";
 
     private Activity mActivity;
-    private Context mContext;
     private ErrorUtils mErrorUtils;
     private DrawerLayout mDrawerLayout;
     private ArrayList<String> alAmazonCategories, alChableeCategories;
@@ -135,23 +134,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void initializeViews() {
         mActivity = MainActivity.this;
-        mContext = MainActivity.this;
         mErrorUtils = new ErrorUtils();
         alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = Categories.getChableeCategories(); // retrieve all Chablee categories
         mInfoBarUtils = new InfoBarUtils();
 
         // instantiate shared prefs
-        mSharedPref = new SharedPref(mContext, com.app.framework.constants.Constants.PREF_FILE_NAME);
+        mSharedPref = new SharedPref(this, com.app.framework.constants.Constants.PREF_FILE_NAME);
 
         // rate this app
-        new AppRaterUtil(mContext, getPackageName());
+        new AppRaterUtil(this, getPackageName());
 
         // track Happiness
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
 
         // instantiate SQLite database
-        mItemProvider = new ItemProvider(mContext);
+        mItemProvider = new ItemProvider(this);
         alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
                 mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
         isDbEmpty = alItemDb.size() == 0;
@@ -163,11 +161,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 getResources().getString(R.string.amazon_secret_key));
 
         // initialize adapter
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         RecyclerView rvItems = findViewById(R.id.rv_items);
         rvItems.setLayoutManager(gridLayoutManager);
-        mItemAdapter = new ItemAdapter(mContext, new ArrayList<ItemDatabaseModel>(),
+        mItemAdapter = new ItemAdapter(this, new ArrayList<ItemDatabaseModel>(),
                 com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE);
         rvItems.setAdapter(mItemAdapter);
 
@@ -183,7 +181,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 super.onDrawerClosed(view);
                 if (FrameworkUtils.checkIfNull(getTopFragment())) {
                     // show keyboard
-                    DeviceUtils.showKeyboard(mContext);
+                    DeviceUtils.showKeyboard(mActivity);
                 }
             }
 
@@ -191,7 +189,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 // hide keyboard
-                DeviceUtils.hideKeyboard(mContext, getWindow().getDecorView().getWindowToken());
+                DeviceUtils.hideKeyboard(mActivity, getWindow().getDecorView().getWindowToken());
             }
         };
         mDrawerLayout.addDrawerListener(toggle);
@@ -256,7 +254,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onRetrieveDataError(DatabaseError databaseError) {
                 // display error dialog
                 mErrorUtils.showError(MainActivity.this,
-                        mContext.getResources().getString(R.string.default_error_message), "");
+                        getResources().getString(R.string.default_error_message), "");
             }
         });
     }
@@ -437,6 +435,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     chableeModel.asin = ""; // no asin for Chablee items
                     chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                     chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
+                    chableeModel.isLabelSet = false;
 
                     // only add data if it exists. This is enforced by the required
                     // title and description values
@@ -464,6 +463,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                             itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                             itemDatabaseModel.isFavorite = chableeModel.isFavorite;
+                            itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                             alItemDb.add(itemDatabaseModel);
                         }
                     } else {
@@ -502,6 +502,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
                                 alItemDb.get(index).isFeatured = chableeModel.isFeatured;
                                 alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
+                                alItemDb.get(index).isLabelSet = !Utils.isItemTimestampBeforeModifiedTimestamp(
+                                        alItemDb.get(index), false);
                             } else {
                                 // item does not exist in database
                                 // stored data
@@ -525,6 +527,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                                 itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                                 itemDatabaseModel.isFavorite = chableeModel.isFavorite;
+                                itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                                 alItemDb.add(itemDatabaseModel);
                             }
                         }
@@ -544,7 +547,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void retrieveFirebaseData() {
         if (categoryIndex == 0) {
             // show progress dialog
-            DialogUtils.showProgressDialog(mContext);
+            DialogUtils.showProgressDialog(this);
         }
 
         // retrieve more data from Amazon so long that category index is less than
@@ -579,7 +582,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         createSQLiteDb();
                     } else {
                         // update database
-                        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
+                        new AsyncTaskUpdateDatabase(this, mItemProvider, alItemDb).execute();
                         printDb();
                     }
                 }

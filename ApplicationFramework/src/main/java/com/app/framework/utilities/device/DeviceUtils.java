@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
@@ -26,23 +27,23 @@ public class DeviceUtils {
     /**
      * Method is used to show virtual keyboard
      *
-     * @param context Interface to global information about an application environment
+     * @param activity An activity is a single, focused thing that the user can do
      */
-    public static void showKeyboard(Context context) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void showKeyboard(@NonNull Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
     /**
      * Method is used to hide virtual keyboard
      *
-     * @param context Interface to global information about an application environment
+     * @param activity An activity is a single, focused thing that the user can do
      * @param binder  Base interface for a remotable object, the core part of a lightweight remote
      *                procedure call mechanism designed for high performance when performing
      *                in-process and cross-process calls
      */
-    public static void hideKeyboard(Context context, IBinder binder) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void hideKeyboard(@NonNull Activity activity, IBinder binder) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(binder, 0);
     }
 
