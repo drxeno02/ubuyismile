@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +19,7 @@ import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
-import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
+import com.blog.ljtatum.ubuyismile.adapter.ItemDetailAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
@@ -54,7 +53,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
     private List<ItemDatabaseModel> alItemDb;
 
     // adapter
-    private ItemAdapter mItemAdapter;
+    private ItemDetailAdapter itemDetailAdapter;
 
     // refresh layout
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -100,9 +99,9 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvItems.setLayoutManager(layoutManager);
-        mItemAdapter = new ItemAdapter(mContext, new ArrayList<ItemDatabaseModel>(),
+        itemDetailAdapter = new ItemDetailAdapter(mContext, new ArrayList<ItemDatabaseModel>(),
                 com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE);
-        rvItems.setAdapter(mItemAdapter);
+        rvItems.setAdapter(itemDetailAdapter);
 
     }
 
@@ -153,13 +152,13 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         });
 
         // onClick listener
-        ItemAdapter.onClickAdapterListener(new OnClickAdapterListener() {
+        ItemDetailAdapter.onClickAdapterListener(new OnClickAdapterListener() {
             @Override
-            public void onClick(int position) {
+            public void onClick(ItemDatabaseModel item, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType itemType) {
                 Bundle args = new Bundle();
-                args.putString(Constants.KEY_ITEM_ID, alItemDb.get(position).itemId);
-                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
-                args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString());
+                args.putString(Constants.KEY_ITEM_ID, item.itemId);
+                args.putString(Constants.KEY_CATEGORY, item.category);
+                args.putString(Constants.KEY_ITEM_TYPE, itemType.toString());
 
                 BaseFragment fragment = new DetailFragment();
                 fragment.setArguments(args);
@@ -211,7 +210,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             if (items.size() > 0) {
                 // set adapter
                 FrameworkUtils.setViewGone(tvNoItems);
-                mItemAdapter.updateData(items);
+                itemDetailAdapter.updateData(items);
             } else {
                 // empty list
                 FrameworkUtils.setViewVisible(tvNoItems);
@@ -315,7 +314,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         }
 
         // set adapter
-        mItemAdapter.updateData(items);
+        itemDetailAdapter.updateData(items);
         swipeRefreshLayout.setRefreshing(false);
     }
 

@@ -1,13 +1,10 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
@@ -28,7 +24,6 @@ import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.sharedpref.SharedPref;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.apprater.AppRaterUtil;
-import com.app.framework.utilities.device.DeviceUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
@@ -40,7 +35,9 @@ import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
 import com.blog.ljtatum.ubuyismile.fragments.BaseFragment;
 import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
+import com.blog.ljtatum.ubuyismile.fragments.DetailFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
+import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
@@ -249,6 +246,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 // display error dialog
                 mErrorUtils.showError(MainActivity.this,
                         getResources().getString(R.string.default_error_message), "");
+            }
+        });
+
+        // onClick listener
+        ItemAdapter.onClickAdapterListener(new OnClickAdapterListener() {
+            @Override
+            public void onClick(ItemDatabaseModel item, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType itemType) {
+                Bundle args = new Bundle();
+                args.putString(Constants.KEY_ITEM_ID, item.itemId);
+                args.putString(Constants.KEY_CATEGORY, item.category);
+                args.putString(Constants.KEY_ITEM_TYPE, itemType.toString());
+
+                BaseFragment fragment = new DetailFragment();
+                fragment.setArguments(args);
+                fragment.setOnRemoveListener(new BaseFragment.OnRemoveFragment() {
+                    @Override
+                    public void onRemove() {
+                        // update database list
+                        alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
+                                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
+                    }
+                });
+                addFragment(fragment);
             }
         });
     }

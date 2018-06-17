@@ -23,14 +23,13 @@ import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by LJTat on 12/31/2017.
  */
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
+public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.ViewHolder> {
 
     private Context mContext;
     private List<ItemDatabaseModel> alItems;
@@ -55,7 +54,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * @param items    List of items to display
      * @param itemType The type of item e.g. Chablee or Amazon
      */
-    public ItemAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items, Enum.ItemType itemType) {
+    public ItemDetailAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items, Enum.ItemType itemType) {
         mItemType = itemType;
         mContext = context;
         alItems = items;
@@ -69,7 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         } else {
             v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
         }
-        return new ItemAdapter.ViewHolder(v);
+        return new ItemDetailAdapter.ViewHolder(v);
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -177,7 +176,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * Method is used to update trip history data
      *
      * @param items List of completed status trips. Populated from model class
-     *              {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     *              {@link ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
         if (items.size() > 0) {

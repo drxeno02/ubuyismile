@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -168,7 +167,9 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                             FrameworkUtils.setViewVisible(rvFavorite);
 
                             // update adapter
-                            mFavoriteAdapter.updateData(filterFavoriteItemList(mItemProvider.getAllInfo()));
+                            mFavoriteAdapter.updateData(filterFavoriteItemList(
+                                    !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
+                                            mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>()));
                         }
 
                         // set item details
