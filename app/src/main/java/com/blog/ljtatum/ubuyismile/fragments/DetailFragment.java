@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.FavoriteAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
@@ -217,7 +218,12 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
             // set header
             if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
-
+                // set fragment header
+                tvFragmentHeader.setText(getResources().getString(R.string.menu_browse));
+                // set text color
+                tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                // set compound drawable with intrinsic bounds
+                tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_white, 0, 0, 0);
             } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
                 if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
                     // set fragment header
@@ -232,6 +238,10 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
                 }
+                // set text color
+                tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+                // set compound drawable with intrinsic bounds
+                tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_black, 0, 0, 0);
             }
 
             // set item details
@@ -428,8 +438,17 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // disable drawer
+        ((MainActivity) mContext).setDrawerState(false);
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
+        // enable drawer
+        ((MainActivity) mContext).setDrawerState(true);
         // clear animation
         tvBuy.clearAnimation();
         tvBuy = null;

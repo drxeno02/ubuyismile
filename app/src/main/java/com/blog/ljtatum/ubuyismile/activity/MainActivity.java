@@ -27,7 +27,7 @@ import com.app.framework.utilities.apprater.AppRaterUtil;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
-import com.blog.ljtatum.ubuyismile.adapter.ItemAdapter;
+import com.blog.ljtatum.ubuyismile.adapter.ItemBrowseAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private List<ItemDatabaseModel> alItemDb;
 
     // adapter
-    private ItemAdapter mItemAdapter;
+    private ItemBrowseAdapter itemBrowseAdapter;
 
     // Amazon web service authentication
     AmazonWebServiceAuthentication mAmazonAuth;
@@ -162,9 +162,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         RecyclerView rvItems = findViewById(R.id.rv_items);
         rvItems.setLayoutManager(gridLayoutManager);
-        mItemAdapter = new ItemAdapter(this, new ArrayList<ItemDatabaseModel>(),
+        itemBrowseAdapter = new ItemBrowseAdapter(this, new ArrayList<ItemDatabaseModel>(),
                 com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE);
-        rvItems.setAdapter(mItemAdapter);
+        rvItems.setAdapter(itemBrowseAdapter);
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -250,7 +250,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         });
 
         // onClick listener
-        ItemAdapter.onClickAdapterListener(new OnClickAdapterListener() {
+        ItemBrowseAdapter.onClickAdapterListener(new OnClickAdapterListener() {
             @Override
             public void onClick(ItemDatabaseModel item, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType itemType) {
                 Bundle args = new Bundle();
@@ -623,7 +623,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         // set adapter
-        mItemAdapter.updateData(items);
+        itemBrowseAdapter.updateData(items);
 
         // dismiss progress dialog
         DialogUtils.dismissProgressDialog();
