@@ -179,17 +179,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                if (FrameworkUtils.checkIfNull(getTopFragment())) {
-                    // show keyboard
-                    DeviceUtils.showKeyboard(mActivity);
-                }
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                // hide keyboard
-                DeviceUtils.hideKeyboard(mActivity, getWindow().getDecorView().getWindowToken());
             }
         };
         mDrawerLayout.addDrawerListener(toggle);
