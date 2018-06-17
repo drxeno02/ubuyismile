@@ -1,5 +1,6 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ import java.util.List;
 public class ChableeFragment extends BaseFragment implements View.OnClickListener {
 
     private Context mContext;
+    private Activity mActivity;
     private ErrorUtils mErrorUtils;
     private View mRootView;
     private String mCategory;
@@ -59,7 +61,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_chablee, container, false);
 
         // instantiate views
@@ -77,6 +79,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
      */
     private void initializeViews() {
         mContext = getActivity();
+        mActivity = getActivity();
         mErrorUtils = new ErrorUtils();
 
         // track Happiness
@@ -145,8 +148,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onRetrieveDataError(DatabaseError databaseError) {
                 // display error dialog
-                mErrorUtils.showError(getActivity(),
-                        mContext.getResources().getString(R.string.default_error_message), "");
+                mErrorUtils.showError(mActivity, getResources().getString(R.string.default_error_message), "");
             }
         });
 
@@ -198,7 +200,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             }
 
             // populate item list
-            ArrayList<ItemDatabaseModel> items = new ArrayList<>();
+            List<ItemDatabaseModel> items = new ArrayList<>();
             for (int i = 0; i < alItemDb.size(); i++) {
                 if (alItemDb.get(i).category.equalsIgnoreCase(mCategory)) {
                     // add item
@@ -301,10 +303,10 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         }
 
         // update database
-        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
 
         // add Chablee items to list
-        ArrayList<ItemDatabaseModel> items = new ArrayList<>();
+        List<ItemDatabaseModel> items = new ArrayList<>();
         for (int i = 0; i < alItemDb.size(); i++) {
             if (alItemDb.get(i).category.equalsIgnoreCase(mCategory)) {
                 // add item

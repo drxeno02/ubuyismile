@@ -1,9 +1,9 @@
 package com.blog.ljtatum.ubuyismile.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
@@ -11,11 +11,9 @@ import com.app.framework.constants.Constants;
 import com.app.framework.sharedpref.SharedPref;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
-import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
@@ -32,7 +30,7 @@ public class HappinessUtils {
     public static final String EVENT_CONTENT_ITEM_DETAIL_COUNTER = "key_event_content_item_detail_counter";
     public static final String EVENT_ABOUT_COUNTER = "key_event_about_counter";
     public static final String EVENT_ABOUT_SHARE_COUNTER = "key_event_share_counter";
-    public static final String EVENT_SEARH_COUNTER = "key_event_search_counter";
+    public static final String EVENT_SEARCH_COUNTER = "key_event_search_counter";
     public static final String EVENT_ITEM_FEEDBACK_COUNTER = "key_event_item_feedback_counter";
 
     private static final String HAPPINESS_SCORE = "key_happiness";
@@ -56,9 +54,15 @@ public class HappinessUtils {
     private static TypedArray typedArryDrawable50;
 
     private static SharedPref mSharedPref;
+    @SuppressLint("StaticFieldLeak")
     private static Context mContext;
 
-    public HappinessUtils(Context context) {
+    /**
+     * Constructor
+     *
+     * @param context Interface to global information about an application environment
+     */
+    public HappinessUtils(@NonNull Context context) {
         mContext = context;
         mSharedPref = new SharedPref(context, Constants.PREF_FILE_NAME);
 
@@ -91,6 +95,7 @@ public class HappinessUtils {
 
     /**
      * Method is used to update Happiness Score
+     *
      * @param event The event name that marks a milestone
      */
     public static void trackHappiness(@NonNull String event) {
@@ -165,13 +170,13 @@ public class HappinessUtils {
                 // reset value
                 mSharedPref.setPref(EVENT_ABOUT_SHARE_COUNTER, 0);
             }
-        } else if (event.equalsIgnoreCase(EVENT_SEARH_COUNTER)) {
+        } else if (event.equalsIgnoreCase(EVENT_SEARCH_COUNTER)) {
             // increment event
-            mSharedPref.setPref(EVENT_SEARH_COUNTER, (mSharedPref.getIntPref(EVENT_SEARH_COUNTER, 0) + 1));
-            if (mSharedPref.getIntPref(EVENT_SEARH_COUNTER, 0) >= SEARCH_THRESHOLD) {
+            mSharedPref.setPref(EVENT_SEARCH_COUNTER, (mSharedPref.getIntPref(EVENT_SEARCH_COUNTER, 0) + 1));
+            if (mSharedPref.getIntPref(EVENT_SEARCH_COUNTER, 0) >= SEARCH_THRESHOLD) {
                 isHappinessScoreChanged = true;
                 // reset value
-                mSharedPref.setPref(EVENT_SEARH_COUNTER, 0);
+                mSharedPref.setPref(EVENT_SEARCH_COUNTER, 0);
             }
         } else if (event.equalsIgnoreCase(EVENT_ITEM_FEEDBACK_COUNTER)) {
             // increment event
@@ -198,6 +203,7 @@ public class HappinessUtils {
 
     /**
      * Method is used to retrieve description
+     *
      * @return An immutable sequence of UTF-16 char
      */
     public static String retrieveDescription() {
@@ -223,6 +229,7 @@ public class HappinessUtils {
 
     /**
      * Method is used to retrieve drawable
+     *
      * @return A Drawable is a general abstraction for "something that can be drawn."
      */
     public static Drawable retrieveDrawable() {

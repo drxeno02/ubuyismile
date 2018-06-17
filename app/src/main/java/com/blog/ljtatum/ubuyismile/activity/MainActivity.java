@@ -582,7 +582,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         createSQLiteDb();
                     } else {
                         // update database
-                        new AsyncTaskUpdateDatabase(this, mItemProvider, alItemDb).execute();
+                        new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
                         printDb();
                     }
                 }
@@ -595,7 +595,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * be highlighted during initial load
      */
     private void setBrowseAdapter() {
-        ArrayList<ItemDatabaseModel> items = new ArrayList<>();
+        List<ItemDatabaseModel> items = new ArrayList<>();
 
         // add Amazon browse items to list
         // TODO add browse items for Amazon

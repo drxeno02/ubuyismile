@@ -1,12 +1,16 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
+import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +21,17 @@ import android.widget.TextView;
 
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
-import com.app.framework.utilities.dialog.DialogUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.adapter.FavoriteAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
-import com.blog.ljtatum.ubuyismile.logger.Logger;
+import com.blog.ljtatum.ubuyismile.interfaces.OnDatabaseChangeListener;
+import com.blog.ljtatum.ubuyismile.interfaces.OnFavoriteRemoveListener;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.AnimationUtils;
+import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -40,9 +46,10 @@ import java.util.Random;
 public class DetailFragment extends BaseFragment implements View.OnClickListener {
 
     private Context mContext;
+    private Activity mActivity;
     private View mRootView;
 
-    private TextView tvFragmentHeader, tvLabel, tvTitle, tvPrice, tvDesc, tvBuy;
+    private TextView tvFragmentHeader, tvLabel, tvTitle, tvPrice, tvDesc, tvBuy, tvNoFavoriteItems;
     private ImageView ivBg, ivLabelIcon, ivShare, ivFavorite;
     private LinearLayout llLabelWrapper, llFavoriteIndicatorWrapper;
     private RelativeLayout rlParent;
@@ -54,14 +61,19 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private ItemProvider mItemProvider;
     private List<ItemDatabaseModel> alItemDb;
 
+    // adapter
+    private FavoriteAdapter mFavoriteAdapter;
+    private RecyclerView rvFavorite;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         // instantiate views
         initializeViews();
         initializeHandlers();
+        initializeListeners();
         // retrieve bundle info
         getBundle();
 
@@ -73,12 +85,17 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      */
     private void initializeViews() {
         mContext = getActivity();
+        mActivity = getActivity();
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
-        alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
-                mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
+        alItemDb = mItemProvider.getAllInfo();
 
+        // track Happiness
+        HappinessUtils.trackHappiness(HappinessUtils.EVENT_CONTENT_ITEM_DETAIL_COUNTER);
+
+        // initialize views
+        rvFavorite = mRootView.findViewById(R.id.rv_favorite);
         llLabelWrapper = mRootView.findViewById(R.id.ll_label_wrapper);
         llFavoriteIndicatorWrapper = mRootView.findViewById(R.id.ll_favorite_indicator_wrapper);
         rlParent = mRootView.findViewById(R.id.rl_parent);
@@ -88,6 +105,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         tvTitle = mRootView.findViewById(R.id.tv_title);
         tvDesc = mRootView.findViewById(R.id.tv_desc);
         tvBuy = mRootView.findViewById(R.id.tv_buy);
+        tvNoFavoriteItems = mRootView.findViewById(R.id.tv_no_favorite_items);
         ivBg = mRootView.findViewById(R.id.iv_bg);
         ivLabelIcon = mRootView.findViewById(R.id.iv_label_icon);
         ivShare = mRootView.findViewById(R.id.iv_share);
@@ -95,6 +113,25 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
         // start animation
         tvBuy.startAnimation(AnimationUtils.retrieveBlinkAnimation());
+
+        // initialize adapter
+        if (!isFavoriteItem()) {
+            // set visibility
+            FrameworkUtils.setViewGone(rvFavorite);
+            FrameworkUtils.setViewVisible(tvNoFavoriteItems);
+        } else {
+            // set visibility
+            FrameworkUtils.setViewGone(tvNoFavoriteItems);
+            FrameworkUtils.setViewVisible(rvFavorite);
+
+            // set adapter
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            rvFavorite.setLayoutManager(layoutManager);
+            rvFavorite.addItemDecoration(new DividerItemDecoration(rvFavorite.getContext(), DividerItemDecoration.VERTICAL));
+            mFavoriteAdapter = new FavoriteAdapter(mContext, filterFavoriteItemList(mItemProvider.getAllInfo()));
+            rvFavorite.setAdapter(mFavoriteAdapter);
+        }
     }
 
     /**
@@ -106,6 +143,55 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         ivBg.setOnClickListener(this);
         ivShare.setOnClickListener(this);
         ivFavorite.setOnClickListener(this);
+    }
+
+    /**
+     * Method is used to initialize listeners and callbacks
+     */
+    private void initializeListeners() {
+        // onDatabseChange listener
+        AsyncTaskUpdateDatabase.onDatabaseChangeListener(new OnDatabaseChangeListener() {
+            @Override
+            public void onDatabaseUpdate() {
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        alItemDb = mItemProvider.getAllInfo();
+
+                        if (!isFavoriteItem()) {
+                            // set visibility
+                            FrameworkUtils.setViewGone(rvFavorite);
+                            FrameworkUtils.setViewVisible(tvNoFavoriteItems);
+                        } else {
+                            // set visibility
+                            FrameworkUtils.setViewGone(tvNoFavoriteItems);
+                            FrameworkUtils.setViewVisible(rvFavorite);
+
+                            // update adapter
+                            mFavoriteAdapter.updateData(filterFavoriteItemList(mItemProvider.getAllInfo()));
+                        }
+
+                        // set item details
+                        setItemDetails();
+                    }
+                });
+            }
+        });
+        // onFavoriteRemove listener
+        FavoriteAdapter.onFavoriteRemoveListener(new OnFavoriteRemoveListener() {
+            @Override
+            public void onFavoriteRemove(ItemDatabaseModel item) {
+                // item to un-favorite
+                for (int i = 0; i < alItemDb.size(); i++) {
+                    if (alItemDb.get(i).itemId.equalsIgnoreCase(item.itemId)) {
+                        alItemDb.get(i).isFavorite = false;
+                        break;
+                    }
+                }
+                // update database
+                new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
+            }
+        });
     }
 
     /**
@@ -263,7 +349,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.iv_favorite:
                 // favorite
-                favorite();
+                addFavoriteItem();
                 break;
             default:
                 break;
@@ -278,16 +364,16 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         Random rand = new Random();
         int msgValue = (rand.nextInt(3));
         if (msgValue == 0) {
-            msg = getActivity().getResources().getString(R.string.share_option_a).concat(" ").concat(alItemDb.get(mItemIndex).purchaseUrl);
+            msg = getResources().getString(R.string.share_option_a).concat(" ").concat(alItemDb.get(mItemIndex).purchaseUrl);
         } else if (msgValue == 1) {
-            msg = getActivity().getResources().getString(R.string.share_option_b).concat(" ").concat(alItemDb.get(mItemIndex).purchaseUrl);
+            msg = getResources().getString(R.string.share_option_b).concat(" ").concat(alItemDb.get(mItemIndex).purchaseUrl);
         } else {
-            msg = getActivity().getResources().getString(R.string.share_option_c).concat(" ").concat(alItemDb.get(mItemIndex).purchaseUrl);
+            msg = getResources().getString(R.string.share_option_c).concat(" ").concat(alItemDb.get(mItemIndex).purchaseUrl);
         }
 
-        ShareCompat.IntentBuilder.from(getActivity())
+        ShareCompat.IntentBuilder.from(mActivity)
                 .setType("text/plain")
-                .setChooserTitle(getActivity().getResources().getString(R.string.menu_share))
+                .setChooserTitle(getResources().getString(R.string.menu_share))
                 .setText(msg)
                 .startChooser();
     }
@@ -295,7 +381,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     /**
      * Method is used to favorite an item
      */
-    private void favorite() {
+    private void addFavoriteItem() {
         // update flag
         alItemDb.get(mItemIndex).isFavorite = !alItemDb.get(mItemIndex).isFavorite;
         // favorite item
@@ -307,7 +393,37 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             FrameworkUtils.setViewGone(llFavoriteIndicatorWrapper);
         }
         // update database
-        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
+    }
+
+    /**
+     * Method is used to filter out items that are not favorited
+     *
+     * @return List of favorite items
+     */
+    private List<ItemDatabaseModel> filterFavoriteItemList(@NonNull final List<ItemDatabaseModel> alItems) {
+        for (int i = alItems.size() - 1; i >= 0; i--) {
+            if (!alItems.get(i).isFavorite) {
+                alItems.remove(i);
+            }
+        }
+        return alItems;
+    }
+
+    /**
+     * Method is used to check if there are any favorite items that exist
+     *
+     * @return True if there are any addFavoriteItem items that exists, otherwise false
+     */
+    private boolean isFavoriteItem() {
+        boolean isFavoriteItem = false;
+        for (int i = 0; i < alItemDb.size(); i++) {
+            if (alItemDb.get(i).isFavorite) {
+                isFavoriteItem = true;
+                break;
+            }
+        }
+        return isFavoriteItem;
     }
 
     @Override

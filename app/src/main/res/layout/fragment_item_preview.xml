@@ -30,8 +30,6 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/scaling_20"
             android:paddingEnd="@dimen/scaling_10"
-            android:paddingLeft="@dimen/scaling_10"
-            android:paddingRight="@dimen/scaling_10"
             android:paddingStart="@dimen/scaling_10"
             android:paddingTop="@dimen/scaling_10">
 

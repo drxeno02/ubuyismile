@@ -44,8 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/scaling_20"
-            android:layout_marginLeft="@dimen/scaling_20"
-            android:layout_marginRight="@dimen/scaling_20"
             android:layout_marginStart="@dimen/scaling_20"
             android:layout_marginTop="@dimen/scaling_40"
             android:text="@string/sorry_unable_retrieve_item"

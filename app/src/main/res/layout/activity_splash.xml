@@ -34,8 +34,6 @@
         android:layout_below="@+id/tv_title"
         android:layout_marginBottom="@dimen/scaling_10"
         android:layout_marginEnd="@dimen/scaling_60"
-        android:layout_marginLeft="@dimen/scaling_60"
-        android:layout_marginRight="@dimen/scaling_60"
         android:layout_marginStart="@dimen/scaling_60"
         android:layout_marginTop="@dimen/scaling_10"
         android:background="@color/black" />

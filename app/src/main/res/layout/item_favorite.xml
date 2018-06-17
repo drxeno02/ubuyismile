@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/scaling_10"
+    android:visibility="visible">
 
+    <!-- item icon -->
+    <com.app.framework.gui.CircleImageView
+        android:id="@+id/civ_item_icon"
+        android:layout_width="@dimen/scaling_60"
+        android:layout_height="@dimen/scaling_60"
+        android:scaleType="centerCrop" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/scaling_10"
+        android:layout_toEndOf="@+id/civ_item_icon"
+        android:layout_toStartOf="@+id/tv_remove"
+        android:orientation="vertical">
+
+        <!-- title -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/scaling_10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16" />
+
+        <LinearLayout
+            android:id="@+id/ll_label_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/scaling_10"
+            android:layout_marginTop="@dimen/scaling_5"
+            android:orientation="horizontal">
+
+            <!-- label icon -->
+            <ImageView
+                android:id="@+id/iv_label_icon"
+                android:layout_width="@dimen/scaling_20"
+                android:layout_height="@dimen/scaling_20"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/scaling_5"
+                android:gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+
+            <!-- label -->
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/scaling_10"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/scaling_10"
+            android:layout_marginTop="@dimen/scaling_5"
+            android:orientation="horizontal">
+
+            <!-- scratch price -->
+            <TextView
+                android:id="@+id/tv_scratch_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_16"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <!-- price -->
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_18"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- remove favorite -->
+    <TextView
+        android:id="@+id/tv_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/scaling_10"
+        android:background="@drawable/pill_black_hollow"
+        android:gravity="center"
+        android:padding="@dimen/scaling_4"
+        android:text="@string/remove"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_14" />
 
 </RelativeLayout>

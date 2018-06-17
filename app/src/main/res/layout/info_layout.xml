@@ -22,7 +22,6 @@
                 android:layout_height="@dimen/scaling_56"
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:layout_marginLeft="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:layout_marginTop="@dimen/scaling_10"
                 android:src="@drawable/happiness_90_01" />
@@ -33,13 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/scaling_10"
-                android:layout_marginLeft="@dimen/scaling_10"
-                android:layout_marginRight="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:layout_marginTop="@dimen/scaling_5"
                 android:layout_toEndOf="@+id/civ_emote_info"
-                android:layout_toLeftOf="@+id/iv_close_info"
-                android:layout_toRightOf="@+id/civ_emote_info"
                 android:layout_toStartOf="@+id/iv_close_info"
                 android:textSize="@dimen/font_size_18"
                 android:gravity="center_vertical"
@@ -51,9 +46,7 @@
                 android:layout_width="@dimen/scaling_26"
                 android:layout_height="@dimen/scaling_26"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/scaling_5"
-                android:layout_marginRight="@dimen/scaling_5"
                 android:layout_marginTop="@dimen/scaling_5"
                 android:src="@drawable/close_white" />
 

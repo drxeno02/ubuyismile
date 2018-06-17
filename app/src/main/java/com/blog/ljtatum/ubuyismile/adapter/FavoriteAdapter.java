@@ -1,11 +1,11 @@
 package com.blog.ljtatum.ubuyismile.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,78 +13,64 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.framework.gui.CircleImageView;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
-import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
+import com.blog.ljtatum.ubuyismile.interfaces.OnFavoriteRemoveListener;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by LJTat on 12/31/2017.
  */
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private Context mContext;
     private List<ItemDatabaseModel> alItems;
-    private Enum.ItemType mItemType;
 
     // custom callback
-    private static OnClickAdapterListener mOnClickAdapterListener;
+    private static OnFavoriteRemoveListener mOnFavoriteRemoveListener;
 
     /**
-     * Method is used to set callback for when item is clicked
+     * Method is used to set callback for when to remove item from favorite list
      *
-     * @param listener Callback for when item is clicked
+     * @param listener Callback for when to remove item from favorite list
      */
-    public static void onClickAdapterListener(OnClickAdapterListener listener) {
-        mOnClickAdapterListener = listener;
+    public static void onFavoriteRemoveListener(OnFavoriteRemoveListener listener) {
+        mOnFavoriteRemoveListener = listener;
     }
 
     /**
      * Constructor
      *
-     * @param context  Interface to global information about an application environment
-     * @param items    List of items to display
-     * @param itemType The type of item e.g. Chablee or Amazon
+     * @param context Interface to global information about an application environment
+     * @param items   List of items to display
      */
-    public ItemAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items, Enum.ItemType itemType) {
-        mItemType = itemType;
+    public FavoriteAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
+        for (int i = 0; i < items.size(); i++) {
+            Log.v("DATMUG", "list of favorite items :: title= " + items.get(i).title + " //isFavorite= " + items.get(i).isFavorite);
+        }
+
         mContext = context;
         alItems = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
-        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
-        } else {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
-        }
-        return new ItemAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_favorite, parent, false);
+        return new FavoriteAdapter.ViewHolder(v);
     }
 
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final int index = holder.getAdapterPosition();
-
-        // set background
-        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
-            if (position % 2 == 0) {
-                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
-            } else {
-                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_a100_color_code));
-            }
-        }
 
         // sale price percentage
         if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
@@ -93,11 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 (Utils.getDollarValue(alItems.get(position).salePrice) <
                         Utils.getDollarValue(alItems.get(position).price))) {
             // set visibility
-            FrameworkUtils.setViewVisible(holder.tvSalePerc, holder.tvScratchPrice);
-            // set percent sale value
-            holder.tvSalePerc.setText(mContext.getResources().getString(R.string.percent_sale,
-                    String.valueOf(Utils.calculatePercSale(Utils.getDollarValue(alItems.get(position).price),
-                            Utils.getDollarValue(alItems.get(position).salePrice)))));
+            FrameworkUtils.setViewVisible(holder.tvScratchPrice);
             // set price as sale price and price
             holder.tvPrice.setText(mContext.getResources().getString(
                     R.string.dollar_format, alItems.get(position).salePrice));
@@ -106,7 +88,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             holder.tvScratchPrice.setPaintFlags(holder.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             // set visibility
-            FrameworkUtils.setViewGone(holder.tvSalePerc);
             FrameworkUtils.setViewInvisible(holder.tvScratchPrice);
             holder.tvPrice.setText(mContext.getResources().getString(
                     R.string.dollar_format, alItems.get(position).price));
@@ -121,8 +102,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             FrameworkUtils.setViewGone(holder.ivLabelIcon);
             // set value
             holder.tvLabel.setText(alItems.get(position).label);
-            // set text color default
-            holder.tvLabel.setTextColor(ContextCompat.getColor(mContext, R.color.white));
             if (alItems.get(position).label.equalsIgnoreCase(Enum.ItemLabel.SALE.toString())) {
                 // set visibility
                 FrameworkUtils.setViewVisible(holder.ivLabelIcon);
@@ -153,19 +132,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItems.get(position).imageUrl1))
                 .placeholder(R.drawable.no_image_available)
                 .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
-                .into(holder.ivBg);
+                .into(holder.civItemIcon);
 
         // click listener
-        holder.ivBg.setOnClickListener(new View.OnClickListener() {
+        holder.tvRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!FrameworkUtils.checkIfNull(mOnClickAdapterListener)) {
+                if (!FrameworkUtils.checkIfNull(mOnFavoriteRemoveListener)) {
                     // set listener
-                    mOnClickAdapterListener.onClick(index);
+                    mOnFavoriteRemoveListener.onFavoriteRemove(alItems.get(index));
                 }
             }
         });
-
     }
 
     @Override
@@ -177,7 +155,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * Method is used to update trip history data
      *
      * @param items List of completed status trips. Populated from model class
-     *              {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
+     *              {@link ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
         if (items.size() > 0) {
@@ -191,22 +169,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
      * <p>A ViewHolder describes an item view and metadata about its place within the RecyclerView</p>
      */
     class ViewHolder extends RecyclerView.ViewHolder {
-
-        private final LinearLayout llLabelWrapper, llBgWrapper;
-        private final TextView tvSalePerc, tvLabel, tvTitle, tvPrice, tvScratchPrice;
-        private final ImageView ivBg, ivLabelIcon;
+        private final LinearLayout llLabelWrapper;
+        private final TextView tvLabel, tvTitle, tvRemove, tvPrice, tvScratchPrice;
+        private final ImageView ivLabelIcon;
+        private final CircleImageView civItemIcon;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            llBgWrapper = itemView.findViewById(R.id.ll_bg_wrapper);
             llLabelWrapper = itemView.findViewById(R.id.ll_label_wrapper);
-            tvSalePerc = itemView.findViewById(R.id.tv_sale_perc);
             tvLabel = itemView.findViewById(R.id.tv_label);
             tvTitle = itemView.findViewById(R.id.tv_title);
-            tvPrice = itemView.findViewById(R.id.tv_price);
+            tvRemove = itemView.findViewById(R.id.tv_remove);
             tvScratchPrice = itemView.findViewById(R.id.tv_scratch_price);
-            ivBg = itemView.findViewById(R.id.iv_bg);
+            tvPrice = itemView.findViewById(R.id.tv_price);
+            civItemIcon = itemView.findViewById(R.id.civ_item_icon);
             ivLabelIcon = itemView.findViewById(R.id.iv_label_icon);
         }
     }

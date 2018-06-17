@@ -19,6 +19,8 @@
     <!-- favorite -->
     <string name="favorite">Favorite</string>
     <string name="favorite_item">Favorite Item!</string>
+    <string name="no_favorite_item">No favorite items</string>
+    <string name="remove">Remove</string>
 
     <!-- item details -->
     <string name="buy">Buy</string>

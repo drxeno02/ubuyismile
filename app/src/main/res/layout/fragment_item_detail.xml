@@ -30,7 +30,6 @@
             android:id="@+id/ll_favorite_indicator_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="@dimen/scaling_10"
             android:gravity="center"
@@ -43,7 +42,6 @@
                 android:layout_width="@dimen/scaling_20"
                 android:layout_height="@dimen/scaling_20"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:gravity="center_vertical"
                 android:scaleType="fitXY"
@@ -54,7 +52,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/scaling_5"
                 android:layout_marginStart="@dimen/scaling_5"
                 android:gravity="center_vertical"
                 android:text="@string/favorite_item"
@@ -81,7 +78,6 @@
                 android:layout_width="@dimen/scaling_20"
                 android:layout_height="@dimen/scaling_20"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/scaling_4"
                 android:layout_marginStart="@dimen/scaling_4"
                 android:gravity="center_vertical"
                 android:scaleType="fitXY"
@@ -94,8 +90,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/scaling_10"
-                android:layout_marginLeft="@dimen/scaling_4"
-                android:layout_marginRight="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_4"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
@@ -164,7 +158,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="@dimen/scaling_neg_20"
             android:layout_marginEnd="@dimen/scaling_5"
-            android:layout_marginRight="@dimen/scaling_5"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="horizontal">
@@ -182,7 +175,6 @@
                 android:id="@+id/iv_share"
                 android:layout_width="@dimen/scaling_40"
                 android:layout_height="@dimen/scaling_40"
-                android:layout_marginLeft="@dimen/scaling_10"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:scaleType="fitXY"
                 android:src="@drawable/share_icon" />
@@ -205,29 +197,18 @@
 
     <!-- favorite items -->
     <RelativeLayout
-        android:layout_below="@+id/tv_buy"
         android:id="@+id/rl_favorite_wrapper"
-        android:padding="@dimen/scaling_10"
-        android:background="@color/material_grey_300_color_code"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <!-- favorite label -->
-    <TextView
-        android:id="@+id/tv_favorite"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/favorite"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_size_20" />
+        android:layout_below="@+id/tv_buy"
+        android:background="@color/white"
+        android:padding="@dimen/scaling_10">
 
+        <!-- favorite label -->
         <TextView
-            android:layout_toEndOf="@+id/tv_favorite"
-            android:id="@+id/tv_favorite_meta"
+            android:id="@+id/tv_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/scaling_10"
             android:gravity="center_vertical"
             android:text="@string/favorite"
             android:textColor="@color/black"
@@ -235,23 +216,37 @@
 
         <!-- arrow -->
         <ImageView
-            android:layout_alignParentEnd="true"
             android:layout_width="@dimen/scaling_20"
+            android:layout_height="@dimen/scaling_20"
+            android:layout_alignParentEnd="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/arrow_down_black"
-            android:layout_height="@dimen/scaling_20" />
+            android:src="@drawable/arrow_down_black" />
 
     </RelativeLayout>
 
-    <!-- list of items -->
+    <!-- list of favorite items -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_items"
-        android:layout_below="@+id/rl_favorite_wrapper"
+        android:id="@+id/rv_favorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/rl_favorite_wrapper"
         android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="none" />
+
+    <!-- description -->
+    <TextView
+        android:layout_below="@+id/rl_favorite_wrapper"
+        android:id="@+id/tv_no_favorite_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/no_favorite_item"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_20" />
 
 </RelativeLayout>
