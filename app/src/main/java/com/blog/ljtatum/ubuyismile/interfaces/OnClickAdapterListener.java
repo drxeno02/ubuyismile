@@ -11,5 +11,5 @@ import com.blog.ljtatum.ubuyismile.enums.Enum;
 
 public interface OnClickAdapterListener {
 
-    void onClick(ItemDatabaseModel item, Enum.ItemType itemType);
+    void onClick(ItemDatabaseModel item);
 }

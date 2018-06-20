@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +115,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         // start animation
         tvBuy.startAnimation(AnimationUtils.retrieveBlinkAnimation());
 
-        // initialize adapter
+
         if (!isFavoriteItem()) {
             // set visibility
             FrameworkUtils.setViewGone(rvFavorite);
@@ -123,15 +124,15 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             // set visibility
             FrameworkUtils.setViewGone(tvNoFavoriteItems);
             FrameworkUtils.setViewVisible(rvFavorite);
-
-            // set adapter
-            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            rvFavorite.setLayoutManager(layoutManager);
-            rvFavorite.addItemDecoration(new DividerItemDecoration(rvFavorite.getContext(), DividerItemDecoration.VERTICAL));
-            mFavoriteAdapter = new FavoriteAdapter(mContext, filterFavoriteItemList(mItemProvider.getAllInfo()));
-            rvFavorite.setAdapter(mFavoriteAdapter);
         }
+
+        // initialize adapter
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvFavorite.setLayoutManager(layoutManager);
+        rvFavorite.addItemDecoration(new DividerItemDecoration(rvFavorite.getContext(), DividerItemDecoration.VERTICAL));
+        mFavoriteAdapter = new FavoriteAdapter(mContext, filterFavoriteItemList(mItemProvider.getAllInfo()));
+        rvFavorite.setAdapter(mFavoriteAdapter);
     }
 
     /**
@@ -156,7 +157,11 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.e("DATMUG", "onDatabaseUpdate called");
                         alItemDb = mItemProvider.getAllInfo();
+                        for (int i = 0; i< alItemDb.size(); i++) {
+                            Log.e("DATMUG", "title= " + alItemDb.get(i).title + " //isFavorite= " + alItemDb.get(i).isFavorite);
+                        }
 
                         if (!isFavoriteItem()) {
                             // set visibility
@@ -167,10 +172,16 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                             FrameworkUtils.setViewGone(tvNoFavoriteItems);
                             FrameworkUtils.setViewVisible(rvFavorite);
 
+                            if (FrameworkUtils.checkIfNull(mItemProvider.getAllInfo())) {
+                                Log.i("DATMUG", "database provider is null");
+                            }
+
+                            if (FrameworkUtils.checkIfNull(mFavoriteAdapter)) {
+                                Log.i("DATMUG", "favorite adapter is null");
+                            }
+
                             // update adapter
-                            mFavoriteAdapter.updateData(filterFavoriteItemList(
-                                    !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
-                                            mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>()));
+                            mFavoriteAdapter.updateData(filterFavoriteItemList(mItemProvider.getAllInfo()));
                         }
 
                         // set item details
@@ -191,7 +202,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                     }
                 }
                 // update database
-                new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
+                new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
             }
         });
     }
@@ -212,14 +223,22 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             // set background
             if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
                 rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_light_blue_400_color_code));
+            } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.AMAZON.toString())) {
+                rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_orange_400_color_code));
             } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
                 rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
             }
 
             // set header
-            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
+            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString()) ||
+                    mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.AMAZON.toString())) {
+
                 // set fragment header
-                tvFragmentHeader.setText(getResources().getString(R.string.menu_browse));
+                if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_browse));
+                } else {
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_amazon));
+                }
                 // set text color
                 tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                 // set compound drawable with intrinsic bounds
@@ -393,8 +412,21 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      * Method is used to favorite an item
      */
     private void addFavoriteItem() {
+        Log.v("DATMUG", "(BEFORE)------------------------------------------");
+        Log.v("DATMUG", "addFavorite called");
+        for (int i = 0; i< alItemDb.size(); i++) {
+            Log.v("DATMUG", "(BEFORE)<addFavoriteItem> title= " + alItemDb.get(i).title + " //isFavorite= " + alItemDb.get(i).isFavorite);
+        }
+        Log.v("DATMUG", "(BEFORE)------------------------------------------");
         // update flag
         alItemDb.get(mItemIndex).isFavorite = !alItemDb.get(mItemIndex).isFavorite;
+
+        for (int i = 0; i< alItemDb.size(); i++) {
+            Log.v("DATMUG", "(AFTER)<addFavoriteItem> title= " + alItemDb.get(i).title + " //isFavorite= " + alItemDb.get(i).isFavorite);
+        }
+
+        Log.v("DATMUG", "(AFTER)------------------------------------------");
+
         // favorite item
         if (alItemDb.get(mItemIndex).isFavorite) {
             ivFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.favorite_icon_on));
@@ -404,7 +436,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             FrameworkUtils.setViewGone(llFavoriteIndicatorWrapper);
         }
         // update database
-        new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
     }
 
     /**
@@ -412,7 +444,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      *
      * @return List of favorite items
      */
-    private List<ItemDatabaseModel> filterFavoriteItemList(@NonNull final List<ItemDatabaseModel> alItems) {
+    private List<ItemDatabaseModel> filterFavoriteItemList(@NonNull List<ItemDatabaseModel> alItems) {
         for (int i = alItems.size() - 1; i >= 0; i--) {
             if (!alItems.get(i).isFavorite) {
                 alItems.remove(i);
@@ -424,7 +456,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     /**
      * Method is used to check if there are any favorite items that exist
      *
-     * @return True if there are any addFavoriteItem items that exists, otherwise false
+     * @return True if there are any favorite items that exists, otherwise false
      */
     private boolean isFavoriteItem() {
         boolean isFavoriteItem = false;

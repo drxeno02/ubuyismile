@@ -22,6 +22,9 @@ import java.util.List;
  */
 public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
 
+    @SuppressLint("StaticFieldLeak")
+    private Context mContext;
+
     // database
     private ItemProvider mItemProvider;
     private List<ItemDatabaseModel> alItemDb;
@@ -41,10 +44,13 @@ public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
     /**
      * Constructor
      *
+     * @param context      Interface to global information about an application environment
      * @param itemProvider Provider to update database
      * @param itemDb       List of items to update in database
      */
-    public AsyncTaskUpdateDatabase(@NonNull ItemProvider itemProvider, @NonNull List<ItemDatabaseModel> itemDb) {
+    public AsyncTaskUpdateDatabase(@NonNull Context context, @NonNull ItemProvider itemProvider,
+                                   @NonNull List<ItemDatabaseModel> itemDb) {
+        mContext = context;
         mItemProvider = itemProvider;
         alItemDb = itemDb;
     }
@@ -52,6 +58,8 @@ public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
+        // hide progress dialog
+        DialogUtils.dismissProgressDialog();
     }
 
 
@@ -72,5 +80,7 @@ public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        // show progress dialog
+        DialogUtils.showProgressDialog(mContext);
     }
 }

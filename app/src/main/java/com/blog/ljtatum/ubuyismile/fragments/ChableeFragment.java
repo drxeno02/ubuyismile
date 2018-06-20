@@ -99,8 +99,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvItems.setLayoutManager(layoutManager);
-        itemDetailAdapter = new ItemDetailAdapter(mContext, new ArrayList<ItemDatabaseModel>(),
-                com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE);
+        itemDetailAdapter = new ItemDetailAdapter(mContext, new ArrayList<ItemDatabaseModel>());
         rvItems.setAdapter(itemDetailAdapter);
 
     }
@@ -154,11 +153,11 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         // onClick listener
         ItemDetailAdapter.onClickAdapterListener(new OnClickAdapterListener() {
             @Override
-            public void onClick(ItemDatabaseModel item, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType itemType) {
+            public void onClick(ItemDatabaseModel item) {
                 Bundle args = new Bundle();
                 args.putString(Constants.KEY_ITEM_ID, item.itemId);
                 args.putString(Constants.KEY_CATEGORY, item.category);
-                args.putString(Constants.KEY_ITEM_TYPE, itemType.toString());
+                args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString());
 
                 BaseFragment fragment = new DetailFragment();
                 fragment.setArguments(args);
@@ -232,6 +231,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                 chableeModel.asin = ""; // no asin for Chablee items
                 chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                 chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
+                chableeModel.itemType = com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString();
                 chableeModel.isLabelSet = false;
 
                 if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
@@ -256,6 +256,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         // update dynamically changing data e.g. category, label
                         alItemDb.get(index).category = chableeModel.category;
                         alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
+                        alItemDb.get(index).itemType = chableeModel.itemType;
                         alItemDb.get(index).price = chableeModel.price;
                         alItemDb.get(index).salePrice = chableeModel.salePrice;
                         alItemDb.get(index).title = chableeModel.title;
@@ -280,6 +281,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         itemDatabaseModel.label = chableeModel.label;
                         itemDatabaseModel.timestamp = chableeModel.timestamp;
                         itemDatabaseModel.itemId = chableeModel.itemId;
+                        itemDatabaseModel.itemType = chableeModel.itemType;
                         itemDatabaseModel.price = chableeModel.price;
                         itemDatabaseModel.salePrice = chableeModel.salePrice;
                         itemDatabaseModel.title = chableeModel.title;
@@ -302,7 +304,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         }
 
         // update database
-        new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
 
         // add Chablee items to list
         List<ItemDatabaseModel> items = new ArrayList<>();

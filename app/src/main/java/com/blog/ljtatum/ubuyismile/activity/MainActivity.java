@@ -37,6 +37,7 @@ import com.blog.ljtatum.ubuyismile.fragments.BaseFragment;
 import com.blog.ljtatum.ubuyismile.fragments.ChableeFragment;
 import com.blog.ljtatum.ubuyismile.fragments.DetailFragment;
 import com.blog.ljtatum.ubuyismile.fragments.PrivacyFragment;
+import com.blog.ljtatum.ubuyismile.fragments.SearchFragment;
 import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
 import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
@@ -132,7 +133,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initializeViews() {
         mActivity = MainActivity.this;
         mErrorUtils = new ErrorUtils();
-        alAmazonCategories = AmazonData.getAmazonCategories(); // retrieve all Amazon categories
+        alAmazonCategories = Categories.getAmazonCategories(); // retrieve all Amazon categories
         alChableeCategories = Categories.getChableeCategories(); // retrieve all Chablee categories
         mInfoBarUtils = new InfoBarUtils();
 
@@ -162,8 +163,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         RecyclerView rvItems = findViewById(R.id.rv_items);
         rvItems.setLayoutManager(gridLayoutManager);
-        itemBrowseAdapter = new ItemBrowseAdapter(this, new ArrayList<ItemDatabaseModel>(),
-                com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE);
+        itemBrowseAdapter = new ItemBrowseAdapter(this, new ArrayList<ItemDatabaseModel>());
         rvItems.setAdapter(itemBrowseAdapter);
 
         // drawer
@@ -252,11 +252,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // onClick listener
         ItemBrowseAdapter.onClickAdapterListener(new OnClickAdapterListener() {
             @Override
-            public void onClick(ItemDatabaseModel item, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType itemType) {
+            public void onClick(ItemDatabaseModel item) {
                 Bundle args = new Bundle();
                 args.putString(Constants.KEY_ITEM_ID, item.itemId);
                 args.putString(Constants.KEY_CATEGORY, item.category);
-                args.putString(Constants.KEY_ITEM_TYPE, itemType.toString());
+                args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString());
 
                 BaseFragment fragment = new DetailFragment();
                 fragment.setArguments(args);
@@ -449,6 +449,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     chableeModel.asin = ""; // no asin for Chablee items
                     chableeModel.label = com.blog.ljtatum.ubuyismile.enums.Enum.ItemLabel.NEW.toString();
                     chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
+                    chableeModel.itemType = com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString();
                     chableeModel.isLabelSet = false;
 
                     // only add data if it exists. This is enforced by the required
@@ -463,6 +464,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             itemDatabaseModel.label = chableeModel.label;
                             itemDatabaseModel.timestamp = chableeModel.timestamp;
                             itemDatabaseModel.itemId = chableeModel.itemId;
+                            itemDatabaseModel.itemType = chableeModel.itemType;
                             itemDatabaseModel.price = chableeModel.price;
                             itemDatabaseModel.salePrice = chableeModel.salePrice;
                             itemDatabaseModel.title = chableeModel.title;
@@ -503,6 +505,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 // update dynamically changing data e.g. category, label
                                 alItemDb.get(index).category = chableeModel.category;
                                 alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
+                                alItemDb.get(index).itemType = chableeModel.itemType;
                                 alItemDb.get(index).price = chableeModel.price;
                                 alItemDb.get(index).salePrice = chableeModel.salePrice;
                                 alItemDb.get(index).title = chableeModel.title;
@@ -527,6 +530,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 itemDatabaseModel.label = chableeModel.label;
                                 itemDatabaseModel.timestamp = chableeModel.timestamp;
                                 itemDatabaseModel.itemId = chableeModel.itemId;
+                                itemDatabaseModel.itemType = chableeModel.itemType;
                                 itemDatabaseModel.price = chableeModel.price;
                                 itemDatabaseModel.salePrice = chableeModel.salePrice;
                                 itemDatabaseModel.title = chableeModel.title;
@@ -596,7 +600,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         createSQLiteDb();
                     } else {
                         // update database
-                        new AsyncTaskUpdateDatabase(mItemProvider, alItemDb).execute();
+                        new AsyncTaskUpdateDatabase(this, mItemProvider, alItemDb).execute();
                         printDb();
                     }
                 }
@@ -701,10 +705,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Bundle args = new Bundle();
         switch (item.getItemId()) {
             case R.id.nav_browse:
-
+                // TODO for this section remove all fragments and close drawer. This simply brings up the main screen
                 break;
             case R.id.nav_search:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.ALL.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_settings:
 
@@ -730,25 +736,39 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 fragment.setArguments(args);
                 break;
             case R.id.nav_all_good_deals:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.ALL_GOOD_DEALS.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_quick_search_books:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.BOOKS.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_quick_search_electronics:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.ELECTRONICS.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_quick_search_food:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.FOOD.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_quick_search_health_beauty:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.HEALTH_BEAUTY.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_quick_search_movies:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.MOVIES.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_quick_search_video_games:
-
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.VIDEO_GAMES.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_about:
                 fragment = new AboutFragment();

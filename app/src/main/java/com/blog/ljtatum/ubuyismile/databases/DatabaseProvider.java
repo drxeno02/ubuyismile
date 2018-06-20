@@ -237,20 +237,22 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                 values.put(where[2], alItemDb.get(i).label);
                 values.put(where[3], alItemDb.get(i).timestamp);
                 values.put(where[4], alItemDb.get(i).itemId);
-                values.put(where[5], alItemDb.get(i).price);
-                values.put(where[6], alItemDb.get(i).salePrice);
-                values.put(where[7], alItemDb.get(i).title);
-                values.put(where[8], alItemDb.get(i).description);
-                values.put(where[9], alItemDb.get(i).purchaseUrl);
-                values.put(where[10], alItemDb.get(i).imageUrl1);
-                values.put(where[11], alItemDb.get(i).imageUrl2);
-                values.put(where[12], alItemDb.get(i).imageUrl3);
-                values.put(where[13], alItemDb.get(i).imageUrl4);
-                values.put(where[14], alItemDb.get(i).imageUrl5);
-                values.put(where[15], alItemDb.get(i).isBrowseItem);
-                values.put(where[16], alItemDb.get(i).isFeatured);
-                values.put(where[17], alItemDb.get(i).isMostPopular);
-                values.put(where[18], alItemDb.get(i).isFavorite);
+                values.put(where[5], alItemDb.get(i).itemType);
+                values.put(where[6], alItemDb.get(i).price);
+                values.put(where[7], alItemDb.get(i).salePrice);
+                values.put(where[8], alItemDb.get(i).title);
+                values.put(where[9], alItemDb.get(i).description);
+                values.put(where[10], alItemDb.get(i).purchaseUrl);
+                values.put(where[11], alItemDb.get(i).imageUrl1);
+                values.put(where[12], alItemDb.get(i).imageUrl2);
+                values.put(where[13], alItemDb.get(i).imageUrl3);
+                values.put(where[14], alItemDb.get(i).imageUrl4);
+                values.put(where[15], alItemDb.get(i).imageUrl5);
+                values.put(where[16], alItemDb.get(i).isLabelSet);
+                values.put(where[17], alItemDb.get(i).isBrowseItem);
+                values.put(where[18], alItemDb.get(i).isFeatured);
+                values.put(where[19], alItemDb.get(i).isMostPopular);
+                values.put(where[20], alItemDb.get(i).isFavorite);
                 // insert into table
                 mDatabase.insert(ItemSchema.TABLE_NAME, null, values);
             }

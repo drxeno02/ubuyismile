@@ -16,6 +16,7 @@ public class ItemSchema implements BaseColumns {
     public static final String LABEL = "label";
     public static final String TIMESTAMP = "timestamp";
     public static final String ITEM_ID = "item_id";
+    public static final String ITEM_TYPE = "item_type";
     public static final String PRICE = "price";
     public static final String SALE_PRICE = "sale_price";
     public static final String TITLE = "title";
@@ -46,6 +47,7 @@ public class ItemSchema implements BaseColumns {
         sb.append(LABEL + " TEXT, ");
         sb.append(TIMESTAMP + " TEXT, ");
         sb.append(ITEM_ID + " TEXT, ");
+        sb.append(ITEM_TYPE + " TEXT, ");
         sb.append(PRICE + " TEXT, ");
         sb.append(SALE_PRICE + " TEXT, ");
         sb.append(TITLE + " TEXT, ");

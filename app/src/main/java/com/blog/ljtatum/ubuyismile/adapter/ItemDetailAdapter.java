@@ -33,7 +33,6 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
 
     private Context mContext;
     private List<ItemDatabaseModel> alItems;
-    private Enum.ItemType mItemType;
 
     // custom callback
     private static OnClickAdapterListener mOnClickAdapterListener;
@@ -52,22 +51,15 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
      *
      * @param context  Interface to global information about an application environment
      * @param items    List of items to display
-     * @param itemType The type of item e.g. Chablee or Amazon
      */
-    public ItemDetailAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items, Enum.ItemType itemType) {
-        mItemType = itemType;
+    public ItemDetailAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
         mContext = context;
         alItems = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
-        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
-        } else {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
-        }
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_detail, parent, false);
         return new ItemDetailAdapter.ViewHolder(v);
     }
 
@@ -77,7 +69,13 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
         final int index = holder.getAdapterPosition();
 
         // set background
-        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
+        if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
+            if (position % 2 == 0) {
+                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_orange_100_color_code));
+            } else {
+                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_orange_a100_color_code));
+            }
+        } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
             if (position % 2 == 0) {
                 holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
             } else {
@@ -160,7 +158,7 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
             public void onClick(View view) {
                 if (!FrameworkUtils.checkIfNull(mOnClickAdapterListener)) {
                     // set listener
-                    mOnClickAdapterListener.onClick(alItems.get(index), mItemType);
+                    mOnClickAdapterListener.onClick(alItems.get(index));
                 }
             }
         });

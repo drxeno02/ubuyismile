@@ -33,7 +33,6 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
 
     private Context mContext;
     private List<ItemDatabaseModel> alItems;
-    private Enum.ItemType mItemType;
 
     // custom callback
     private static OnClickAdapterListener mOnClickAdapterListener;
@@ -52,22 +51,15 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
      *
      * @param context  Interface to global information about an application environment
      * @param items    List of items to display
-     * @param itemType The type of item e.g. Chablee or Amazon
      */
-    public ItemBrowseAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items, Enum.ItemType itemType) {
-        mItemType = itemType;
+    public ItemBrowseAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
         mContext = context;
         alItems = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
-        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_a, parent, false);
-        } else {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_b, parent, false);
-        }
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_browse, parent, false);
         return new ItemBrowseAdapter.ViewHolder(v);
     }
 
@@ -75,15 +67,6 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final int index = holder.getAdapterPosition();
-
-        // set background
-        if (mItemType.equals(Enum.ItemType.CHABLEE)) {
-            if (position % 2 == 0) {
-                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
-            } else {
-                holder.llBgWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_pink_a100_color_code));
-            }
-        }
 
         // sale price percentage
         if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
@@ -160,7 +143,7 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
             public void onClick(View view) {
                 if (!FrameworkUtils.checkIfNull(mOnClickAdapterListener)) {
                     // set listener
-                    mOnClickAdapterListener.onClick(alItems.get(index), mItemType);
+                    mOnClickAdapterListener.onClick(alItems.get(index));
                 }
             }
         });

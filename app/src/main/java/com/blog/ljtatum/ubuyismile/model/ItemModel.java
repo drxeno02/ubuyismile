@@ -8,7 +8,7 @@ public class ItemModel {
     private static final String WIX_URL_PREFIX = "https://static.wixstatic.com/media/";
 
     // base values
-    public String category, asin, label, timestamp, itemId;
+    public String category, asin, label, timestamp, itemId, itemType;
     public boolean isBrowseItem, isLabelSet;
 
     // Chablee specific values

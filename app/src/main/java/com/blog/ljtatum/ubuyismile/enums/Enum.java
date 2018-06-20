@@ -36,7 +36,44 @@ public class Enum {
      * Method is used to set item type
      */
     public enum ItemType {
-        BROWSE,
-        CHABLEE;
+        BROWSE("Browse"),
+        AMAZON("Amazon"),
+        CHABLEE("Chablee");
+
+        private final String itemType;
+
+        ItemType(final String itemType) {
+            this.itemType = itemType;
+        }
+
+        @Override
+        public String toString() {
+            return itemType;
+        }
+    }
+
+    /**
+     * Method is used to set item type
+     */
+    public enum SearchCategory {
+        ALL("all"),
+        ALL_GOOD_DEALS("all_good_deals"), // these are all items on sale
+        BOOKS("books"),
+        ELECTRONICS("electronics"),
+        FOOD("food"),
+        HEALTH_BEAUTY("health_beauty"),
+        MOVIES("movies"),
+        VIDEO_GAMES("video_games");
+
+        private final String searchCategory;
+
+        SearchCategory(final String searchCategory) {
+            this.searchCategory = searchCategory;
+        }
+
+        @Override
+        public String toString() {
+            return searchCategory;
+        }
     }
 }

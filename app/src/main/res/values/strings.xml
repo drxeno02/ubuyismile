@@ -57,6 +57,7 @@
     <string name="menu_header_goods">Goods</string>
 
     <!-- menu options -->
+    <string name="menu_amazon">Amazon</string>
     <string name="menu_browse">Browse</string>
     <string name="menu_search">Search</string>
     <string name="menu_all_goods_deals">All Goods Deals</string>
