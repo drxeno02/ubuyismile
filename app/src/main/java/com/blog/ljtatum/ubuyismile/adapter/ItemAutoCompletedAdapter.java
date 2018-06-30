@@ -4,12 +4,14 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.framework.utilities.FrameworkUtils;
@@ -17,6 +19,7 @@ import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
 import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
+import com.blog.ljtatum.ubuyismile.model.ItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,25 +31,12 @@ import java.util.List;
 public class ItemAutoCompletedAdapter extends ArrayAdapter {
 
     private static final String COLOR_CODE_AMAZON = "[A]";
-    private static final String COLOR_CODE_CHABLEE = "[C}";
+    private static final String COLOR_CODE_CHABLEE = "[C]";
 
     private Context mContext;
     private List<ItemDatabaseModel> alItems;
     private List<ItemDatabaseModel> alItemsTemp;
     private ListFilter listFilter = new ListFilter();
-
-
-    // custom callback
-    private static OnClickAdapterListener mOnClickAdapterListener;
-
-    /**
-     * Method is used to set callback for when item is clicked
-     *
-     * @param listener Callback for when item is clicked
-     */
-    public static void onClickAdapterListener(OnClickAdapterListener listener) {
-        mOnClickAdapterListener = listener;
-    }
 
     /**
      * Constructor
@@ -72,6 +62,19 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
         return alItems.get(position);
     }
 
+    /**
+     * Method is used to update trip history data
+     *
+     * @param items List of completed status trips. Populated from model class
+     *              {@link ItemModel}
+     */
+    public void updateData(@NonNull List<ItemDatabaseModel> items) {
+        if (items.size() > 0) {
+            alItems = items;
+            notifyDataSetChanged();
+        }
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -80,6 +83,7 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
         }
 
         // instantiate views
+        LinearLayout llParentWrapper = convertView.findViewById(R.id.ll_parent_wrapper);
         TextView tvColorCode = convertView.findViewById(R.id.tv_color_code);
         TextView tvTitle = convertView.findViewById(R.id.tv_title);
         ImageView ivItemCategoryIcon = convertView.findViewById(R.id.iv_item_category_icon);

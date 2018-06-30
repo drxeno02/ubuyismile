@@ -27,26 +27,64 @@
             android:layout_height="wrap_content"
             android:src="@drawable/search" />
 
-        <!-- auto complete edit text -->
-        <android.support.design.widget.TextInputLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/scaling_4">
+            android:layout_height="wrap_content">
 
-            <!-- auto complete text view -->
-            <AutoCompleteTextView
-                android:id="@+id/ac_search"
+            <!-- auto complete edit text -->
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/menu_search"
-                android:imeOptions="actionSearch"
-                android:inputType="textAutoComplete|textAutoCorrect"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_16" />
+                android:layout_marginStart="@dimen/scaling_4">
 
-        </android.support.design.widget.TextInputLayout>
+                <!-- auto complete text view -->
+                <AutoCompleteTextView
+                    android:id="@+id/ac_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/menu_search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textAutoComplete|textAutoCorrect"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/scaling_30"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_16" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- clear button -->
+            <ImageView
+                android:id="@+id/iv_clear"
+                android:layout_width="@dimen/scaling_30"
+                android:layout_height="@dimen/scaling_30"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/scaling_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/close_black"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
     </LinearLayout>
+
+    <!-- item detail cta -->
+    <TextView
+        android:id="@+id/tv_item_detail"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="@dimen/scaling_15"
+        android:layout_marginLeft="@dimen/scaling_15"
+        android:layout_marginRight="@dimen/scaling_15"
+        android:layout_marginStart="@dimen/scaling_15"
+        android:layout_marginTop="@dimen/scaling_15"
+        android:background="@drawable/pill_grey"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/scaling_12"
+        android:text="@string/item_details"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_20"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -7,6 +7,10 @@
     <string name="no_items">Sorry, we currently have no items for this category. For feedback or
         support, contact\n Leonard Tatum at <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>
 
+    <!-- search -->
+    <string name="item_details">Item Details</string>
+    <string name="no_item_found">No Item Found</string>
+
     <!-- share -->
     <string name="share_option_a">Thinking about buying this. Any thoughts?</string>
     <string name="share_option_b">Hey, take a look at what I found!</string>

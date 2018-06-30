@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
@@ -53,7 +52,7 @@ public class BaseFragment extends Fragment {
     /**
      * Method is used to add fragment to the current stack
      *
-     * @param fragment    The new Fragment that is going to replace the container
+     * @param fragment The new Fragment that is going to replace the container
      */
     void addFragment(@NonNull Fragment fragment) {
         if (!FrameworkUtils.checkIfNull(getActivity()) && !FrameworkUtils.checkIfNull(getActivity().getSupportFragmentManager())) {
@@ -74,7 +73,7 @@ public class BaseFragment extends Fragment {
     /**
      * Method is used to add fragment to the current stack without animation
      *
-     * @param fragment    The new Fragment that is going to replace the container
+     * @param fragment The new Fragment that is going to replace the container
      */
     void addFragmentNoAnim(@NonNull Fragment fragment) {
         if (!FrameworkUtils.checkIfNull(getActivity()) && !FrameworkUtils.checkIfNull(getActivity().getSupportFragmentManager())) {
@@ -87,6 +86,38 @@ public class BaseFragment extends Fragment {
             // add fragment and transition with animation
             getActivity().getSupportFragmentManager().beginTransaction().add(R.id.frag_container, fragment,
                     fragment.getClass().getSimpleName()).addToBackStack(fragment.getClass().getSimpleName()).commit();
+        }
+    }
+
+    /**
+     * Method is used to add fragment with replace to stack without animation.
+     * When Fragment is replaced all current fragments on the backstack are removed.
+     *
+     * @param fragment The Fragment to be added
+     */
+    void addFragmentReplaceNoAnim(@NonNull Fragment fragment) {
+        if (!FrameworkUtils.checkIfNull(getActivity()) && !FrameworkUtils.checkIfNull(getActivity().getSupportFragmentManager())) {
+            // check if the fragment has been added already
+            Fragment temp = getActivity().getSupportFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName());
+            if (!FrameworkUtils.checkIfNull(temp) && temp.isAdded()) {
+                return;
+            }
+
+            // replace fragment and transition with animation
+            try {
+                if (!FrameworkUtils.checkIfNull(getTopFragment()) &&
+                        !FrameworkUtils.isStringEmpty(getTopFragment().getTag()) && getTopFragment().isAdded()) {
+                    // pop back stack
+                    popBackStack();
+                }
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment,
+                        fragment.getClass().getSimpleName()).addToBackStack(fragment.getClass().getSimpleName()).commit();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                // used as last resort
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment,
+                        fragment.getClass().getSimpleName()).addToBackStack(fragment.getClass().getSimpleName()).commitAllowingStateLoss();
+            }
         }
     }
 
@@ -118,6 +149,28 @@ public class BaseFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Method is used to retrieve the current fragment the user is on
+     *
+     * @return Returns the TopFragment if there is one, otherwise returns null
+     */
+    @Nullable
+    private Fragment getTopFragment() {
+        if (!FrameworkUtils.checkIfNull(getActivity().getSupportFragmentManager())) {
+            if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                int i = getActivity().getSupportFragmentManager().getBackStackEntryCount();
+                while (i >= 0) {
+                    i--;
+                    Fragment topFragment = getActivity().getSupportFragmentManager().getFragments().get(i);
+                    if (!FrameworkUtils.checkIfNull(topFragment)) {
+                        return topFragment;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     @Override

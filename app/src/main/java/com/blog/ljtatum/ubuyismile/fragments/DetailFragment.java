@@ -157,11 +157,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("DATMUG", "onDatabaseUpdate called");
                         alItemDb = mItemProvider.getAllInfo();
-                        for (int i = 0; i< alItemDb.size(); i++) {
-                            Log.e("DATMUG", "title= " + alItemDb.get(i).title + " //isFavorite= " + alItemDb.get(i).isFavorite);
-                        }
 
                         if (!isFavoriteItem()) {
                             // set visibility
@@ -171,14 +167,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                             // set visibility
                             FrameworkUtils.setViewGone(tvNoFavoriteItems);
                             FrameworkUtils.setViewVisible(rvFavorite);
-
-                            if (FrameworkUtils.checkIfNull(mItemProvider.getAllInfo())) {
-                                Log.i("DATMUG", "database provider is null");
-                            }
-
-                            if (FrameworkUtils.checkIfNull(mFavoriteAdapter)) {
-                                Log.i("DATMUG", "favorite adapter is null");
-                            }
 
                             // update adapter
                             mFavoriteAdapter.updateData(filterFavoriteItemList(mItemProvider.getAllInfo()));
@@ -412,20 +400,8 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      * Method is used to favorite an item
      */
     private void addFavoriteItem() {
-        Log.v("DATMUG", "(BEFORE)------------------------------------------");
-        Log.v("DATMUG", "addFavorite called");
-        for (int i = 0; i< alItemDb.size(); i++) {
-            Log.v("DATMUG", "(BEFORE)<addFavoriteItem> title= " + alItemDb.get(i).title + " //isFavorite= " + alItemDb.get(i).isFavorite);
-        }
-        Log.v("DATMUG", "(BEFORE)------------------------------------------");
         // update flag
         alItemDb.get(mItemIndex).isFavorite = !alItemDb.get(mItemIndex).isFavorite;
-
-        for (int i = 0; i< alItemDb.size(); i++) {
-            Log.v("DATMUG", "(AFTER)<addFavoriteItem> title= " + alItemDb.get(i).title + " //isFavorite= " + alItemDb.get(i).isFavorite);
-        }
-
-        Log.v("DATMUG", "(AFTER)------------------------------------------");
 
         // favorite item
         if (alItemDb.get(mItemIndex).isFavorite) {

@@ -64,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
      *
      * @param fragment The fragment to be removed
      */
-    void removeFragment(Fragment fragment) {
+    public void removeFragment(Fragment fragment) {
         try {
             FragmentTransaction ft = mFragmentManager.beginTransaction();
             ft.remove(fragment).commitAllowingStateLoss();

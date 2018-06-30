@@ -696,7 +696,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 toggleInfoBar(false);
                 break;
         }
-
     }
 
     @Override

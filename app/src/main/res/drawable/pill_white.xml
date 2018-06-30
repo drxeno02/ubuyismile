@@ -4,8 +4,8 @@
     <solid
         android:color="@color/white_40"/>
     <size
-        android:width="100dp"
-        android:height="30dp"/>
+        android:width="@dimen/scaling_100"
+        android:height="@dimen/scaling_30"/>
     <corners
         android:radius="50dp"/>
 </shape>
