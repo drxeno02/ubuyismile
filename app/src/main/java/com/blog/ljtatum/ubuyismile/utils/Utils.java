@@ -307,4 +307,21 @@ public class Utils {
         return false;
     }
 
+    /**
+     * Method is used to determine if item is on sale
+     * @param itemDatabaseModel Database object {@link com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel}
+     *                            that represents item properties
+     * @return True if item is on sale, otherwise false
+     */
+    public static boolean isItemOnSale(@NonNull ItemDatabaseModel itemDatabaseModel) {
+        if ((!FrameworkUtils.isStringEmpty(itemDatabaseModel.salePrice) &&
+                !FrameworkUtils.isStringEmpty(itemDatabaseModel.price)) &&
+                (getDollarValue(itemDatabaseModel.salePrice) > 0) &&
+                (getDollarValue(itemDatabaseModel.salePrice) <
+                        getDollarValue(itemDatabaseModel.price))) {
+            return true;
+        }
+        return false;
+    }
+
 }

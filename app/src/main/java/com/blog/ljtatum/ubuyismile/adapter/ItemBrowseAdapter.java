@@ -69,11 +69,7 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
         final int index = holder.getAdapterPosition();
 
         // sale price percentage
-        if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
-                !FrameworkUtils.isStringEmpty(alItems.get(position).price)) &&
-                (Utils.getDollarValue(alItems.get(position).salePrice) > 0) &&
-                (Utils.getDollarValue(alItems.get(position).salePrice) <
-                        Utils.getDollarValue(alItems.get(position).price))) {
+        if (Utils.isItemOnSale(alItems.get(position))) {
             // set visibility
             FrameworkUtils.setViewVisible(holder.tvSalePerc, holder.tvScratchPrice);
             // set percent sale value
@@ -174,14 +170,13 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
      */
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final LinearLayout llLabelWrapper, llBgWrapper;
+        private final LinearLayout llLabelWrapper;
         private final TextView tvSalePerc, tvLabel, tvTitle, tvPrice, tvScratchPrice;
         private final ImageView ivBg, ivLabelIcon;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            llBgWrapper = itemView.findViewById(R.id.ll_bg_wrapper);
             llLabelWrapper = itemView.findViewById(R.id.ll_label_wrapper);
             tvSalePerc = itemView.findViewById(R.id.tv_sale_perc);
             tvLabel = itemView.findViewById(R.id.tv_label);

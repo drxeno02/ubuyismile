@@ -73,11 +73,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         final int index = holder.getAdapterPosition();
 
         // sale price percentage
-        if ((!FrameworkUtils.isStringEmpty(alItems.get(position).salePrice) &&
-                !FrameworkUtils.isStringEmpty(alItems.get(position).price)) &&
-                (Utils.getDollarValue(alItems.get(position).salePrice) > 0) &&
-                (Utils.getDollarValue(alItems.get(position).salePrice) <
-                        Utils.getDollarValue(alItems.get(position).price))) {
+        if (Utils.isItemOnSale(alItems.get(position))) {
             // set visibility
             FrameworkUtils.setViewVisible(holder.tvScratchPrice);
             // set price as sale price and price

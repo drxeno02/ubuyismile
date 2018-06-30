@@ -274,11 +274,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 }
 
                 // sale price percentage
-                if ((!FrameworkUtils.isStringEmpty(alItemDb.get(i).salePrice) &&
-                        !FrameworkUtils.isStringEmpty(alItemDb.get(i).price)) &&
-                        (Utils.getDollarValue(alItemDb.get(i).salePrice) > 0) &&
-                        (Utils.getDollarValue(alItemDb.get(i).salePrice) <
-                                Utils.getDollarValue(alItemDb.get(i).price))) {
+                if (Utils.isItemOnSale(alItemDb.get(i))) {
                     // set price as sale price and price
                     tvPrice.setText(mContext.getResources().getString(
                             R.string.dollar_format, alItemDb.get(i).salePrice));
