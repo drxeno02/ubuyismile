@@ -209,7 +209,8 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             mItemType = args.getString(Constants.KEY_ITEM_TYPE, "");
 
             // set background
-            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
+            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.SEARCH.toString()) ||
+                    mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
                 rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_light_blue_400_color_code));
             } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.AMAZON.toString())) {
                 rlParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.material_orange_400_color_code));
@@ -218,11 +219,14 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             }
 
             // set header
-            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString()) ||
+            if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.SEARCH.toString()) ||
+                    mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString()) ||
                     mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.AMAZON.toString())) {
 
                 // set fragment header
-                if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
+                if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.SEARCH.toString())) {
+                    tvFragmentHeader.setText(getResources().getString(R.string.menu_search));
+                } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString())) {
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_browse));
                 } else {
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_amazon));

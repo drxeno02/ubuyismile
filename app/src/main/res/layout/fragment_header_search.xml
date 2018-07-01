@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/scaling_5">
+
+    <!-- header -->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:src="@drawable/arrow_black"
+        android:layout_gravity="center_vertical"
+        android:padding="@dimen/scaling_4"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/scaling_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/scaling_10">
+
+        <!-- search icon -->
+        <ImageView
+            android:layout_width="@dimen/scaling_20"
+            android:layout_height="@dimen/scaling_20"
+            android:src="@drawable/search" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- auto complete edit text -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/scaling_4">
+
+                <!-- auto complete text view -->
+                <AutoCompleteTextView
+                    android:id="@+id/ac_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/menu_search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textAutoComplete|textAutoCorrect"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/scaling_30"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_14" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- clear button -->
+            <ImageView
+                android:id="@+id/iv_clear"
+                android:layout_width="@dimen/scaling_30"
+                android:layout_height="@dimen/scaling_30"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/scaling_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/close_black"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

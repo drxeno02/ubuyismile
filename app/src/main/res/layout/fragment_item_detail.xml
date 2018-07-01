@@ -202,7 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_buy"
         android:background="@color/white"
-        android:padding="@dimen/scaling_10">
+        android:padding="@dimen/scaling_7">
 
         <!-- favorite label -->
         <TextView

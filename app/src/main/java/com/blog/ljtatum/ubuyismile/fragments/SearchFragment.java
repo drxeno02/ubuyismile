@@ -37,8 +37,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     private View mRootView;
 
     private String mSearchCategory;
-    private TextView tvFragmentHeader, tvItemDetailCta;
-    private ImageView ivClear;
+    private TextView tvItemDetailCta;
+    private ImageView ivClear, ivBack;
     private AutoCompleteTextView acSearch;
     private ItemDatabaseModel mSelectedItem;
 
@@ -82,7 +82,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         // initialize adapter
         acSearch = mRootView.findViewById(R.id.ac_search);
         ivClear = mRootView.findViewById(R.id.iv_clear);
-        tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
+        ivBack = mRootView.findViewById(R.id.iv_back);
         tvItemDetailCta = mRootView.findViewById(R.id.tv_item_detail);
         itemAutoCompleteAdapter = new ItemAutoCompletedAdapter(mContext, R.layout.item_auto_complete, alItemDb);
         acSearch.setAdapter(itemAutoCompleteAdapter);
@@ -99,7 +99,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
      */
     private void initializeHandlers() {
         ivClear.setOnClickListener(this);
-        tvFragmentHeader.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
         tvItemDetailCta.setOnClickListener(this);
     }
 
@@ -116,6 +116,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                 mSelectedItem = (ItemDatabaseModel) acSearch.getAdapter().getItem(i);
                 // set text
                 acSearch.setText(mSelectedItem.title);
+                // set cursor end of text
+                acSearch.setSelection(acSearch.getText().length());
                 // set CTA state
                 setCtaEnabled(true);
             }
@@ -136,12 +138,32 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.length() > 0) {
+                    // set visibility
                     FrameworkUtils.setViewVisible(ivClear);
                 } else {
+                    // set visibility
                     FrameworkUtils.setViewGone(ivClear);
-
+                    // reset selected item
+                    mSelectedItem = null;
                     // set CTA state
                     setCtaEnabled(false);
+                }
+
+                // check if text has been change from selected results
+                if (tvItemDetailCta.isEnabled()) {
+                    if (!FrameworkUtils.checkIfNull(mSelectedItem) &&
+                            acSearch.getText().length() > 0 && !mSelectedItem.title.trim().equalsIgnoreCase(
+                            acSearch.getText().toString().trim())) {
+                        // set CTA state
+                        setCtaEnabled(false);
+                    }
+                } else {
+                    if (!FrameworkUtils.checkIfNull(mSelectedItem) &&
+                            acSearch.getText().length() > 0 && mSelectedItem.title.trim().equalsIgnoreCase(
+                            acSearch.getText().toString().trim())) {
+                        // set CTA state
+                        setCtaEnabled(true);
+                    }
                 }
             }
         });
@@ -212,7 +234,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     }
 
     /**
-     * Method is used to enable / disable the Call To Action button
+     * Method is used to enable / disable the Call To Action (CTA) button
      *
      * @param isEnabled True if the CTA button should be enabled, otherwise false
      */
@@ -234,7 +256,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         }
 
         switch (view.getId()) {
-            case R.id.tv_fragment_header:
+            case R.id.iv_back:
                 remove();
                 popBackStack();
             case R.id.iv_clear:
@@ -242,13 +264,23 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                 acSearch.setText("");
                 break;
             case R.id.tv_item_detail:
+                // hide keyboard
+                DeviceUtils.hideKeyboard(mActivity, mActivity.getWindow().getDecorView().getWindowToken());
+
                 Bundle args = new Bundle();
                 args.putString(Constants.KEY_ITEM_ID, mSelectedItem.itemId);
                 args.putString(Constants.KEY_CATEGORY, mSelectedItem.category);
-                args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString());
+                args.putString(Constants.KEY_ITEM_TYPE, com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.SEARCH.toString());
 
                 BaseFragment fragment = new DetailFragment();
                 fragment.setArguments(args);
+                fragment.setOnRemoveListener(new OnRemoveFragment() {
+                    @Override
+                    public void onRemove() {
+                        // show keyboard
+                        DeviceUtils.showKeyboard(mActivity);
+                    }
+                });
                 addFragment(fragment);
                 break;
             default:

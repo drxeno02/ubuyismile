@@ -36,6 +36,7 @@ public class Enum {
      * Method is used to set item type
      */
     public enum ItemType {
+        SEARCH("Search"),
         BROWSE("Browse"),
         AMAZON("Amazon"),
         CHABLEE("Chablee");

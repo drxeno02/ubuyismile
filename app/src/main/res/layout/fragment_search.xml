@@ -9,82 +9,89 @@
 
     <include
         android:id="@+id/header"
-        layout="@layout/fragment_header"
+        layout="@layout/fragment_header_search"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scaling_50" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/scaling_10">
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <!-- search icon -->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search" />
+        <!-- search history -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6">
+
+            <RelativeLayout
+                android:id="@+id/rl_search_history_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_grey_300_color_code"
+                android:padding="@dimen/scaling_7">
+
+                <!-- search history label -->
+                <TextView
+                    android:id="@+id/tv_search_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/search_history"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_20" />
+
+                <!-- arrow -->
+                <ImageView
+                    android:layout_width="@dimen/scaling_20"
+                    android:layout_height="@dimen/scaling_20"
+                    android:layout_alignParentEnd="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/arrow_down_black" />
+
+            </RelativeLayout>
+
+            <!-- search history items -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_search_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_search_history_wrapper"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:scrollbars="none" />
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="0.4">
 
-            <!-- auto complete edit text -->
-            <android.support.design.widget.TextInputLayout
+            <!-- item detail cta -->
+            <TextView
+                android:id="@+id/tv_item_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/scaling_4">
-
-                <!-- auto complete text view -->
-                <AutoCompleteTextView
-                    android:id="@+id/ac_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/menu_search"
-                    android:imeOptions="actionSearch"
-                    android:inputType="textAutoComplete|textAutoCorrect"
-                    android:maxLines="1"
-                    android:paddingEnd="@dimen/scaling_30"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_size_16" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <!-- clear button -->
-            <ImageView
-                android:id="@+id/iv_clear"
-                android:layout_width="@dimen/scaling_30"
-                android:layout_height="@dimen/scaling_30"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/scaling_4"
-                android:scaleType="fitXY"
-                android:src="@drawable/close_black"
-                android:visibility="gone" />
+                android:layout_marginEnd="@dimen/scaling_15"
+                android:layout_marginLeft="@dimen/scaling_15"
+                android:layout_marginRight="@dimen/scaling_15"
+                android:layout_marginStart="@dimen/scaling_15"
+                android:layout_marginTop="@dimen/scaling_15"
+                android:background="@drawable/pill_grey"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:padding="@dimen/scaling_12"
+                android:text="@string/item_details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_20" />
 
         </RelativeLayout>
 
     </LinearLayout>
-
-    <!-- item detail cta -->
-    <TextView
-        android:id="@+id/tv_item_detail"
-        android:layout_width="match_parent"
-        android:layout_marginEnd="@dimen/scaling_15"
-        android:layout_marginLeft="@dimen/scaling_15"
-        android:layout_marginRight="@dimen/scaling_15"
-        android:layout_marginStart="@dimen/scaling_15"
-        android:layout_marginTop="@dimen/scaling_15"
-        android:background="@drawable/pill_grey"
-        android:elevation="5dp"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:padding="@dimen/scaling_12"
-        android:text="@string/item_details"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_size_20"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>
