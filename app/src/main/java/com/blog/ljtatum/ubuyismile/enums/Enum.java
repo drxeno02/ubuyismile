@@ -33,7 +33,7 @@ public class Enum {
     }
 
     /**
-     * Method is used to set item type
+     * Enum is used to set item type
      */
     public enum ItemType {
         SEARCH("Search"),
@@ -54,7 +54,9 @@ public class Enum {
     }
 
     /**
-     * Method is used to set item type
+     * Enum is used to set item search category. The different type of searches fall into these
+     * categories. This does not include what can be searched via auto search. This sets up the
+     * filters for auto search
      */
     public enum SearchCategory {
         ALL("all"),
@@ -77,4 +79,5 @@ public class Enum {
             return searchCategory;
         }
     }
+
 }

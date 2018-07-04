@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,11 @@ import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
-import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -83,7 +83,6 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
         }
 
         // instantiate views
-        LinearLayout llParentWrapper = convertView.findViewById(R.id.ll_parent_wrapper);
         TextView tvColorCode = convertView.findViewById(R.id.tv_color_code);
         TextView tvTitle = convertView.findViewById(R.id.tv_title);
         ImageView ivItemCategoryIcon = convertView.findViewById(R.id.iv_item_category_icon);
@@ -99,7 +98,7 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
 
         // set category icon
         if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
-
+            // TODO use Amazon official icon
         } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
             if (alItems.get(position).category.equalsIgnoreCase(
                     com.app.amazon.framework.enums.Enum.ItemCategoryChablee.CROWNS.toString())) {
@@ -159,10 +158,22 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
 
                 for (ItemDatabaseModel dataItem : alItemsTemp) {
                     if (!matchValues.contains(dataItem.itemId) &&
-                            dataItem.title.toLowerCase().startsWith(searchStrLowerCase)) {
+                            dataItem.title.toLowerCase().startsWith(searchStrLowerCase) ||
+                            dataItem.category.toLowerCase().startsWith(searchStrLowerCase)) {
                         matchValues.add(dataItem);
                     }
                 }
+
+                // sort items in ascending order
+                if (matchValues.size() > 1) {
+                    Collections.sort(matchValues, new Comparator<ItemDatabaseModel>() {
+                        public int compare(ItemDatabaseModel obj1, ItemDatabaseModel obj2) {
+                            // compare by title
+                            return obj1.title.compareToIgnoreCase(obj2.title);
+                        }
+                    });
+                }
+
                 results.values = matchValues;
                 results.count = matchValues.size();
             }

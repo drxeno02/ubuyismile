@@ -668,11 +668,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     /**
      * Method is used to enable/disable drawer
      *
-     * @param isEnabled True to enable drawer interaction, otherwise disable interaction
+     * @param isDrawerUnlocked True to enable drawer interaction, otherwise disable interaction
      */
-    public void setDrawerState(boolean isEnabled) {
+    public void setDrawerState(boolean isDrawerUnlocked) {
         if (!FrameworkUtils.checkIfNull(mDrawerLayout)) {
-            if (isEnabled) {
+            if (isDrawerUnlocked) {
                 // only unlock (enable) drawer interaction if it is disabled
                 if (mDrawerLayout.getDrawerLockMode(GravityCompat.START) != DrawerLayout.LOCK_MODE_UNLOCKED) {
                     mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);

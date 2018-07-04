@@ -115,8 +115,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
      * Method is used to set click listeners
      */
     private void initializeHandlers() {
-        tvFragmentHeader.setOnClickListener(this);
-
+        // OnRefreshListener
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

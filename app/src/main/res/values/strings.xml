@@ -33,10 +33,6 @@
         For feedback or support, contact Leonard Tatum at
 		<a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>
 
-    <!-- purchase items dialog -->
-    <string name="open_in_browser">Open In Browser</string>
-    <string name="purchase_items_official_site">All purchases are done outside of the app on the official websites. Any special discounts and promotions can only occur \n%s</string>
-
     <!-- about -->
     <string name="follow_me">Follow Me:</string>
     <string name="copyright_year">Copyright %s, Leonard Tatum. All Rights Reserved.</string>

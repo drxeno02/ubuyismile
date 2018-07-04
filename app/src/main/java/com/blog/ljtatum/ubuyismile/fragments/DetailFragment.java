@@ -2,6 +2,8 @@ package com.blog.ljtatum.ubuyismile.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
+import com.app.framework.utilities.dialog.DialogUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.FavoriteAdapter;
@@ -222,7 +226,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.SEARCH.toString()) ||
                     mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.BROWSE.toString()) ||
                     mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.AMAZON.toString())) {
-
                 // set fragment header
                 if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.SEARCH.toString())) {
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_search));
