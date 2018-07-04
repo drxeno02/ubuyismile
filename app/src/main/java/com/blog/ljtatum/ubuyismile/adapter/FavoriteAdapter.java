@@ -54,10 +54,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
      * @param items   List of items to display
      */
     public FavoriteAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
-        for (int i = 0; i < items.size(); i++) {
-            Log.v("DATMUG", "list of favorite items :: title= " + items.get(i).title + " //isFavorite= " + items.get(i).isFavorite);
-        }
-
         mContext = context;
         alItems = items;
     }
