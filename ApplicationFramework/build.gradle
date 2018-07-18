@@ -4,12 +4,12 @@ apply plugin: 'com.android.library'
 ext {
     supportLib = "26.1.0"
     googleLib = "12.0.1"
-    firebaseLib = "15.0.0"
+    firebaseLib = "16.0.1"
     facebookLib = "4.31.0"
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
     // construct version name
@@ -20,7 +20,7 @@ android {
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode code
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
@@ -63,7 +63,7 @@ android {
         //noinspection GradleCompatible
         api "com.android.support:support-annotations:${supportLib}"
         //noinspection GradleCompatible
-        api 'com.android.support.constraint:constraint-layout:1.1.0'
+        api 'com.android.support.constraint:constraint-layout:1.1.2'
 
         // google play services
         //noinspection UseOfBundledGooglePlayServices,GradleCompatible
@@ -87,10 +87,10 @@ android {
         api files('libs/commons-codec-1.9.jar')
 
         // unit testing dependencies
-        testImplementation 'junit:junit:4.12'
+        testApi 'junit:junit:4.12'
         // set this dependency if you want to use Mockito
-        testImplementation 'org.mockito:mockito-core:2.10.0'
-        androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        testApi 'org.mockito:mockito-core:2.10.0'
+        androidTestApi('com.android.support.test.espresso:espresso-core:2.2.2', {
             exclude group: 'com.android.support', module: 'support-annotations'
         })
     }
