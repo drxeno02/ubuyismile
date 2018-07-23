@@ -82,8 +82,8 @@ public class PrivacyFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onDetach() {
-        super.onDetach();
         // enable drawer
         ((MainActivity) mContext).setDrawerState(true);
+        super.onDetach();
     }
 }

@@ -9,8 +9,6 @@ import android.widget.TextView;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 
-import org.json.JSONObject;
-
 import de.keyboardsurfer.android.widget.crouton.Configuration;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.LifecycleCallback;
@@ -26,11 +24,10 @@ public class ErrorUtils {
     private Crouton mCrouton;
 
     /**
-     * @param activity      An activity is a single, focused thing that the user can do
-     * @param frontendError The mapped error to track for analytics
-     * @param backendError  The backend error to track for analytics
+     * @param activity An activity is a single, focused thing that the user can do
+     * @param error    The error to display
      */
-    public void showError(@NonNull final Activity activity, @NonNull final String frontendError, @NonNull final String backendError) {
+    public void showError(@NonNull final Activity activity, @NonNull final String error) {
         if (!isDisplayed) {
             try {
                 View view = activity.getLayoutInflater().inflate(R.layout.error_layout, null, false);
@@ -54,7 +51,7 @@ public class ErrorUtils {
                 TextView tvErrorMessage = view.findViewById(R.id.tv_error);
                 ImageView ivClose = view.findViewById(R.id.iv_error_close);
                 // set text
-                tvErrorMessage.setText(!FrameworkUtils.isStringEmpty(frontendError) ? frontendError : "");
+                tvErrorMessage.setText(!FrameworkUtils.isStringEmpty(error) ? error : "");
                 // set listener for close button
                 ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -83,6 +80,7 @@ public class ErrorUtils {
 
     /**
      * Method is used to check if message is showing
+     *
      * @return True if message is showing, otherwise false
      */
     public boolean isShowing() {

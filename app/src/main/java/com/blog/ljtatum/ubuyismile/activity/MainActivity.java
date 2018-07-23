@@ -245,7 +245,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onRetrieveDataError(DatabaseError databaseError) {
                 // display error dialog
                 mErrorUtils.showError(MainActivity.this,
-                        getResources().getString(R.string.default_error_message), "");
+                        getResources().getString(R.string.default_error_message));
             }
         });
 

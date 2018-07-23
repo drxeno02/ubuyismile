@@ -127,8 +127,8 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onDetach() {
-        super.onDetach();
         // enable drawer
         ((MainActivity) mContext).setDrawerState(true);
+        super.onDetach();
     }
 }

@@ -457,12 +457,12 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onDetach() {
-        super.onDetach();
         // enable drawer
         ((MainActivity) mContext).setDrawerState(true);
         // clear animation
         tvBuy.clearAnimation();
         tvBuy = null;
         System.gc();
+        super.onDetach();
     }
 }

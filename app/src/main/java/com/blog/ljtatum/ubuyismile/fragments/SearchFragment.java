@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.device.DeviceUtils;
 import com.blog.ljtatum.ubuyismile.R;
+import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.ItemAutoCompletedAdapter;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
@@ -300,5 +301,12 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         super.onPause();
         // hide keyboard
         DeviceUtils.hideKeyboard(mActivity, mActivity.getWindow().getDecorView().getWindowToken());
+    }
+
+    @Override
+    public void onDetach() {
+        // enable drawer
+        ((MainActivity) mContext).setDrawerState(true);
+        super.onDetach();
     }
 }

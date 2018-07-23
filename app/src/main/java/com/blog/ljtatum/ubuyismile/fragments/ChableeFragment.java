@@ -145,7 +145,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onRetrieveDataError(DatabaseError databaseError) {
                 // display error dialog
-                mErrorUtils.showError(mActivity, getResources().getString(R.string.default_error_message), "");
+                mErrorUtils.showError(mActivity, getResources().getString(R.string.default_error_message));
             }
         });
 
@@ -348,8 +348,8 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             // dismiss error dialog
             mErrorUtils.dismiss();
         }
-        super.onDetach();
         // enable drawer
         ((MainActivity) mContext).setDrawerState(true);
+        super.onDetach();
     }
 }
