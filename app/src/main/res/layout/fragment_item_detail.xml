@@ -237,16 +237,16 @@
 
     <!-- description -->
     <TextView
-        android:layout_below="@+id/rl_favorite_wrapper"
         android:id="@+id/tv_no_favorite_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/rl_favorite_wrapper"
         android:layout_gravity="center"
         android:background="@color/white"
         android:gravity="center"
-        android:visibility="gone"
         android:text="@string/no_favorite_item"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_size_20" />
+        android:textSize="@dimen/font_size_20"
+        android:visibility="gone" />
 
 </RelativeLayout>

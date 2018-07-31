@@ -10,7 +10,7 @@
     <include
         layout="@layout/fragment_header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scaling_50"/>
+        android:layout_height="@dimen/scaling_50" />
 
     <!-- description -->
     <TextView

@@ -31,11 +31,21 @@ import java.util.List;
 
 public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.ViewHolder> {
 
+    // custom callback
+    private static OnClickAdapterListener mOnClickAdapterListener;
     private Context mContext;
     private List<ItemDatabaseModel> alItems;
 
-    // custom callback
-    private static OnClickAdapterListener mOnClickAdapterListener;
+    /**
+     * Constructor
+     *
+     * @param context Interface to global information about an application environment
+     * @param items   List of items to display
+     */
+    public ItemBrowseAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
+        mContext = context;
+        alItems = items;
+    }
 
     /**
      * Method is used to set callback for when item is clicked
@@ -44,17 +54,6 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
      */
     public static void onClickAdapterListener(OnClickAdapterListener listener) {
         mOnClickAdapterListener = listener;
-    }
-
-    /**
-     * Constructor
-     *
-     * @param context  Interface to global information about an application environment
-     * @param items    List of items to display
-     */
-    public ItemBrowseAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
-        mContext = context;
-        alItems = items;
     }
 
     @Override

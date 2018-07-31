@@ -3,12 +3,7 @@ package com.blog.ljtatum.ubuyismile.model;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
-import com.app.amazon.framework.enums.Enum;
-
-import org.apache.commons.codec.binary.StringUtils;
-
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * Created by LJTat on 12/25/2017.

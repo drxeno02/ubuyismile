@@ -14,6 +14,7 @@ public class AnimationUtils {
 
     /**
      * Method is used to retrieve blink animation object
+     *
      * @return An abstraction for an Animation that can be applied to Views, Surfaces, or other objects
      */
     public static Animation retrieveBlinkAnimation() {

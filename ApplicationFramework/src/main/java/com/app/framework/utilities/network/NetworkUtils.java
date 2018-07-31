@@ -187,8 +187,8 @@ public class NetworkUtils {
                     return true; // ~ 400-7000 kbps
                 /*
                  * Above API level 7, make sure to set android:targetSdkVersion
-			     * to appropriate level to use these
-			     */
+                 * to appropriate level to use these
+                 */
                 case TelephonyManager.NETWORK_TYPE_EHRPD: // API level 11
                     Log.v(TAG, "STRONG: ~ 1-2 Mbps");
                     return true; // ~ 1-2 Mbps

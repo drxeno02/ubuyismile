@@ -2,7 +2,6 @@ package com.blog.ljtatum.ubuyismile.application;
 
 import android.app.Application;
 
-import com.app.framework.utilities.apprater.AppRaterUtil;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.google.firebase.FirebaseApp;

@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +24,25 @@ import com.app.framework.utilities.device.DeviceUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.ItemAutoCompletedAdapter;
+import com.blog.ljtatum.ubuyismile.adapter.SearchHistoryAdapter;
+import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.enums.Enum;
+import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
+import com.blog.ljtatum.ubuyismile.interfaces.OnDatabaseChangeListener;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class SearchFragment extends BaseFragment implements View.OnClickListener {
+
+    private static final int MAX_SEARCH_HISTORY_RESULTS = 15;
 
     private Context mContext;
     private Activity mActivity;
@@ -45,6 +56,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
 
     // adapter
     private ItemAutoCompletedAdapter itemAutoCompleteAdapter;
+    private SearchHistoryAdapter searchHistoryAdapter;
+    private RecyclerView rvSearchHistory;
 
     // database
     private ItemProvider mItemProvider;
@@ -80,13 +93,21 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         alItemDb = !FrameworkUtils.checkIfNull(mItemProvider.getAllInfo()) ?
                 mItemProvider.getAllInfo() : new ArrayList<ItemDatabaseModel>();
 
-        // initialize adapter
+        // initialize adapter (auto complete)
         acSearch = mRootView.findViewById(R.id.ac_search);
         ivClear = mRootView.findViewById(R.id.iv_clear);
         ivBack = mRootView.findViewById(R.id.iv_back);
         tvItemDetailCta = mRootView.findViewById(R.id.tv_item_detail);
         itemAutoCompleteAdapter = new ItemAutoCompletedAdapter(mContext, R.layout.item_auto_complete, alItemDb);
         acSearch.setAdapter(itemAutoCompleteAdapter);
+
+        // initialize adapter (search history)
+        rvSearchHistory = mRootView.findViewById(R.id.rv_search_history);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvSearchHistory.setLayoutManager(layoutManager);
+        searchHistoryAdapter = new SearchHistoryAdapter(mContext, getSearchHistory());
+        rvSearchHistory.setAdapter(searchHistoryAdapter);
 
         // request focus
         acSearch.requestFocus();
@@ -119,8 +140,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                 acSearch.setText(mSelectedItem.title);
                 // set cursor end of text
                 acSearch.setSelection(acSearch.getText().length());
-                // set CTA state
-                setCtaEnabled(true);
+                // update search history
+                updateSearchHistory();
             }
         });
 
@@ -166,6 +187,48 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                         setCtaEnabled(true);
                     }
                 }
+            }
+        });
+
+        // onClick listener
+        SearchHistoryAdapter.onClickAdapterListener(new OnClickAdapterListener() {
+            @Override
+            public void onClick(ItemDatabaseModel item) {
+                // hide keyboard
+                DeviceUtils.hideKeyboard(mActivity, mActivity.getWindow().getDecorView().getWindowToken());
+                // retrieve selected item
+                mSelectedItem = item;
+                // set text
+                acSearch.setText(mSelectedItem.title);
+                // set cursor end of text
+                acSearch.setSelection(acSearch.getText().length());
+                // set CTA state
+                setCtaEnabled(true);
+            }
+        });
+
+        // onDatabseChange listener
+        AsyncTaskUpdateItemDatabase.onDatabaseChangeListener(new OnDatabaseChangeListener() {
+            @Override
+            public void onDatabaseUpdate() {
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("DATMUG", "<onDatabaseUpdate> database updates");
+
+
+                        alItemDb = mItemProvider.getAllInfo();
+                        for (int i = 0; i < alItemDb.size(); i++) {
+                            Log.v("DATMUG", "search history : id= " + alItemDb.get(i).itemId);
+                            Log.v("DATMUG", "search history : timestamp= " + alItemDb.get(i).timestampSearch);
+                        }
+
+                        // update adapter
+                        searchHistoryAdapter.updateData(getSearchHistory());
+                        // set CTA state
+                        setCtaEnabled(true);
+                    }
+                });
             }
         });
     }
@@ -248,6 +311,67 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             tvItemDetailCta.setTextColor(ContextCompat.getColor(mContext, R.color.black));
             tvItemDetailCta.setBackground(ContextCompat.getDrawable(mContext, R.drawable.pill_grey));
         }
+    }
+
+    /**
+     * Method is used to update search history
+     */
+    private void updateSearchHistory() {
+        for (int i = 0; i < alItemDb.size(); i++) {
+            if (alItemDb.get(i).itemId.equalsIgnoreCase(mSelectedItem.itemId)) {
+                alItemDb.get(i).timestampSearch = FrameworkUtils.getCurrentDateTime();
+                alItemDb.get(i).itemId = alItemDb.get(i).itemId;
+                alItemDb.get(i).isSearch = true;
+
+                Log.e("DATMUG", "<updateSearchHistory> adding new item to database timestamp= " + alItemDb.get(i).timestampSearch);
+                Log.e("DATMUG", "<updateSearchHistory> adding new item to database itemId= " + alItemDb.get(i).itemId);
+
+                Log.e("DATMUG", "<updateSearchHistory> updating database with AsyncTask");
+                break;
+            }
+        }
+        // update database
+        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
+    }
+
+    /**
+     * Method is used to retrieve list of items that have been recently searched
+     * @return List of items that have been recently searched
+     */
+    private List<ItemDatabaseModel> getSearchHistory() {
+        // create new empty search history list
+        List<ItemDatabaseModel> alFilteredSearchHistory = new ArrayList<>();
+
+        for (int i = 0; i < alItemDb.size(); i++) {
+            Log.v("DATMUG", "itemId= " + alItemDb.get(i).itemId + " //timestamp = " + alItemDb.get(i).timestampSearch);
+            if (alItemDb.get(i).isSearch) {
+                // add item to search history list
+                Log.e("DATMUG", "item added to search: id= " + alItemDb.get(i).itemId);
+                Log.e("DATMUG", "item added to search: itemType= " + alItemDb.get(i).itemType);
+                Log.e("DATMUG", "item added to search: title= " + alItemDb.get(i).title);
+                Log.e("DATMUG", "item added to search: category= " + alItemDb.get(i).category);
+                Log.e("DATMUG", "item added to search: price= " + alItemDb.get(i).price);
+                Log.e("DATMUG", "item added to search: description= " + alItemDb.get(i).description);
+                alFilteredSearchHistory.add(alItemDb.get(i));
+            }
+        }
+
+        // order search items by date/time
+        Collections.sort(alFilteredSearchHistory, new Comparator<ItemDatabaseModel>() {
+            public int compare(ItemDatabaseModel obj1, ItemDatabaseModel obj2) {
+                if (FrameworkUtils.isStringEmpty(obj1.timestampSearch) ||
+                        FrameworkUtils.isStringEmpty(obj2.timestampSearch)) {
+                    return 0;
+                }
+                return obj2.timestampSearch.compareTo(obj1.timestampSearch);
+            }
+        });
+
+        if (alFilteredSearchHistory.size() > MAX_SEARCH_HISTORY_RESULTS) {
+            // only allow maxed number of recently searched items
+            return alFilteredSearchHistory.subList(0, MAX_SEARCH_HISTORY_RESULTS);
+        }
+        return alFilteredSearchHistory;
     }
 
     @Override

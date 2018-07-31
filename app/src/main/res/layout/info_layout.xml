@@ -5,10 +5,10 @@
 
     <RelativeLayout
         android:id="@+id/rl_info_parent"
-        android:background="@color/material_light_blue_a400_color_code"
-        android:paddingBottom="@dimen/scaling_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/material_light_blue_a400_color_code"
+        android:paddingBottom="@dimen/scaling_10">
 
         <RelativeLayout
             android:id="@+id/rl_info_wrapper"
@@ -21,9 +21,9 @@
                 android:layout_width="@dimen/scaling_56"
                 android:layout_height="@dimen/scaling_56"
                 android:layout_centerVertical="true"
-                android:scaleType="centerCrop"
                 android:layout_marginStart="@dimen/scaling_10"
                 android:layout_marginTop="@dimen/scaling_10"
+                android:scaleType="centerCrop"
                 android:src="@drawable/happiness_90_01" />
 
             <!-- happiness message -->
@@ -36,9 +36,9 @@
                 android:layout_marginTop="@dimen/scaling_5"
                 android:layout_toEndOf="@+id/civ_emote_info"
                 android:layout_toStartOf="@+id/iv_close_info"
-                android:textSize="@dimen/font_size_18"
                 android:gravity="center_vertical"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_18" />
 
             <!-- close button -->
             <ImageView
@@ -55,12 +55,12 @@
         <!-- yes/no -->
         <LinearLayout
             android:id="@+id/ll_info_wrapper"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_info_wrapper"
             android:layout_marginTop="@dimen/scaling_5"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:weightSum="1">
 
             <TextView
@@ -71,9 +71,9 @@
                 android:background="@color/material_green_400_color_code"
                 android:gravity="center"
                 android:text="@string/yes"
-                android:textSize="@dimen/font_size_16"
                 android:textAllCaps="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16" />
 
             <TextView
                 android:id="@+id/tv_negative_info"
@@ -84,8 +84,8 @@
                 android:gravity="center"
                 android:text="@string/no"
                 android:textAllCaps="true"
-                android:textSize="@dimen/font_size_16"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16" />
 
         </LinearLayout>
 

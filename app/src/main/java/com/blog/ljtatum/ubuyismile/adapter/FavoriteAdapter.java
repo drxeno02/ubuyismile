@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,20 +31,10 @@ import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<ItemDatabaseModel> alItems;
-
     // custom callback
     private static OnFavoriteRemoveListener mOnFavoriteRemoveListener;
-
-    /**
-     * Method is used to set callback for when to remove item from favorite list
-     *
-     * @param listener Callback for when to remove item from favorite list
-     */
-    public static void onFavoriteRemoveListener(OnFavoriteRemoveListener listener) {
-        mOnFavoriteRemoveListener = listener;
-    }
+    private Context mContext;
+    private List<ItemDatabaseModel> alItems;
 
     /**
      * Constructor
@@ -56,6 +45,15 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public FavoriteAdapter(@NonNull Context context, @NonNull List<ItemDatabaseModel> items) {
         mContext = context;
         alItems = items;
+    }
+
+    /**
+     * Method is used to set callback for when to remove item from favorite list
+     *
+     * @param listener Callback for when to remove item from favorite list
+     */
+    public static void onFavoriteRemoveListener(OnFavoriteRemoveListener listener) {
+        mOnFavoriteRemoveListener = listener;
     }
 
     @Override

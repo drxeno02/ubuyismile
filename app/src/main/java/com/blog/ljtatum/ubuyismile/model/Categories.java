@@ -1,9 +1,6 @@
 package com.blog.ljtatum.ubuyismile.model;
 
-import android.support.annotation.NonNull;
-
 import com.app.amazon.framework.enums.Enum;
-import com.app.framework.utilities.FrameworkUtils;
 
 import java.util.ArrayList;
 

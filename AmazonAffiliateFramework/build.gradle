@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
     // construct version name
@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode code
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

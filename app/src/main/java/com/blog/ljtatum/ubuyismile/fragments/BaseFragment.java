@@ -14,13 +14,6 @@ import com.blog.ljtatum.ubuyismile.R;
 
 public class BaseFragment extends Fragment {
 
-    /**
-     * Method for removing a fragment
-     */
-    public interface OnRemoveFragment {
-        void onRemove();
-    }
-
     @Nullable
     private OnRemoveFragment mOnRemoveFragment;
 
@@ -180,5 +173,12 @@ public class BaseFragment extends Fragment {
             mOnRemoveFragment.onRemove();
             mOnRemoveFragment = null;
         }
+    }
+
+    /**
+     * Method for removing a fragment
+     */
+    public interface OnRemoveFragment {
+        void onRemove();
     }
 }

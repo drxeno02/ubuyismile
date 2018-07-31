@@ -20,7 +20,7 @@ import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.ItemDetailAdapter;
-import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
+import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
@@ -279,6 +279,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         itemDatabaseModel.asin = chableeModel.asin;
                         itemDatabaseModel.label = chableeModel.label;
                         itemDatabaseModel.timestamp = chableeModel.timestamp;
+                        itemDatabaseModel.timestampSearch = chableeModel.timestampSearch;
                         itemDatabaseModel.itemId = chableeModel.itemId;
                         itemDatabaseModel.itemType = chableeModel.itemType;
                         itemDatabaseModel.price = chableeModel.price;
@@ -296,6 +297,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                         itemDatabaseModel.isFavorite = chableeModel.isFavorite;
                         itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
+                        itemDatabaseModel.isSearch = chableeModel.isSearch;
                         alItemDb.add(itemDatabaseModel);
                     }
                 }
@@ -303,7 +305,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         }
 
         // update database
-        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
 
         // add Chablee items to list
         List<ItemDatabaseModel> items = new ArrayList<>();

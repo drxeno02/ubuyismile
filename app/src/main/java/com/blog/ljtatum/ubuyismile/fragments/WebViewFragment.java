@@ -28,8 +28,6 @@ import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
-import com.blog.ljtatum.ubuyismile.model.Categories;
-import com.blog.ljtatum.ubuyismile.model.ItemModel;
 
 import java.util.ArrayList;
 import java.util.List;

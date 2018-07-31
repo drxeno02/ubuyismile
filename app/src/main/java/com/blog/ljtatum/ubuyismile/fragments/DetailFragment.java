@@ -2,8 +2,6 @@ package com.blog.ljtatum.ubuyismile.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +10,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,11 +20,10 @@ import android.widget.TextView;
 
 import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
-import com.app.framework.utilities.dialog.DialogUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.FavoriteAdapter;
-import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
+import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
@@ -40,7 +35,6 @@ import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -155,7 +149,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      */
     private void initializeListeners() {
         // onDatabseChange listener
-        AsyncTaskUpdateDatabase.onDatabaseChangeListener(new OnDatabaseChangeListener() {
+        AsyncTaskUpdateItemDatabase.onDatabaseChangeListener(new OnDatabaseChangeListener() {
             @Override
             public void onDatabaseUpdate() {
                 mActivity.runOnUiThread(new Runnable() {
@@ -194,7 +188,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                     }
                 }
                 // update database
-                new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
+                new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
             }
         });
     }
@@ -415,7 +409,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             FrameworkUtils.setViewGone(llFavoriteIndicatorWrapper);
         }
         // update database
-        new AsyncTaskUpdateDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
     }
 
     /**

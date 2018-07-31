@@ -62,7 +62,7 @@
                 android:background="@color/white"
                 android:clickable="true"
                 android:focusable="true"
-                android:scrollbars="none" />
+                android:scrollbars="vertical" />
 
         </RelativeLayout>
 

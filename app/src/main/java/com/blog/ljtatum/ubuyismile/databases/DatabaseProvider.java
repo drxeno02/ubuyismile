@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.databases.schema.ItemSchema;
@@ -81,7 +82,6 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                 cursor.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                e.printStackTrace();
             }
         }
         return temp;
@@ -95,7 +95,6 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
      *                    will delete all rows
      * @param whereArgs   You may include ?s in the where clause, which will be replaced by the
      *                    values from whereArgs. The values will be bound as Strings
-     * @return 0 if database is not open
      */
     public void delete(String tableName, String whereClause, String[] whereArgs) {
         mDatabase = getWritableDatabase();
@@ -107,27 +106,6 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                 mDatabase.delete(tableName, null, null);
             }
         }
-    }
-
-    /**
-     * Method is used to retrieve one data item
-     *
-     * @param selection A filter declaring which rows to return, formatted as an SQL WHERE
-     *                  clause (excluding the WHERE itself). Passing null will return all rows
-     *                  for the given table
-     * @param cls       Returns a new instance of the class represented by this Class, created by
-     *                  invoking the default (that is, zero-argument) constructor
-     * @throws InstantiationException Thrown when a program attempts to access a constructor
-     *                                which is not accessible from the location where the reference is made
-     * @throws IllegalAccessException Thrown when a program attempts to access a field or method
-     *                                which is not accessible from the location where the reference is made
-     */
-    public T getOne(String selection, Class<T> cls) throws InstantiationException, IllegalAccessException {
-        List<T> list = get(selection, cls);
-        if (FrameworkUtils.checkIfNull(list) || list.size() == 0) {
-            return null;
-        }
-        return list.get(0);
     }
 
     /**
@@ -221,13 +199,13 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
     }
 
     /**
-     * Method is used to insert data on database
+     * Method is used to create data on database
      *
-     * @param alItemDb List of items to insert into database
+     * @param alItemDb List of items to create into database
      * @param where    The optional WHERE clause to apply when updating. Passing null will
      *                 update all rows
      */
-    public void insert(List<ItemDatabaseModel> alItemDb, String[] where) {
+    public void createItemDb(List<ItemDatabaseModel> alItemDb, String[] where) {
         mDatabase = getWritableDatabase();
         if (mDatabase.isOpen()) {
             ContentValues values = new ContentValues();
@@ -236,24 +214,26 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                 values.put(where[1], alItemDb.get(i).asin);
                 values.put(where[2], alItemDb.get(i).label);
                 values.put(where[3], alItemDb.get(i).timestamp);
-                values.put(where[4], alItemDb.get(i).itemId);
-                values.put(where[5], alItemDb.get(i).itemType);
-                values.put(where[6], alItemDb.get(i).price);
-                values.put(where[7], alItemDb.get(i).salePrice);
-                values.put(where[8], alItemDb.get(i).title);
-                values.put(where[9], alItemDb.get(i).description);
-                values.put(where[10], alItemDb.get(i).purchaseUrl);
-                values.put(where[11], alItemDb.get(i).imageUrl1);
-                values.put(where[12], alItemDb.get(i).imageUrl2);
-                values.put(where[13], alItemDb.get(i).imageUrl3);
-                values.put(where[14], alItemDb.get(i).imageUrl4);
-                values.put(where[15], alItemDb.get(i).imageUrl5);
-                values.put(where[16], alItemDb.get(i).isLabelSet);
-                values.put(where[17], alItemDb.get(i).isBrowseItem);
-                values.put(where[18], alItemDb.get(i).isFeatured);
-                values.put(where[19], alItemDb.get(i).isMostPopular);
-                values.put(where[20], alItemDb.get(i).isFavorite);
-                // insert into table
+                values.put(where[4], alItemDb.get(i).timestampSearch);
+                values.put(where[5], alItemDb.get(i).itemId);
+                values.put(where[6], alItemDb.get(i).itemType);
+                values.put(where[7], alItemDb.get(i).price);
+                values.put(where[8], alItemDb.get(i).salePrice);
+                values.put(where[9], alItemDb.get(i).title);
+                values.put(where[10], alItemDb.get(i).description);
+                values.put(where[11], alItemDb.get(i).purchaseUrl);
+                values.put(where[12], alItemDb.get(i).imageUrl1);
+                values.put(where[13], alItemDb.get(i).imageUrl2);
+                values.put(where[14], alItemDb.get(i).imageUrl3);
+                values.put(where[15], alItemDb.get(i).imageUrl4);
+                values.put(where[16], alItemDb.get(i).imageUrl5);
+                values.put(where[17], alItemDb.get(i).isLabelSet);
+                values.put(where[18], alItemDb.get(i).isBrowseItem);
+                values.put(where[19], alItemDb.get(i).isFeatured);
+                values.put(where[20], alItemDb.get(i).isMostPopular);
+                values.put(where[21], alItemDb.get(i).isFavorite);
+                values.put(where[22], alItemDb.get(i).isSearch);
+                // create into table
                 mDatabase.insert(ItemSchema.TABLE_NAME, null, values);
             }
         }
@@ -271,10 +251,11 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
     /**
      * Method is used to retrieve the amount of database rows
      *
+     * @param schema The database scheme to retrieve number of database rows from
      * @return The amount of database rows
      */
-    public int getDatabaseRowCount() {
-        String countQuery = "SELECT  * FROM " + ItemSchema.TABLE_NAME;
+    public int getDbRowCount(@NonNull String schema) {
+        String countQuery = "SELECT  * FROM " + schema;
         mDatabase = getReadableDatabase();
         if (mDatabase.isOpen()) {
             Cursor cursor = mDatabase.rawQuery(countQuery, null);

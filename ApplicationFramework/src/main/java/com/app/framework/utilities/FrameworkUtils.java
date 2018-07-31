@@ -220,6 +220,7 @@ public class FrameworkUtils {
 
     /**
      * Method is used to come two timestamps and determine the difference in days between the dates
+     *
      * @param dateA String value representation of date and time
      * @param dateB String value representation of date and time
      * @return

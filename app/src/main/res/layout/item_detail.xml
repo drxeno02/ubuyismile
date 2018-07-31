@@ -58,9 +58,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_wrapper"
-        android:padding="@dimen/scaling_10"
-        android:orientation="horizontal"
         android:background="@color/material_pink_100_color_code"
+        android:orientation="horizontal"
+        android:padding="@dimen/scaling_10"
         android:weightSum="1">
 
         <!-- title -->
@@ -76,22 +76,22 @@
         <TextView
             android:id="@+id/tv_scratch_price"
             android:layout_width="0dp"
-            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:layout_weight=".15"
-            android:visibility="invisible"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_size_16" />
+            android:textSize="@dimen/font_size_16"
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
         <!-- price -->
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="0dp"
-            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:layout_weight=".15"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_18" />
+            android:textSize="@dimen/font_size_18"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

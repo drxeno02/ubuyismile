@@ -20,26 +20,15 @@ import java.util.List;
  * background operations and publish results on the UI thread without having to manipulate
  * threads and/or handlers.</p>
  */
-public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
-
-    @SuppressLint("StaticFieldLeak")
-    private Context mContext;
-
-    // database
-    private ItemProvider mItemProvider;
-    private List<ItemDatabaseModel> alItemDb;
+public class AsyncTaskUpdateItemDatabase extends AsyncTask<Void, Void, Void> {
 
     // custom callback
     private static OnDatabaseChangeListener mOnDatabaseChangeListener;
-
-    /**
-     * Method is used to set callback for when database is updated
-     *
-     * @param listener Callback for when database is updated
-     */
-    public static void onDatabaseChangeListener(OnDatabaseChangeListener listener) {
-        mOnDatabaseChangeListener = listener;
-    }
+    @SuppressLint("StaticFieldLeak")
+    private Context mContext;
+    // database
+    private ItemProvider mItemProvider;
+    private List<ItemDatabaseModel> alItemDb;
 
     /**
      * Constructor
@@ -48,11 +37,20 @@ public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
      * @param itemProvider Provider to update database
      * @param itemDb       List of items to update in database
      */
-    public AsyncTaskUpdateDatabase(@NonNull Context context, @NonNull ItemProvider itemProvider,
-                                   @NonNull List<ItemDatabaseModel> itemDb) {
+    public AsyncTaskUpdateItemDatabase(@NonNull Context context, @NonNull ItemProvider itemProvider,
+                                       @NonNull List<ItemDatabaseModel> itemDb) {
         mContext = context;
         mItemProvider = itemProvider;
         alItemDb = itemDb;
+    }
+
+    /**
+     * Method is used to set callback for when database is updated
+     *
+     * @param listener Callback for when database is updated
+     */
+    public static void onDatabaseChangeListener(OnDatabaseChangeListener listener) {
+        mOnDatabaseChangeListener = listener;
     }
 
     @Override
@@ -66,9 +64,8 @@ public class AsyncTaskUpdateDatabase extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
-            for (int i = 0; i < alItemDb.size(); i++) {
-                mItemProvider.update(alItemDb.get(i));
-            }
+            // update database
+            mItemProvider.update(alItemDb);
             if (!FrameworkUtils.checkIfNull(mOnDatabaseChangeListener)) {
                 // set listener
                 mOnDatabaseChangeListener.onDatabaseUpdate();

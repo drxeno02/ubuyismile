@@ -8,8 +8,8 @@ public class ItemModel {
     private static final String WIX_URL_PREFIX = "https://static.wixstatic.com/media/";
 
     // base values
-    public String category, asin, label, timestamp, itemId, itemType;
-    public boolean isBrowseItem, isLabelSet;
+    public String category, asin, label, timestamp, timestampSearch, itemId, itemType;
+    public boolean isBrowseItem, isLabelSet, isSearch;
 
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
@@ -18,6 +18,7 @@ public class ItemModel {
 
     /**
      * Method is used to format image urls
+     *
      * @param url Image url to be checked for proper format
      * @return Formatted image url
      */

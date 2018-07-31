@@ -23,8 +23,6 @@ import java.util.Random;
  */
 
 public class HappinessUtils {
-    private static final String TAG = HappinessUtils.class.getSimpleName();
-
     public static final String EVENT_APP_LAUNCH = "key_event_app_launch"; // can be negative Happiness
     public static final String EVENT_CONTENT_COUNTER = "key_event_content_counter";
     public static final String EVENT_CONTENT_ITEM_DETAIL_COUNTER = "key_event_content_item_detail_counter";
@@ -32,7 +30,7 @@ public class HappinessUtils {
     public static final String EVENT_ABOUT_SHARE_COUNTER = "key_event_share_counter";
     public static final String EVENT_SEARCH_COUNTER = "key_event_search_counter";
     public static final String EVENT_ITEM_FEEDBACK_COUNTER = "key_event_item_feedback_counter";
-
+    private static final String TAG = HappinessUtils.class.getSimpleName();
     private static final String HAPPINESS_SCORE = "key_happiness";
     private static final String APP_LAUNCH_TIMESTAMP = "key_app_launch_timestamp";
 
@@ -69,28 +67,6 @@ public class HappinessUtils {
         // populate lists
         populateMessageLists();
         populateDrawableLists();
-    }
-
-    /**
-     * Method is used to populate message lists
-     */
-    private void populateMessageLists() {
-        // instantiate message lists
-        arryHappyMessages = mContext.getResources().getStringArray(R.array.happy_messages);
-        arryNeutralMessages = mContext.getResources().getStringArray(R.array.neutral_messages);
-        arryUnHappyMessages = mContext.getResources().getStringArray(R.array.unhappy_messages);
-    }
-
-    /**
-     * Method is used to populate drawable lists
-     */
-    private void populateDrawableLists() {
-        // instantiate drawable lists
-        typedArryDrawable90 = mContext.getResources().obtainTypedArray(R.array.drawable_90);
-        typedArryDrawable80 = mContext.getResources().obtainTypedArray(R.array.drawable_80);
-        typedArryDrawable70 = mContext.getResources().obtainTypedArray(R.array.drawable_70);
-        typedArryDrawable60 = mContext.getResources().obtainTypedArray(R.array.drawable_60);
-        typedArryDrawable50 = mContext.getResources().obtainTypedArray(R.array.drawable_50);
     }
 
     /**
@@ -264,5 +240,27 @@ public class HappinessUtils {
             }
         }
         return drawable;
+    }
+
+    /**
+     * Method is used to populate message lists
+     */
+    private void populateMessageLists() {
+        // instantiate message lists
+        arryHappyMessages = mContext.getResources().getStringArray(R.array.happy_messages);
+        arryNeutralMessages = mContext.getResources().getStringArray(R.array.neutral_messages);
+        arryUnHappyMessages = mContext.getResources().getStringArray(R.array.unhappy_messages);
+    }
+
+    /**
+     * Method is used to populate drawable lists
+     */
+    private void populateDrawableLists() {
+        // instantiate drawable lists
+        typedArryDrawable90 = mContext.getResources().obtainTypedArray(R.array.drawable_90);
+        typedArryDrawable80 = mContext.getResources().obtainTypedArray(R.array.drawable_80);
+        typedArryDrawable70 = mContext.getResources().obtainTypedArray(R.array.drawable_70);
+        typedArryDrawable60 = mContext.getResources().obtainTypedArray(R.array.drawable_60);
+        typedArryDrawable50 = mContext.getResources().obtainTypedArray(R.array.drawable_50);
     }
 }

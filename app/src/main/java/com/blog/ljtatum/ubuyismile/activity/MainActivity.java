@@ -28,7 +28,7 @@ import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.adapter.ItemBrowseAdapter;
-import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateDatabase;
+import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
@@ -63,29 +63,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String ID_PREFIX = "id_";
-
+    // Amazon web service authentication
+    private AmazonWebServiceAuthentication mAmazonAuth;
     private Activity mActivity;
     private ErrorUtils mErrorUtils;
     private DrawerLayout mDrawerLayout;
     private ArrayList<String> alAmazonCategories, alChableeCategories;
     private int categoryIndex = 0; // default
     private boolean isAmazonFirebaseDataRetrieved, isChableeFirebaseDataRetrieved, isDbEmpty;
-
     // information bar
     private InfoBarUtils mInfoBarUtils;
-
     // shared pref
     private SharedPref mSharedPref;
-
     // database
     private ItemProvider mItemProvider;
     private List<ItemDatabaseModel> alItemDb;
-
     // adapter
     private ItemBrowseAdapter itemBrowseAdapter;
-
-    // Amazon web service authentication
-    AmazonWebServiceAuthentication mAmazonAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,6 +295,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.asin = itemModel.asin;
                         itemDatabaseModel.label = itemModel.label;
                         itemDatabaseModel.timestamp = itemModel.timestamp;
+                        itemDatabaseModel.timestampSearch = "";
                         itemDatabaseModel.price = "";
                         itemDatabaseModel.salePrice = "";
                         itemDatabaseModel.title = "";
@@ -315,6 +310,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.isFeatured = false;
                         itemDatabaseModel.isMostPopular = false;
                         itemDatabaseModel.isFavorite = false;
+                        itemDatabaseModel.isLabelSet = false;
+                        itemDatabaseModel.isSearch = false;
                         alItemDb.add(itemDatabaseModel);
                     } else {
                         // TODO iterate through SQLite db and update values
@@ -463,6 +460,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             itemDatabaseModel.asin = chableeModel.asin;
                             itemDatabaseModel.label = chableeModel.label;
                             itemDatabaseModel.timestamp = chableeModel.timestamp;
+                            itemDatabaseModel.timestampSearch = chableeModel.timestampSearch;
                             itemDatabaseModel.itemId = chableeModel.itemId;
                             itemDatabaseModel.itemType = chableeModel.itemType;
                             itemDatabaseModel.price = chableeModel.price;
@@ -480,6 +478,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                             itemDatabaseModel.isFavorite = chableeModel.isFavorite;
                             itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
+                            itemDatabaseModel.isSearch = chableeModel.isSearch;
                             alItemDb.add(itemDatabaseModel);
                         }
                     } else {
@@ -529,6 +528,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 itemDatabaseModel.asin = chableeModel.asin;
                                 itemDatabaseModel.label = chableeModel.label;
                                 itemDatabaseModel.timestamp = chableeModel.timestamp;
+                                itemDatabaseModel.timestampSearch = chableeModel.timestampSearch;
                                 itemDatabaseModel.itemId = chableeModel.itemId;
                                 itemDatabaseModel.itemType = chableeModel.itemType;
                                 itemDatabaseModel.price = chableeModel.price;
@@ -545,6 +545,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                                 itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                                 itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                                 itemDatabaseModel.isFavorite = chableeModel.isFavorite;
+                                itemDatabaseModel.isSearch = chableeModel.isSearch;
                                 itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                                 alItemDb.add(itemDatabaseModel);
                             }
@@ -600,7 +601,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         createSQLiteDb();
                     } else {
                         // update database
-                        new AsyncTaskUpdateDatabase(this, mItemProvider, alItemDb).execute();
+                        new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb).execute();
                         printDb();
                     }
                 }
@@ -626,7 +627,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
 
-        // set adapter
+        // update adapter
         itemBrowseAdapter.updateData(items);
 
         // dismiss progress dialog
@@ -638,7 +639,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void createSQLiteDb() {
         if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
-            mItemProvider.insert(alItemDb);
+            mItemProvider.create(alItemDb);
         }
     }
 
@@ -801,6 +802,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Logger.v(TAG, "asin= " + alItemDb.get(i).asin);
             Logger.v(TAG, "label= " + alItemDb.get(i).label);
             Logger.v(TAG, "timestamp= " + alItemDb.get(i).timestamp);
+            Logger.v(TAG, "timestampSearch= " + alItemDb.get(i).timestampSearch);
             Logger.v(TAG, "price= " + alItemDb.get(i).price);
             Logger.v(TAG, "salePrice= " + alItemDb.get(i).salePrice);
             Logger.v(TAG, "title= " + alItemDb.get(i).title);
@@ -815,6 +817,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Logger.v(TAG, "isFeatured= " + alItemDb.get(i).isFeatured);
             Logger.v(TAG, "isMostPopular= " + alItemDb.get(i).isMostPopular);
             Logger.v(TAG, "isFavorite= " + alItemDb.get(i).isFavorite);
+            Logger.v(TAG, "isLabelSet= " + alItemDb.get(i).isLabelSet);
+            Logger.v(TAG, "isSearch= " + alItemDb.get(i).isSearch);
         }
     }
 

@@ -309,8 +309,9 @@ public class Utils {
 
     /**
      * Method is used to determine if item is on sale
+     *
      * @param itemDatabaseModel Database object {@link com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel}
-     *                            that represents item properties
+     *                          that represents item properties
      * @return True if item is on sale, otherwise false
      */
     public static boolean isItemOnSale(@NonNull ItemDatabaseModel itemDatabaseModel) {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_parent_wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/scaling_4"
+    tools:ignore="ContentDescription">
+
+    <!-- NOTE: scaling is added so that the timestamp and favorite icon has space -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scaling_28"
+        android:layout_marginEnd="@dimen/scaling_80"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- item category icon -->
+        <ImageView
+            android:id="@+id/iv_item_category_icon"
+            android:layout_width="@dimen/scaling_25"
+            android:layout_height="@dimen/scaling_25"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY" />
+
+        <!-- color code -->
+        <TextView
+            android:id="@+id/tv_color_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/scaling_4"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16"
+            android:textStyle="bold" />
+
+        <!-- title -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/scaling_4"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_14" />
+
+    </LinearLayout>
+
+    <!-- timestamp and favorite icon wrapper -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/scaling_28"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- timestamp -->
+        <TextView
+            android:id="@+id/tv_timestamp_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/scaling_10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_14" />
+
+        <!-- favorite icon -->
+        <ImageView
+            android:id="@+id/iv_item_favorite_icon"
+            android:layout_width="@dimen/scaling_20"
+            android:layout_height="@dimen/scaling_20"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/scaling_5"
+            android:scaleType="fitXY"
+            android:src="@drawable/favorite_icon_off" />
+
+    </LinearLayout>
+
+</RelativeLayout>

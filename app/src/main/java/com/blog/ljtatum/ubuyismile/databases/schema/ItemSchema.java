@@ -15,6 +15,7 @@ public class ItemSchema implements BaseColumns {
     public static final String ASIN = "asin";
     public static final String LABEL = "label";
     public static final String TIMESTAMP = "timestamp";
+    public static final String TIMESTAMP_SEARCH = "timestamp_search";
     public static final String ITEM_ID = "item_id";
     public static final String ITEM_TYPE = "item_type";
     public static final String PRICE = "price";
@@ -32,6 +33,7 @@ public class ItemSchema implements BaseColumns {
     public static final String IS_FEATURED = "is_featured";
     public static final String IS_MOST_POPULAR = "is_most_popular";
     public static final String IS_FAVORITE = "is_favorite";
+    public static final String IS_SEARCH = "is_search";
 
     /**
      * Method is used to create a table for user session data
@@ -46,6 +48,7 @@ public class ItemSchema implements BaseColumns {
         sb.append(ASIN + " TEXT, ");
         sb.append(LABEL + " TEXT, ");
         sb.append(TIMESTAMP + " TEXT, ");
+        sb.append(TIMESTAMP_SEARCH + " TEXT, ");
         sb.append(ITEM_ID + " TEXT, ");
         sb.append(ITEM_TYPE + " TEXT, ");
         sb.append(PRICE + " TEXT, ");
@@ -62,7 +65,8 @@ public class ItemSchema implements BaseColumns {
         sb.append(IS_BROWSABLE + " TEXT, ");
         sb.append(IS_FEATURED + " TEXT, ");
         sb.append(IS_MOST_POPULAR + " TEXT, ");
-        sb.append(IS_FAVORITE + " TEXT");
+        sb.append(IS_FAVORITE + " TEXT, ");
+        sb.append(IS_SEARCH + " TEXT");
         sb.append(");");
         return sb.toString();
     }

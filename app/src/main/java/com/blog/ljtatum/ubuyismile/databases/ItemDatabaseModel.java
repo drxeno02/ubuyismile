@@ -12,8 +12,8 @@ import com.blog.ljtatum.ubuyismile.databases.schema.ItemSchema;
 public class ItemDatabaseModel implements DatabaseModel {
 
     // base values
-    public String category, asin, label, timestamp, itemId, itemType;
-    public boolean isBrowseItem, isLabelSet;
+    public String category, asin, label, timestamp, timestampSearch, itemId, itemType;
+    public boolean isBrowseItem, isLabelSet, isSearch;
 
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
@@ -27,6 +27,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         item.asin = cursor.getString(cursor.getColumnIndex(ItemSchema.ASIN));
         item.label = cursor.getString(cursor.getColumnIndex(ItemSchema.LABEL));
         item.timestamp = cursor.getString(cursor.getColumnIndex(ItemSchema.TIMESTAMP));
+        item.timestampSearch = cursor.getString(cursor.getColumnIndex(ItemSchema.TIMESTAMP_SEARCH));
         item.itemId = cursor.getString(cursor.getColumnIndex(ItemSchema.ITEM_ID));
         item.itemType = cursor.getString(cursor.getColumnIndex(ItemSchema.ITEM_TYPE));
         item.price = cursor.getString(cursor.getColumnIndex(ItemSchema.PRICE));
@@ -44,16 +45,18 @@ public class ItemDatabaseModel implements DatabaseModel {
         item.isFeatured = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_FEATURED)) > 0;
         item.isMostPopular = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_MOST_POPULAR)) > 0;
         item.isFavorite = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_FAVORITE)) > 0;
+        item.isSearch = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_SEARCH)) > 0;
         return (T) item;
     }
 
     @Override
     public String[] getColumns() {
-        return new String[] {
+        return new String[]{
                 ItemSchema.CATEGORY,
                 ItemSchema.ASIN,
                 ItemSchema.LABEL,
                 ItemSchema.TIMESTAMP,
+                ItemSchema.TIMESTAMP_SEARCH,
                 ItemSchema.ITEM_ID,
                 ItemSchema.ITEM_TYPE,
                 ItemSchema.PRICE,
@@ -70,7 +73,8 @@ public class ItemDatabaseModel implements DatabaseModel {
                 ItemSchema.IS_BROWSABLE,
                 ItemSchema.IS_FEATURED,
                 ItemSchema.IS_MOST_POPULAR,
-                ItemSchema.IS_FAVORITE
+                ItemSchema.IS_FAVORITE,
+                ItemSchema.IS_SEARCH
         };
     }
 
@@ -81,6 +85,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         values.put(ItemSchema.ASIN, asin);
         values.put(ItemSchema.LABEL, label);
         values.put(ItemSchema.TIMESTAMP, timestamp);
+        values.put(ItemSchema.TIMESTAMP_SEARCH, timestampSearch);
         values.put(ItemSchema.ITEM_ID, itemId);
         values.put(ItemSchema.ITEM_TYPE, itemType);
         values.put(ItemSchema.PRICE, price);
@@ -98,6 +103,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         values.put(ItemSchema.IS_FEATURED, isFeatured);
         values.put(ItemSchema.IS_MOST_POPULAR, isMostPopular);
         values.put(ItemSchema.IS_FAVORITE, isFavorite);
+        values.put(ItemSchema.IS_SEARCH, isSearch);
         return values;
     }
 

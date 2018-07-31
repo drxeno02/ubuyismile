@@ -63,11 +63,11 @@
         <!-- title -->
         <TextView
             android:id="@+id/tv_title"
-            android:ellipsize="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/scaling_5"
             android:layout_marginEnd="@dimen/scaling_5"
+            android:layout_marginStart="@dimen/scaling_5"
+            android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_16" />
@@ -76,8 +76,8 @@
             android:id="@+id/ll_bg_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/scaling_5"
             android:layout_marginEnd="@dimen/scaling_5"
+            android:layout_marginStart="@dimen/scaling_5"
             android:orientation="horizontal">
 
             <!-- price -->

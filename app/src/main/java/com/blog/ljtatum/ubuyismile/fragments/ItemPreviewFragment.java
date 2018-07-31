@@ -11,13 +11,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.app.amazon.framework.enums.Enum;
 import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
-import com.blog.ljtatum.ubuyismile.model.Categories;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.squareup.picasso.Picasso;
 

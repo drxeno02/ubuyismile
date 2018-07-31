@@ -38,9 +38,9 @@ public class DeviceUtils {
      * Method is used to hide virtual keyboard
      *
      * @param activity An activity is a single, focused thing that the user can do
-     * @param binder  Base interface for a remotable object, the core part of a lightweight remote
-     *                procedure call mechanism designed for high performance when performing
-     *                in-process and cross-process calls
+     * @param binder   Base interface for a remotable object, the core part of a lightweight remote
+     *                 procedure call mechanism designed for high performance when performing
+     *                 in-process and cross-process calls
      */
     public static void hideKeyboard(@NonNull Activity activity, IBinder binder) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
