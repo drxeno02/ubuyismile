@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/scaling_60"
-    android:layout_height="@dimen/scaling_60"
+    android:layout_width="@dimen/scaling_90"
+    android:layout_height="@dimen/scaling_90"
     tools:ignore="ContentDescription">
 
     <RelativeLayout
-        android:id="@+id/rl_daily_bonus_wrapper"
-        android:layout_width="@dimen/scaling_60"
-        android:layout_height="@dimen/scaling_60">
+        android:id="@+id/rl_signin_bonus_wrapper"
+        android:layout_width="@dimen/scaling_90"
+        android:layout_height="@dimen/scaling_90">
 
-        <!-- daily bonus icon -->
+        <!-- signin bonus icon -->
         <ImageView
             android:id="@+id/iv_day"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/daily_bonus_default" />
+            android:src="@drawable/signin_bonus_default" />
 
         <!-- day label -->
         <TextView
@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/edge_right_black"
+            android:background="@drawable/edge_right_black_trans_40"
             android:gravity="center"
-            android:padding="@dimen/scaling_4"
+            android:padding="@dimen/scaling_5"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_14" />
 

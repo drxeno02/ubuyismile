@@ -72,6 +72,17 @@ public class HappinessUtils {
     }
 
     /**
+     * Method is used to increment happiness by x happiness
+     *
+     * @param value The amount of happiness to increase
+     */
+    public static void incrementHappiness(int value) {
+        if (!FrameworkUtils.checkIfNull(mSharedPref)) {
+            mSharedPref.setPref(HAPPINESS_SCORE, mSharedPref.getIntPref(HAPPINESS_SCORE, -1) + value);
+        }
+    }
+
+    /**
      * Method is used to update Happiness Score
      *
      * @param event The event name that marks a milestone

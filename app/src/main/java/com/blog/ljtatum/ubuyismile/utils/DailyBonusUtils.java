@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.framework.sharedpref.SharedPref;
@@ -21,6 +20,7 @@ import com.blog.ljtatum.ubuyismile.constants.Constants;
 
 public class DailyBonusUtils {
 
+    private static final int DAYS_UNTIL_PROMPT = 2;
     private Context mContext;
     private SharedPref mSharedPref;
 
@@ -52,7 +52,8 @@ public class DailyBonusUtils {
         }
 
         // wait at least n days before opening
-        if (System.currentTimeMillis() >= dateFirstLaunch + (24 * 60 * 60 * 1000)) {
+        if (launchCount == 1 || System.currentTimeMillis() >=
+                dateFirstLaunch + (DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000)) {
             // show rate dialog
             showDailyBonus();
         }
@@ -61,12 +62,15 @@ public class DailyBonusUtils {
     /**
      * Method is used to display doalog
      */
-    @SuppressLint("CutPasteId")
+    @SuppressLint({"CutPasteId", "ResourceType"})
     private void showDailyBonus() {
+        // retrieve daily bonus assets
+        final TypedArray arryDailyBonus = mContext.getResources().obtainTypedArray(R.array.daily_bonus);
+
         // instantiate dialog builder
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-        View v = inflater.inflate(R.layout.daily_bonus_layout, null);
+        View v = inflater.inflate(R.layout.dialog_signin_bonus, null);
         dialogBuilder.setView(v);
         dialogBuilder.setCancelable(false);
         // instantiate alert dialog
@@ -75,52 +79,54 @@ public class DailyBonusUtils {
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
 
-        // retrieve daily bonus assets
-        final TypedArray arryDailyBonus = mContext.getResources().obtainTypedArray(R.array.daily_bonus);
-
         // instantiate views
         TextView tvCta = v.findViewById(R.id.tv_cta);
-        RelativeLayout rlBonusInfo = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDayInfo = rlBonusInfo.findViewById(R.id.iv_day);
-        TextView tvDayInfo = rlBonusInfo.findViewById(R.id.tv_day);
+        TextView tvRewardEarned = v.findViewById(R.id.tv_reward_earned);
+
+        // day info
+        View itemBonusInfo = v.findViewById(R.id.item_bonus_info);
+        ImageView ivDayInfo = itemBonusInfo.findViewById(R.id.iv_day);
+        TextView tvDayInfo = itemBonusInfo.findViewById(R.id.tv_day);
         tvDayInfo.setText(String.valueOf(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0)));
 
         // day 1
-        RelativeLayout rlDayOne = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDayOne = rlDayOne.findViewById(R.id.iv_day);
-        TextView tvDayOne = rlDayOne.findViewById(R.id.tv_day);
+        View itemDayOne = v.findViewById(R.id.item_day_one);
+        ImageView ivDayOne = itemDayOne.findViewById(R.id.iv_day);
+        TextView tvDayOne = itemDayOne.findViewById(R.id.tv_day);
 
         // day 2
-        RelativeLayout rlDayTwo = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDayTwo = rlDayTwo.findViewById(R.id.iv_day);
-        TextView tvDayTwo = rlDayTwo.findViewById(R.id.tv_day);
+        View itemDayTwo = v.findViewById(R.id.item_day_two);
+        ImageView ivDayTwo = itemDayTwo.findViewById(R.id.iv_day);
+        TextView tvDayTwo = itemDayTwo.findViewById(R.id.tv_day);
 
         // day 3
-        RelativeLayout rlDayThree = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDayThree = rlDayThree.findViewById(R.id.iv_day);
-        TextView tvDayThree = rlDayThree.findViewById(R.id.tv_day);
+        View itemDayThree = v.findViewById(R.id.item_day_three);
+        ImageView ivDayThree = itemDayThree.findViewById(R.id.iv_day);
+        TextView tvDayThree = itemDayThree.findViewById(R.id.tv_day);
 
         // day 4
-        RelativeLayout rlDayFour = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDayFour = rlDayFour.findViewById(R.id.iv_day);
-        TextView tvDayFour = rlDayFour.findViewById(R.id.tv_day);
+        View itemDayFour = v.findViewById(R.id.item_day_four);
+        ImageView ivDayFour = itemDayFour.findViewById(R.id.iv_day);
+        TextView tvDayFour = itemDayFour.findViewById(R.id.tv_day);
 
         // day 5
-        RelativeLayout rlDayFive = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDayFive = rlDayFive.findViewById(R.id.iv_day);
-        TextView tvDayFive = rlDayFive.findViewById(R.id.tv_day);
+        View itemDayFive = v.findViewById(R.id.item_day_five);
+        ImageView ivDayFive = itemDayFive.findViewById(R.id.iv_day);
+        TextView tvDayFive = itemDayFive.findViewById(R.id.tv_day);
 
         // day 6
-        RelativeLayout rlDaySix = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDaySix = rlDaySix.findViewById(R.id.iv_day);
-        TextView tvDaySix = rlDaySix.findViewById(R.id.tv_day);
+        View itemDaySix = v.findViewById(R.id.item_day_six);
+        ImageView ivDaySix = itemDaySix.findViewById(R.id.iv_day);
+        TextView tvDaySix = itemDaySix.findViewById(R.id.tv_day);
 
         // day 7
-        RelativeLayout rlDaySeven = v.findViewById(R.id.rl_daily_bonus_wrapper);
-        ImageView ivDaySeven = rlDaySeven.findViewById(R.id.iv_day);
-        TextView tvDaySeven = rlDaySeven.findViewById(R.id.tv_day);
+        View itemDaySeven = v.findViewById(R.id.item_day_seven);
+        ImageView ivDaySeven = itemDaySeven.findViewById(R.id.iv_day);
+        TextView tvDaySeven = itemDaySeven.findViewById(R.id.tv_day);
 
         // set values
+        tvRewardEarned.setText(mContext.getResources().getString(R.string.reward_earned,
+                String.valueOf(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0))));
         tvDayOne.setText("1");
         tvDayTwo.setText("2");
         tvDayThree.setText("3");
@@ -131,45 +137,45 @@ public class DailyBonusUtils {
 
         // set image drawable
         ivDayInfo.setImageDrawable(ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) + 1, 0)));
-        ivDayOne.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 1 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
-        ivDayTwo.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 2 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
-        ivDayThree.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 3 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
-        ivDayFour.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 4 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
-        ivDayFive.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 5 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
-        ivDaySix.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 6 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
-        ivDaySeven.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) == 7 ?
-                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(
-                        mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0), 0)) :
-                ContextCompat.getDrawable(mContext, R.drawable.daily_bonus_default));
+                mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) - 1, 0)));
+        ivDayOne.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 1 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(0, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
+        ivDayTwo.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 2 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(1, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
+        ivDayThree.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 3 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(3, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
+        ivDayFour.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 4 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(4, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
+        ivDayFive.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 5 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(5, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
+        ivDaySix.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 6 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(6, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
+        ivDaySeven.setImageDrawable(mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) >= 7 ?
+                ContextCompat.getDrawable(mContext, arryDailyBonus.getResourceId(7, 0)) :
+                ContextCompat.getDrawable(mContext, R.drawable.signin_bonus_default));
 
         // set listener
         tvCta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // increase happiness
+                HappinessUtils.incrementHappiness(1);
+                // update launch date
+                mSharedPref.setPref(Constants.KEY_DAILY_BONUS_DATE, System.currentTimeMillis());
                 // recycle
                 arryDailyBonus.recycle();
                 // dismiss dialog
                 alertDialog.dismiss();
             }
         });
+
+        // display alert dialog
+        alertDialog.show();
     }
 }

@@ -129,10 +129,10 @@
     <string name="no">no</string>
 
     <!-- daily bonus -->
-    <string name="daily_login_bonus">Daily Login Bonus</string>
+    <string name="signin_bonus">Signin Bonus</string>
     <string name="reward_earned">%s Day Reward Earned!</string>
     <string name="more_deals_items">More deals &amp; items!</string>
-    <string name="daily_bonus_info">Earn more items and more deals each day you visit the UBuyISmile app</string>
+    <string name="signin_bonus_info">Earn more items and more deals by visiting the UBuyISmile app</string>
     <string name="cool_beans">Cool Beans</string>
 
 </resources>
