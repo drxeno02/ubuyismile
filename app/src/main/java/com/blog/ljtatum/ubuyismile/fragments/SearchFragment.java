@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -202,8 +201,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                 acSearch.setText(mSelectedItem.title);
                 // set cursor end of text
                 acSearch.setSelection(acSearch.getText().length());
-                // set CTA state
-                setCtaEnabled(true);
+                // update search history
+                updateSearchHistory();
             }
         });
 
@@ -214,15 +213,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("DATMUG", "<onDatabaseUpdate> database updates");
-
-
+                        // update item list from database
                         alItemDb = mItemProvider.getAllInfo();
-                        for (int i = 0; i < alItemDb.size(); i++) {
-                            Log.v("DATMUG", "search history : id= " + alItemDb.get(i).itemId);
-                            Log.v("DATMUG", "search history : timestamp= " + alItemDb.get(i).timestampSearch);
-                        }
-
                         // update adapter
                         searchHistoryAdapter.updateData(getSearchHistory());
                         // set CTA state
@@ -322,11 +314,6 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                 alItemDb.get(i).timestampSearch = FrameworkUtils.getCurrentDateTime();
                 alItemDb.get(i).itemId = alItemDb.get(i).itemId;
                 alItemDb.get(i).isSearch = true;
-
-                Log.e("DATMUG", "<updateSearchHistory> adding new item to database timestamp= " + alItemDb.get(i).timestampSearch);
-                Log.e("DATMUG", "<updateSearchHistory> adding new item to database itemId= " + alItemDb.get(i).itemId);
-
-                Log.e("DATMUG", "<updateSearchHistory> updating database with AsyncTask");
                 break;
             }
         }
@@ -336,6 +323,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
 
     /**
      * Method is used to retrieve list of items that have been recently searched
+     *
      * @return List of items that have been recently searched
      */
     private List<ItemDatabaseModel> getSearchHistory() {
@@ -343,15 +331,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         List<ItemDatabaseModel> alFilteredSearchHistory = new ArrayList<>();
 
         for (int i = 0; i < alItemDb.size(); i++) {
-            Log.v("DATMUG", "itemId= " + alItemDb.get(i).itemId + " //timestamp = " + alItemDb.get(i).timestampSearch);
             if (alItemDb.get(i).isSearch) {
                 // add item to search history list
-                Log.e("DATMUG", "item added to search: id= " + alItemDb.get(i).itemId);
-                Log.e("DATMUG", "item added to search: itemType= " + alItemDb.get(i).itemType);
-                Log.e("DATMUG", "item added to search: title= " + alItemDb.get(i).title);
-                Log.e("DATMUG", "item added to search: category= " + alItemDb.get(i).category);
-                Log.e("DATMUG", "item added to search: price= " + alItemDb.get(i).price);
-                Log.e("DATMUG", "item added to search: description= " + alItemDb.get(i).description);
                 alFilteredSearchHistory.add(alItemDb.get(i));
             }
         }

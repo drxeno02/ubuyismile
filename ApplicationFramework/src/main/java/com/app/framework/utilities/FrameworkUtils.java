@@ -118,6 +118,23 @@ public class FrameworkUtils {
     }
 
     /**
+     * Method is used to parse formatted date from a given timestamp
+     *
+     * @param dateTime Method is used to parse formatted date
+     * @return Formatted date from a given timestamp
+     */
+    public static String parseDate(String dateTime) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+        try {
+            Date date = formatter.parse(dateTime);
+            return formatter.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
      * Method is used to parse formatted date
      *
      * @param calendar   Calendar object {@link java.util.Calendar} with given date and time
@@ -219,7 +236,7 @@ public class FrameworkUtils {
     }
 
     /**
-     * Method is used to come two timestamps and determine the difference in days between the dates
+     * Method is used to compare two timestamps and determine the difference in days between the dates
      *
      * @param dateA String value representation of date and time
      * @param dateB String value representation of date and time

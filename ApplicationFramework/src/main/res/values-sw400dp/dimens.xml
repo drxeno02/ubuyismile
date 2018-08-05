@@ -1,5 +1,4 @@
 <resources>
-
     <!-- font sizes -->
     <dimen name="font_size_6">6sp</dimen>
     <dimen name="font_size_7">7sp</dimen>
@@ -16,7 +15,6 @@
     <dimen name="font_size_18">18sp</dimen>
     <dimen name="font_size_19">19sp</dimen>
     <dimen name="font_size_20">20sp</dimen>
-    <dimen name="font_size_21">21sp</dimen>
     <dimen name="font_size_22">22sp</dimen>
     <dimen name="font_size_24">24sp</dimen>
     <dimen name="font_size_26">26sp</dimen>
@@ -29,7 +27,7 @@
     <dimen name="font_size_40">40sp</dimen>
     <dimen name="font_size_42">42sp</dimen>
 
-    <!-- layout dimension attributes (positive) -->
+    <!-- layout dimension attributes -->
     <dimen name="scaling_4">4dp</dimen>
     <dimen name="scaling_5">5dp</dimen>
     <dimen name="scaling_7">7dp</dimen>
@@ -66,7 +64,7 @@
     <dimen name="scaling_135">135dp</dimen>
     <dimen name="scaling_140">140dp</dimen>
     <dimen name="scaling_150">150dp</dimen>
-    <dimen name="scaling_170">170dp</dimen>
+    <dimen name="scaling_170">162dp</dimen>
     <dimen name="scaling_200">200dp</dimen>
     <dimen name="scaling_220">220dp</dimen>
     <dimen name="scaling_260">260dp</dimen>

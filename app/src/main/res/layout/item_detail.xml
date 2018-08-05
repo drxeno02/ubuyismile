@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/scaling_34"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/edge_left_black"
+            android:background="@drawable/edge_left_black_rad10"
             android:orientation="horizontal"
             android:visibility="gone">
 

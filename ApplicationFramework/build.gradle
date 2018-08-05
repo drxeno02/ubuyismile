@@ -87,10 +87,10 @@ android {
         api files('libs/commons-codec-1.9.jar')
 
         // unit testing dependencies
-        testApi 'junit:junit:4.12'
+        testImplementation 'junit:junit:4.12'
         // set this dependency if you want to use Mockito
-        testApi 'org.mockito:mockito-core:2.10.0'
-        androidTestApi('com.android.support.test.espresso:espresso-core:2.2.2', {
+        testImplementation 'org.mockito:mockito-core:2.10.0'
+        androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
             exclude group: 'com.android.support', module: 'support-annotations'
         })
     }

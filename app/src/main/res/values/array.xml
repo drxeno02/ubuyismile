@@ -97,5 +97,15 @@
         <item>@drawable/happiness_50_06</item>
     </integer-array>
 
+    <!-- 50s drawables -->
+    <integer-array name="daily_bonus">
+        <item>@drawable/daily_bonus_01</item>
+        <item>@drawable/daily_bonus_02</item>
+        <item>@drawable/daily_bonus_03</item>
+        <item>@drawable/daily_bonus_04</item>
+        <item>@drawable/daily_bonus_05</item>
+        <item>@drawable/daily_bonus_06</item>
+        <item>@drawable/daily_bonus_07</item>
+    </integer-array>
 
 </resources>

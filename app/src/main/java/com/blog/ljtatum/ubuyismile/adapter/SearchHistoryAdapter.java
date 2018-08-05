@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.framework.utilities.FrameworkUtils;
@@ -98,7 +99,18 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdap
 
         // set values
         holder.tvTitle.setText(alItems.get(position).title);
-        holder.tvTimestampSearch.setText(alItems.get(position).timestampSearch);
+        holder.tvTimestampSearch.setText(FrameworkUtils.parseDate(alItems.get(position).timestampSearch));
+
+        // click listener
+        holder.rlParentWrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!FrameworkUtils.checkIfNull(mOnClickAdapterListener)) {
+                    // set listener
+                    mOnClickAdapterListener.onClick(alItems.get(index));
+                }
+            }
+        });
     }
 
     @Override
@@ -125,12 +137,14 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdap
      */
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final RelativeLayout rlParentWrapper;
         private final ImageView ivItemCategoryIcon, ivItemFavoriteIcon;
         private final TextView tvColorCode, tvTitle, tvTimestampSearch;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            rlParentWrapper = itemView.findViewById(R.id.rl_parent_wrapper);
             ivItemCategoryIcon = itemView.findViewById(R.id.iv_item_category_icon);
             ivItemFavoriteIcon = itemView.findViewById(R.id.iv_item_favorite_icon);
             tvColorCode = itemView.findViewById(R.id.tv_color_code);

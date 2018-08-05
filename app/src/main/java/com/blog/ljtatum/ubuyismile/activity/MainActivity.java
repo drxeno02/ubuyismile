@@ -44,6 +44,7 @@ import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.Categories;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
+import com.blog.ljtatum.ubuyismile.utils.DailyBonusUtils;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.InfoBarUtils;
@@ -134,8 +135,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // instantiate shared prefs
         mSharedPref = new SharedPref(this, com.app.framework.constants.Constants.PREF_FILE_NAME);
 
-        // rate this app
-        new AppRaterUtil(this, getPackageName());
+        if (mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) < 7) {
+            // daily bonus
+            new DailyBonusUtils(this);
+        } else {
+            // rate this app
+            new AppRaterUtil(this, getPackageName());
+        }
 
         // track Happiness
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);

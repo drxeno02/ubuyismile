@@ -51,7 +51,7 @@ public class AppRaterUtil {
         }
 
         // increment launch counter
-        Long launchCount = mSharedPref.getLongPref(Constants.KEY_APP_LAUNCH_COUNT, 0L) + 1;
+        int launchCount = mSharedPref.getIntPref(Constants.KEY_APP_LAUNCH_COUNT, 0) + 1;
         mSharedPref.setPref(Constants.KEY_APP_LAUNCH_COUNT, launchCount);
 
         // get date of first launch
