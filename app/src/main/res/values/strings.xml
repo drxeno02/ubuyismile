@@ -2,6 +2,7 @@
     <string name="app_name">UBuyISmile</string>
     <string name="u_buy">U Buy I Smile</string>
     <string name="creators">Leonard Tatum &amp; Jeremy Garcia</string>
+    <string name="welcome">Welcome</string>
 
     <!-- labels -->
     <string name="not_available">--</string>
@@ -30,6 +31,7 @@
 
     <!-- item details -->
     <string name="buy">Buy</string>
+    <string name="page_indicator">%1$d of %2$d</string>
     <string name="sorry_unable_retrieve_item">Sorry, we are unable to retrieve this item for you.
         For feedback or support, contact Leonard Tatum at
 		<a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>

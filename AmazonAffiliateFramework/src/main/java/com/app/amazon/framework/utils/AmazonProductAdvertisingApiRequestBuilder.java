@@ -272,7 +272,7 @@ public class AmazonProductAdvertisingApiRequestBuilder {
         /**
          * Method is used to set item id for lookup
          *
-         * @param itemId
+         * @param itemId The ID of the item to get the information for
          */
         private AdvertisingApiItemLookupRequestBuilder(final ItemId itemId) {
             this.itemId = itemId;

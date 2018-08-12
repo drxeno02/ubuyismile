@@ -656,7 +656,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     public void toggleInfoBar(boolean isDisplay) {
         if (isDisplay) {
-            if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 5) {
+            if (mSharedPref.getIntPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0) < 5) {
                 // display information bar 100% of the time
                 mInfoBarUtils.showInfoBar(mActivity, false);
             } else {

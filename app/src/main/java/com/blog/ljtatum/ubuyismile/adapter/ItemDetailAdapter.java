@@ -144,7 +144,7 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
         // set image
         Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItems.get(position).imageUrl1))
                 .placeholder(R.drawable.no_image_available)
-                .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
+                .resize(Constants.DEFAULT_IMAGE_SIZE_250, Constants.DEFAULT_IMAGE_SIZE_250)
                 .into(holder.ivBg);
 
         // click listener

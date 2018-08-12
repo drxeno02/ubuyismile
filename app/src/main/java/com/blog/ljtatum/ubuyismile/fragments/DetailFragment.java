@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,18 +24,18 @@ import com.app.framework.utilities.FrameworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.FavoriteAdapter;
+import com.blog.ljtatum.ubuyismile.adapter.ScreenshotAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.interfaces.OnDatabaseChangeListener;
 import com.blog.ljtatum.ubuyismile.interfaces.OnFavoriteRemoveListener;
-import com.blog.ljtatum.ubuyismile.model.ItemModel;
-import com.blog.ljtatum.ubuyismile.utils.AnimationUtils;
+import com.blog.ljtatum.ubuyismile.interfaces.OnScreenshotSelectedListener;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -48,21 +49,26 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private Activity mActivity;
     private View mRootView;
 
-    private TextView tvFragmentHeader, tvLabel, tvTitle, tvPrice, tvDesc, tvBuy, tvNoFavoriteItems;
-    private ImageView ivBg, ivLabelIcon, ivShare, ivFavorite;
+    private TextView tvFragmentHeader, tvLabel, tvTitle, tvPrice, tvDesc, tvBuy, tvNoFavoriteItems,
+            tvPageIndicator;
+    private ImageView ivLabelIcon, ivShare, ivFavorite;
     private LinearLayout llLabelWrapper, llFavoriteIndicatorWrapper;
     private RelativeLayout rlParent;
 
     private int mItemIndex;
     private String mCategory, mItemType, mItemId;
+    private ViewPager vpScreenshot;
 
     // database
     private ItemProvider mItemProvider;
     private List<ItemDatabaseModel> alItemDb;
 
-    // adapter
+    // adapter (favorite)
     private FavoriteAdapter mFavoriteAdapter;
     private RecyclerView rvFavorite;
+
+    // adapter (screenshot)
+    private List<String> alImgUrls;
 
     @Nullable
     @Override
@@ -85,6 +91,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private void initializeViews() {
         mContext = getActivity();
         mActivity = getActivity();
+        alImgUrls = new ArrayList<>();
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(mContext);
@@ -94,6 +101,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_CONTENT_ITEM_DETAIL_COUNTER);
 
         // initialize views
+        vpScreenshot = mRootView.findViewById(R.id.vp_screenshot);
         rvFavorite = mRootView.findViewById(R.id.rv_favorite);
         llLabelWrapper = mRootView.findViewById(R.id.ll_label_wrapper);
         llFavoriteIndicatorWrapper = mRootView.findViewById(R.id.ll_favorite_indicator_wrapper);
@@ -105,14 +113,10 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         tvDesc = mRootView.findViewById(R.id.tv_desc);
         tvBuy = mRootView.findViewById(R.id.tv_buy);
         tvNoFavoriteItems = mRootView.findViewById(R.id.tv_no_favorite_items);
-        ivBg = mRootView.findViewById(R.id.iv_bg);
+        tvPageIndicator = mRootView.findViewById(R.id.tv_page_indicator);
         ivLabelIcon = mRootView.findViewById(R.id.iv_label_icon);
         ivShare = mRootView.findViewById(R.id.iv_share);
         ivFavorite = mRootView.findViewById(R.id.iv_favorite);
-
-        // start animation
-        tvBuy.startAnimation(AnimationUtils.retrieveBlinkAnimation());
-
 
         if (!isFavoriteItem()) {
             // set visibility
@@ -139,7 +143,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private void initializeHandlers() {
         tvFragmentHeader.setOnClickListener(this);
         tvBuy.setOnClickListener(this);
-        ivBg.setOnClickListener(this);
         ivShare.setOnClickListener(this);
         ivFavorite.setOnClickListener(this);
     }
@@ -176,6 +179,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 });
             }
         });
+
         // onFavoriteRemove listener
         FavoriteAdapter.onFavoriteRemoveListener(new OnFavoriteRemoveListener() {
             @Override
@@ -189,6 +193,39 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 }
                 // update database
                 new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
+            }
+        });
+
+        // onScreenshotSelected listener
+        ScreenshotAdapter.onScreenshotSelectedListener(new OnScreenshotSelectedListener() {
+            @Override
+            public void onClick(int pos) {
+                Bundle args = new Bundle();
+                args.putString(Constants.KEY_ITEM_ID, mItemId);
+                args.putInt(Constants.KEY_SCREENSHOT_POS, pos);
+                // add fragment
+                BaseFragment fragment = new ItemPreviewFragment();
+                fragment.setArguments(args);
+                addFragmentNoAnim(fragment);
+            }
+        });
+
+        // onPageChange listener
+        vpScreenshot.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // do nothing
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                // update page indicator
+                tvPageIndicator.setText(mContext.getResources().getString(R.string.page_indicator, position + 1, alImgUrls.size()));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // do nothing
             }
         });
     }
@@ -317,13 +354,45 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 // set values
                 tvTitle.setText(alItemDb.get(i).title);
                 tvDesc.setText(alItemDb.get(i).description);
-                // set image
-                Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItemDb.get(i).imageUrl1))
-                        .placeholder(R.drawable.no_image_available)
-                        .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
-                        .into(ivBg);
+
+                // populate image list
+                populateImageUrls(alItemDb.get(i));
+
+                // update page indicator
+                tvPageIndicator.setText(mContext.getResources().getString(R.string.page_indicator, 1, alImgUrls.size()));
+
+                // set adapter
+                vpScreenshot.setAdapter(new ScreenshotAdapter(mContext, alImgUrls));
                 break;
             }
+        }
+    }
+
+    /**
+     * Method is used to populate a list of image urls
+     *
+     * @param item Selected item
+     */
+    private void populateImageUrls(@NonNull ItemDatabaseModel item) {
+        if (!FrameworkUtils.isStringEmpty(item.imageUrl1)) {
+            // add screenshot 1
+            alImgUrls.add(item.imageUrl1);
+        }
+        if (!FrameworkUtils.isStringEmpty(item.imageUrl2)) {
+            // add screenshot 2
+            alImgUrls.add(item.imageUrl2);
+        }
+        if (!FrameworkUtils.isStringEmpty(item.imageUrl3)) {
+            // add screenshot 3
+            alImgUrls.add(item.imageUrl3);
+        }
+        if (!FrameworkUtils.isStringEmpty(item.imageUrl4)) {
+            // add screenshot 4
+            alImgUrls.add(item.imageUrl4);
+        }
+        if (!FrameworkUtils.isStringEmpty(item.imageUrl5)) {
+            // add screenshot 5
+            alImgUrls.add(item.imageUrl5);
         }
     }
 
@@ -350,13 +419,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 fragment = new WebViewFragment();
                 fragment.setArguments(args);
                 addFragment(fragment);
-                break;
-            case R.id.iv_bg:
-                args.putString(Constants.KEY_ITEM_ID, mItemId);
-                // add fragment
-                fragment = new ItemPreviewFragment();
-                fragment.setArguments(args);
-                addFragmentNoAnim(fragment);
                 break;
             case R.id.iv_share:
                 // share

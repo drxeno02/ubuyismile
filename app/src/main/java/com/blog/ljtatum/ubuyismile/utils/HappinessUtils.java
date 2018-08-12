@@ -23,8 +23,6 @@ import java.util.Random;
  */
 
 public class HappinessUtils {
-    private static final String TAG = HappinessUtils.class.getSimpleName();
-
     public static final String EVENT_APP_LAUNCH = "key_event_app_launch"; // can be negative Happiness
     public static final String EVENT_CONTENT_COUNTER = "key_event_content_counter";
     public static final String EVENT_CONTENT_ITEM_DETAIL_COUNTER = "key_event_content_item_detail_counter";
@@ -32,7 +30,7 @@ public class HappinessUtils {
     public static final String EVENT_ABOUT_SHARE_COUNTER = "key_event_share_counter";
     public static final String EVENT_SEARCH_COUNTER = "key_event_search_counter";
     public static final String EVENT_ITEM_FEEDBACK_COUNTER = "key_event_item_feedback_counter";
-
+    private static final String TAG = HappinessUtils.class.getSimpleName();
     private static final String HAPPINESS_SCORE = "key_happiness";
     private static final String APP_LAUNCH_TIMESTAMP = "key_app_launch_timestamp";
 
@@ -198,7 +196,7 @@ public class HappinessUtils {
     public static String retrieveDescription() {
         String description;
         Random rand = new Random();
-        if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 3) {
+        if (mSharedPref.getIntPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0) < 3) {
             description = mContext.getResources().getString(R.string.neutral_01);
         } else {
             if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 80) {
@@ -224,7 +222,7 @@ public class HappinessUtils {
     public static Drawable retrieveDrawable() {
         Drawable drawable;
         Random rand = new Random();
-        if (mSharedPref.getLongPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0L) < 3) {
+        if (mSharedPref.getIntPref(com.app.framework.constants.Constants.KEY_APP_LAUNCH_COUNT, 0) < 3) {
             drawable = ContextCompat.getDrawable(mContext, R.drawable.happiness_80_04);
         } else {
             if (mSharedPref.getIntPref(HAPPINESS_SCORE, 0) > 90) {

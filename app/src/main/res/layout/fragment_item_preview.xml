@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_size_16"
+                android:textSize="@dimen/font_size_20"
                 android:textStyle="bold" />
 
             <!-- building image -->
@@ -48,7 +48,7 @@
                 android:id="@+id/iv_item_preview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/scaling_5" />
+                android:layout_marginTop="@dimen/scaling_10" />
 
         </LinearLayout>
 

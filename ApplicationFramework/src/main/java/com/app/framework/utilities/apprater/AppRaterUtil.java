@@ -139,7 +139,7 @@ public class AppRaterUtil {
      */
     private void resetSharedPref() {
         // reset
-        mSharedPref.setPref(Constants.KEY_APP_LAUNCH_COUNT, 0L);
+        mSharedPref.setPref(Constants.KEY_APP_LAUNCH_COUNT, 0);
         // update launch date
         mSharedPref.setPref(Constants.KEY_APP_LAUNCH_DATE, System.currentTimeMillis());
     }

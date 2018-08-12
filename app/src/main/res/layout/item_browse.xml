@@ -94,7 +94,9 @@
                 android:id="@+id/tv_scratch_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/scaling_10"
+                android:layout_marginStart="@dimen/scaling_10"
+                android:textColor="@color/material_red_300_color_code"
                 android:textSize="@dimen/font_size_16"
                 android:textStyle="bold"
                 android:visibility="invisible" />

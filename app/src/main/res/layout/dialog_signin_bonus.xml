@@ -53,122 +53,128 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/ll_info_wrapper"
             android:background="@color/white"
             android:padding="@dimen/scaling_20">
 
-            <!-- reward earned -->
-            <TextView
-                android:id="@+id/tv_desc"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/signin_bonus_info"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_20"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
 
-            <!-- row 1: Days 1 - 3 -->
-            <LinearLayout
-                android:id="@+id/ll_row_one"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_desc"
-                android:layout_marginTop="@dimen/scaling_40"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <!-- day 1 -->
-                <include
-                    android:id="@+id/item_day_one"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".33" />
-
-                <!-- day 2 -->
-                <include
-                    android:id="@+id/item_day_two"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".34" />
-
-                <!-- day 3 -->
-                <include
-                    android:id="@+id/item_day_three"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".33" />
-
-            </LinearLayout>
-
-            <!-- row 2: Days 4 - 7 -->
-            <LinearLayout
-                android:id="@+id/ll_row_two"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_row_one"
-                android:layout_marginTop="@dimen/scaling_20"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <!-- day 4 -->
-                <include
-                    android:id="@+id/item_day_four"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".33" />
-
-                <!-- day 5 -->
-                <include
-                    android:id="@+id/item_day_five"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".34" />
-
-                <!-- day 6 -->
-                <include
-                    android:id="@+id/item_day_six"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".33" />
-
-            </LinearLayout>
-
-            <!-- row 3: Days 7 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_row_two"
-                android:layout_marginTop="@dimen/scaling_20"
-                android:orientation="horizontal">
-
-                <!-- day 7 -->
-                <include
-                    android:id="@+id/item_day_seven"
-                    layout="@layout/item_signin_bonus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                <!-- reward earned -->
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/scaling_20"
-                    android:gravity="center_vertical"
-                    android:text="@string/more_deals_items"
+                    android:id="@+id/tv_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signin_bonus_info"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/font_size_22" />
+                    android:textSize="@dimen/font_size_20"
+                    android:textStyle="bold" />
 
-            </LinearLayout>
+                <!-- row 1: Days 1 - 3 -->
+                <LinearLayout
+                    android:id="@+id/ll_row_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_desc"
+                    android:layout_marginTop="@dimen/scaling_40"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-        </RelativeLayout>
+                    <!-- day 1 -->
+                    <include
+                        android:id="@+id/item_day_one"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33" />
+
+                    <!-- day 2 -->
+                    <include
+                        android:id="@+id/item_day_two"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".34" />
+
+                    <!-- day 3 -->
+                    <include
+                        android:id="@+id/item_day_three"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33" />
+
+                </LinearLayout>
+
+                <!-- row 2: Days 4 - 7 -->
+                <LinearLayout
+                    android:id="@+id/ll_row_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_row_one"
+                    android:layout_marginTop="@dimen/scaling_20"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <!-- day 4 -->
+                    <include
+                        android:id="@+id/item_day_four"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33" />
+
+                    <!-- day 5 -->
+                    <include
+                        android:id="@+id/item_day_five"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".34" />
+
+                    <!-- day 6 -->
+                    <include
+                        android:id="@+id/item_day_six"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33" />
+
+                </LinearLayout>
+
+                <!-- row 3: Days 7 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_row_two"
+                    android:layout_marginTop="@dimen/scaling_20"
+                    android:orientation="horizontal">
+
+                    <!-- day 7 -->
+                    <include
+                        android:id="@+id/item_day_seven"
+                        layout="@layout/item_signin_bonus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/scaling_20"
+                        android:gravity="center_vertical"
+                        android:text="@string/more_deals_items"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_size_22" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
 
     </RelativeLayout>
 
@@ -176,9 +182,10 @@
         android:id="@+id/fl_cra_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/scaling_20"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:elevation="@dimen/scaling_10"
+        android:padding="@dimen/scaling_20">
 
         <!-- cta -->
         <TextView
@@ -189,7 +196,7 @@
             android:gravity="center"
             android:text="@string/cool_beans"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_18" />
+            android:textSize="@dimen/font_size_20" />
 
     </FrameLayout>
 

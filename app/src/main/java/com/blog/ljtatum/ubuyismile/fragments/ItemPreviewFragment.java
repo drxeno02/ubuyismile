@@ -36,6 +36,7 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
     private TextView tvTitle;
 
     private String mItemId;
+    private int mScreenshotPos;
 
     // database
     private List<ItemDatabaseModel> alItemDb;
@@ -85,6 +86,7 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
         if (!FrameworkUtils.checkIfNull(args)) {
             // set position
             mItemId = args.getString(Constants.KEY_ITEM_ID, "");
+            mScreenshotPos = args.getInt(Constants.KEY_SCREENSHOT_POS, 0);
 
             // set item details
             setItemDetails();
@@ -99,14 +101,35 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
             if (alItemDb.get(i).itemId.equalsIgnoreCase(mItemId)) {
                 // set values
                 tvTitle.setText(alItemDb.get(i).title);
+
                 // set image
-                Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alItemDb.get(i).imageUrl1))
+                Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(getImgUrl(alItemDb.get(i))))
                         .placeholder(R.drawable.no_image_available)
-                        .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
+                        .resize(Constants.DEFAULT_IMAGE_SIZE_250, Constants.DEFAULT_IMAGE_SIZE_250)
                         .into(ivItemPreview);
                 break;
             }
         }
+    }
+
+    /**
+     * Method is used to retrieve selected image url
+     *
+     * @param item Database object {@link com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel}
+     *             that represents item properties
+     * @return Image url
+     */
+    private String getImgUrl(@NonNull ItemDatabaseModel item) {
+        if (mScreenshotPos == 1) {
+            return item.imageUrl2;
+        } else if (mScreenshotPos == 2) {
+            return item.imageUrl3;
+        } else if (mScreenshotPos == 3) {
+            return item.imageUrl4;
+        } else if (mScreenshotPos == 4) {
+            return item.imageUrl5;
+        }
+        return item.imageUrl1;
     }
 
     @Override

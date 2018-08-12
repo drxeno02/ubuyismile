@@ -18,7 +18,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends BaseActivity {
     private static final String TAG = SplashActivity.class.getSimpleName();
-    private final int SPLASH_TIMER = 2000;
+    private final int SPLASH_TIMER = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
