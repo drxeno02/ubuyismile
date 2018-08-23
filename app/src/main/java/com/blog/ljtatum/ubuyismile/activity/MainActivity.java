@@ -1,8 +1,11 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,10 +29,12 @@ import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.apprater.AppRaterUtil;
 import com.app.framework.utilities.dialog.DialogUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
+import com.app.framework.utilities.network.NetworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.adapter.ItemBrowseAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.constants.Durations;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.fragments.AboutFragment;
@@ -49,6 +54,9 @@ import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.InfoBarUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -64,6 +72,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String ID_PREFIX = "id_";
+    private static final String AD_ID_TEST = "950036DB8197D296BE390357BD9A964E";
+
     // Amazon web service authentication
     private AmazonWebServiceAuthentication mAmazonAuth;
     private Activity mActivity;
@@ -81,6 +91,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private List<ItemDatabaseModel> alItemDb;
     // adapter
     private ItemBrowseAdapter itemBrowseAdapter;
+
+    private AdView adView; // container for banner ads
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +177,35 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         rvItems.setLayoutManager(gridLayoutManager);
         itemBrowseAdapter = new ItemBrowseAdapter(this, new ArrayList<ItemDatabaseModel>());
         rvItems.setAdapter(itemBrowseAdapter);
+
+        // ad banner
+        adView = findViewById(R.id.ad_view);
+        try {
+            if (NetworkUtils.isNetworkAvailable(this)
+                    && NetworkUtils.isConnected(this)) {
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // request banner ads
+                        AdRequest adRequestBanner;
+                        if (Constants.DEBUG) {
+                            // load test ad
+                            adRequestBanner = new AdRequest.Builder().addTestDevice(AD_ID_TEST).build();
+                        } else {
+                            // load production ad
+                            adRequestBanner = new AdRequest.Builder().build();
+                        }
+                        // load banner ads
+                        adView.loadAd(adRequestBanner);
+                    }
+                }, Durations.DELAY_INTERVAL_MS_500);
+            }
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            // set default ad image
+            adView.setBackgroundResource(R.drawable.banner);
+        }
 
         // drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -269,6 +310,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     }
                 });
                 addFragment(fragment);
+            }
+        });
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // do nothing
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // set default ad image
+                adView.setBackgroundResource(R.drawable.banner);
+            }
+
+            @Override
+            public void onAdOpened() {
+                // do nothing
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // do nothing
+            }
+
+            @Override
+            public void onAdClosed() {
+                // do nothing
             }
         });
     }
@@ -702,6 +771,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 // toggle information bar
                 toggleInfoBar(false);
                 break;
+            default:
+                break;
         }
     }
 
@@ -896,6 +967,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void onPause() {
+        // pause adview
+        adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // resume adview
+        adView.resume();
+    }
+
+    @Override
     protected void onDestroy() {
         if (!FrameworkUtils.checkIfNull(mErrorUtils)) {
             // dismiss error dialog
@@ -904,6 +989,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (!FrameworkUtils.checkIfNull(mInfoBarUtils)) {
             // dismiss information dialog
             mInfoBarUtils.dismiss();
+        }
+        if (!FrameworkUtils.checkIfNull(adView)) {
+            // destroy the adview
+            adView.destroy();
         }
         super.onDestroy();
     }

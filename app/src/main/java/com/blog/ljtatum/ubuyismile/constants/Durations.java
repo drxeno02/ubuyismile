@@ -11,6 +11,7 @@ public class Durations {
     public static final int DELAY_INTERVAL_SEC_30 = 30; // seconds
     public static final int DELAY_INTERVAL_SEC_60 = 60; // seconds
     public static final int DELAY_INTERVAL_MS_100 = 100; // milliseconds
+    public static final int DELAY_INTERVAL_MS_500 = 500; // milliseconds
     public static final int DELAY_INTERVAL_MS_1000 = 1000; // milliseconds
     public static final int DELAY_INTERVAL_MS_10000 = 10000; // milliseconds
     public static final int DELAY_INTERVAL_MS_15000 = 15000; // milliseconds

@@ -1,10 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frag_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_light_blue_400_color_code"
+    android:background="@color/white"
     tools:context=".activity.MainActivity">
 
     <!-- toolbar -->
@@ -36,8 +37,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_toolbar"
+        android:layout_above="@+id/ad_view"
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="none" />
+
+    <!-- ad banner -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-8397256122648968/2986194648" />
 
 </RelativeLayout>

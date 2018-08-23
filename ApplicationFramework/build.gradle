@@ -68,6 +68,7 @@ android {
         // google play services
         //noinspection UseOfBundledGooglePlayServices,GradleCompatible
         api "com.google.android.gms:play-services:${googleLib}"
+        api 'com.google.android.gms:play-services-ads:15.0.0'
 
         // firebase
         //noinspection GradleCompatible
