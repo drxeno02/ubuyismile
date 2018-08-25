@@ -157,7 +157,7 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
      *              {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
-        if (items.size() > 0) {
+        if (!items.isEmpty()) {
             alItems = items;
             notifyDataSetChanged();
         }

@@ -172,7 +172,7 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
      *              {@link ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
-        if (items.size() > 0) {
+        if (!items.isEmpty()) {
             alItems = items;
             notifyDataSetChanged();
         }

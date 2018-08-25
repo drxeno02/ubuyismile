@@ -125,7 +125,7 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdap
      *              {@link com.blog.ljtatum.ubuyismile.model.ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
-        if (items.size() > 0) {
+        if (items.isEmpty()) {
             alItems = items;
             notifyDataSetChanged();
         }
