@@ -148,7 +148,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
      *              {@link ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
-        if (items.size() > 0) {
+        if (!items.isEmpty()) {
             alItems = items;
             notifyDataSetChanged();
         }
