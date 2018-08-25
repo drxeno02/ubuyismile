@@ -3,6 +3,7 @@ package com.blog.ljtatum.ubuyismile.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,11 +18,13 @@ import com.app.amazon.framework.enums.Enum;
 import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.firebase.FirebaseUtils;
+import com.app.framework.utilities.network.NetworkUtils;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.adapter.ItemDetailAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.constants.Durations;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.interfaces.OnClickAdapterListener;
@@ -29,6 +32,9 @@ import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -57,6 +63,9 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
 
     // refresh layout
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    // container for banner ads
+    private AdView adView;
 
     @Nullable
     @Override
@@ -101,6 +110,35 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         rvItems.setLayoutManager(layoutManager);
         itemDetailAdapter = new ItemDetailAdapter(mContext, new ArrayList<ItemDatabaseModel>());
         rvItems.setAdapter(itemDetailAdapter);
+
+        // ad banner
+        adView = mRootView.findViewById(R.id.ad_view);
+        try {
+            if (NetworkUtils.isNetworkAvailable(mContext)
+                    && NetworkUtils.isConnected(mContext)) {
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // request banner ads
+                        AdRequest adRequestBanner;
+                        if (Constants.DEBUG) {
+                            // load test ad
+                            adRequestBanner = new AdRequest.Builder().addTestDevice(Constants.AD_ID_TEST).build();
+                        } else {
+                            // load production ad
+                            adRequestBanner = new AdRequest.Builder().build();
+                        }
+                        // load banner ads
+                        adView.loadAd(adRequestBanner);
+                    }
+                }, Durations.DELAY_INTERVAL_MS_500);
+            }
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            // set default ad image
+            adView.setBackgroundResource(R.drawable.banner);
+        }
 
     }
 
@@ -169,6 +207,34 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                     }
                 });
                 addFragment(fragment);
+            }
+        });
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // do nothing
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // set default ad image
+                adView.setBackgroundResource(R.drawable.banner);
+            }
+
+            @Override
+            public void onAdOpened() {
+                // do nothing
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // do nothing
+            }
+
+            @Override
+            public void onAdClosed() {
+                // do nothing
             }
         });
     }
@@ -305,7 +371,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         }
 
         // update database
-        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb, null).execute();
 
         // add Chablee items to list
         List<ItemDatabaseModel> items = new ArrayList<>();

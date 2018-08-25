@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.app.framework.utilities.FrameworkUtils;
 import com.app.framework.utilities.dialog.DialogUtils;
@@ -28,20 +29,22 @@ public class AsyncTaskUpdateItemDatabase extends AsyncTask<Void, Void, Void> {
     private Context mContext;
     // database
     private ItemProvider mItemProvider;
+    private ItemDatabaseModel mSingleItemDb;
     private List<ItemDatabaseModel> alItemDb;
 
     /**
      * Constructor
-     *
      * @param context      Interface to global information about an application environment
      * @param itemProvider Provider to update database
      * @param itemDb       List of items to update in database
+     * @param itemDatabaseModel Single item to update in database
      */
     public AsyncTaskUpdateItemDatabase(@NonNull Context context, @NonNull ItemProvider itemProvider,
-                                       @NonNull List<ItemDatabaseModel> itemDb) {
+                                       @Nullable List<ItemDatabaseModel> itemDb, @Nullable ItemDatabaseModel itemDatabaseModel) {
         mContext = context;
         mItemProvider = itemProvider;
         alItemDb = itemDb;
+        mSingleItemDb = itemDatabaseModel;
     }
 
     /**
@@ -58,17 +61,23 @@ public class AsyncTaskUpdateItemDatabase extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(result);
         // hide progress dialog
         DialogUtils.dismissProgressDialog();
+
+        if (!FrameworkUtils.checkIfNull(mOnDatabaseChangeListener)) {
+            // set listener
+            mOnDatabaseChangeListener.onDatabaseUpdate();
+        }
     }
 
 
     @Override
     protected Void doInBackground(Void... params) {
-        if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
-            // update database
-            mItemProvider.update(alItemDb);
-            if (!FrameworkUtils.checkIfNull(mOnDatabaseChangeListener)) {
-                // set listener
-                mOnDatabaseChangeListener.onDatabaseUpdate();
+        if (!FrameworkUtils.checkIfNull(mItemProvider)) {
+            if (!FrameworkUtils.checkIfNull(mSingleItemDb)) {
+                // update single item database
+                mItemProvider.update(mSingleItemDb);
+            } else if (!FrameworkUtils.checkIfNull(alItemDb) && !alItemDb.isEmpty()) {
+                // update entire list database
+                mItemProvider.update(alItemDb);
             }
         }
         return null;

@@ -72,7 +72,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String ID_PREFIX = "id_";
-    private static final String AD_ID_TEST = "950036DB8197D296BE390357BD9A964E";
 
     // Amazon web service authentication
     private AmazonWebServiceAuthentication mAmazonAuth;
@@ -91,8 +90,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private List<ItemDatabaseModel> alItemDb;
     // adapter
     private ItemBrowseAdapter itemBrowseAdapter;
-
-    private AdView adView; // container for banner ads
+    // container for banner ads
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,7 +190,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         AdRequest adRequestBanner;
                         if (Constants.DEBUG) {
                             // load test ad
-                            adRequestBanner = new AdRequest.Builder().addTestDevice(AD_ID_TEST).build();
+                            adRequestBanner = new AdRequest.Builder().addTestDevice(Constants.AD_ID_TEST).build();
                         } else {
                             // load production ad
                             adRequestBanner = new AdRequest.Builder().build();
@@ -676,7 +675,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         createSQLiteDb();
                     } else {
                         // update database
-                        new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb).execute();
+                        new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb, null).execute();
                         printDb();
                     }
                 }

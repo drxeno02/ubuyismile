@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,6 +18,7 @@
         android:id="@+id/sr_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/ad_view"
         android:layout_below="@id/header">
 
         <!-- list of items -->
@@ -43,5 +45,17 @@
         android:text="@string/no_items"
         android:textSize="@dimen/font_size_16"
         android:visibility="gone" />
+
+    <!-- ad banner -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-8397256122648968/2986194648" />
 
 </RelativeLayout>

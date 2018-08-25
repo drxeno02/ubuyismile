@@ -13,6 +13,9 @@ public class Constants {
     // verbose mode; true to see verbosity mode otherwise false
     public static final boolean DEBUG_VERBOSE = true;
 
+    // test ad unit id
+    public static final String AD_ID_TEST = "950036DB8197D296BE390357BD9A964E";
+
     // default image size
     public static final int DEFAULT_IMAGE_SIZE_250 = 250;
     public static final int DEFAULT_IMAGE_SIZE_500 = 500;

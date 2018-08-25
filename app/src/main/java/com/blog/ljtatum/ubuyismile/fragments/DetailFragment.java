@@ -1,5 +1,7 @@
 package com.blog.ljtatum.ubuyismile.fragments;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,6 +31,7 @@ import com.blog.ljtatum.ubuyismile.adapter.FavoriteAdapter;
 import com.blog.ljtatum.ubuyismile.adapter.ScreenshotAdapter;
 import com.blog.ljtatum.ubuyismile.asynctask.AsyncTaskUpdateItemDatabase;
 import com.blog.ljtatum.ubuyismile.constants.Constants;
+import com.blog.ljtatum.ubuyismile.constants.Durations;
 import com.blog.ljtatum.ubuyismile.databases.ItemDatabaseModel;
 import com.blog.ljtatum.ubuyismile.databases.provider.ItemProvider;
 import com.blog.ljtatum.ubuyismile.interfaces.OnDatabaseChangeListener;
@@ -51,9 +56,10 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
     private TextView tvFragmentHeader, tvLabel, tvTitle, tvPrice, tvDesc, tvBuy, tvNoFavoriteItems,
             tvPageIndicator;
-    private ImageView ivLabelIcon, ivShare, ivFavorite;
+    private ImageView ivLabelIcon, ivShare, ivFavorite, ivFavoriteAnim;
     private LinearLayout llLabelWrapper, llFavoriteIndicatorWrapper;
     private RelativeLayout rlParent;
+    private View vFavoriteAnimBg;
 
     private int mItemIndex;
     private String mCategory, mItemType, mItemId;
@@ -117,6 +123,8 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         ivLabelIcon = mRootView.findViewById(R.id.iv_label_icon);
         ivShare = mRootView.findViewById(R.id.iv_share);
         ivFavorite = mRootView.findViewById(R.id.iv_favorite);
+        ivFavoriteAnim = mRootView.findViewById(R.id.iv_favorite_anim);
+        vFavoriteAnimBg = mRootView.findViewById(R.id.v_favorite_anim_bg);
 
         if (!isFavoriteItem()) {
             // set visibility
@@ -192,7 +200,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                     }
                 }
                 // update database
-                new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
+                new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, null, item).execute();
             }
         });
 
@@ -265,10 +273,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 } else {
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_amazon));
                 }
-                // set text color
-                tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.white));
-                // set compound drawable with intrinsic bounds
-                tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_white, 0, 0, 0);
             } else if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
                 if (mCategory.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
                     // set fragment header
@@ -283,10 +287,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
                 }
-                // set text color
-                tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                // set compound drawable with intrinsic bounds
-                tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_black, 0, 0, 0);
             }
 
             // set item details
@@ -464,14 +464,67 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
         // favorite item
         if (alItemDb.get(mItemIndex).isFavorite) {
-            ivFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.favorite_icon_on));
             FrameworkUtils.setViewVisible(llFavoriteIndicatorWrapper);
+            ivFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.favorite_icon_on));
+            // animate favorite
+            animateFavorite();
         } else {
-            ivFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.favorite_icon_off));
             FrameworkUtils.setViewGone(llFavoriteIndicatorWrapper);
+            ivFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.favorite_icon_off));
         }
         // update database
-        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, null, alItemDb.get(mItemIndex)).execute();
+    }
+
+    /**
+     * Method is used to show animation when item is favorite
+     */
+    private void animateFavorite() {
+        // interpolator where the rate of change starts out quickly and and then decelerates
+        DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
+        // interpolator where the rate of change starts out slowly and and then accelerates
+        AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
+
+        // set visibility
+        FrameworkUtils.setViewVisible(ivFavoriteAnim, vFavoriteAnimBg);
+
+        // alpha and scaling
+        vFavoriteAnimBg.setAlpha(1f);
+        vFavoriteAnimBg.setScaleX(0.1f);
+        vFavoriteAnimBg.setScaleY(0.1f);
+        ivFavoriteAnim.setScaleX(0.1f);
+        ivFavoriteAnim.setScaleY(0.1f);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator bgScaleYAnim = ObjectAnimator.ofFloat(vFavoriteAnimBg, "scaleY", 0.1f, 1f);
+        bgScaleYAnim.setDuration(Durations.ANIM_DURATION_SHORT_200);
+        bgScaleYAnim.setInterpolator(decelerateInterpolator);
+        ObjectAnimator bgScaleXAnim = ObjectAnimator.ofFloat(vFavoriteAnimBg, "scaleX", 0.1f, 1f);
+        bgScaleXAnim.setDuration(Durations.ANIM_DURATION_SHORT_200);
+        bgScaleXAnim.setInterpolator(decelerateInterpolator);
+        ObjectAnimator bgAlphaAnim = ObjectAnimator.ofFloat(vFavoriteAnimBg, "alpha", 1f, 0f);
+        bgAlphaAnim.setDuration(Durations.ANIM_DURATION_SHORT_200);
+        bgAlphaAnim.setStartDelay(Durations.ANIM_DURATION_SHORT_200);
+        bgAlphaAnim.setInterpolator(decelerateInterpolator);
+
+        ObjectAnimator imgScaleUpYAnim = ObjectAnimator.ofFloat(ivFavoriteAnim, "scaleY", 0.1f, 1f);
+        imgScaleUpYAnim.setDuration(Durations.ANIM_DURATION_MEDIUM_400);
+        imgScaleUpYAnim.setInterpolator(decelerateInterpolator);
+        ObjectAnimator imgScaleUpXAnim = ObjectAnimator.ofFloat(ivFavoriteAnim, "scaleX", 0.1f, 1f);
+        imgScaleUpXAnim.setDuration(Durations.ANIM_DURATION_MEDIUM_400);
+        imgScaleUpXAnim.setInterpolator(decelerateInterpolator);
+
+        ObjectAnimator imgScaleDownYAnim = ObjectAnimator.ofFloat(ivFavoriteAnim, "scaleY", 1f, 0f);
+        imgScaleDownYAnim.setDuration(Durations.ANIM_DURATION_MEDIUM_400);
+        imgScaleDownYAnim.setInterpolator(accelerateInterpolator);
+        ObjectAnimator imgScaleDownXAnim = ObjectAnimator.ofFloat(ivFavoriteAnim, "scaleX", 1f, 0f);
+        imgScaleDownXAnim.setDuration(Durations.ANIM_DURATION_MEDIUM_400);
+        imgScaleDownXAnim.setInterpolator(accelerateInterpolator);
+
+        // sets up this AnimatorSet to play all of the supplied animations at the same time
+        animatorSet.playTogether(bgScaleYAnim, bgScaleXAnim, bgAlphaAnim, imgScaleUpYAnim, imgScaleUpXAnim);
+        animatorSet.play(imgScaleDownYAnim).with(imgScaleDownXAnim).after(imgScaleUpYAnim);
+        animatorSet.start();
     }
 
     /**

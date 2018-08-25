@@ -22,8 +22,23 @@
     <RelativeLayout
         android:id="@+id/rl_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/scaling_320"
+        android:layout_height="@dimen/scaling_300"
         android:layout_below="@id/header">
+
+        <View
+            android:id="@+id/v_favorite_anim_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/favorite_icon_anim_bg"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/iv_favorite_anim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/favorite_icon"
+            android:visibility="invisible" />
 
         <!-- favorite icon and favorite notification -->
         <LinearLayout

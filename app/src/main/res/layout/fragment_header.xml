@@ -14,8 +14,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
         android:drawablePadding="10dp"
-        android:drawableStart="@drawable/arrow_black"
-        android:textColor="@color/black"
+        android:drawableStart="@drawable/arrow_white"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_size_20" />
 
 </LinearLayout>

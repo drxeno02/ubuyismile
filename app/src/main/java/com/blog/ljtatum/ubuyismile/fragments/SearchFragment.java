@@ -318,7 +318,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             }
         }
         // update database
-        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb).execute();
+        new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, alItemDb, null).execute();
     }
 
     /**

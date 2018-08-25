@@ -170,10 +170,6 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
                 } else {
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_amazon));
                 }
-                // set text color
-                tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.white));
-                // set compound drawable with intrinsic bounds
-                tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_white, 0, 0, 0);
             } else if (itemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString())) {
                 if (category.equalsIgnoreCase(Enum.ItemCategoryChablee.CROWNS.toString())) {
                     // set fragment header
@@ -188,10 +184,6 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
                     // set fragment header
                     tvFragmentHeader.setText(getResources().getString(R.string.menu_rocks));
                 }
-                // set text color
-                tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-                // set compound drawable with intrinsic bounds
-                tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_black, 0, 0, 0);
             }
 
             for (int i = 0; i < alItemDb.size(); i++) {
