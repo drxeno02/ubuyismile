@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -523,11 +524,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     chableeModel.itemType = com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString();
                     chableeModel.isLabelSet = false;
 
-                    // only add data if it exists. This is enforced by the required
-                    // title and description values
+                    // only add data if it exists. This is enforced by the required title
                     if (isDbEmpty) {
-                        if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
-                                !FrameworkUtils.isStringEmpty(chableeModel.description)) {
+                        if (!FrameworkUtils.isStringEmpty(chableeModel.title)) {
                             // stored data
                             ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
                             itemDatabaseModel.category = chableeModel.category;
@@ -556,8 +555,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             alItemDb.add(itemDatabaseModel);
                         }
                     } else {
-                        if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
-                                !FrameworkUtils.isStringEmpty(chableeModel.description)) {
+                        if (!FrameworkUtils.isStringEmpty(chableeModel.title)) {
                             // update database values for existing items or add new item to database
                             boolean isItemExisting = false;
                             int index = 0;
@@ -628,7 +626,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 }
             }
         } else {
-            // Amazon and Chablee requests made
             // make Amazon requests
             AmazonData.getAmazonASINRequest(AmazonData.getBooks());
         }
@@ -638,16 +635,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to retrieve Firebase data
      */
     private void retrieveFirebaseData() {
-        if (categoryIndex == 0) {
-            // show progress dialog
-            DialogUtils.showProgressDialog(this);
-        }
+        Log.v("DATMUG", "<retrieveFirebaseData> alItemDb size= " + alItemDb.size());
 
-        // retrieve more data from Amazon so long that category index is less than
-        // Amazon category list size otherwise retrieve Chablee data
-        if (!isAmazonFirebaseDataRetrieved) {
+       if (!isAmazonFirebaseDataRetrieved) {
+            if (categoryIndex == 0) {
+                // show progress dialog
+                DialogUtils.showProgressDialog(this);
+            }
+
             if (categoryIndex < alAmazonCategories.size()) {
                 // retrieve data (AMAZON)
+                Log.e("DATMUG", "(1) <retrieveFirebaseData> category= " + alAmazonCategories.get(categoryIndex));
                 FirebaseUtils.retrieveItemsAmazon(alAmazonCategories.get(categoryIndex));
             } else {
                 // reset
@@ -655,11 +653,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 // Amazon queries completed
                 isAmazonFirebaseDataRetrieved = true;
                 // retrieve data (CHABLEE)
+                Log.e("DATMUG", "(2) <retrieveFirebaseData> category= " + alChableeCategories.get(categoryIndex));
                 FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
             }
         } else if (!isChableeFirebaseDataRetrieved) {
             if (categoryIndex < alChableeCategories.size()) {
                 // retrieve data (CHABLEE)
+                Log.e("DATMUG", "(3) <retrieveFirebaseData> category= " + alChableeCategories.get(categoryIndex));
                 FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
             } else {
                 // reset
@@ -667,20 +667,64 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 // Chablee queries completed
                 isChableeFirebaseDataRetrieved = true;
 
-                if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
-                    // set browse data
-                    setBrowseAdapter();
+                // set browse data
+                setBrowseAdapter();
 
-                    if (isDbEmpty) {
-                        createSQLiteDb();
-                    } else {
-                        // update database
-                        new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb, null).execute();
-                        printDb();
-                    }
+                if (isDbEmpty) {
+                    createSQLiteDb();
+                } else {
+                    // update database
+                    new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb, null).execute();
+                    printDb();
                 }
             }
         }
+
+
+
+//        if (categoryIndex == 0 && !isAmazonFirebaseDataRetrieved && !isChableeFirebaseDataRetrieved) {
+//            // show progress dialog
+//            DialogUtils.showProgressDialog(this);
+//        }
+//
+//        // retrieve more data from Amazon so long that category index is less than
+//        // Amazon category list size otherwise retrieve Chablee data
+//        if (!isAmazonFirebaseDataRetrieved) {
+//            if (categoryIndex < alAmazonCategories.size()) {
+//                // retrieve data (AMAZON)
+//                FirebaseUtils.retrieveItemsAmazon(alAmazonCategories.get(categoryIndex));
+//            } else {
+//                // reset
+//                categoryIndex = 0;
+//                // Amazon queries completed
+//                isAmazonFirebaseDataRetrieved = true;
+//                // retrieve data (CHABLEE)
+//                FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
+//            }
+//        } else if (!isChableeFirebaseDataRetrieved) {
+//            if (categoryIndex < alChableeCategories.size()) {
+//                // retrieve data (CHABLEE)
+//                FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
+//            } else {
+//                // reset
+//                categoryIndex = 0;
+//                // Chablee queries completed
+//                isChableeFirebaseDataRetrieved = true;
+//
+//                if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
+//                    // set browse data
+//                    setBrowseAdapter();
+//
+//                    if (isDbEmpty) {
+//                        createSQLiteDb();
+//                    } else {
+//                        // update database
+//                        new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb, null).execute();
+//                        printDb();
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**

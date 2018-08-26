@@ -382,8 +382,14 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
             }
         }
 
-        // set adapter
-        itemDetailAdapter.updateData(items);
+        if (items.size() > 0) {
+            // set adapter
+            FrameworkUtils.setViewGone(tvNoItems);
+            itemDetailAdapter.updateData(items);
+        } else {
+            // empty list
+            FrameworkUtils.setViewVisible(tvNoItems);
+        }
         swipeRefreshLayout.setRefreshing(false);
     }
 

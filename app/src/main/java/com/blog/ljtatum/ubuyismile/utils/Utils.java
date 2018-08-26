@@ -315,14 +315,11 @@ public class Utils {
      * @return True if item is on sale, otherwise false
      */
     public static boolean isItemOnSale(@NonNull ItemDatabaseModel itemDatabaseModel) {
-        if ((!FrameworkUtils.isStringEmpty(itemDatabaseModel.salePrice) &&
-                !FrameworkUtils.isStringEmpty(itemDatabaseModel.price)) &&
-                (getDollarValue(itemDatabaseModel.salePrice) > 0) &&
-                (getDollarValue(itemDatabaseModel.salePrice) <
-                        getDollarValue(itemDatabaseModel.price))) {
-            return true;
-        }
-        return false;
+        return !FrameworkUtils.isStringEmpty(itemDatabaseModel.salePrice) &&
+                !FrameworkUtils.isStringEmpty(itemDatabaseModel.price) &&
+                getDollarValue(itemDatabaseModel.salePrice) > 0 &&
+                getDollarValue(itemDatabaseModel.salePrice) <
+                        getDollarValue(itemDatabaseModel.price);
     }
 
 }

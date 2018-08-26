@@ -79,8 +79,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         } else {
             // set visibility
             FrameworkUtils.setViewInvisible(holder.tvScratchPrice);
-            holder.tvPrice.setText(mContext.getResources().getString(
-                    R.string.dollar_format, alItems.get(position).price));
+            holder.tvPrice.setText(!FrameworkUtils.isStringEmpty(alItems.get(position).price) ?
+                    mContext.getResources().getString(R.string.dollar_format, alItems.get(position).price) :
+                    mContext.getResources().getString(R.string.free));
         }
 
         // label

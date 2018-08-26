@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,7 +179,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                             FrameworkUtils.setViewVisible(rvFavorite);
 
                             // update adapter
-                            mFavoriteAdapter.updateData(filterFavoriteItemList(mItemProvider.getAllInfo()));
+                            mFavoriteAdapter.updateData(filterFavoriteItemList(alItemDb));
                         }
 
                         // set item details
@@ -193,14 +194,16 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onFavoriteRemove(ItemDatabaseModel item) {
                 // item to un-favorite
+                int index = 0;
                 for (int i = 0; i < alItemDb.size(); i++) {
                     if (alItemDb.get(i).itemId.equalsIgnoreCase(item.itemId)) {
+                        index = i;
                         alItemDb.get(i).isFavorite = false;
                         break;
                     }
                 }
                 // update database
-                new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, null, item).execute();
+                new AsyncTaskUpdateItemDatabase(mContext, mItemProvider, null, alItemDb.get(index)).execute();
             }
         });
 
@@ -317,8 +320,9 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                     tvPrice.setText(mContext.getResources().getString(
                             R.string.dollar_format, alItemDb.get(i).salePrice));
                 } else {
-                    tvPrice.setText(mContext.getResources().getString(
-                            R.string.dollar_format, alItemDb.get(i).price));
+                    tvPrice.setText(!FrameworkUtils.isStringEmpty(alItemDb.get(i).price) ?
+                            mContext.getResources().getString(R.string.dollar_format, alItemDb.get(i).price) :
+                            mContext.getResources().getString(R.string.free));
                 }
 
                 // label
@@ -353,7 +357,15 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
 
                 // set values
                 tvTitle.setText(alItemDb.get(i).title);
-                tvDesc.setText(alItemDb.get(i).description);
+                if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).description)) {
+                    tvDesc.setText(alItemDb.get(i).description);
+                } else {
+                    if (mItemType.equalsIgnoreCase(com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.AMAZON.toString())) {
+                        tvDesc.setText(mContext.getResources().getString(R.string.default_description_amazon));
+                    } else {
+                        tvDesc.setText(mContext.getResources().getString(R.string.default_description_chablee));
+                    }
+                }
 
                 // populate image list
                 populateImageUrls(alItemDb.get(i));
@@ -534,6 +546,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      */
     private List<ItemDatabaseModel> filterFavoriteItemList(@NonNull List<ItemDatabaseModel> alItems) {
         for (int i = alItems.size() - 1; i >= 0; i--) {
+            Log.e("DATMUG", "id= " + alItems.get(i).itemId + " //name= " + alItems.get(i).title + " //isFavorite= " + alItems.get(i).isFavorite);
             if (!alItems.get(i).isFavorite) {
                 alItems.remove(i);
             }

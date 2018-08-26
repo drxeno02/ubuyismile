@@ -100,8 +100,9 @@ public class ItemDetailAdapter extends RecyclerView.Adapter<ItemDetailAdapter.Vi
             // set visibility
             FrameworkUtils.setViewGone(holder.tvSalePerc);
             FrameworkUtils.setViewInvisible(holder.tvScratchPrice);
-            holder.tvPrice.setText(mContext.getResources().getString(
-                    R.string.dollar_format, alItems.get(position).price));
+            holder.tvPrice.setText(!FrameworkUtils.isStringEmpty(alItems.get(position).price) ?
+                    mContext.getResources().getString(R.string.dollar_format, alItems.get(position).price) :
+                    mContext.getResources().getString(R.string.free));
         }
 
         // label

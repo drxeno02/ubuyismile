@@ -245,8 +245,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             for (int i = 0; i < alItemDb.size(); i++) {
 
                 if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.ALL_GOOD_DEALS.toString())) {
-                    if (Utils.isItemOnSale(alItemDb.get(i)) || alItemDb.get(i).category.equalsIgnoreCase(
-                            com.app.amazon.framework.enums.Enum.ItemCategory.DEALS.toString())) {
+                    if ((Utils.isItemOnSale(alItemDb.get(i)) || FrameworkUtils.isStringEmpty(alItemDb.get(i).price)) ||
+                            alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.DEALS.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
                 } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.BOOKS.toString())) {

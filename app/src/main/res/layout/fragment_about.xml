@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_grey_300_color_code"
+    android:background="@color/material_grey_200_color_code"
     android:clickable="true"
     android:orientation="vertical"
     tools:ignore="KeyboardInaccessibleWidget">

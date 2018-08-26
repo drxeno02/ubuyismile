@@ -4,15 +4,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.framework.utilities.FrameworkUtils;
+import com.blog.ljtatum.ubuyismile.BuildConfig;
 import com.blog.ljtatum.ubuyismile.R;
 import com.blog.ljtatum.ubuyismile.activity.MainActivity;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
+
+import java.util.Calendar;
 
 /**
  * Created by leonard on 10/23/2017.
@@ -42,9 +46,18 @@ public class PrivacyFragment extends BaseFragment implements View.OnClickListene
     private void initializeViews() {
         mContext = getActivity();
         tvFragmentHeader = mRootView.findViewById(R.id.tv_fragment_header);
+        TextView tvAppVersion = mRootView.findViewById(R.id.tv_app_version);
+        TextView tvCopyright = mRootView.findViewById(R.id.tv_copyright);
 
         // set fragment header
         tvFragmentHeader.setText(getResources().getString(R.string.menu_privacy));
+        tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+        tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(mContext.getResources().getDrawable(R.drawable.arrow_black), null, null, null );
+        // set app version
+        tvAppVersion.setText(BuildConfig.VERSION_NAME);
+        // set copyright year
+        tvCopyright.setText(getActivity().getResources().getString(R.string.copyright_year,
+                String.valueOf(Calendar.getInstance().get(Calendar.YEAR))));
 
         // track Happiness
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_CONTENT_COUNTER);

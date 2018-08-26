@@ -28,6 +28,7 @@
     <dimen name="font_size_42">41sp</dimen>
 
     <!-- layout dimension attributes 90% -->
+    <dimen name="scaling_2">1dp</dimen>
     <dimen name="scaling_4">4dp</dimen>
     <dimen name="scaling_5">5dp</dimen>
     <dimen name="scaling_7">6dp</dimen>

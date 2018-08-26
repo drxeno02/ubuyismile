@@ -30,6 +30,7 @@
     <dimen name="font_size_42">42sp</dimen>
 
     <!-- layout dimension attributes (positive) -->
+    <dimen name="scaling_2">2dp</dimen>
     <dimen name="scaling_4">4dp</dimen>
     <dimen name="scaling_5">5dp</dimen>
     <dimen name="scaling_7">7dp</dimen>

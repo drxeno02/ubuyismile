@@ -5,9 +5,13 @@
     <string name="welcome">Welcome</string>
 
     <!-- labels -->
+    <string name="free">FREE</string>
     <string name="not_available">--</string>
     <string name="no_items">Sorry, we currently have no items for this category. For feedback or
         support, contact\n Leonard Tatum at <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>
+    <string name="default_description_amazon">Have some items you want added? Contact Leonard Tatum at
+        <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a> and he will get right on it!</string>
+    <string name="default_description_chablee">For more information and details, go to www.chablee.com/</string>
 
     <!-- search -->
     <string name="search_history">Search History</string>
@@ -39,7 +43,7 @@
     <!-- about -->
     <string name="follow_me">Follow Me:</string>
     <string name="copyright_year">Copyright %s, Leonard Tatum. All Rights Reserved.</string>
-    <string name="about_desc">This app is 100\%% free, created for the education, convenience
+    <string name="about_desc">This app is 100\% free, created for the education, convenience
 		and use of the public. There will never be in-app purchases or alternative paid versions
 		of the app. To learn about other apps Leonard Tatum is working on, connect with him on social
 		media or send him an email with your questions or comments. Cheers!</string>
