@@ -320,7 +320,9 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         // item exists in database
                         // update dynamically changing data e.g. category, label
                         alItemDb.get(index).category = chableeModel.category;
+                        alItemDb.get(index).asin = chableeModel.asin;
                         alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
+                        alItemDb.get(index).itemId = chableeModel.itemId;
                         alItemDb.get(index).itemType = chableeModel.itemType;
                         alItemDb.get(index).price = chableeModel.price;
                         alItemDb.get(index).salePrice = chableeModel.salePrice;
@@ -362,8 +364,8 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                         itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                         itemDatabaseModel.isFavorite = chableeModel.isFavorite;
-                        itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                         itemDatabaseModel.isSearch = chableeModel.isSearch;
+                        itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                         alItemDb.add(itemDatabaseModel);
                     }
                 }
