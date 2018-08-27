@@ -525,8 +525,48 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     chableeModel.isLabelSet = false;
 
                     // only add data if it exists. This is enforced by the required title
-                    if (isDbEmpty) {
-                        if (!FrameworkUtils.isStringEmpty(chableeModel.title)) {
+                    if (!FrameworkUtils.isStringEmpty(chableeModel.title)) {
+                        // update database values for existing items or add new item to database
+                        boolean isItemExisting = false;
+                        int index = 0;
+                        for (int i = 0; i < alItemDb.size(); i++) {
+                            if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).itemId) &&
+                                    !FrameworkUtils.isStringEmpty(chableeModel.itemId) &&
+                                    alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId) &&
+                                    alItemDb.get(i).category.equalsIgnoreCase(chableeModel.category)) {
+                                // set index
+                                index = i;
+                                // set flag
+                                isItemExisting = true;
+                                break;
+                            }
+                        }
+
+                        if (isItemExisting) {
+                            // item exists in database
+                            // update dynamically changing data e.g. category, label
+                            alItemDb.get(index).category = chableeModel.category;
+                            alItemDb.get(index).asin = chableeModel.asin;
+                            alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
+                            alItemDb.get(index).itemId = chableeModel.itemId;
+                            alItemDb.get(index).itemType = chableeModel.itemType;
+                            alItemDb.get(index).price = chableeModel.price;
+                            alItemDb.get(index).salePrice = chableeModel.salePrice;
+                            alItemDb.get(index).title = chableeModel.title;
+                            alItemDb.get(index).description = chableeModel.description;
+                            alItemDb.get(index).purchaseUrl = chableeModel.purchaseUrl;
+                            alItemDb.get(index).imageUrl1 = chableeModel.imageUrl1;
+                            alItemDb.get(index).imageUrl2 = chableeModel.imageUrl2;
+                            alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
+                            alItemDb.get(index).imageUrl4 = chableeModel.imageUrl4;
+                            alItemDb.get(index).imageUrl5 = chableeModel.imageUrl5;
+                            alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
+                            alItemDb.get(index).isFeatured = chableeModel.isFeatured;
+                            alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
+                            alItemDb.get(index).isLabelSet = !Utils.isItemTimestampBeforeModifiedTimestamp(
+                                    alItemDb.get(index), false);
+                        } else {
+                            // item does not exist in database
                             // stored data
                             ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
                             itemDatabaseModel.category = chableeModel.category;
@@ -550,77 +590,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                             itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
                             itemDatabaseModel.isFavorite = chableeModel.isFavorite;
-                            itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                             itemDatabaseModel.isSearch = chableeModel.isSearch;
+                            itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
                             alItemDb.add(itemDatabaseModel);
-                        }
-                    } else {
-                        if (!FrameworkUtils.isStringEmpty(chableeModel.title)) {
-                            // update database values for existing items or add new item to database
-                            boolean isItemExisting = false;
-                            int index = 0;
-                            for (int i = 0; i < alItemDb.size(); i++) {
-                                if (!FrameworkUtils.isStringEmpty(alItemDb.get(i).itemId) &&
-                                        !FrameworkUtils.isStringEmpty(chableeModel.itemId) &&
-                                        alItemDb.get(i).itemId.equalsIgnoreCase(chableeModel.itemId)) {
-                                    // set index
-                                    index = i;
-                                    // set flag
-                                    isItemExisting = true;
-                                    break;
-                                }
-                            }
-
-                            if (isItemExisting) {
-                                // item exists in database
-                                // update dynamically changing data e.g. category, label
-                                alItemDb.get(index).category = chableeModel.category;
-                                alItemDb.get(index).label = Utils.retrieveChableeItemLabel(alItemDb.get(index));
-                                alItemDb.get(index).itemType = chableeModel.itemType;
-                                alItemDb.get(index).price = chableeModel.price;
-                                alItemDb.get(index).salePrice = chableeModel.salePrice;
-                                alItemDb.get(index).title = chableeModel.title;
-                                alItemDb.get(index).description = chableeModel.description;
-                                alItemDb.get(index).purchaseUrl = chableeModel.purchaseUrl;
-                                alItemDb.get(index).imageUrl1 = chableeModel.imageUrl1;
-                                alItemDb.get(index).imageUrl2 = chableeModel.imageUrl2;
-                                alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
-                                alItemDb.get(index).imageUrl4 = chableeModel.imageUrl4;
-                                alItemDb.get(index).imageUrl5 = chableeModel.imageUrl5;
-                                alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
-                                alItemDb.get(index).isFeatured = chableeModel.isFeatured;
-                                alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
-                                alItemDb.get(index).isLabelSet = !Utils.isItemTimestampBeforeModifiedTimestamp(
-                                        alItemDb.get(index), false);
-                            } else {
-                                // item does not exist in database
-                                // stored data
-                                ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
-                                itemDatabaseModel.category = chableeModel.category;
-                                itemDatabaseModel.asin = chableeModel.asin;
-                                itemDatabaseModel.label = chableeModel.label;
-                                itemDatabaseModel.timestamp = chableeModel.timestamp;
-                                itemDatabaseModel.timestampSearch = chableeModel.timestampSearch;
-                                itemDatabaseModel.itemId = chableeModel.itemId;
-                                itemDatabaseModel.itemType = chableeModel.itemType;
-                                itemDatabaseModel.price = chableeModel.price;
-                                itemDatabaseModel.salePrice = chableeModel.salePrice;
-                                itemDatabaseModel.title = chableeModel.title;
-                                itemDatabaseModel.description = chableeModel.description;
-                                itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
-                                itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
-                                itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
-                                itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
-                                itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
-                                itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
-                                itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
-                                itemDatabaseModel.isFeatured = chableeModel.isFeatured;
-                                itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
-                                itemDatabaseModel.isFavorite = chableeModel.isFavorite;
-                                itemDatabaseModel.isSearch = chableeModel.isSearch;
-                                itemDatabaseModel.isLabelSet = chableeModel.isLabelSet;
-                                alItemDb.add(itemDatabaseModel);
-                            }
                         }
                     }
                 }
@@ -635,8 +607,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to retrieve Firebase data
      */
     private void retrieveFirebaseData() {
-        Log.v("DATMUG", "<retrieveFirebaseData> alItemDb size= " + alItemDb.size());
-
        if (!isAmazonFirebaseDataRetrieved) {
             if (categoryIndex == 0) {
                 // show progress dialog
@@ -645,7 +615,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             if (categoryIndex < alAmazonCategories.size()) {
                 // retrieve data (AMAZON)
-                Log.e("DATMUG", "(1) <retrieveFirebaseData> category= " + alAmazonCategories.get(categoryIndex));
                 FirebaseUtils.retrieveItemsAmazon(alAmazonCategories.get(categoryIndex));
             } else {
                 // reset
@@ -653,13 +622,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 // Amazon queries completed
                 isAmazonFirebaseDataRetrieved = true;
                 // retrieve data (CHABLEE)
-                Log.e("DATMUG", "(2) <retrieveFirebaseData> category= " + alChableeCategories.get(categoryIndex));
                 FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
             }
         } else if (!isChableeFirebaseDataRetrieved) {
             if (categoryIndex < alChableeCategories.size()) {
                 // retrieve data (CHABLEE)
-                Log.e("DATMUG", "(3) <retrieveFirebaseData> category= " + alChableeCategories.get(categoryIndex));
                 FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
             } else {
                 // reset
@@ -946,67 +913,64 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to create/populate database on Firebase with empty data
      */
     private void createFirebaseDb() {
+        // categories (AMAZON)
+        final String[] arryCategoriesAmazon = {Enum.ItemCategory.DEALS.toString(), Enum.ItemCategory.APPAREL.toString(),
+                Enum.ItemCategory.APPLIANCES.toString(), Enum.ItemCategory.AUTOMOTIVE.toString(),
+                Enum.ItemCategory.BABY.toString(), Enum.ItemCategory.BEAUTY.toString(),
+                Enum.ItemCategory.BOOKS.toString(), Enum.ItemCategory.DVD.toString(),
+                Enum.ItemCategory.ELECTRONICS.toString(), Enum.ItemCategory.GROCERY.toString(),
+                Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString(), Enum.ItemCategory.HOME_AND_GARDEN.toString(),
+                Enum.ItemCategory.JEWELRY.toString(), Enum.ItemCategory.KINDLE_STORE.toString(),
+                Enum.ItemCategory.LAWN_AND_GARDEN.toString(), Enum.ItemCategory.LUGGAGE_AND_BAGS.toString(),
+                Enum.ItemCategory.LUXURY_BEAUTY.toString(), Enum.ItemCategory.MUSIC.toString(),
+                Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString(), Enum.ItemCategory.OFFICE_PRODUCTS.toString(),
+                Enum.ItemCategory.AMAZON_PANTRY.toString(), Enum.ItemCategory.PC_HARDWARE.toString(),
+                Enum.ItemCategory.PET_SUPPLIES.toString(), Enum.ItemCategory.SHOES.toString(),
+                Enum.ItemCategory.SOFTWARE.toString(), Enum.ItemCategory.SPORTING_GOODS.toString(),
+                Enum.ItemCategory.TOYS.toString(), Enum.ItemCategory.VIDEO_GAMES.toString(),
+                Enum.ItemCategory.WATCHES.toString()};
+        // categories (CHABLEE)
+        final String[] arryCategoriesChablee = {Enum.ItemCategoryChablee.CROWNS.toString(),
+                Enum.ItemCategoryChablee.RINGS.toString(), Enum.ItemCategoryChablee.NECKLACES.toString(),
+                Enum.ItemCategoryChablee.GEMSTONE.toString(), Enum.ItemCategoryChablee.ROCKS.toString()};
 
-        // setup Chablee database
-        HashMap<String, ItemModel> mapChablee = new HashMap<>();
-        for (int i = 0; i < 50; i++) {
-            ItemModel chableeModel = new ItemModel();
-            chableeModel.itemId = ID_PREFIX.concat(String.valueOf(i));
-            chableeModel.title = " ";
-            chableeModel.description = " ";
-            chableeModel.price = " ";
-            chableeModel.salePrice = " ";
-            chableeModel.purchaseUrl = " ";
-            chableeModel.imageUrl1 = " ";
-            chableeModel.imageUrl2 = " ";
-            chableeModel.imageUrl3 = " ";
-            chableeModel.imageUrl4 = " ";
-            chableeModel.imageUrl5 = " ";
-            chableeModel.isFeatured = false;
-            chableeModel.isMostPopular = false;
-            // add to hashmap
-            mapChablee.put(String.valueOf(i), chableeModel);
-        }
-        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.CROWNS.toString());
-        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.RINGS.toString());
-        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.NECKLACES.toString());
-        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.GEMSTONE.toString());
-        FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), Enum.ItemCategoryChablee.ROCKS.toString());
+        // id value
+        int id = -1;
 
-        // setup Amazon database
-        HashMap<String, String> mapAmazon = new HashMap<>();
-        for (int i = 0; i < 50; i++) {
-            mapAmazon.put(String.valueOf(i), " ");
+            for (int i = 0; i < arryCategoriesAmazon.length; i++) {
+                // setup Amazon database
+                HashMap<String, String> mapAmazon = new HashMap<>();
+                for (int n = 0; n < 60; n++) {
+                    id++;
+                    mapAmazon.put(String.valueOf(id), " ");
+                }
+                FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), arryCategoriesAmazon[i]);
+            }
+
+        for (int i = 0; i < arryCategoriesChablee.length; i++) {
+            // setup Chablee database
+            HashMap<String, ItemModel> mapChablee = new HashMap<>();
+            for (int n = 0; n < 60; n++) {
+                id++;
+                ItemModel chableeModel = new ItemModel();
+                chableeModel.itemId = ID_PREFIX.concat(String.valueOf(id));
+                chableeModel.title = " ";
+                chableeModel.description = " ";
+                chableeModel.price = " ";
+                chableeModel.salePrice = " ";
+                chableeModel.purchaseUrl = " ";
+                chableeModel.imageUrl1 = " ";
+                chableeModel.imageUrl2 = " ";
+                chableeModel.imageUrl3 = " ";
+                chableeModel.imageUrl4 = " ";
+                chableeModel.imageUrl5 = " ";
+                chableeModel.isFeatured = false;
+                chableeModel.isMostPopular = false;
+                // add to hashmap
+                mapChablee.put(String.valueOf(id), chableeModel);
+            }
+            FirebaseUtils.addValuesChab(new ArrayList<>(mapChablee.values()), arryCategoriesChablee[i]);
         }
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.DEALS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.APPAREL.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.APPLIANCES.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.AUTOMOTIVE.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.BABY.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.BEAUTY.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.BOOKS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.DVD.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.ELECTRONICS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.GROCERY.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.HOME_AND_GARDEN.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.JEWELRY.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.KINDLE_STORE.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.LAWN_AND_GARDEN.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.LUGGAGE_AND_BAGS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.LUXURY_BEAUTY.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.MUSIC.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.MUSICAL_INSTRUMENTS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.OFFICE_PRODUCTS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.AMAZON_PANTRY.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.PC_HARDWARE.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.PET_SUPPLIES.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.SHOES.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.SOFTWARE.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.SPORTING_GOODS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.TOYS.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.VIDEO_GAMES.toString());
-        FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), Enum.ItemCategory.WATCHES.toString());
     }
 
     @Override

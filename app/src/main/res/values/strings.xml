@@ -141,4 +141,8 @@
     <string name="signin_bonus_info">Earn more items and more deals by visiting the UBuyISmile app</string>
     <string name="cool_beans">Cool Beans</string>
 
+    <!-- push noifications -->
+    <string name="default_notification_message">Sending you good vibes and well wishes! Thanks for using our app!!</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
 </resources>

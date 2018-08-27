@@ -546,7 +546,6 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      */
     private List<ItemDatabaseModel> filterFavoriteItemList(@NonNull List<ItemDatabaseModel> alItems) {
         for (int i = alItems.size() - 1; i >= 0; i--) {
-            Log.e("DATMUG", "id= " + alItems.get(i).itemId + " //name= " + alItems.get(i).title + " //isFavorite= " + alItems.get(i).isFavorite);
             if (!alItems.get(i).isFavorite) {
                 alItems.remove(i);
             }

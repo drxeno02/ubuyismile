@@ -68,18 +68,23 @@ android {
         // google play services
         //noinspection UseOfBundledGooglePlayServices,GradleCompatible
         api "com.google.android.gms:play-services:${googleLib}"
+//        api 'com.google.android.gms:play-services:15.0.1'
         api 'com.google.android.gms:play-services-ads:15.0.0'
+
+        // facebook
+        //noinspection GradleCompatible
+        api "com.facebook.android:facebook-android-sdk:${facebookLib}"
 
         // firebase
         //noinspection GradleCompatible
         api "com.google.firebase:firebase-core:${firebaseLib}"
         //noinspection GradleCompatible
-        api "com.google.firebase:firebase-auth:${firebaseLib}"
-        //noinspection GradleCompatible
         api "com.google.firebase:firebase-database:${firebaseLib}"
         //noinspection GradleCompatible
-        api "com.facebook.android:facebook-android-sdk:${facebookLib}"
-        //noinspection GradleCompatible
+        api 'com.google.firebase:firebase-auth:16.0.1'
+        api 'com.google.firebase:firebase-messaging:17.3.0'
+//        api "com.google.firebase:firebase-auth:${firebaseLib}"
+//        api "com.google.firebase:firebase-messaging:${firebaseLib}"
         api 'com.firebaseui:firebase-ui-database:1.2.0'
 
         // picasso

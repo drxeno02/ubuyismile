@@ -57,7 +57,6 @@ android {
             debuggable true
         }
         release {
-            applicationIdSuffix '.prod'
             buildConfigField "String", "ENVIRONMENT", "\"production\""
             buildConfigField "boolean", "DEBUG_MODE", "false"
             manifestPlaceholders = [build_version: "${versionMajor}.${versionMinor}.${versionPatch}"]
