@@ -11,7 +11,7 @@
         support, contact\n Leonard Tatum at <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a></string>
     <string name="default_description_amazon">Have some items you want added? Contact Leonard Tatum at
         <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a> and he will get right on it!</string>
-    <string name="default_description_chablee">For more information and details, go to www.chablee.com/</string>
+    <string name="default_description_chablee">For more information and details, go to www.chablee.com</string>
 
     <!-- search -->
     <string name="search_history">Search History</string>
