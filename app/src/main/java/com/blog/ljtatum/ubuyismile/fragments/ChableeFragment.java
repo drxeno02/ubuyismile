@@ -298,6 +298,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                 chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
                 chableeModel.itemType = com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString();
                 chableeModel.isLabelSet = false;
+                chableeModel.isFavorite = false;
 
                 if (!FrameworkUtils.isStringEmpty(chableeModel.title) &&
                         !FrameworkUtils.isStringEmpty(chableeModel.description)) {
@@ -334,6 +335,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
                         alItemDb.get(index).imageUrl4 = chableeModel.imageUrl4;
                         alItemDb.get(index).imageUrl5 = chableeModel.imageUrl5;
+                        alItemDb.get(index).imageUrl6 = chableeModel.imageUrl6;
                         alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
                         alItemDb.get(index).isFeatured = chableeModel.isFeatured;
                         alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
@@ -360,6 +362,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
                         itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
                         itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
                         itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
+                        itemDatabaseModel.imageUrl6 = chableeModel.imageUrl6;
                         itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
                         itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                         itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;

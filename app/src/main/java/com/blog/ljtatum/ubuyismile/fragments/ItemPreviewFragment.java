@@ -128,6 +128,8 @@ public class ItemPreviewFragment extends BaseFragment implements View.OnClickLis
             return item.imageUrl4;
         } else if (mScreenshotPos == 4) {
             return item.imageUrl5;
+        } else if (mScreenshotPos == 5) {
+            return item.imageUrl6;
         }
         return item.imageUrl1;
     }

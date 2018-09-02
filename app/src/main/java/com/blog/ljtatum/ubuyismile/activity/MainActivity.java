@@ -46,6 +46,7 @@ import com.blog.ljtatum.ubuyismile.logger.Logger;
 import com.blog.ljtatum.ubuyismile.model.AmazonData;
 import com.blog.ljtatum.ubuyismile.model.AmazonResponseModel;
 import com.blog.ljtatum.ubuyismile.model.Categories;
+import com.blog.ljtatum.ubuyismile.model.CreateDatabaseItemModel;
 import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.DailyBonusUtils;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
@@ -378,6 +379,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         itemDatabaseModel.imageUrl3 = "";
                         itemDatabaseModel.imageUrl4 = "";
                         itemDatabaseModel.imageUrl5 = "";
+                        itemDatabaseModel.imageUrl6 = "";
                         itemDatabaseModel.isBrowseItem = itemModel.isBrowseItem;
                         itemDatabaseModel.isFeatured = false;
                         itemDatabaseModel.isMostPopular = false;
@@ -520,6 +522,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     chableeModel.timestamp = FrameworkUtils.getCurrentDateTime();
                     chableeModel.itemType = com.blog.ljtatum.ubuyismile.enums.Enum.ItemType.CHABLEE.toString();
                     chableeModel.isLabelSet = false;
+                    chableeModel.isFavorite = false;
 
                     // only add data if it exists. This is enforced by the required title
                     if (!FrameworkUtils.isStringEmpty(chableeModel.title)) {
@@ -557,6 +560,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
                             alItemDb.get(index).imageUrl4 = chableeModel.imageUrl4;
                             alItemDb.get(index).imageUrl5 = chableeModel.imageUrl5;
+                            alItemDb.get(index).imageUrl6 = chableeModel.imageUrl6;
                             alItemDb.get(index).isBrowseItem = chableeModel.isBrowseItem;
                             alItemDb.get(index).isFeatured = chableeModel.isFeatured;
                             alItemDb.get(index).isMostPopular = chableeModel.isMostPopular;
@@ -583,6 +587,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
                             itemDatabaseModel.imageUrl4 = chableeModel.imageUrl4;
                             itemDatabaseModel.imageUrl5 = chableeModel.imageUrl5;
+                            itemDatabaseModel.imageUrl6 = chableeModel.imageUrl6;
                             itemDatabaseModel.isBrowseItem = chableeModel.isBrowseItem;
                             itemDatabaseModel.isFeatured = chableeModel.isFeatured;
                             itemDatabaseModel.isMostPopular = chableeModel.isMostPopular;
@@ -795,9 +800,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 fragment = new SearchFragment();
                 fragment.setArguments(args);
                 break;
-            case R.id.nav_settings:
-
-                break;
             case R.id.nav_chablee_crowns:
                 args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
                 fragment = new ChableeFragment();
@@ -896,6 +898,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Logger.v(TAG, "imageUrl3= " + alItemDb.get(i).imageUrl3);
             Logger.v(TAG, "imageUrl4= " + alItemDb.get(i).imageUrl4);
             Logger.v(TAG, "imageUrl5= " + alItemDb.get(i).imageUrl5);
+            Logger.v(TAG, "imageUrl6= " + alItemDb.get(i).imageUrl6);
             Logger.v(TAG, "isBrowseItem= " + alItemDb.get(i).isBrowseItem);
             Logger.v(TAG, "isFeatured= " + alItemDb.get(i).isFeatured);
             Logger.v(TAG, "isMostPopular= " + alItemDb.get(i).isMostPopular);
@@ -937,17 +940,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         for (int i = 0; i < arryCategoriesAmazon.length; i++) {
             // setup Amazon database
             HashMap<String, String> mapAmazon = new HashMap<>();
-            for (int n = 0; n < 60; n++) {
+            for (int n = 0; n < 75; n++) {
                 mapAmazon.put(String.valueOf(n), " ");
             }
             FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), arryCategoriesAmazon[i]);
         }
         for (int i = 0; i < arryCategoriesChablee.length; i++) {
             // setup Chablee database
-            HashMap<String, ItemModel> mapChablee = new HashMap<>();
+            HashMap<String, CreateDatabaseItemModel> mapChablee = new HashMap<>();
             for (int n = 0; n < 60; n++) {
                 id++;
-                ItemModel chableeModel = new ItemModel();
+                CreateDatabaseItemModel chableeModel = new CreateDatabaseItemModel();
                 chableeModel.itemId = ID_PREFIX.concat(String.valueOf(id));
                 chableeModel.title = " ";
                 chableeModel.description = " ";
@@ -959,7 +962,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 chableeModel.imageUrl3 = " ";
                 chableeModel.imageUrl4 = " ";
                 chableeModel.imageUrl5 = " ";
-                chableeModel.isFeatured = false;
+                chableeModel.imageUrl6 = " ";
                 chableeModel.isMostPopular = false;
                 // add to hashmap
                 mapChablee.put(String.valueOf(id), chableeModel);

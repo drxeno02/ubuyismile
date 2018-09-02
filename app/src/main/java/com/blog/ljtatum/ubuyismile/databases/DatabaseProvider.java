@@ -227,12 +227,13 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                 values.put(where[14], alItemDb.get(i).imageUrl3);
                 values.put(where[15], alItemDb.get(i).imageUrl4);
                 values.put(where[16], alItemDb.get(i).imageUrl5);
-                values.put(where[17], alItemDb.get(i).isLabelSet);
-                values.put(where[18], alItemDb.get(i).isBrowseItem);
-                values.put(where[19], alItemDb.get(i).isFeatured);
-                values.put(where[20], alItemDb.get(i).isMostPopular);
-                values.put(where[21], alItemDb.get(i).isFavorite);
-                values.put(where[22], alItemDb.get(i).isSearch);
+                values.put(where[17], alItemDb.get(i).imageUrl6);
+                values.put(where[18], alItemDb.get(i).isLabelSet);
+                values.put(where[19], alItemDb.get(i).isBrowseItem);
+                values.put(where[20], alItemDb.get(i).isFeatured);
+                values.put(where[21], alItemDb.get(i).isMostPopular);
+                values.put(where[22], alItemDb.get(i).isFavorite);
+                values.put(where[23], alItemDb.get(i).isSearch);
                 // create into table
                 mDatabase.insert(ItemSchema.TABLE_NAME, null, values);
             }

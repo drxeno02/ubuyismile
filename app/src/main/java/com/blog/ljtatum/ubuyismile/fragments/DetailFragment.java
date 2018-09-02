@@ -405,6 +405,10 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
             // add screenshot 5
             alImgUrls.add(item.imageUrl5);
         }
+        if (!FrameworkUtils.isStringEmpty(item.imageUrl6)) {
+            // add screenshot 6
+            alImgUrls.add(item.imageUrl6);
+        }
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ItemDatabaseModel implements DatabaseModel {
 
     // Chablee specific values
     public String price, salePrice, title, description, purchaseUrl, imageUrl1, imageUrl2,
-            imageUrl3, imageUrl4, imageUrl5;
+            imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     public boolean isFeatured, isMostPopular, isFavorite;
 
     @Override
@@ -40,6 +40,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         item.imageUrl3 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_3));
         item.imageUrl4 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_4));
         item.imageUrl5 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_5));
+        item.imageUrl6 = cursor.getString(cursor.getColumnIndex(ItemSchema.IMAGE_URL_6));
         item.isLabelSet = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_LABEL_SET)) > 0;
         item.isBrowseItem = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_BROWSABLE)) > 0;
         item.isFeatured = cursor.getInt(cursor.getColumnIndex(ItemSchema.IS_FEATURED)) > 0;
@@ -69,6 +70,7 @@ public class ItemDatabaseModel implements DatabaseModel {
                 ItemSchema.IMAGE_URL_3,
                 ItemSchema.IMAGE_URL_4,
                 ItemSchema.IMAGE_URL_5,
+                ItemSchema.IMAGE_URL_6,
                 ItemSchema.IS_LABEL_SET,
                 ItemSchema.IS_BROWSABLE,
                 ItemSchema.IS_FEATURED,
@@ -98,6 +100,7 @@ public class ItemDatabaseModel implements DatabaseModel {
         values.put(ItemSchema.IMAGE_URL_3, imageUrl3);
         values.put(ItemSchema.IMAGE_URL_4, imageUrl4);
         values.put(ItemSchema.IMAGE_URL_5, imageUrl5);
+        values.put(ItemSchema.IMAGE_URL_6, imageUrl6);
         values.put(ItemSchema.IS_LABEL_SET, isLabelSet);
         values.put(ItemSchema.IS_BROWSABLE, isBrowseItem);
         values.put(ItemSchema.IS_FEATURED, isFeatured);
