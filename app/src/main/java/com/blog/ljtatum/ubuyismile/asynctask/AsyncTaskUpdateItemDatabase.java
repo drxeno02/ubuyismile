@@ -34,9 +34,10 @@ public class AsyncTaskUpdateItemDatabase extends AsyncTask<Void, Void, Void> {
 
     /**
      * Constructor
-     * @param context      Interface to global information about an application environment
-     * @param itemProvider Provider to update database
-     * @param itemDb       List of items to update in database
+     *
+     * @param context           Interface to global information about an application environment
+     * @param itemProvider      Provider to update database
+     * @param itemDb            List of items to update in database
      * @param itemDatabaseModel Single item to update in database
      */
     public AsyncTaskUpdateItemDatabase(@NonNull Context context, @NonNull ItemProvider itemProvider,

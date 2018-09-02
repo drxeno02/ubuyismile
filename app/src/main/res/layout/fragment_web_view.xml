@@ -18,10 +18,10 @@
     <!-- web view -->
     <WebView
         android:id="@+id/wv"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header" />
+        android:layout_below="@id/header"
+        android:background="@color/white" />
 
     <!-- no purchase url -->
     <LinearLayout

@@ -1,9 +1,7 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -112,7 +109,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // toggle information bar
         toggleInfoBar(true);
 
-        // uncomment below to create firebase db. Will also reset all data
+        // NOTE: uncomment below to create firebase db. Will also reset all data
 //        createFirebaseDb();
 
 
@@ -607,7 +604,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * Method is used to retrieve Firebase data
      */
     private void retrieveFirebaseData() {
-       if (!isAmazonFirebaseDataRetrieved) {
+        if (!isAmazonFirebaseDataRetrieved) {
             if (categoryIndex == 0) {
                 // show progress dialog
                 DialogUtils.showProgressDialog(this);
@@ -646,7 +643,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 }
             }
         }
-
 
 
 //        if (categoryIndex == 0 && !isAmazonFirebaseDataRetrieved && !isChableeFirebaseDataRetrieved) {
@@ -792,7 +788,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Bundle args = new Bundle();
         switch (item.getItemId()) {
             case R.id.nav_browse:
-                // TODO for this section remove all fragments and close drawer. This simply brings up the main screen
+                removeAllFragments();
                 break;
             case R.id.nav_search:
                 args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.ALL.toString());
@@ -937,16 +933,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // id value
         int id = -1;
 
-            for (int i = 0; i < arryCategoriesAmazon.length; i++) {
-                // setup Amazon database
-                HashMap<String, String> mapAmazon = new HashMap<>();
-                for (int n = 0; n < 60; n++) {
-                    id++;
-                    mapAmazon.put(String.valueOf(id), " ");
-                }
-                FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), arryCategoriesAmazon[i]);
+        // setup Amazon database
+        for (int i = 0; i < arryCategoriesAmazon.length; i++) {
+            // setup Amazon database
+            HashMap<String, String> mapAmazon = new HashMap<>();
+            for (int n = 0; n < 60; n++) {
+                mapAmazon.put(String.valueOf(n), " ");
             }
-
+            FirebaseUtils.addValues(new ArrayList<>(mapAmazon.values()), arryCategoriesAmazon[i]);
+        }
         for (int i = 0; i < arryCategoriesChablee.length; i++) {
             // setup Chablee database
             HashMap<String, ItemModel> mapChablee = new HashMap<>();

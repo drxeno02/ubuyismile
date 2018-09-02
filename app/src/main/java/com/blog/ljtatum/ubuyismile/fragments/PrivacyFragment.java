@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +50,7 @@ public class PrivacyFragment extends BaseFragment implements View.OnClickListene
 
         // set fragment header
         tvFragmentHeader.setText(getResources().getString(R.string.menu_privacy));
-        tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-        tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(mContext.getResources().getDrawable(R.drawable.arrow_black), null, null, null );
+
         // set app version
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
         // set copyright year

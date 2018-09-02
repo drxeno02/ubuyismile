@@ -47,7 +47,6 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     private Activity mActivity;
     private View mRootView;
 
-    private String mSearchCategory;
     private TextView tvItemDetailCta;
     private ImageView ivClear, ivBack;
     private AutoCompleteTextView acSearch;
@@ -56,7 +55,6 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     // adapter
     private ItemAutoCompletedAdapter itemAutoCompleteAdapter;
     private SearchHistoryAdapter searchHistoryAdapter;
-    private RecyclerView rvSearchHistory;
 
     // database
     private ItemProvider mItemProvider;
@@ -101,7 +99,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         acSearch.setAdapter(itemAutoCompleteAdapter);
 
         // initialize adapter (search history)
-        rvSearchHistory = mRootView.findViewById(R.id.rv_search_history);
+        RecyclerView rvSearchHistory = mRootView.findViewById(R.id.rv_search_history);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvSearchHistory.setLayoutManager(layoutManager);
@@ -231,9 +229,9 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     private void getBundle() {
         Bundle args = getArguments();
         if (!FrameworkUtils.checkIfNull(args)) {
-            mSearchCategory = args.getString(Constants.KEY_SEARCH_CATEGORY, "");
+            String searchCategory = args.getString(Constants.KEY_SEARCH_CATEGORY, "");
 
-            if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.ALL.toString())) {
+            if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.ALL.toString())) {
                 // do not filter results when searching for all items
                 return;
             }
@@ -244,17 +242,17 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             // filter searchable results
             for (int i = 0; i < alItemDb.size(); i++) {
 
-                if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.ALL_GOOD_DEALS.toString())) {
+                if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.ALL_GOOD_DEALS.toString())) {
                     if ((Utils.isItemOnSale(alItemDb.get(i)) || FrameworkUtils.isStringEmpty(alItemDb.get(i).price)) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.DEALS.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
-                } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.BOOKS.toString())) {
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.BOOKS.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.BOOKS.toString()) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.KINDLE_STORE.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
-                } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.ELECTRONICS.toString())) {
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.ELECTRONICS.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.ELECTRONICS.toString()) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.APPLIANCES.toString()) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.PC_HARDWARE.toString()) ||
@@ -262,22 +260,22 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.VIDEO_GAMES.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
-                } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.FOOD.toString())) {
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.FOOD.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.GROCERY.toString()) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.AMAZON_PANTRY.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
-                } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.HEALTH_BEAUTY.toString())) {
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.HEALTH_BEAUTY.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.BEAUTY.toString()) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.HEALTH_AND_PERSONAL_CARE.toString()) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.LUXURY_BEAUTY.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
-                } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.MOVIES.toString())) {
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.MOVIES.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.DVD.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
-                } else if (mSearchCategory.equalsIgnoreCase(Enum.SearchCategory.VIDEO_GAMES.toString())) {
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.VIDEO_GAMES.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.VIDEO_GAMES.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }

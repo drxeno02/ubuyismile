@@ -61,11 +61,11 @@
 
     <!-- description -->
     <TextView
-        android:layout_marginTop="@dimen/scaling_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="@dimen/scaling_20"
         android:gravity="center"
         android:text="@string/privacy_desc"
         android:textColor="@color/black"

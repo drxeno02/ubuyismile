@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.app.framework.utilities.firebase.FirebaseUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.FirebaseApp;
 
 /**

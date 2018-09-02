@@ -28,9 +28,9 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/scaling_20"
             android:paddingEnd="@dimen/scaling_5"
             android:paddingStart="@dimen/scaling_5"
-            android:paddingBottom="@dimen/scaling_20"
             android:paddingTop="@dimen/scaling_5">
 
             <!-- title -->

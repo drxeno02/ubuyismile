@@ -49,11 +49,11 @@
     <!-- ad banner -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/ad_view"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
+        android:background="@color/white"
         android:orientation="vertical"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-8397256122648968/2986194648" />

@@ -86,35 +86,46 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
         TextView tvTitle = convertView.findViewById(R.id.tv_title);
         ImageView ivItemCategoryIcon = convertView.findViewById(R.id.iv_item_category_icon);
 
-        // set color code
-        if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
-            tvColorCode.setText(COLOR_CODE_AMAZON);
-            tvColorCode.setTextColor(ContextCompat.getColor(mContext, R.color.material_orange_100_color_code));
-        } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
-            tvColorCode.setText(COLOR_CODE_CHABLEE);
-            tvColorCode.setTextColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
-        }
+        if (FrameworkUtils.isStringEmpty(alItems.get(position).itemType)) {
+            // set visibility
+            FrameworkUtils.setViewGone(tvColorCode);
 
-        // set category icon
-        if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
-            // TODO use Amazon official icon
-        } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
-            if (alItems.get(position).category.equalsIgnoreCase(
-                    com.app.amazon.framework.enums.Enum.ItemCategoryChablee.CROWNS.toString())) {
-                // set icon
-                ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.crowns));
-            } else if (alItems.get(position).category.equalsIgnoreCase(
-                    com.app.amazon.framework.enums.Enum.ItemCategoryChablee.RINGS.toString())) {
-                // set icon
-                ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.rings));
-            } else if (alItems.get(position).category.equalsIgnoreCase(
-                    com.app.amazon.framework.enums.Enum.ItemCategoryChablee.NECKLACES.toString())) {
-                // set icon
-                ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.necklaces));
-            } else if (alItems.get(position).category.equalsIgnoreCase(
-                    com.app.amazon.framework.enums.Enum.ItemCategoryChablee.ROCKS.toString())) {
-                // set icon
-                ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.rocks));
+            // set category icon
+            ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.question_mark_a));
+        } else {
+            // set visibility
+            FrameworkUtils.setViewVisible(tvColorCode);
+
+            if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
+                // set color code
+                tvColorCode.setText(COLOR_CODE_AMAZON);
+                tvColorCode.setTextColor(ContextCompat.getColor(mContext, R.color.material_orange_100_color_code));
+
+                // set category icon
+                ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.amazon));
+            } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
+                // set color code
+                tvColorCode.setText(COLOR_CODE_CHABLEE);
+                tvColorCode.setTextColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
+
+                // set category icon
+                if (alItems.get(position).category.equalsIgnoreCase(
+                        com.app.amazon.framework.enums.Enum.ItemCategoryChablee.CROWNS.toString())) {
+                    // set icon
+                    ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.crowns));
+                } else if (alItems.get(position).category.equalsIgnoreCase(
+                        com.app.amazon.framework.enums.Enum.ItemCategoryChablee.RINGS.toString())) {
+                    // set icon
+                    ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.rings));
+                } else if (alItems.get(position).category.equalsIgnoreCase(
+                        com.app.amazon.framework.enums.Enum.ItemCategoryChablee.NECKLACES.toString())) {
+                    // set icon
+                    ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.necklaces));
+                } else if (alItems.get(position).category.equalsIgnoreCase(
+                        com.app.amazon.framework.enums.Enum.ItemCategoryChablee.ROCKS.toString())) {
+                    // set icon
+                    ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.rocks));
+                }
             }
         }
 
@@ -158,7 +169,8 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
                 for (ItemDatabaseModel dataItem : alItemsTemp) {
                     if (!matchValues.contains(dataItem.itemId) &&
                             dataItem.title.toLowerCase().startsWith(searchStrLowerCase) ||
-                            dataItem.category.toLowerCase().startsWith(searchStrLowerCase)) {
+                            dataItem.category.toLowerCase().startsWith(searchStrLowerCase) ||
+                            dataItem.title.contains(searchStrLowerCase)) {
                         matchValues.add(dataItem);
                     }
                 }
@@ -181,16 +193,18 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            if (!FrameworkUtils.checkIfNull(results.values)) {
+            if (!FrameworkUtils.checkIfNull(results) && !((ArrayList<ItemDatabaseModel>) results.values).isEmpty()) {
                 alItems = (ArrayList<ItemDatabaseModel>) results.values;
             } else {
-                alItems = null;
+                ArrayList<ItemDatabaseModel> items = new ArrayList<>();
+                ItemDatabaseModel itemDatabaseModel = new ItemDatabaseModel();
+                itemDatabaseModel.title = mContext.getResources().getString(R.string.no_item_found);
+                items.add(itemDatabaseModel);
+                alItems = items;
             }
-            if (results.count > 0) {
-                notifyDataSetChanged();
-            } else {
-                notifyDataSetInvalidated();
-            }
+            // notifies the attached observers that the underlying data has been changed
+            // and any View reflecting the data set should refresh itself
+            notifyDataSetChanged();
         }
     }
 }

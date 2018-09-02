@@ -36,8 +36,8 @@
         android:id="@+id/rv_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_toolbar"
         android:layout_above="@+id/ad_view"
+        android:layout_below="@+id/ll_toolbar"
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="none" />
@@ -45,11 +45,11 @@
     <!-- ad banner -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/ad_view"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
+        android:background="@color/white"
         android:orientation="vertical"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-8397256122648968/2986194648" />

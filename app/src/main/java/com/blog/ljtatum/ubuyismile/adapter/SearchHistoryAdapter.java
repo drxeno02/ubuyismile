@@ -65,19 +65,19 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdap
             holder.ivItemFavoriteIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.favorite_icon_off));
         }
 
-        // set color code
         if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
+            // set color code
             holder.tvColorCode.setText(COLOR_CODE_AMAZON);
             holder.tvColorCode.setTextColor(ContextCompat.getColor(mContext, R.color.material_orange_100_color_code));
+
+            // set category icon
+            holder.ivItemCategoryIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.amazon));
         } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
+            // set color code
             holder.tvColorCode.setText(COLOR_CODE_CHABLEE);
             holder.tvColorCode.setTextColor(ContextCompat.getColor(mContext, R.color.material_pink_100_color_code));
-        }
 
-        // set category icon
-        if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.AMAZON.toString())) {
-            // TODO use Amazon official icon
-        } else if (alItems.get(position).itemType.equalsIgnoreCase(Enum.ItemType.CHABLEE.toString())) {
+            // set category icon
             if (alItems.get(position).category.equalsIgnoreCase(
                     com.app.amazon.framework.enums.Enum.ItemCategoryChablee.CROWNS.toString())) {
                 // set icon

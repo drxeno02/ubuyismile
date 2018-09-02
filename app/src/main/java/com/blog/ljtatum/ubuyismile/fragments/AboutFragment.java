@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -65,8 +64,7 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
 
         // set fragment header
         tvFragmentHeader.setText(getResources().getString(R.string.menu_about));
-        tvFragmentHeader.setTextColor(ContextCompat.getColor(mContext, R.color.black));
-        tvFragmentHeader.setCompoundDrawablesWithIntrinsicBounds(mContext.getResources().getDrawable(R.drawable.arrow_black), null, null, null );
+
         // set app version
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
         // set copyright year
