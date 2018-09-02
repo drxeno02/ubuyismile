@@ -648,51 +648,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 }
             }
         }
-
-
-//        if (categoryIndex == 0 && !isAmazonFirebaseDataRetrieved && !isChableeFirebaseDataRetrieved) {
-//            // show progress dialog
-//            DialogUtils.showProgressDialog(this);
-//        }
-//
-//        // retrieve more data from Amazon so long that category index is less than
-//        // Amazon category list size otherwise retrieve Chablee data
-//        if (!isAmazonFirebaseDataRetrieved) {
-//            if (categoryIndex < alAmazonCategories.size()) {
-//                // retrieve data (AMAZON)
-//                FirebaseUtils.retrieveItemsAmazon(alAmazonCategories.get(categoryIndex));
-//            } else {
-//                // reset
-//                categoryIndex = 0;
-//                // Amazon queries completed
-//                isAmazonFirebaseDataRetrieved = true;
-//                // retrieve data (CHABLEE)
-//                FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
-//            }
-//        } else if (!isChableeFirebaseDataRetrieved) {
-//            if (categoryIndex < alChableeCategories.size()) {
-//                // retrieve data (CHABLEE)
-//                FirebaseUtils.retrieveItemsChablee(alChableeCategories.get(categoryIndex));
-//            } else {
-//                // reset
-//                categoryIndex = 0;
-//                // Chablee queries completed
-//                isChableeFirebaseDataRetrieved = true;
-//
-//                if (isAmazonFirebaseDataRetrieved && isChableeFirebaseDataRetrieved) {
-//                    // set browse data
-//                    setBrowseAdapter();
-//
-//                    if (isDbEmpty) {
-//                        createSQLiteDb();
-//                    } else {
-//                        // update database
-//                        new AsyncTaskUpdateItemDatabase(this, mItemProvider, alItemDb, null).execute();
-//                        printDb();
-//                    }
-//                }
-//            }
-//        }
     }
 
     /**

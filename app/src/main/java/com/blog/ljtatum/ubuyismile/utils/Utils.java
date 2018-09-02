@@ -143,7 +143,12 @@ public class Utils {
      * @return Dollar amount without special characters and/or spaces
      */
     public static double getDollarValue(@NonNull String value) {
-        return Double.parseDouble(value.replaceAll("[^\\d.]", "").trim());
+        try {
+            return Double.parseDouble(value.replaceAll("[^\\d.]", "").trim());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0d;
+        }
     }
 
     /**
