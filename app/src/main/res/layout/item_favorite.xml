@@ -84,6 +84,7 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/scaling_5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_18"
                 android:textStyle="bold" />

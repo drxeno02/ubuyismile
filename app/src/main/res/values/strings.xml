@@ -12,6 +12,7 @@
     <string name="default_description_amazon">Have some items you want added? Contact Leonard Tatum at
         <a href="mailto:ljtatum@hotmail.com">ljtatum@hotmail.com</a> and he will get right on it!</string>
     <string name="default_description_chablee">For more information and details, go to www.chablee.com</string>
+    <string name="holiday_date_range">Available %1$s - %2$s</string>
 
     <!-- search -->
     <string name="search_history">Search History</string>
@@ -148,7 +149,6 @@
     <!-- holiday titles -->
     <string name="new_year_title">Happy New Years Sale</string>
     <string name="martin_luther_king_title">Martin Luther King Celebration</string>
-    <string name="leonard_birthday_title">Birthday Jamboree!</string>
     <string name="valentine_day_title">Valentine Day Discounts</string>
     <string name="labor_day_title">Labor Day Sale</string>
     <string name="black_friday_title">Black Friday Clearance</string>
@@ -156,12 +156,20 @@
     <string name="christmas_title">Xmas Discounts</string>
 
     <!-- holiday messages -->
-    <string name="new_year_message">Happiness and success is my wish for you this year.</string>
-    <string name="martin_luther_king_message">Nothing in all the world is more dangerous than sincere ignorance and conscientious stupidity.</string>
-    <string name="valentine_day_message">Buy your loved ones something sweet and special.</string>
-    <string name="labor_day_message">Find big savings under the deals section!</string>
-    <string name="black_friday_message">Everything is cheap, cheap, cheap this time of the year.</string>
-    <string name="green_monday_message">This really isn\'t a holiday, is it?</string>
-    <string name="christmas_message">Jingle bells, jingle bells, jingle all the way!</string>
+    <string name="new_year_message_a">Happiness and success is my wish for you this year.</string>
+    <string name="martin_luther_king_message_a">Nothing in all the world is more dangerous than sincere ignorance and conscientious stupidity.</string>
+    <string name="valentine_day_message_a">Buy your loved ones something sweet and special.</string>
+    <string name="labor_day_message_a">Find big savings under the deals section!</string>
+    <string name="black_friday_message_a">Everything is cheap, cheap, cheap this time of the year.</string>
+    <string name="green_monday_message_a">Not sure this is really a holiday. But lets celebrate Capitalism anyway. Cheers!</string>
+    <string name="christmas_message_a">Jingle bells, jingle bells, jingle all the way!</string>
+
+    <string name="new_year_message_b">Happy New Years! And remember, we become what we think about. Lets be happy and positive all year round.</string>
+    <string name="martin_luther_king_message_b">We are not makers of history. We are made by history.</string>
+    <string name="valentine_day_message_b">Buy your loved ones something thoughtful this year.</string>
+    <string name="labor_day_message_b">Everything must go! Check out the deals section.</string>
+    <string name="black_friday_message_b">These may be the lowest prices and greatest deals all year!</string>
+    <string name="green_monday_message_b">Green Monday is the second biggest day for online holiday shopping. True story!</string>
+    <string name="christmas_message_b">Tis the season to be jolly!</string>
 
 </resources>

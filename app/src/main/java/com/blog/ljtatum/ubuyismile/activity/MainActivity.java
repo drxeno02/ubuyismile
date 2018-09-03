@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
@@ -159,9 +162,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // holiday
         HolidayUtils holidayUtils = new HolidayUtils(this);
+        // instantiate holiday views
+        RelativeLayout rlHolidayParent = findViewById(R.id.rl_holiday_parent);
+        TextView tvHolidayDateRange = findViewById(R.id.tv_holiday_date_range);
+        TextView tvHolidayTitle = findViewById(R.id.tv_holiday_title);
+        TextView tvHolidayMessage = findViewById(R.id.tv_holiday_message);
         if (holidayUtils.isHoliday()) {
             // display holiday UI
+            tvHolidayDateRange.setText(holidayUtils.getHolidayDateRange());
+            tvHolidayTitle.setText(holidayUtils.getHolidayTitle());
+            tvHolidayMessage.setText(holidayUtils.getHolidayMessage());
 
+            // set background
+            rlHolidayParent.setBackground(ContextCompat.getDrawable(this, holidayUtils.getHolidayDrawable()));
+
+            // set visibility
+            FrameworkUtils.setViewVisible(rlHolidayParent);
+        } else {
+            // set visibility
+            FrameworkUtils.setViewGone(rlHolidayParent);
         }
 
         // instantiate SQLite database
