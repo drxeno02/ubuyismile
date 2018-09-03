@@ -66,7 +66,8 @@ public class Enum {
         FOOD("food"),
         HEALTH_BEAUTY("health_beauty"),
         MOVIES("movies"),
-        VIDEO_GAMES("video_games");
+        VIDEO_GAMES("video_games"),
+        CHABLEE("chablee");
 
         private final String searchCategory;
 

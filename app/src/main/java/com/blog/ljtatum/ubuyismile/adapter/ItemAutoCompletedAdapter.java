@@ -68,10 +68,8 @@ public class ItemAutoCompletedAdapter extends ArrayAdapter {
      *              {@link ItemModel}
      */
     public void updateData(@NonNull List<ItemDatabaseModel> items) {
-        if (!items.isEmpty()) {
-            alItems = items;
-            notifyDataSetChanged();
-        }
+        alItems = items;
+        notifyDataSetChanged();
     }
 
     @NonNull

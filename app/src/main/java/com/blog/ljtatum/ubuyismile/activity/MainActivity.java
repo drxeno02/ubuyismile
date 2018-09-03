@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +52,7 @@ import com.blog.ljtatum.ubuyismile.model.ItemModel;
 import com.blog.ljtatum.ubuyismile.utils.DailyBonusUtils;
 import com.blog.ljtatum.ubuyismile.utils.ErrorUtils;
 import com.blog.ljtatum.ubuyismile.utils.HappinessUtils;
+import com.blog.ljtatum.ubuyismile.utils.HolidayUtils;
 import com.blog.ljtatum.ubuyismile.utils.InfoBarUtils;
 import com.blog.ljtatum.ubuyismile.utils.Utils;
 import com.google.android.gms.ads.AdListener;
@@ -144,7 +146,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // instantiate shared prefs
         mSharedPref = new SharedPref(this, com.app.framework.constants.Constants.PREF_FILE_NAME);
-
         if (mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) < 7) {
             // daily bonus
             new DailyBonusUtils(this);
@@ -155,6 +156,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // track Happiness
         HappinessUtils.trackHappiness(HappinessUtils.EVENT_APP_LAUNCH);
+
+        // holiday
+        HolidayUtils holidayUtils = new HolidayUtils(this);
+        if (holidayUtils.isHoliday()) {
+            // display holiday UI
+
+        }
 
         // instantiate SQLite database
         mItemProvider = new ItemProvider(this);
@@ -807,6 +815,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case R.id.nav_quick_search_video_games:
                 args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.VIDEO_GAMES.toString());
+                fragment = new SearchFragment();
+                fragment.setArguments(args);
+                break;
+            case R.id.nav_quick_search_chablee:
+                args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.CHABLEE.toString());
                 fragment = new SearchFragment();
                 fragment.setArguments(args);
                 break;

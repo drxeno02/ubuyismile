@@ -63,6 +63,10 @@
                 android:id="@+id/nav_quick_search_video_games"
                 android:icon="@drawable/games"
                 android:title="@string/menu_quick_search_video_games" />
+            <item
+                android:id="@+id/nav_quick_search_chablee"
+                android:icon="@drawable/jewelry"
+                android:title="@string/menu_quick_search_chablee" />
         </menu>
     </item>
 

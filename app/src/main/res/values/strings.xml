@@ -79,6 +79,7 @@
     <string name="menu_quick_search_health_beauty">Quick Search Health &amp; Beauty</string>
     <string name="menu_quick_search_movies">Quick Search Movies</string>
     <string name="menu_quick_search_video_games">Quick Search Video Games</string>
+    <string name="menu_quick_search_chablee">Quick Search Chablee</string>
     <string name="menu_share">Share</string>
     <string name="menu_about">About</string>
     <string name="menu_privacy">Privacy</string>
@@ -143,5 +144,24 @@
     <!-- push noifications -->
     <string name="default_notification_message">Sending you good vibes and well wishes! Thanks for using our app!!</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+    <!-- holiday titles -->
+    <string name="new_year_title">Happy New Years Sale</string>
+    <string name="martin_luther_king_title">Martin Luther King Celebration</string>
+    <string name="leonard_birthday_title">Birthday Jamboree!</string>
+    <string name="valentine_day_title">Valentine Day Discounts</string>
+    <string name="labor_day_title">Labor Day Sale</string>
+    <string name="black_friday_title">Black Friday Clearance</string>
+    <string name="green_monday_title">Green Monday Sale</string>
+    <string name="christmas_title">Xmas Discounts</string>
+
+    <!-- holiday messages -->
+    <string name="new_year_message">Happiness and success is my wish for you this year.</string>
+    <string name="martin_luther_king_message">Nothing in all the world is more dangerous than sincere ignorance and conscientious stupidity.</string>
+    <string name="valentine_day_message">Buy your loved ones something sweet and special.</string>
+    <string name="labor_day_message">Find big savings under the deals section!</string>
+    <string name="black_friday_message">Everything is cheap, cheap, cheap this time of the year.</string>
+    <string name="green_monday_message">This really isn\'t a holiday, is it?</string>
+    <string name="christmas_message">Jingle bells, jingle bells, jingle all the way!</string>
 
 </resources>

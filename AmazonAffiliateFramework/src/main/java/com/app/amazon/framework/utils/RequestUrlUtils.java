@@ -26,13 +26,6 @@ public class RequestUrlUtils {
     private static final String UTF8_CHARSET = "UTF-8";
 
     /**
-     * Constructor
-     */
-    private RequestUrlUtils() {
-        //no instance
-    }
-
-    /**
      * Method is used to create signed request URL
      *
      * @param protocol         Common means for unrelated objects to communicate with each other

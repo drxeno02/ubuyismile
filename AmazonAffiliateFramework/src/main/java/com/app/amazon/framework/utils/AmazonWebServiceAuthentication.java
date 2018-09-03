@@ -15,6 +15,13 @@ public class AmazonWebServiceAuthentication {
     private final String awsAccessKey;
     private final String awsSecretKey;
 
+    /**
+     * Constructor
+     *
+     * @param associateTag The associate tag identifying the user of the Amazon service
+     * @param awsAccessKey The access key needed to access a Amazon service
+     * @param awsSecretKey The secret key needed to access a Amazon service
+     */
     private AmazonWebServiceAuthentication(final String associateTag, final String awsAccessKey, final String awsSecretKey) {
         this.associateTag = associateTag;
         this.awsAccessKey = awsAccessKey;

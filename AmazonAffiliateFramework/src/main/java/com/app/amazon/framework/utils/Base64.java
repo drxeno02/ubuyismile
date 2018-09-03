@@ -5,18 +5,10 @@ import java.util.Arrays;
 /**
  * Created by leonard on 9/26/2017.
  */
-
 public class Base64 {
 
     /**
-     * Constructor
-     */
-    private Base64() {
-    }
-
-    /**
-     * Returns a {@link Encoder} that encodes using the
-     * <a href="#basic">Basic</a> type base64 encoding scheme
+     * Returns an encoder that encodes using the basic type base64 encoding scheme
      *
      * @return A Base64 encoder
      */
@@ -27,17 +19,11 @@ public class Base64 {
     /**
      * This class implements an encoder for encoding byte data using
      * the Base64 encoding scheme as specified in RFC 4648 and RFC 2045
-     * <p>
-     * <p> Instances of {@link Encoder} class are safe for use by
-     * multiple concurrent threads.
-     * <p>
-     * <p> Unless otherwise noted, passing a {@code null} argument to
-     * a method of this class will cause a
-     * {@link NullPointerException NullPointerException} to
-     * be thrown
-     *
-     * @see Decoder
-     * @since 1.8
+     * <p>Instances of encoder class are safe for use by
+     * multiple concurrent threads</p>
+     * <p>Unless otherwise noted, passing a {@code null} argument to
+     * a method of this class will cause a {@link NullPointerException NullPointerException}
+     * to be thrown</p>
      */
     static class Encoder {
 
@@ -72,20 +58,34 @@ public class Base64 {
         private final boolean isURL;
         private final boolean doPadding;
 
-        private Encoder(final boolean isURL, final byte[] newline, final int linemax, final boolean doPadding) {
+        /**
+         * Constructor
+         *
+         * @param isURL     True if url value, otherwise false
+         * @param newline   The byte array to encode
+         * @param lineMax   Maximum line length
+         * @param doPadding True to include padding, otherwise false
+         */
+        private Encoder(final boolean isURL, final byte[] newline, final int lineMax, final boolean doPadding) {
             this.isURL = isURL;
             this.newline = newline;
-            this.linemax = linemax;
+            this.linemax = lineMax;
             this.doPadding = doPadding;
         }
 
-        private int outLength(final int srclen) {
+        /**
+         * Outputs length of encoded value
+         *
+         * @param srcLength The byte array length
+         * @return Calculated length
+         */
+        private int outLength(final int srcLength) {
             int len;
             if (doPadding) {
-                len = 4 * ((srclen + 2) / 3);
+                len = 4 * ((srcLength + 2) / 3);
             } else {
-                final int n = srclen % 3;
-                len = 4 * (srclen / 3) + (n == 0 ? 0 : n + 1);
+                final int n = srcLength % 3;
+                len = 4 * (srcLength / 3) + (n == 0 ? 0 : n + 1);
             }
             if (linemax > 0) { // line separators
                 len += (len - 1) / linemax * newline.length;
@@ -98,7 +98,7 @@ public class Base64 {
          * byte array using the {@link Base64} encoding scheme. The returned byte
          * array is of the length of the resulting bytes
          *
-         * @param src the byte array to encode
+         * @param src The byte array to encode
          * @return A newly-allocated byte array containing the resulting
          * encoded bytes
          */
@@ -111,6 +111,17 @@ public class Base64 {
             return dst;
         }
 
+        /**
+         * Encodes all bytes from the specified byte array into a newly-allocated
+         * byte array using the {@link Base64} encoding scheme. The returned byte
+         * array is of the length of the resulting bytes
+         *
+         * @param src The byte array to encode
+         * @param off
+         * @param end
+         * @param dst
+         * @return
+         */
         private int encode0(final byte[] src, final int off, final int end, final byte[] dst) {
             final char[] base64 = isURL ? toBase64URL : toBase64;
             int sp = off;
@@ -164,7 +175,6 @@ public class Base64 {
     /**
      * This class implements a decoder for decoding byte data using the
      * Base64 encoding scheme as specified in RFC 4648 and RFC 2045.
-     * <p>
      * <p> The Base64 padding character {@code '='} is accepted and
      * interpreted as the end of the encoded byte data, but is not
      * required. So if the final unit of the encoded byte data only has
@@ -174,20 +184,17 @@ public class Base64 {
      * final unit, the correct number of padding character(s) must be
      * present, otherwise {@code IllegalArgumentException} (
      * {@code IOException} when reading from a Base64 stream) is thrown
-     * during decoding.
-     * <p>
+     * during decoding</p>
      * <p> Instances of {@link Decoder} class are safe for use by
-     * multiple concurrent threads.
-     * <p>
+     * multiple concurrent threads</p>
      * <p> Unless otherwise noted, passing a {@code null} argument to
      * a method of this class will cause a
-     * {@link NullPointerException NullPointerException} to
-     * be thrown.
-     *
-     * @see Encoder
-     * @since 1.8
+     * {@link NullPointerException NullPointerException} to be thrown</p>
      */
     private static class Decoder {
+
+        private final boolean isURL;
+        private final boolean isMIME;
 
         /**
          * Lookup table for decoding unicode characters drawn from the
@@ -216,9 +223,6 @@ public class Base64 {
                 fromBase64URL[Encoder.toBase64URL[i]] = i;
             fromBase64URL['='] = -2;
         }
-
-        private final boolean isURL;
-        private final boolean isMIME;
 
         private Decoder(final boolean isURL, final boolean isMIME) {
             this.isURL = isURL;

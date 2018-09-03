@@ -241,7 +241,6 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
 
             // filter searchable results
             for (int i = 0; i < alItemDb.size(); i++) {
-
                 if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.ALL_GOOD_DEALS.toString())) {
                     if ((Utils.isItemOnSale(alItemDb.get(i)) || FrameworkUtils.isStringEmpty(alItemDb.get(i).price)) ||
                             alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.DEALS.toString())) {
@@ -277,6 +276,14 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                     }
                 } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.VIDEO_GAMES.toString())) {
                     if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategory.VIDEO_GAMES.toString())) {
+                        filteredItemList.add(alItemDb.get(i));
+                    }
+                } else if (searchCategory.equalsIgnoreCase(Enum.SearchCategory.CHABLEE.toString())) {
+                    if (alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategoryChablee.CROWNS.toString()) ||
+                            alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategoryChablee.GEMSTONE.toString()) ||
+                                    alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategoryChablee.NECKLACES.toString()) ||
+                                            alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategoryChablee.RINGS.toString()) ||
+                            alItemDb.get(i).category.equalsIgnoreCase(com.app.amazon.framework.enums.Enum.ItemCategoryChablee.ROCKS.toString())) {
                         filteredItemList.add(alItemDb.get(i));
                     }
                 }

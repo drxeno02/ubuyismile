@@ -31,13 +31,48 @@
             android:background="@drawable/toolbar_shadow" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_below="@+id/ll_toolbar"
+        android:id="@+id/rl_holiday_parent"
+        android:layout_width="match_parent"
+        android:background="@color/material_grey_200_color_code"
+        android:layout_height="@dimen/scaling_135">
+
+        <TextView
+            android:id="@+id/tv_holiday_date_range"
+            android:layout_width="match_parent"
+            android:gravity="end"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_12"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_holiday_title"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_20"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@+id/tv_holiday_title"
+            android:id="@+id/tv_holiday_message"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
     <!-- list of items -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ad_view"
-        android:layout_below="@+id/ll_toolbar"
+        android:layout_below="@+id/rl_holiday_parent"
         android:clickable="true"
         android:focusable="true"
         android:scrollbars="none" />
