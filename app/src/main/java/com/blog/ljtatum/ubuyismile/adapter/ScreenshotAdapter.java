@@ -63,7 +63,7 @@ public class ScreenshotAdapter extends PagerAdapter {
         // set image
         Picasso.with(mContext).load(ItemModel.getFormattedImageUrl(alImgUrls.get(position)))
                 .placeholder(R.drawable.no_image_available)
-                .resize(Constants.DEFAULT_IMAGE_SIZE_250, Constants.DEFAULT_IMAGE_SIZE_250)
+                .resize(Constants.DEFAULT_IMAGE_SIZE_500, Constants.DEFAULT_IMAGE_SIZE_500)
                 .into(ivScreenshot);
 
         // set listener

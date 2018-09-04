@@ -24,6 +24,8 @@ import android.widget.TextView;
 import com.app.amazon.framework.RequestManager;
 import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
+import com.app.amazon.framework.model.ItemId;
+import com.app.amazon.framework.utils.AmazonProductAdvertisingApiRequestBuilder;
 import com.app.amazon.framework.utils.AmazonWebServiceAuthentication;
 import com.app.framework.listeners.OnFirebaseValueListener;
 import com.app.framework.sharedpref.SharedPref;
@@ -121,20 +123,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // B00W0TD6Y6 - Poetry in Programming
         // 076243631X - Mammoth Book of Tattoos
-//        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
-//                .forItemLookup("B00W0TD6Y6, 076243631X", ItemId.Type.ISBN)
-//                .includeInformationAbout(Enum.ResponseGroupItemLookup.IMAGES)
-//                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
+        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
+                .forItemLookup("B00W0TD6Y6, 076243631X", ItemId.Type.ISBN)
+                .includeInformationAbout(Enum.ResponseGroupItemLookup.IMAGES)
+                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, mAmazonAuth);
+        Log.e("DATMUG", "(1) requestUrl= " + requestUrl);
 
-//        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
-//                .forItemSearch("Title, Total, Rest"                                                                                                                                     )
-//                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
+        final String requestUrl1 = AmazonProductAdvertisingApiRequestBuilder
+                .forItemSearch("Title, Total, Rest"                                                                                                                                     )
+                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, mAmazonAuth);
+        Log.e("DATMUG", "(2) requestUrl= " + requestUrl1);
 
-//        final String requestUrl = AmazonProductAdvertisingApiRequestBuilder
-//                .forItemBrowse(Enum.ItemBrowseNodeId.VIDEO_GAMES)
-//                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, authentication);
+        final String requestUrl2 = AmazonProductAdvertisingApiRequestBuilder
+                .forItemBrowse(Enum.ItemBrowseNodeId.VIDEO_GAMES)
+                .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, mAmazonAuth);
+        Log.e("DATMUG", "(3) requestUrl= " + requestUrl2);
 
-//        mAsyncTask = new RequestTask().execute(requestUrl);
     }
 
     /**
