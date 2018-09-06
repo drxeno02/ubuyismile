@@ -2,6 +2,7 @@ package com.app.amazon.framework;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.framework.utilities.FrameworkUtils;
@@ -15,7 +16,7 @@ import java.net.URL;
  * Created by leonard on 10/20/2017.
  */
 
-public class RequestManager extends AsyncTask<String, String, String> {
+public class AmazonRequestManager extends AsyncTask<String, String, String> {
 
     private static OnAWSRequestListener mAWSRequestListener;
 

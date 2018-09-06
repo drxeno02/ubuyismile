@@ -21,7 +21,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.app.amazon.framework.RequestManager;
+import com.app.amazon.framework.AmazonRequestManager;
 import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.amazon.framework.model.ItemId;
@@ -139,6 +139,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .createRequestUrlFor(Enum.AmazonWebServiceLocation.COM, mAmazonAuth);
         Log.e("DATMUG", "(3) requestUrl= " + requestUrl2);
 
+        new AmazonRequestManager().execute(requestUrl);
     }
 
     /**
@@ -272,11 +273,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void initializeListeners() {
         // OnAWSRequestListener
-        RequestManager.onAWSRequestListener(new OnAWSRequestListener() {
+        AmazonRequestManager.onAWSRequestListener(new OnAWSRequestListener() {
             @Override
             public void onAWSSuccess(@NonNull String response) {
                 // retrieve item_a model
                 AmazonResponseModel itemModel = SAXParse(response);
+                Log.e("DATMUG", "made amazon request :: response = " + response);
+                Log.e("DATMUG", "made amazon request :: asin = " + itemModel.asin);
+                Log.e("DATMUG", "made amazon request :: detailPageURL = " + itemModel.detailPageURL);
             }
         });
 

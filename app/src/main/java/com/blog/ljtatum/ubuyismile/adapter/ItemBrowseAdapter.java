@@ -70,7 +70,7 @@ public class ItemBrowseAdapter extends RecyclerView.Adapter<ItemBrowseAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.item_browse, parent, false);
         GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) v.getLayoutParams();
-        params.height = DeviceUtils.getDeviceWidthPx() / 2;
+        params.height = (int) (DeviceUtils.getDeviceWidthPx() / 1.92);
         params.width = DeviceUtils.getDeviceWidthPx() / 2;
         v.setLayoutParams(params);
         return new ItemBrowseAdapter.ViewHolder(v);
