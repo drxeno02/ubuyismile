@@ -52,6 +52,14 @@
 -dontwarn com.google.android.gms.**
 -keep public class com.google.android.gms.* { public *; }
 
+# -- Picasso --
+-dontwarn com.squareup.picasso.**
+-keep class com.squareup.picasso.** { *; }
+
+# -- OkHttp --
+-dontwarn com.squareup.okhttp.internal.**
+-keep class com.squareup.okhttp.internal.** { *; }
+
 # Libraries
 -dontwarn com.android.**
 -keep class com.app.framework.** { *; }
