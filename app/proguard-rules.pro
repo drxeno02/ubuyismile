@@ -52,11 +52,6 @@
 -dontwarn com.google.android.gms.**
 -keep public class com.google.android.gms.* { public *; }
 
-# Google Map and Markers
--keep class com.google.android.gms.maps.** { *; }
--keep interface com.google.android.gms.maps.** { *; }
--keep class com.google.android.gms.maps.model.Marker { *; }
-
 # Libraries
 -dontwarn com.android.**
 -keep class com.app.framework.** { *; }

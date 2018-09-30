@@ -68,11 +68,11 @@ public class AboutFragment extends BaseFragment implements View.OnClickListener 
         // set app version
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
         // set copyright year
-        tvCopyright.setText(getActivity().getResources().getString(R.string.copyright_year,
+        tvCopyright.setText(getResources().getString(R.string.copyright_year,
                 String.valueOf(Calendar.getInstance().get(Calendar.YEAR))));
         // set email link
         final SpannableString email = new SpannableString(
-                getActivity().getResources().getString(R.string.feedback_email));
+                getResources().getString(R.string.feedback_email));
         Linkify.addLinks(email, Linkify.EMAIL_ADDRESSES);
         tvFeedbackEmail.setText(email);
         tvFeedbackEmail.setMovementMethod(LinkMovementMethod.getInstance());

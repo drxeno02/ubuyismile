@@ -54,7 +54,7 @@ public class PrivacyFragment extends BaseFragment implements View.OnClickListene
         // set app version
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
         // set copyright year
-        tvCopyright.setText(getActivity().getResources().getString(R.string.copyright_year,
+        tvCopyright.setText(getResources().getString(R.string.copyright_year,
                 String.valueOf(Calendar.getInstance().get(Calendar.YEAR))));
 
         // track Happiness
