@@ -61,6 +61,7 @@ import static com.blog.ljtatum.ubuyismile.saxparse.SAXParseHandler.SAXParse;
 public class SplashActivity extends BaseActivity {
     private static final String TAG = SplashActivity.class.getSimpleName();
 
+    private static final String PURCHASE_URL_HARDCODED = "https://www.amazon.com/Luxurman-Platinum-Women-Natural-Diamond/dp/B01L9XXVEI/ref=sr_1_1?s=apparel&ie=UTF8&qid=1538282576&sr=1-1&nodeID=7454939011&psd=1&refinements=p_n_feature_twenty-eight_browse-bin%3A17435969011";
     private static final String ID_PREFIX = "id_";
 
     // Amazon web service authentication
@@ -283,7 +284,7 @@ public class SplashActivity extends BaseActivity {
                         itemDatabaseModel.salePrice = "";
                         itemDatabaseModel.title = "";
                         itemDatabaseModel.description = "";
-                        itemDatabaseModel.purchaseUrl = "";
+                        itemDatabaseModel.purchaseUrl = PURCHASE_URL_HARDCODED;
                         itemDatabaseModel.imageUrl1 = "";
                         itemDatabaseModel.imageUrl2 = "";
                         itemDatabaseModel.imageUrl3 = "";
@@ -464,7 +465,7 @@ public class SplashActivity extends BaseActivity {
                             alItemDb.get(index).salePrice = chableeModel.salePrice;
                             alItemDb.get(index).title = chableeModel.title;
                             alItemDb.get(index).description = chableeModel.description;
-                            alItemDb.get(index).purchaseUrl = chableeModel.purchaseUrl;
+                            alItemDb.get(index).purchaseUrl = PURCHASE_URL_HARDCODED;
                             alItemDb.get(index).imageUrl1 = chableeModel.imageUrl1;
                             alItemDb.get(index).imageUrl2 = chableeModel.imageUrl2;
                             alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
@@ -491,7 +492,7 @@ public class SplashActivity extends BaseActivity {
                             itemDatabaseModel.salePrice = chableeModel.salePrice;
                             itemDatabaseModel.title = chableeModel.title;
                             itemDatabaseModel.description = chableeModel.description;
-                            itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
+                            itemDatabaseModel.purchaseUrl = PURCHASE_URL_HARDCODED;
                             itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
                             itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
                             itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
@@ -579,7 +580,7 @@ public class SplashActivity extends BaseActivity {
             Logger.v(TAG, "salePrice= " + alItemDb.get(i).salePrice);
             Logger.v(TAG, "title= " + alItemDb.get(i).title);
             Logger.v(TAG, "description= " + alItemDb.get(i).description);
-            Logger.v(TAG, "purchaseUrl= " + alItemDb.get(i).purchaseUrl);
+            Logger.v(TAG, "purchaseUrl= " + PURCHASE_URL_HARDCODED);
             Logger.v(TAG, "imageUrl1= " + alItemDb.get(i).imageUrl1);
             Logger.v(TAG, "imageUrl2= " + alItemDb.get(i).imageUrl2);
             Logger.v(TAG, "imageUrl3= " + alItemDb.get(i).imageUrl3);

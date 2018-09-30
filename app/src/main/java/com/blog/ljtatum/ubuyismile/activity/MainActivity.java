@@ -123,7 +123,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mSharedPref = new SharedPref(this, com.app.framework.constants.Constants.PREF_FILE_NAME);
         if (mSharedPref.getIntPref(Constants.KEY_DAILY_BONUS, 0) < 7) {
             // daily bonus
-            new DailyBonusUtils(this);
+//            new DailyBonusUtils(this);
+
+            DialogUtils.showDefaultOKAlert(this, "Require PA-API", "All the images, " +
+                    "titles, pricing, descriptions, ect is hardcoded into the app because I do not " +
+                    "have access to PA-API. I need to be able to make item requests. I mocked up how " +
+                    "the UI would look. As soon that I am able to make successful requests I can pull " +
+                    "in REAL items from Amazon for people to be redirected back to Amazon to purchase. " +
+                    "That is how the app works.");
+
         } else {
             // rate this app
             new AppRaterUtil(this, getPackageName());
@@ -380,26 +388,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 fragment = new SearchFragment();
                 fragment.setArguments(args);
                 break;
-            case R.id.nav_chablee_crowns:
-                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
-                fragment = new ChableeFragment();
-                fragment.setArguments(args);
-                break;
-            case R.id.nav_chablee_rings:
-                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.RINGS.toString());
-                fragment = new ChableeFragment();
-                fragment.setArguments(args);
-                break;
-            case R.id.nav_chablee_necklaces:
-                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.NECKLACES.toString());
-                fragment = new ChableeFragment();
-                fragment.setArguments(args);
-                break;
-            case R.id.nav_chablee_rocks:
-                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.ROCKS.toString());
-                fragment = new ChableeFragment();
-                fragment.setArguments(args);
-                break;
+//            case R.id.nav_chablee_crowns:
+//                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.CROWNS.toString());
+//                fragment = new ChableeFragment();
+//                fragment.setArguments(args);
+//                break;
+//            case R.id.nav_chablee_rings:
+//                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.RINGS.toString());
+//                fragment = new ChableeFragment();
+//                fragment.setArguments(args);
+//                break;
+//            case R.id.nav_chablee_necklaces:
+//                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.NECKLACES.toString());
+//                fragment = new ChableeFragment();
+//                fragment.setArguments(args);
+//                break;
+//            case R.id.nav_chablee_rocks:
+//                args.putString(Constants.KEY_CATEGORY, Enum.ItemCategoryChablee.ROCKS.toString());
+//                fragment = new ChableeFragment();
+//                fragment.setArguments(args);
+//                break;
             case R.id.nav_all_good_deals:
                 args.putString(Constants.KEY_SEARCH_CATEGORY, com.blog.ljtatum.ubuyismile.enums.Enum.SearchCategory.ALL_GOOD_DEALS.toString());
                 fragment = new SearchFragment();
