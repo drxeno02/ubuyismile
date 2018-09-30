@@ -42,14 +42,9 @@ public class HappinessUtils {
     private static final int SEARCH_THRESHOLD = 25; // threshold for searching items
     private static final int FEEDBACK_VISIT_THRESHOLD = 10; // threshold for visiting feedback
 
-    private static String[] arryHappyMessages;
-    private static String[] arryNeutralMessages;
-    private static String[] arryUnHappyMessages;
-    private static TypedArray typedArryDrawable90;
-    private static TypedArray typedArryDrawable80;
-    private static TypedArray typedArryDrawable70;
-    private static TypedArray typedArryDrawable60;
-    private static TypedArray typedArryDrawable50;
+    private static String[] arryHappyMessages, arryNeutralMessages, arryUnHappyMessages;
+    private static TypedArray typedArryDrawable90, typedArryDrawable80, typedArryDrawable70,
+            typedArryDrawable60, typedArryDrawable50;
 
     private static SharedPref mSharedPref;
     @SuppressLint("StaticFieldLeak")

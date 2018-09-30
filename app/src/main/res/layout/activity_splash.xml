@@ -50,15 +50,35 @@
         android:textColor="@color/black"
         android:textSize="@dimen/font_size_20" />
 
-    <!-- progress bar -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_below="@+id/tv_authors"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/scaling_20" />
+        android:layout_height="wrap_content">
+
+        <!-- progress bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- progress text -->
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/tv_progress"
+            android:visibility="invisible"
+            android:textStyle="bold"
+            android:paddingStart="@dimen/scaling_24"
+            android:paddingEnd="@dimen/scaling_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

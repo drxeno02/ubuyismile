@@ -105,8 +105,7 @@ public class ChableeFragment extends BaseFragment implements View.OnClickListene
         tvNoItems = mRootView.findViewById(R.id.tv_no_items);
 
         // initialize adapter
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         rvItems.setLayoutManager(layoutManager);
         itemDetailAdapter = new ItemDetailAdapter(mContext, new ArrayList<ItemDatabaseModel>());
         rvItems.setAdapter(itemDetailAdapter);

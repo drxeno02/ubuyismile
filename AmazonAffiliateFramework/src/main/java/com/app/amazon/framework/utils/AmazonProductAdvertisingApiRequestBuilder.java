@@ -1,5 +1,7 @@
 package com.app.amazon.framework.utils;
 
+import android.util.Log;
+
 import com.app.amazon.framework.enums.Enum;
 import com.app.amazon.framework.model.ItemId;
 
@@ -13,6 +15,7 @@ import java.util.Map;
  */
 
 public class AmazonProductAdvertisingApiRequestBuilder {
+    private static final String TAG = AmazonProductAdvertisingApiRequestBuilder.class.getSimpleName();
 
     private static final String SERVICE = "AWSECommerceService";
 
@@ -251,7 +254,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             if (minimumPrice != -1) {
                 requestParams.put("MinimumPrice", "" + minimumPrice);
             }
-
+            Log.d(TAG, "created url = " + RequestUrlUtils.createSignedRequestUrl(protocol,
+                    serviceLocation.toString(), ROUTE, requestParams, authentication.getAwsSecretKey()));
             return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.toString(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }
@@ -348,6 +352,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("AssociateTag", authentication.getAssociateTag());
             requestParams.put("Timestamp", authentication.getTimestamp());
 
+            Log.d(TAG, "created url = " + RequestUrlUtils.createSignedRequestUrl(protocol,
+                    serviceLocation.toString(), ROUTE, requestParams, authentication.getAwsSecretKey()));
             return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.toString(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }
@@ -432,6 +438,8 @@ public class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("AssociateTag", authentication.getAssociateTag());
             requestParams.put("Timestamp", authentication.getTimestamp());
 
+            Log.d(TAG, "created url = " + RequestUrlUtils.createSignedRequestUrl(protocol,
+                    serviceLocation.toString(), ROUTE, requestParams, authentication.getAwsSecretKey()));
             return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.toString(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
         }

@@ -53,8 +53,8 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     private ItemDatabaseModel mSelectedItem;
 
     // adapter
-    private ItemAutoCompletedAdapter itemAutoCompleteAdapter;
-    private SearchHistoryAdapter searchHistoryAdapter;
+    private ItemAutoCompletedAdapter mItemAutoCompleteAdapter;
+    private SearchHistoryAdapter mSearchHistoryAdapter;
 
     // database
     private ItemProvider mItemProvider;
@@ -95,16 +95,15 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
         ivClear = mRootView.findViewById(R.id.iv_clear);
         ivBack = mRootView.findViewById(R.id.iv_back);
         tvItemDetailCta = mRootView.findViewById(R.id.tv_item_detail);
-        itemAutoCompleteAdapter = new ItemAutoCompletedAdapter(mContext, R.layout.item_auto_complete, alItemDb);
-        acSearch.setAdapter(itemAutoCompleteAdapter);
+        mItemAutoCompleteAdapter = new ItemAutoCompletedAdapter(mContext, R.layout.item_auto_complete, alItemDb);
+        acSearch.setAdapter(mItemAutoCompleteAdapter);
 
         // initialize adapter (search history)
         RecyclerView rvSearchHistory = mRootView.findViewById(R.id.rv_search_history);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         rvSearchHistory.setLayoutManager(layoutManager);
-        searchHistoryAdapter = new SearchHistoryAdapter(mContext, getSearchHistory());
-        rvSearchHistory.setAdapter(searchHistoryAdapter);
+        mSearchHistoryAdapter = new SearchHistoryAdapter(mContext, getSearchHistory());
+        rvSearchHistory.setAdapter(mSearchHistoryAdapter);
 
         // request focus
         acSearch.requestFocus();
@@ -204,7 +203,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             }
         });
 
-        // onDatabseChange listener
+        // onDatabaseChange listener
         AsyncTaskUpdateItemDatabase.onDatabaseChangeListener(new OnDatabaseChangeListener() {
             @Override
             public void onDatabaseUpdate() {
@@ -214,7 +213,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                         // update item list from database
                         alItemDb = mItemProvider.getAllInfo();
                         // update adapter
-                        searchHistoryAdapter.updateData(getSearchHistory());
+                        mSearchHistoryAdapter.updateData(getSearchHistory());
                         // set CTA state
                         setCtaEnabled(true);
                     }
@@ -290,7 +289,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             }
 
             // update adapter
-            itemAutoCompleteAdapter.updateData(filteredItemList);
+            mItemAutoCompleteAdapter.updateData(filteredItemList);
         }
     }
 

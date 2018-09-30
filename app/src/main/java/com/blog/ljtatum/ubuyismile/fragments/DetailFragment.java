@@ -137,8 +137,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         }
 
         // initialize adapter
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         rvFavorite.setLayoutManager(layoutManager);
         rvFavorite.addItemDecoration(new DividerItemDecoration(rvFavorite.getContext(), DividerItemDecoration.VERTICAL));
         mFavoriteAdapter = new FavoriteAdapter(mContext, filterFavoriteItemList(mItemProvider.getAllInfo()));
@@ -159,7 +158,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      * Method is used to initialize listeners and callbacks
      */
     private void initializeListeners() {
-        // onDatabseChange listener
+        // onDatabaseChange listener
         AsyncTaskUpdateItemDatabase.onDatabaseChangeListener(new OnDatabaseChangeListener() {
             @Override
             public void onDatabaseUpdate() {

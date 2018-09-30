@@ -11,8 +11,8 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 
+import com.app.framework.anim.listeners.OnAnimationCompleteListener;
 import com.app.framework.anim.listeners.OnAnimationPaddingListener;
-import com.app.framework.anim.listeners.OnAnimationTranslateListener;
 import com.app.framework.anim.listeners.OnAnimationUpdateListener;
 import com.app.framework.utilities.FrameworkUtils;
 
@@ -22,7 +22,7 @@ import com.app.framework.utilities.FrameworkUtils;
 public class CustomAnimations {
 
     // custom callbacks
-    private static OnAnimationTranslateListener mOnAnimationTranslateListener;
+    private static OnAnimationCompleteListener mOnAnimationCompleteListener;
     private static OnAnimationPaddingListener mOnAnimationPaddingListener;
     private static OnAnimationUpdateListener mOnAnimationUpdateListener;
 
@@ -34,8 +34,8 @@ public class CustomAnimations {
      * @param animation The animation type
      * @param isFadeIn  Toggle true to fade in, otherwise false
      */
-    public static void fadeAnimation(Context context, View view, int animation, boolean isFadeIn) {
-        fadeAnim(context, view, animation, isFadeIn, 0);
+    public static void fadeAnimation(Context context, View view, int animation, boolean isFadeIn, final boolean isCallback) {
+        fadeAnim(context, view, animation, isFadeIn, 0, isCallback);
     }
 
     /**
@@ -47,8 +47,8 @@ public class CustomAnimations {
      * @param isFadeIn   Toggle true to fade in, otherwise false
      * @param startDelay Set animation start offset (ms)
      */
-    public static void fadeAnimation(Context context, View view, int animation, boolean isFadeIn, long startDelay) {
-        fadeAnim(context, view, animation, isFadeIn, startDelay);
+    public static void fadeAnimation(Context context, View view, int animation, boolean isFadeIn, long startDelay, final boolean isCallback) {
+        fadeAnim(context, view, animation, isFadeIn, startDelay, isCallback);
     }
 
     /**
@@ -59,10 +59,10 @@ public class CustomAnimations {
      * @param isFadeIn  Toggle true to fade in, otherwise false
      * @param view      The views to fade
      */
-    public static void fadeAnimation(Context context, int animation, boolean isFadeIn, View... view) {
+    public static void fadeAnimation(Context context, int animation, boolean isFadeIn, final boolean isCallback, View... view) {
         for (View v : view) {
             if (!FrameworkUtils.checkIfNull(v)) {
-                fadeAnim(context, v, animation, isFadeIn, 0);
+                fadeAnim(context, v, animation, isFadeIn, 0, isCallback);
             }
         }
     }
@@ -76,10 +76,10 @@ public class CustomAnimations {
      * @param isFadeIn   Toggle true to fade in, otherwise false
      * @param startDelay Set animation start offset (ms)
      */
-    public static void fadeAnimation(Context context, int animation, boolean isFadeIn, long startDelay, View... view) {
+    public static void fadeAnimation(Context context, int animation, boolean isFadeIn, long startDelay, final boolean isCallback, View... view) {
         for (View v : view) {
             if (!FrameworkUtils.checkIfNull(v)) {
-                fadeAnim(context, v, animation, isFadeIn, startDelay);
+                fadeAnim(context, v, animation, isFadeIn, startDelay, isCallback);
             }
         }
     }
@@ -91,7 +91,7 @@ public class CustomAnimations {
      * @param isFadeIn   Toggle true to fade in, otherwise false
      * @param startDelay Set animation start offset (ms)
      */
-    private static void fadeAnim(Context context, final View view, int animation, final boolean isFadeIn, long startDelay) {
+    private static void fadeAnim(Context context, final View view, int animation, final boolean isFadeIn, long startDelay, final boolean isCallback) {
         final Animation fade = AnimationUtils.loadAnimation(context, animation);
         fade.setStartOffset(startDelay);
         fade.setAnimationListener(new Animation.AnimationListener() {
@@ -107,6 +107,11 @@ public class CustomAnimations {
                     FrameworkUtils.setViewVisible(view);
                 } else {
                     FrameworkUtils.setViewGone(view);
+                }
+
+                // set listener
+                if (isCallback && !FrameworkUtils.checkIfNull(mOnAnimationCompleteListener)) {
+                    mOnAnimationCompleteListener.onAnimationComplete();
                 }
             }
 
@@ -136,8 +141,8 @@ public class CustomAnimations {
                     @Override
                     public void run() {
                         // set listener
-                        if (isCallback && !FrameworkUtils.checkIfNull(mOnAnimationTranslateListener)) {
-                            mOnAnimationTranslateListener.onAnimationComplete();
+                        if (isCallback && !FrameworkUtils.checkIfNull(mOnAnimationCompleteListener)) {
+                            mOnAnimationCompleteListener.onAnimationComplete();
                         }
                     }
                 });
@@ -165,8 +170,8 @@ public class CustomAnimations {
                     @Override
                     public void run() {
                         // set listener
-                        if (isCallback && !FrameworkUtils.checkIfNull(mOnAnimationTranslateListener)) {
-                            mOnAnimationTranslateListener.onAnimationComplete();
+                        if (isCallback && !FrameworkUtils.checkIfNull(mOnAnimationCompleteListener)) {
+                            mOnAnimationCompleteListener.onAnimationComplete();
                         }
                     }
                 });
@@ -253,15 +258,6 @@ public class CustomAnimations {
     }
 
     /**
-     * Method is used to set callback for when translate animation is complete
-     *
-     * @param listener Callback for when translate animation is complete
-     */
-    public static void onAnimationTranslateListener(OnAnimationTranslateListener listener) {
-        mOnAnimationTranslateListener = listener;
-    }
-
-    /**
      * @param fromPadding The amount of padding the view should have in the beginning of the animation (pixels)
      * @param toPadding   The amount of padding the view will have at the end of the animation (pixels)
      * @param duration    How long the animation will last (milliseconds)
@@ -324,6 +320,15 @@ public class CustomAnimations {
         });
         animator.setDuration(duration);
         animator.start();
+    }
+
+    /**
+     * Method is used to set callback for when fade/translate animation is complete
+     *
+     * @param listener Callback for when fade/translate animation is complete
+     */
+    public static void onAnimationCompleteListener(OnAnimationCompleteListener listener) {
+        mOnAnimationCompleteListener = listener;
     }
 
     /**

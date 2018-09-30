@@ -39,8 +39,8 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
     /**
      * Method is used to get the instance
      *
-     * @param context Interface to global information about an application environment
      * @param <T>     Generics
+     * @param context Interface to global information about an application environment
      * @return An instance of DatabaseProvider
      */
     public synchronized static <T extends DatabaseModel> DatabaseProvider<T> getInstance(Context context) {
@@ -65,9 +65,8 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
      * Method is used to create table
      *
      * @param model Generic model
-     * @return Variable of type T
      */
-    public T create(T model) {
+    public void create(T model) {
         long rowId = mDatabase.insert(model.getTableName(), null, model.getContentValues());
         String selection = model.getPrimaryKeyName() + " = " + rowId;
         T temp = null;
@@ -84,7 +83,6 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
                 e.printStackTrace();
             }
         }
-        return temp;
     }
 
     /**
@@ -189,7 +187,6 @@ public class DatabaseProvider<T extends DatabaseModel> extends SQLiteOpenHelper 
      *                  update all rows
      * @param whereArgs You may include ?s in the where clause, which will be replaced by
      *                  the values from whereArgs. The values will be bound as Strings
-     * @return zero if database is not open
      */
     public void update(T model, String where, String[] whereArgs) {
         mDatabase = getWritableDatabase();

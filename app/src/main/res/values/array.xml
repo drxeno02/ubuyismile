@@ -30,6 +30,20 @@
         <item>@string/unhappy_04</item>
     </string-array>
 
+    <!-- loading Amazon messages -->
+    <string-array name="loading_amazon_messages">
+        <item>@string/loading_amazon_items_01</item>
+        <item>@string/loading_amazon_items_02</item>
+        <item>@string/loading_amazon_items_03</item>
+    </string-array>
+
+    <!-- loading Chablee messages -->
+    <string-array name="loading_chablee_messages">
+        <item>@string/loading_chablee_items_01</item>
+        <item>@string/loading_chablee_items_02</item>
+        <item>@string/loading_chablee_items_03</item>
+    </string-array>
+
     <!-- 90s drawables -->
     <integer-array name="drawable_90">
         <item>@drawable/happiness_90_01</item>

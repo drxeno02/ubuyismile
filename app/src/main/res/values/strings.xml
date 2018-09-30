@@ -14,6 +14,16 @@
     <string name="default_description_chablee">For more information and details, go to www.chablee.com</string>
     <string name="holiday_date_range">Available %1$s - %2$s</string>
 
+    <!-- loading Amazon -->
+    <string name="loading_amazon_items_01">Finding the best Amazon products for you&#8230;</string>
+    <string name="loading_amazon_items_02">Speaking with Amazon execs and demanding only the best quality products&#8230;</string>
+    <string name="loading_amazon_items_03">Negotiating the cheapest prices and most amazing deals with Amazon. Stay tuned&#8230;</string>
+
+    <!-- loading Chablee -->
+    <string name="loading_chablee_items_01">Finding the best quality jewelry from the Chablee collection&#8230;</string>
+    <string name="loading_chablee_items_02">Putting on our shades. Cool jewelry shining so bright&#8230;</string>
+    <string name="loading_chablee_items_03">Waiting and watching Chablee handcraft each jewelry piece. Such mastery&#8230;</string>
+
     <!-- search -->
     <string name="search_history">Search History</string>
     <string name="item_details">Item Details</string>

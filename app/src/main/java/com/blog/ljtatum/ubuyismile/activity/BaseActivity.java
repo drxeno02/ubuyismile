@@ -1,5 +1,7 @@
 package com.blog.ljtatum.ubuyismile.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -109,5 +111,65 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    /**
+     * Method is used to re-direct to a different Activity with no transition
+     *
+     * @param context          Interface to global information about an application environment
+     * @param activity         The in-memory representation of a Java class
+     * @param intent           An intent is an abstract description of an operation to be performed
+     * @param isClearBackStack True to clear Activity backstack, otherwise false
+     * @param isFinished       True to finish Activity otherwise false
+     */
+    public void goToActivity(@NonNull Context context, @NonNull Class<?> activity, Intent intent,
+                             boolean isClearBackStack, boolean isFinished) {
+        Intent i;
+        if (FrameworkUtils.checkIfNull(intent)) {
+            i = new Intent(context, activity);
+        } else {
+            i = intent;
+        }
+        if (isClearBackStack) {
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        } else {
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
+
+        if (isFinished && !isFinishing()) {
+            finish();
+        }
+        startActivity(i);
+    }
+
+    /**
+     * Method is used to re-direct to different Activity from a fragment with a
+     * transition animation slide in from bottom of screen
+     *
+     * @param context          Interface to global information about an application environment
+     * @param activity         The in-memory representation of a Java class
+     * @param isClearBackStack True to clear Activity backstack, otherwise false
+     * @param isFinished       True to finish Activity otherwise false
+     */
+    public void goToActivityAnimInFromBottom(@NonNull Context context, @NonNull Class<?> activity,
+                                             Intent intent, boolean isClearBackStack, boolean isFinished) {
+        Intent i;
+        if (FrameworkUtils.checkIfNull(intent)) {
+            i = new Intent(context, activity);
+        } else {
+            i = intent;
+        }
+        if (isClearBackStack) {
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        } else {
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
+
+        if (isFinished && !isFinishing()) {
+            finish();
+        }
+        startActivity(i);
+        // transition animation
+        overridePendingTransition(R.anim.ui_slide_in_from_bottom, R.anim.ui_slide_out_to_bottom);
     }
 }

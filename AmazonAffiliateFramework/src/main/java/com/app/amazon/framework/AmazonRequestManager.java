@@ -2,7 +2,6 @@ package com.app.amazon.framework;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.app.amazon.framework.interfaces.OnAWSRequestListener;
 import com.app.framework.utilities.FrameworkUtils;
