@@ -72,7 +72,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:225783426649:android:b8627df9a3f26f9a",
         "android_client_info": {
-          "package_name": "com.blog.ljtatum.ubuyismile.prod"
+          "package_name": "com.blog.ljtatum.ubuyismile"
         }
       },
       "oauth_client": [
