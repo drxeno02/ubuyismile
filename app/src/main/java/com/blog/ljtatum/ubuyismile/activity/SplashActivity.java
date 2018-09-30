@@ -294,7 +294,7 @@ public class SplashActivity extends BaseActivity {
                         itemDatabaseModel.salePrice = "";
                         itemDatabaseModel.title = "";
                         itemDatabaseModel.description = "";
-                        itemDatabaseModel.purchaseUrl = PURCHASE_URL_HARDCODED;
+                        itemDatabaseModel.purchaseUrl = "";
                         itemDatabaseModel.imageUrl1 = "";
                         itemDatabaseModel.imageUrl2 = "";
                         itemDatabaseModel.imageUrl3 = "";
@@ -475,7 +475,7 @@ public class SplashActivity extends BaseActivity {
                             alItemDb.get(index).salePrice = chableeModel.salePrice;
                             alItemDb.get(index).title = chableeModel.title;
                             alItemDb.get(index).description = chableeModel.description;
-                            alItemDb.get(index).purchaseUrl = PURCHASE_URL_HARDCODED;
+                            alItemDb.get(index).purchaseUrl = chableeModel.purchaseUrl;
                             alItemDb.get(index).imageUrl1 = chableeModel.imageUrl1;
                             alItemDb.get(index).imageUrl2 = chableeModel.imageUrl2;
                             alItemDb.get(index).imageUrl3 = chableeModel.imageUrl3;
@@ -502,7 +502,7 @@ public class SplashActivity extends BaseActivity {
                             itemDatabaseModel.salePrice = chableeModel.salePrice;
                             itemDatabaseModel.title = chableeModel.title;
                             itemDatabaseModel.description = chableeModel.description;
-                            itemDatabaseModel.purchaseUrl = PURCHASE_URL_HARDCODED;
+                            itemDatabaseModel.purchaseUrl = chableeModel.purchaseUrl;
                             itemDatabaseModel.imageUrl1 = chableeModel.imageUrl1;
                             itemDatabaseModel.imageUrl2 = chableeModel.imageUrl2;
                             itemDatabaseModel.imageUrl3 = chableeModel.imageUrl3;
@@ -590,7 +590,7 @@ public class SplashActivity extends BaseActivity {
             Logger.v(TAG, "salePrice= " + alItemDb.get(i).salePrice);
             Logger.v(TAG, "title= " + alItemDb.get(i).title);
             Logger.v(TAG, "description= " + alItemDb.get(i).description);
-            Logger.v(TAG, "purchaseUrl= " + PURCHASE_URL_HARDCODED);
+            Logger.v(TAG, "purchaseUrl= " + alItemDb.get(i).purchaseUrl);
             Logger.v(TAG, "imageUrl1= " + alItemDb.get(i).imageUrl1);
             Logger.v(TAG, "imageUrl2= " + alItemDb.get(i).imageUrl2);
             Logger.v(TAG, "imageUrl3= " + alItemDb.get(i).imageUrl3);
