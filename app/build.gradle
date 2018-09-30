@@ -61,7 +61,7 @@ android {
             buildConfigField "boolean", "DEBUG_MODE", "false"
             manifestPlaceholders = [build_version: "${versionMajor}.${versionMinor}.${versionPatch}"]
 
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFile 'proguard-rules.pro'
         }
