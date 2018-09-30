@@ -12,26 +12,26 @@
             android:title="@string/menu_search" />
     </group>
 
-    <!--<item android:title="@string/menu_header_chablee">-->
-        <!--<menu>-->
-            <!--<item-->
-                <!--android:id="@+id/nav_chablee_crowns"-->
-                <!--android:icon="@drawable/crowns"-->
-                <!--android:title="@string/menu_crowns" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_chablee_rings"-->
-                <!--android:icon="@drawable/rings"-->
-                <!--android:title="@string/menu_rings" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_chablee_necklaces"-->
-                <!--android:icon="@drawable/necklaces"-->
-                <!--android:title="@string/menu_necklaces" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_chablee_rocks"-->
-                <!--android:icon="@drawable/rocks"-->
-                <!--android:title="@string/menu_rocks" />-->
-        <!--</menu>-->
-    <!--</item>-->
+    <item android:title="@string/menu_header_chablee">
+        <menu>
+            <item
+                android:id="@+id/nav_chablee_crowns"
+                android:icon="@drawable/crowns"
+                android:title="@string/menu_crowns" />
+            <item
+                android:id="@+id/nav_chablee_rings"
+                android:icon="@drawable/rings"
+                android:title="@string/menu_rings" />
+            <item
+                android:id="@+id/nav_chablee_necklaces"
+                android:icon="@drawable/necklaces"
+                android:title="@string/menu_necklaces" />
+            <item
+                android:id="@+id/nav_chablee_rocks"
+                android:icon="@drawable/rocks"
+                android:title="@string/menu_rocks" />
+        </menu>
+    </item>
 
     <item android:title="@string/menu_header_goods">
         <menu>

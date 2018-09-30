@@ -72,10 +72,6 @@ android {
             applicationId 'com.blog.ljtatum.ubuyismile'
             dimension "app"
         }
-        beta {
-            applicationId 'com.blog.ljtatum.ubuyismile.beta'
-            dimension "app"
-        }
     }
     lintOptions {
         // if true, stop the gradle build if errors are found

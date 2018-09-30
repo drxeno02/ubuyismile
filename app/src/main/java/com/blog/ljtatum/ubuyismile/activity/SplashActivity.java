@@ -208,11 +208,19 @@ public class SplashActivity extends BaseActivity {
                     @Override
                     public void run() {
                         // go to MainActivity
-                        goToActivity(SplashActivity.this, MainActivity.class, null, true, true);
+                        transitionToMain();
                     }
                 });
             }
         });
+    }
+
+    /**
+     * Method is used to transition to MainActivity
+     */
+    private void transitionToMain() {
+        // go to MainActivity
+        goToActivity(SplashActivity.this, MainActivity.class, null, true, true);
     }
 
     /**
@@ -249,6 +257,8 @@ public class SplashActivity extends BaseActivity {
         if (!FrameworkUtils.checkIfNull(mItemProvider) && !FrameworkUtils.checkIfNull(alItemDb)) {
             mItemProvider.create(alItemDb);
         }
+        // go to MainActivity
+        transitionToMain();
     }
 
     /**
